@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ED1407D92AC2FC240050E631 /* .swiftlint.yml */; };
+		ED1407DD2AC2FDDE0050E631 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DC2AC2FDDE0050E631 /* RxCocoa */; };
+		ED1407DF2AC2FDDE0050E631 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DE2AC2FDDE0050E631 /* RxRelay */; };
+		ED1407E12AC2FDDE0050E631 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E02AC2FDDE0050E631 /* RxSwift */; };
+		ED1407E42AC2FE3D0050E631 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E32AC2FE3D0050E631 /* SnapKit */; };
+		ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E62AC2FE5D0050E631 /* FSCalendar */; };
+		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
+		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
 		ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */; };
 		ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */; };
 		ED8192192AC2ECEA00C7C830 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192182AC2ECEA00C7C830 /* ViewController.swift */; };
@@ -35,6 +42,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */,
+				ED1407E12AC2FDDE0050E631 /* RxSwift in Frameworks */,
+				ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */,
+				ED1407E42AC2FE3D0050E631 /* SnapKit in Frameworks */,
+				ED1407DF2AC2FDDE0050E631 /* RxRelay in Frameworks */,
+				ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */,
+				ED1407DD2AC2FDDE0050E631 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +177,13 @@
 			);
 			name = TodayFastComplete;
 			packageProductDependencies = (
+				ED1407DC2AC2FDDE0050E631 /* RxCocoa */,
+				ED1407DE2AC2FDDE0050E631 /* RxRelay */,
+				ED1407E02AC2FDDE0050E631 /* RxSwift */,
+				ED1407E32AC2FE3D0050E631 /* SnapKit */,
+				ED1407E62AC2FE5D0050E631 /* FSCalendar */,
+				ED1407E92AC2FF4D0050E631 /* Realm */,
+				ED1407EB2AC2FF4D0050E631 /* RealmSwift */,
 			);
 			productName = TodayFastComplete;
 			productReference = ED8192112AC2ECEA00C7C830 /* TodayFastComplete.app */;
@@ -195,6 +216,10 @@
 			mainGroup = ED8192082AC2ECEA00C7C830;
 			packageReferences = (
 				ED8192362AC2F6FF00C7C830 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				ED1407DB2AC2FDDE0050E631 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				ED1407E22AC2FE3D0050E631 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				ED1407E52AC2FE5D0050E631 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				ED1407E82AC2FF4D0050E631 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = ED8192122AC2ECEA00C7C830 /* Products */;
 			projectDirPath = "";
@@ -459,6 +484,38 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		ED1407DB2AC2FDDE0050E631 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.6.0;
+			};
+		};
+		ED1407E22AC2FE3D0050E631 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
+			};
+		};
+		ED1407E52AC2FE5D0050E631 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
+		ED1407E82AC2FF4D0050E631 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.42.4;
+			};
+		};
 		ED8192362AC2F6FF00C7C830 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint";
@@ -470,6 +527,41 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		ED1407DC2AC2FDDE0050E631 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1407DB2AC2FDDE0050E631 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		ED1407DE2AC2FDDE0050E631 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1407DB2AC2FDDE0050E631 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		ED1407E02AC2FDDE0050E631 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1407DB2AC2FDDE0050E631 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		ED1407E32AC2FE3D0050E631 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1407E22AC2FE3D0050E631 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		ED1407E62AC2FE5D0050E631 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1407E52AC2FE5D0050E631 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		ED1407E92AC2FF4D0050E631 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1407E82AC2FF4D0050E631 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		ED1407EB2AC2FF4D0050E631 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1407E82AC2FF4D0050E631 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		ED81923B2AC2F73000C7C830 /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED8192362AC2F6FF00C7C830 /* XCRemoteSwiftPackageReference "SwiftLint" */;
