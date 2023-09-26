@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ED1407D92AC2FC240050E631 /* .swiftlint.yml */; };
 		ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */; };
 		ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */; };
 		ED8192192AC2ECEA00C7C830 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192182AC2ECEA00C7C830 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED8192112AC2ECEA00C7C830 /* TodayFastComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayFastComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 		ED8192082AC2ECEA00C7C830 = {
 			isa = PBXGroup;
 			children = (
+				ED1407D92AC2FC240050E631 /* .swiftlint.yml */,
 				ED8192282AC2EE2700C7C830 /* .gitignore */,
 				ED81922A2AC2EEAC00C7C830 /* Memo.md */,
 				ED8192132AC2ECEA00C7C830 /* TodayFastComplete */,
@@ -156,8 +159,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				ED81923C2AC2F73000C7C830 /* PBXTargetDependency */,
 			);
 			name = TodayFastComplete;
+			packageProductDependencies = (
+			);
 			productName = TodayFastComplete;
 			productReference = ED8192112AC2ECEA00C7C830 /* TodayFastComplete.app */;
 			productType = "com.apple.product-type.application";
@@ -187,6 +193,9 @@
 				ko,
 			);
 			mainGroup = ED8192082AC2ECEA00C7C830;
+			packageReferences = (
+				ED8192362AC2F6FF00C7C830 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+			);
 			productRefGroup = ED8192122AC2ECEA00C7C830 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -201,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */,
 				ED8192292AC2EE2700C7C830 /* .gitignore in Resources */,
 				ED8192212AC2ECEB00C7C830 /* LaunchScreen.storyboard in Resources */,
 				ED81921E2AC2ECEB00C7C830 /* Assets.xcassets in Resources */,
@@ -221,6 +231,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED81923C2AC2F73000C7C830 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = ED81923B2AC2F73000C7C830 /* SwiftLintPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		ED81921F2AC2ECEB00C7C830 /* LaunchScreen.storyboard */ = {
@@ -440,6 +457,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED8192362AC2F6FF00C7C830 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.52.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED81923B2AC2F73000C7C830 /* SwiftLintPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED8192362AC2F6FF00C7C830 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ED8192092AC2ECEA00C7C830 /* Project object */;
 }

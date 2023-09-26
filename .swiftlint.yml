@@ -1,0 +1,25 @@
+# Swift Lint Rule Customize 
+disabled_rules:
+  - trailing_whitespace
+  - unused_optional_binding
+  - identifier_name
+  - force_cast
+  - function_body_length
+  - empty_enum_arguments
+  - implicit_getter
+  - type_body_length
+  - line_length
+  - cyclomatic_complexity
+  - large_tuple
+  - function_parameter_count
+opt_in_rules:
+
+included:
+excluded:
+  - Carthage
+  - Pods
+  
+# rules
+line_length:
+  warning: 200
+  error: 300
