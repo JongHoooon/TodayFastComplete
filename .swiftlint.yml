@@ -18,6 +18,8 @@ included:
 excluded:
   - Carthage
   - Pods
+  - TodayFastComplete/Presentation/Utils/Preview/UIView+Preview.swift
+  
   
 # rules
 line_length:
