@@ -169,11 +169,11 @@
 				ED81920D2AC2ECEA00C7C830 /* Sources */,
 				ED81920E2AC2ECEA00C7C830 /* Frameworks */,
 				ED81920F2AC2ECEA00C7C830 /* Resources */,
+				EDF700E32AC80ADD00DBA5E8 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				ED81923C2AC2F73000C7C830 /* PBXTargetDependency */,
 			);
 			name = TodayFastComplete;
 			packageProductDependencies = (
@@ -244,6 +244,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		EDF700E32AC80ADD00DBA5E8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ED81920D2AC2ECEA00C7C830 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -256,13 +276,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		ED81923C2AC2F73000C7C830 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = ED81923B2AC2F73000C7C830 /* SwiftLintPlugin */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		ED81921F2AC2ECEB00C7C830 /* LaunchScreen.storyboard */ = {
@@ -315,7 +328,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -379,7 +392,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -561,11 +574,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED1407E82AC2FF4D0050E631 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
-		};
-		ED81923B2AC2F73000C7C830 /* SwiftLintPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED8192362AC2F6FF00C7C830 /* XCRemoteSwiftPackageReference "SwiftLint" */;
-			productName = "plugin:SwiftLintPlugin";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
