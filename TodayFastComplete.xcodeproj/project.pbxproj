@@ -15,9 +15,18 @@
 		ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E62AC2FE5D0050E631 /* FSCalendar */; };
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
+		ED6C671C2AC8393F00230621 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671B2AC8393F00230621 /* BaseCoordinator.swift */; };
+		ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671D2AC8395400230621 /* Coordinator.swift */; };
+		ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67222AC83EA100230621 /* TimerViewController.swift */; };
+		ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67252AC83EB200230621 /* TimerViewModel.swift */; };
+		ED6C67292AC83EF300230621 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67282AC83EF300230621 /* BaseViewController.swift */; };
+		ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C672A2AC8401800230621 /* ViewModel.swift */; };
+		ED6C672F2AC841AB00230621 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C672E2AC841AB00230621 /* Constants.swift */; };
+		ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67332AC84F2C00230621 /* TimerCoordinator.swift */; };
+		ED6C67382AC9029400230621 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67372AC9029400230621 /* Log.swift */; };
+		ED6C673B2AC9033D00230621 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C673A2AC9033D00230621 /* OSLog.framework */; };
 		ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */; };
 		ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */; };
-		ED8192192AC2ECEA00C7C830 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192182AC2ECEA00C7C830 /* ViewController.swift */; };
 		ED81921E2AC2ECEB00C7C830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */; };
 		ED8192212AC2ECEB00C7C830 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED81921F2AC2ECEB00C7C830 /* LaunchScreen.storyboard */; };
 		ED8192292AC2EE2700C7C830 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = ED8192282AC2EE2700C7C830 /* .gitignore */; };
@@ -27,10 +36,19 @@
 
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		ED6C671B2AC8393F00230621 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		ED6C671D2AC8395400230621 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		ED6C67222AC83EA100230621 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		ED6C67252AC83EB200230621 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		ED6C67282AC83EF300230621 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		ED6C672A2AC8401800230621 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		ED6C672E2AC841AB00230621 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ED6C67332AC84F2C00230621 /* TimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCoordinator.swift; sourceTree = "<group>"; };
+		ED6C67372AC9029400230621 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		ED6C673A2AC9033D00230621 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		ED8192112AC2ECEA00C7C830 /* TodayFastComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayFastComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ED8192182AC2ECEA00C7C830 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED8192202AC2ECEB00C7C830 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED8192222AC2ECEB00C7C830 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED6C673B2AC9033D00230621 /* OSLog.framework in Frameworks */,
 				ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */,
 				ED1407E12AC2FDDE0050E631 /* RxSwift in Frameworks */,
 				ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */,
@@ -59,6 +78,99 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED6C671A2AC8392800230621 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C671B2AC8393F00230621 /* BaseCoordinator.swift */,
+				ED6C671D2AC8395400230621 /* Coordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		ED6C671F2AC83E5700230621 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67272AC83EDB00230621 /* Base */,
+				ED6C67202AC83E7100230621 /* TimerScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		ED6C67202AC83E7100230621 /* TimerScene */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67322AC84F1600230621 /* Coordinator */,
+				ED6C67242AC83EA400230621 /* ViewModel */,
+				ED6C67212AC83E7900230621 /* View */,
+			);
+			path = TimerScene;
+			sourceTree = "<group>";
+		};
+		ED6C67212AC83E7900230621 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67222AC83EA100230621 /* TimerViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED6C67242AC83EA400230621 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67252AC83EB200230621 /* TimerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED6C67272AC83EDB00230621 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67282AC83EF300230621 /* BaseViewController.swift */,
+				ED6C672A2AC8401800230621 /* ViewModel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		ED6C672C2AC840C100230621 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C672E2AC841AB00230621 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		ED6C67322AC84F1600230621 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67332AC84F2C00230621 /* TimerCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		ED6C67352AC9027600230621 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67362AC9028100230621 /* Log */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		ED6C67362AC9028100230621 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67372AC9029400230621 /* Log.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		ED6C67392AC9033D00230621 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C673A2AC9033D00230621 /* OSLog.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ED8192082AC2ECEA00C7C830 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +179,7 @@
 				ED81922A2AC2EEAC00C7C830 /* Memo.md */,
 				ED8192132AC2ECEA00C7C830 /* TodayFastComplete */,
 				ED8192122AC2ECEA00C7C830 /* Products */,
+				ED6C67392AC9033D00230621 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +198,7 @@
 				ED8192302AC2F3B300C7C830 /* Data */,
 				ED8192312AC2F3BA00C7C830 /* Domain */,
 				ED81922F2AC2F38A00C7C830 /* Presentation */,
+				ED6C67352AC9027600230621 /* Infrastructure */,
 				ED81922D2AC2F36A00C7C830 /* Resources */,
 			);
 			path = TodayFastComplete;
@@ -93,6 +207,7 @@
 		ED81922D2AC2F36A00C7C830 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED6C672C2AC840C100230621 /* Constants */,
 				ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */,
 				ED81921F2AC2ECEB00C7C830 /* LaunchScreen.storyboard */,
 				ED8192222AC2ECEB00C7C830 /* Info.plist */,
@@ -113,7 +228,8 @@
 		ED81922F2AC2F38A00C7C830 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				ED8192182AC2ECEA00C7C830 /* ViewController.swift */,
+				ED6C671A2AC8392800230621 /* Coordinator */,
+				ED6C671F2AC83E5700230621 /* Scenes */,
 				EDF700E42AC80D4E00DBA5E8 /* Utils */,
 			);
 			path = Presentation;
@@ -291,11 +407,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED8192192AC2ECEA00C7C830 /* ViewController.swift in Sources */,
+				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
+				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
+				ED6C67382AC9029400230621 /* Log.swift in Sources */,
+				ED6C671C2AC8393F00230621 /* BaseCoordinator.swift in Sources */,
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
+				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
+				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,
+				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
+				ED6C67292AC83EF300230621 /* BaseViewController.swift in Sources */,
 				ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */,
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
+				ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,11 +491,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D LOG";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -425,7 +550,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -450,7 +575,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -481,7 +606,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
