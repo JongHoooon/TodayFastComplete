@@ -15,10 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         _ scene: UIScene, willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .systemBackground
+        window.tintColor = Constants.Color.mainTint
+        UINavigationBar.appearance().tintColor = .label
         appCoordinator = AppCoordinator(
             window: window,
             dependencies: AppDIContainer()

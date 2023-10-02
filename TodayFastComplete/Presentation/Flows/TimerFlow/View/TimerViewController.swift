@@ -18,7 +18,7 @@ final class TimerViewController: BaseViewController {
     }
     
     override func configureNavigationBar() { 
-        
+        navigationItem.title = "타이머"
     }
     
     override func configureLayout() {
