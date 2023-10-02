@@ -9,7 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
+    var appCoordinator: Coordinator?
 
     func scene(
         _ scene: UIScene, willConnectTo session: UISceneSession,
@@ -17,10 +17,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        window?.backgroundColor = .systemBackground
-        window?.rootViewController = ViewController()
-        window?.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        window.backgroundColor = .systemBackground
+        appCoordinator = AppCoordinator(
+            window: window,
+            dependencies: AppDIContainer()
+        )
+        appCoordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }
