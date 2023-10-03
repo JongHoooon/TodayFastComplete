@@ -58,7 +58,7 @@ extension UIViewController {
     }
     
     func showPreview(_ deviceType: DeviceType = .iPhone15Pro) -> some View {
-        Preview(viewController: self).previewDevice(PreviewDevice(rawValue: deviceType.name()))
+        return Preview(viewController: self)
     }
 }
 #endif

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,8 @@
 		EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FA2ACAF9C50019DCB1 /* TabBarDIContainer.swift */; };
 		EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FC2ACAFE540019DCB1 /* TabBarEnum.swift */; };
 		EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */; };
+		EDA777012ACB17070019DCB1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EDA777002ACB17070019DCB1 /* Localizable.xcstrings */; };
+		EDA777092ACBD85C0019DCB1 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
 		EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +64,6 @@
 		ED8192222AC2ECEB00C7C830 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED8192282AC2EE2700C7C830 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		ED81922A2AC2EEAC00C7C830 /* Memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Memo.md; sourceTree = "<group>"; };
-		ED81922C2AC2EFC000C7C830 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../Desktop/Study/iOS/TabBarController.swift; sourceTree = "<group>"; };
 		EDA776ED2ACAB58B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EDA776EF2ACAB5CA0019DCB1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -72,6 +73,9 @@
 		EDA776FA2ACAF9C50019DCB1 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
 		EDA776FC2ACAFE540019DCB1 /* TabBarEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarEnum.swift; sourceTree = "<group>"; };
 		EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDIContainer.swift; sourceTree = "<group>"; };
+		EDA777002ACB17070019DCB1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		EDA777072ACBD82E0019DCB1 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
+		EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +234,8 @@
 				ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */,
 				ED81921F2AC2ECEB00C7C830 /* LaunchScreen.storyboard */,
 				ED8192222AC2ECEB00C7C830 /* Info.plist */,
+				EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */,
+				EDA777002ACB17070019DCB1 /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -423,7 +429,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDA777092ACBD85C0019DCB1 /* InfoPlist.xcstrings in Resources */,
 				ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */,
+				EDA777012ACB17070019DCB1 /* Localizable.xcstrings in Resources */,
 				ED8192292AC2EE2700C7C830 /* .gitignore in Resources */,
 				ED8192212AC2ECEB00C7C830 /* LaunchScreen.storyboard in Resources */,
 				ED81921E2AC2ECEB00C7C830 /* Assets.xcassets in Resources */,
@@ -488,7 +496,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				ED8192202AC2ECEB00C7C830 /* Base */,
-				ED81922C2AC2EFC000C7C830 /* ko */,
+				EDA777072ACBD82E0019DCB1 /* mul */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

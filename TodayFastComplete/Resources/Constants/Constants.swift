@@ -23,4 +23,8 @@ enum Constants {
         static let timer = UIImage(systemName: "timer")
     }
     
+    // MARK: - Localization
+    enum Localization {
+        static let TIMER_TITLE = String(localized: "TIMER_TITLE", defaultValue: "타이머")
+    }
 }

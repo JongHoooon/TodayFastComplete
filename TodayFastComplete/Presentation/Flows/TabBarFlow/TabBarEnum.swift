@@ -14,7 +14,7 @@ enum TabBarEnum {
         switch self {
         case .timer:
             return UITabBarItem(
-                title: "타이머",
+                title: Constants.Localization.TIMER_TITLE,
                 image: Constants.Icon.timer,
                 selectedImage: Constants.Icon.timer
             )
