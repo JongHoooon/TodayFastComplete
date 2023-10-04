@@ -11,11 +11,11 @@ enum Constants {
     
     // MARK: - Color
     enum Color {
-        static let mainTint = UIColor(resource: .mainTint)
-        static let baseTint = UIColor(resource: .baseTint)
-        static let accentTint = UIColor(resource: .accentTint)
+        static let tintMain = UIColor(resource: .tintMain)
+        static let tintBase = UIColor(resource: .tintBase)
+        static let tintAccent = UIColor(resource: .tintAccent)
         
-        static let background = UIColor(resource: .background)
+        static let backgroundMain = UIColor(resource: .backgroundMain)
     }
     
     // MARK: - Icon

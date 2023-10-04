@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .systemBackground
-        window.tintColor = Constants.Color.mainTint
+        window.tintColor = Constants.Color.tintMain
         UINavigationBar.appearance().tintColor = .label
         appCoordinator = AppCoordinator(
             window: window,

@@ -30,7 +30,7 @@ class BaseViewController: UIViewController {
     }
     
     func configure() {
-        view.backgroundColor = Constants.Color.background
+        view.backgroundColor = Constants.Color.backgroundMain
     }
     
     func configureNavigationBar() {
