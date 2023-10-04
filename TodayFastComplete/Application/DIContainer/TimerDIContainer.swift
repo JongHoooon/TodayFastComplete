@@ -11,6 +11,10 @@ final class TimerDIContainer: TimerCoordinatorDependencies {
     
     // MARK: - Timer View
     func makeTimerViewController() -> UIViewController {
-        return TimerViewController()
+        return TimerViewController(viewModel: makeTimerViewModel())
+    }
+    
+    func makeTimerViewModel() -> TimerViewModel {
+        return TimerViewModel()
     }
 }

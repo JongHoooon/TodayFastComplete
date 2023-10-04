@@ -21,6 +21,8 @@ enum Constants {
     // MARK: - Icon
     enum Icon {
         static let timer = UIImage(systemName: "timer")
+        static let pencilLine = UIImage(systemName: "pencil.line")
+        static let gear = UIImage(systemName: "gearshape")
     }
     
     // MARK: - Localization

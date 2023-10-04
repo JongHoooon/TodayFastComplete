@@ -41,6 +41,8 @@
 		EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */; };
 		EDA777012ACB17070019DCB1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EDA777002ACB17070019DCB1 /* Localizable.xcstrings */; };
 		EDA777092ACBD85C0019DCB1 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */; };
+		EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */; };
+		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
 		EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		EDA777002ACB17070019DCB1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		EDA777072ACBD82E0019DCB1 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
 		EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
+		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +126,7 @@
 		ED6C671F2AC83E5700230621 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				EDA7770C2ACBF2960019DCB1 /* UI */,
 				ED6C67272AC83EDB00230621 /* Base */,
 				EDA776E92ACAB4680019DCB1 /* TabBarFlow */,
 				ED6C67202AC83E7100230621 /* TimerFlow */,
@@ -346,6 +351,15 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		EDA7770C2ACBF2960019DCB1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */,
+				EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		EDF700E42AC80D4E00DBA5E8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,6 +496,7 @@
 				ED6C67382AC9029400230621 /* Log.swift in Sources */,
 				ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */,
 				EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */,
+				EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */,
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
@@ -491,6 +506,7 @@
 				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,
 				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
 				ED6C67292AC83EF300230621 /* BaseViewController.swift in Sources */,
+				EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */,
 				ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */,
 				EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */,
 				EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */,
