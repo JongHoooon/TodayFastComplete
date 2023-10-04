@@ -43,7 +43,7 @@ extension UIView {
     }
     
     func showPreview() -> some View {
-        Preview(view: self).previewDevice(PreviewDevice(rawValue: "iPhone 15 Pro"))
+        Preview(view: self)
     }
 }
 #endif

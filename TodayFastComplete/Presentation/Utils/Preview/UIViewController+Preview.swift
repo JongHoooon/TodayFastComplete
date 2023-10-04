@@ -57,7 +57,7 @@ extension UIViewController {
         func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) { }
     }
     
-    func showPreview(_ deviceType: DeviceType = .iPhone15Pro) -> some View {
+    func showPreview() -> some View {
         return Preview(viewController: self)
     }
 }

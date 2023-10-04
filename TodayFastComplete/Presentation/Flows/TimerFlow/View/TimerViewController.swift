@@ -42,7 +42,7 @@ struct KoreanViewControllerPreview: PreviewProvider {
 struct EnglishViewControllerPreview: PreviewProvider {
     static var previews: some View {
         TimerViewController()
-            .showPreview(.iPhoneSE2)
+            .showPreview()
             .environment(\.locale, .init(identifier: "en"))
     }
 }
