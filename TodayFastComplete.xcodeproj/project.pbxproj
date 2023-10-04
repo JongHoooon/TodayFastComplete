@@ -43,6 +43,7 @@
 		EDA777092ACBD85C0019DCB1 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */; };
 		EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */; };
 		EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */; };
+		EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC262ACD9A8E0096D2F0 /* Step.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
 		EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */; };
@@ -83,6 +84,7 @@
 		EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
+		EDC2CC262ACD9A8E0096D2F0 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6C671D2AC8395400230621 /* Coordinator.swift */,
+				EDC2CC262ACD9A8E0096D2F0 /* Step.swift */,
 				ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */,
 				EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */,
 			);
@@ -504,6 +507,7 @@
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
+				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
 				EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */,
 				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,

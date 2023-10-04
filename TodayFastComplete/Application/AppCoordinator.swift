@@ -8,8 +8,7 @@
 import UIKit
 
 protocol AppCoordinatorDependencies {
-    func makeTabBarCoordinator(window: UIWindow) -> Coordinator
-}
+    func makeTabBarCoordinator(window: UIWindow, finishDelegate: CoordinatorFinishDelegate) -> Coordinator}
 
 final class AppCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
     
@@ -28,14 +27,23 @@ final class AppCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
         Log.deinit()
     }
     
-    override func start() {
-        showTabBarScene()
+    override func navigate(to step: Step) {
+        switch step {
+        case .appFlowIsRequired:
+            navigate(to: .tabBarFlowIsRequired)
+        case .tabBarFlowIsRequired:
+            showTabBarScene()
+        default:
+            assertionFailure("not configured step")
+        }
     }
     
     private func showTabBarScene() {
-        let tabBarCoordinator = dependencies.makeTabBarCoordinator(window: window)
-        tabBarCoordinator.finishDelegate = self
-        tabBarCoordinator.start()
+        let tabBarCoordinator = dependencies.makeTabBarCoordinator(
+            window: window,
+            finishDelegate: self
+        )
+        tabBarCoordinator.navigate(to: .tabBarFlowIsRequired)
         addChild(child: tabBarCoordinator)
     }
 }

@@ -18,18 +18,26 @@ final class DefaultTimerCoordinator: BaseCoordinator {
     
     init(
         navigationController: UINavigationController,
-        dependencies: TimerCoordinatorDependencies
+        dependencies: TimerCoordinatorDependencies,
+        finishDelegate: CoordinatorFinishDelegate
     ) {
         self.navigationController = navigationController
         self.dependencies = dependencies
+        super.init()
+        self.finishDelegate = finishDelegate
     }
     
     deinit {
         Log.deinit()
     }
     
-    override func start() {
-        showTimer()
+    override func navigate(to step: Step) {
+        switch step {
+        case .timerFlowIsRequired:
+            showTimer()
+        default:
+            assertionFailure("not configured step")
+        }
     }
     
     private func showTimer() {

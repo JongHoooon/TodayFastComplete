@@ -10,10 +10,14 @@ import UIKit
 final class TabBarDIContainer: TabBarDependencies {
     
     // MARK: - Coordinators
-    func makeTimerCoordinator(navigationController: UINavigationController) -> Coordinator {
+    func makeTimerCoordinator(
+        navigationController: UINavigationController,
+        finishDelegate: CoordinatorFinishDelegate
+    ) -> Coordinator {
         return DefaultTimerCoordinator(
             navigationController: navigationController,
-            dependencies: TimerDIContainer()
+            dependencies: TimerDIContainer(), 
+            finishDelegate: finishDelegate
         )
     }
     

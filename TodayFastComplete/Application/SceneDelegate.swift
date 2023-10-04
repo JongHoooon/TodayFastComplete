@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window: window,
             dependencies: AppDIContainer()
         )
-        appCoordinator?.start()
+        appCoordinator?.navigate(to: .appFlowIsRequired)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }

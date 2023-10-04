@@ -8,6 +8,13 @@
 import UIKit
 
 protocol Coordinator: AnyObject {
-    var finishDelegate: CoordinatorFinishDelegate? { get set }
-    func start()
+    func navigate(to step: Step)
+    func finish()
+}
+
+extension Coordinator where Self: BaseCoordinator {
+    func finish() {
+        removeAllChild()
+        finishDelegate?.coordinatorDidFinish(child: self)
+    }
 }

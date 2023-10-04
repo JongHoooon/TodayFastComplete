@@ -10,10 +10,14 @@ import UIKit
 final class AppDIContainer: AppCoordinatorDependencies {
         
     // MARK: - Tab Bar Coordinator
-    func makeTabBarCoordinator(window: UIWindow) -> Coordinator {
+    func makeTabBarCoordinator(
+        window: UIWindow,
+        finishDelegate: CoordinatorFinishDelegate
+    ) -> Coordinator {
         return TabBarCoordinator(
             window: window,
-            dependencies: TabBarDIContainer()
+            dependencies: TabBarDIContainer(),
+            finishDelegate: finishDelegate
         )
     }
 }
