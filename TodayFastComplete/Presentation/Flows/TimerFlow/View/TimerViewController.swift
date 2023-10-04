@@ -14,6 +14,7 @@ final class TimerViewController: BaseViewController {
 
     // MARK: - Properties
     private let viewModel: TimerViewModel
+    private let disposeBag: DisposeBag
     
     // MARK: - UI
     private let fastTitleLabel: UILabel = {
@@ -107,6 +108,7 @@ final class TimerViewController: BaseViewController {
     // MARK: - Lifecycle
     init(viewModel: TimerViewModel) {
         self.viewModel = viewModel
+        self.disposeBag = DisposeBag()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -136,6 +138,7 @@ final class TimerViewController: BaseViewController {
     // MARK: - Configure
     override func configure() {
         super.configure()
+        bindViewModel()
     }
     
     override func configureNavigationBar() {
@@ -206,6 +209,41 @@ final class TimerViewController: BaseViewController {
             $0.height.equalTo(64.0)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-8.0)
         }
+    }
+}
+
+private extension TimerViewController {
+    func bindViewModel() {
+        let input = TimerViewModel.Input(
+            viewDidLoad: self.rx.viewDidLoad.asObservable(),
+            viewWillAppear: self.rx.viewWillAppear.asObservable()
+        )
+        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        
+        output.fastTitle
+            .asSignal()
+            .emit(to: fastTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.fastInfoTitle
+            .asSignal()
+            .emit(to: fastInfoLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.messageText
+            .asSignal()
+            .emit(to: messageLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.progressTime
+            .asSignal()
+            .emit(to: progressTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.remainTime
+            .asSignal()
+            .emit(to: remainTimeLabel.rx.text)
+            .disposed(by: disposeBag)
     }
 }
 

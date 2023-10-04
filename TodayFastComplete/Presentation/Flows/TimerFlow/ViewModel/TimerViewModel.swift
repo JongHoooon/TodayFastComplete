@@ -12,16 +12,27 @@ import RxSwift
 
 final class TimerViewModel: ViewModel {
     struct Input {
-        
+        let viewDidLoad: Observable<Void>
+        let viewWillAppear: Observable<Void>
     }
     
     struct Output {
-//        var startTime: BehaviorRelay<Date> = BehaviorRelay(value: Date())
-//        var endTime: Observable<Date>
-//        var progressDegree: Observable<CGFloat>
+        let fastTitle = PublishRelay<String>()
+        let fastInfoTitle = PublishRelay<String>()
+        let messageText = PublishRelay<String>()
+        let progressTime = PublishRelay<String>()
+        let remainTime = PublishRelay<String>()
+        let todayStartTime = PublishRelay<String>()
+        let todayEndTime = PublishRelay<String>()
+        let fastControlButtonTitle = PublishRelay<String>()
     }
     
-    func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        return Output()
+    func transform(
+        input: Input,
+        disposeBag: DisposeBag
+    ) -> Output {
+        let output = Output()
+        
+        return output
     }
 }
