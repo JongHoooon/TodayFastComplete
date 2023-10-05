@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "ko",
   "strings" : {
+    "ROUTINE_MODE_TITLE" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "루틴 모드"
+          }
+        }
+      }
+    },
+    "TIME_DESIGNATION_MODE_TITLE" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "시간 지정 모드"
+          }
+        }
+      }
+    },
     "TIMER_TITLE" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {

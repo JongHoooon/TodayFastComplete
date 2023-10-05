@@ -9,10 +9,10 @@ import UIKit
 
 protocol TimerCoordinatorDependencies {
     func makeTimerViewController(coordinator: Coordinator) -> UIViewController
-    func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController
+    func makeSettingTimerCoordinator(rootViewController: UINavigationController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
 }
 
-final class DefaultTimerCoordinator: BaseCoordinator {
+final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
     
     let navigationController: UINavigationController
     let dependencies: TimerCoordinatorDependencies
@@ -36,8 +36,8 @@ final class DefaultTimerCoordinator: BaseCoordinator {
         switch step {
         case .timerFlowIsRequired:
             showTimer()
-        case .timerSelectFastModeIsRequired:
-            pushToSelectFastMode()
+        case .timerSettingButtonTapped:
+            presentToSelectFastMode()
         default:
             assertionFailure("not configured step")
         }
@@ -48,8 +48,18 @@ final class DefaultTimerCoordinator: BaseCoordinator {
         navigationController.setViewControllers([vc], animated: true)
     }
     
-    private func pushToSelectFastMode() {
-        let vc = dependencies.makeSelectFastModeViewController(coordinator: self)
-        navigationController.pushViewController(vc, animated: true)
+    private func presentToSelectFastMode() {
+        let settingTimerNavigationController = UINavigationController()
+        let settingTimerCoordinator = dependencies.makeSettingTimerCoordinator(
+            rootViewController: settingTimerNavigationController,
+            finishDelegate: self
+        )
+        settingTimerCoordinator.navigate(to: .settingTimerFlowIsRequired)
+        settingTimerNavigationController.modalPresentationStyle = .fullScreen
+        navigationController.present(
+            settingTimerNavigationController,
+            animated: true
+        )
+        addChild(child: settingTimerCoordinator)
     }
 }

@@ -29,7 +29,7 @@ final class TimerViewModel: ViewModel {
     }
     
     // MARK: - Properties
-    private let coordinator: Coordinator
+    private weak var coordinator: Coordinator?
     
     // MARK: - Init
     init(coordinator: Coordinator) {
@@ -38,7 +38,7 @@ final class TimerViewModel: ViewModel {
     
     deinit {
         Log.deinit()
-        coordinator.finish()
+        coordinator?.finish()
     }
     
     func transform(
@@ -52,7 +52,7 @@ final class TimerViewModel: ViewModel {
             .emit(
                 with: self,
                 onNext: { owner, _ in
-                    owner.coordinator.navigate(to: .timerSelectFastModeIsRequired)
+                    owner.coordinator?.navigate(to: .timerSettingButtonTapped)
             })
             .disposed(by: disposeBag)
         

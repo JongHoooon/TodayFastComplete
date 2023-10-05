@@ -14,5 +14,9 @@ enum Step {
     
     // Timer
     case timerFlowIsRequired
-    case timerSelectFastModeIsRequired
+    case timerSettingButtonTapped
+    
+    // Setting Timer
+    case settingTimerFlowIsRequired
+    case settingTimerFlowDismissButtonTapped
 }
