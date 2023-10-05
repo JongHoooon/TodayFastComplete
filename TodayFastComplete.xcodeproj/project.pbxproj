@@ -143,9 +143,9 @@
 		ED6C67202AC83E7100230621 /* TimerFlow */ = {
 			isa = PBXGroup;
 			children = (
+				EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */,
 				ED6C67322AC84F1600230621 /* Coordinator */,
-				ED6C67242AC83EA400230621 /* ViewModel */,
-				ED6C67212AC83E7900230621 /* View */,
+				EDC2CC2A2ACE44420096D2F0 /* TimerView */,
 			);
 			path = TimerFlow;
 			sourceTree = "<group>";
@@ -364,6 +364,22 @@
 				EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		EDC2CC2A2ACE44420096D2F0 /* TimerView */ = {
+			isa = PBXGroup;
+			children = (
+				ED6C67242AC83EA400230621 /* ViewModel */,
+				ED6C67212AC83E7900230621 /* View */,
+			);
+			path = TimerView;
+			sourceTree = "<group>";
+		};
+		EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SelectFastModeView;
 			sourceTree = "<group>";
 		};
 		EDF700E42AC80D4E00DBA5E8 /* Utils */ = {
