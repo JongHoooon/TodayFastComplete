@@ -44,6 +44,8 @@
 		EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */; };
 		EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */; };
 		EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC262ACD9A8E0096D2F0 /* Step.swift */; };
+		EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC2E2ACE458F0096D2F0 /* SelectFastModeViewController.swift */; };
+		EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC302ACE459A0096D2F0 /* SelectFastModeViewModel.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
 		EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */; };
@@ -85,6 +87,8 @@
 		EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		EDC2CC262ACD9A8E0096D2F0 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		EDC2CC2E2ACE458F0096D2F0 /* SelectFastModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFastModeViewController.swift; sourceTree = "<group>"; };
+		EDC2CC302ACE459A0096D2F0 /* SelectFastModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFastModeViewModel.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
@@ -143,9 +147,9 @@
 		ED6C67202AC83E7100230621 /* TimerFlow */ = {
 			isa = PBXGroup;
 			children = (
-				EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */,
 				ED6C67322AC84F1600230621 /* Coordinator */,
 				EDC2CC2A2ACE44420096D2F0 /* TimerView */,
+				EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */,
 			);
 			path = TimerFlow;
 			sourceTree = "<group>";
@@ -378,8 +382,26 @@
 		EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */ = {
 			isa = PBXGroup;
 			children = (
+				EDC2CC2C2ACE45690096D2F0 /* ViewModel */,
+				EDC2CC2D2ACE456E0096D2F0 /* View */,
 			);
 			path = SelectFastModeView;
+			sourceTree = "<group>";
+		};
+		EDC2CC2C2ACE45690096D2F0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EDC2CC302ACE459A0096D2F0 /* SelectFastModeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EDC2CC2D2ACE456E0096D2F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EDC2CC2E2ACE458F0096D2F0 /* SelectFastModeViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EDF700E42AC80D4E00DBA5E8 /* Utils */ = {
@@ -521,11 +543,13 @@
 				EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */,
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
+				EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
 				EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */,
+				EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */,
 				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,
 				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
 				ED6C67292AC83EF300230621 /* BaseViewController.swift in Sources */,

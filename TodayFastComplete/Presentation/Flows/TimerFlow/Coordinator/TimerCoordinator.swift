@@ -8,7 +8,8 @@
 import UIKit
 
 protocol TimerCoordinatorDependencies {
-    func makeTimerViewController() -> UIViewController
+    func makeTimerViewController(coordinator: Coordinator) -> UIViewController
+    func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController
 }
 
 final class DefaultTimerCoordinator: BaseCoordinator {
@@ -35,13 +36,20 @@ final class DefaultTimerCoordinator: BaseCoordinator {
         switch step {
         case .timerFlowIsRequired:
             showTimer()
+        case .timerSelectFastModeIsRequired:
+            pushToSelectFastMode()
         default:
             assertionFailure("not configured step")
         }
     }
     
     private func showTimer() {
-        let vc = dependencies.makeTimerViewController()
+        let vc = dependencies.makeTimerViewController(coordinator: self)
         navigationController.setViewControllers([vc], animated: true)
+    }
+    
+    private func pushToSelectFastMode() {
+        let vc = dependencies.makeSelectFastModeViewController(coordinator: self)
+        navigationController.pushViewController(vc, animated: true)
     }
 }

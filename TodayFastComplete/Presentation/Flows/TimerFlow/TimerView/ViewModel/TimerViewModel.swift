@@ -7,13 +7,14 @@
 
 import Foundation
 
-import RxRelay
+import RxCocoa
 import RxSwift
 
 final class TimerViewModel: ViewModel {
     struct Input {
         let viewDidLoad: Observable<Void>
         let viewWillAppear: Observable<Void>
+        let selectFastModeButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -27,11 +28,33 @@ final class TimerViewModel: ViewModel {
         let fastControlButtonTitle = PublishRelay<String>()
     }
     
+    // MARK: - Properties
+    private let coordinator: Coordinator
+    
+    // MARK: - Init
+    init(coordinator: Coordinator) {
+        self.coordinator = coordinator
+    }
+    
+    deinit {
+        Log.deinit()
+        coordinator.finish()
+    }
+    
     func transform(
         input: Input,
         disposeBag: DisposeBag
     ) -> Output {
         let output = Output()
+        
+        input.selectFastModeButtonTapped
+            .asSignal(onErrorJustReturn: Void())
+            .emit(
+                with: self,
+                onNext: { owner, _ in
+                    owner.coordinator.navigate(to: .timerSelectFastModeIsRequired)
+            })
+            .disposed(by: disposeBag)
         
         return output
     }

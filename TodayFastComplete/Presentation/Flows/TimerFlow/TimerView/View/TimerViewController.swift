@@ -105,6 +105,13 @@ final class TimerViewController: BaseViewController {
         return button
     }()
     
+    private let selectFastModelBarButton = UIBarButtonItem(
+        image: Constants.Icon.gear,
+        style: .plain,
+        target: nil,
+        action: nil
+    )
+    
     // MARK: - Lifecycle
     init(viewModel: TimerViewModel) {
         self.viewModel = viewModel
@@ -143,12 +150,8 @@ final class TimerViewController: BaseViewController {
     
     override func configureNavigationBar() {
         navigationItem.title = Constants.Localization.TIMER_TITLE
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: Constants.Icon.gear,
-            style: .plain,
-            target: nil,
-            action: nil
-        )
+        navigationItem.rightBarButtonItem = selectFastModelBarButton
+        navigationItem.backButtonTitle = ""
     }
     
     override func configureLayout() {
@@ -216,7 +219,8 @@ private extension TimerViewController {
     func bindViewModel() {
         let input = TimerViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
-            viewWillAppear: self.rx.viewWillAppear.asObservable()
+            viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            selectFastModeButtonTapped: selectFastModelBarButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
@@ -250,20 +254,20 @@ private extension TimerViewController {
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-struct KoreanViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        TimerViewController(viewModel: TimerViewModel())
-            .showPreview()
-            .environment(\.locale, .init(identifier: "ko"))
-    }
-}
-
-struct EnglishViewControllerPreview: PreviewProvider {
-    static var previews: some View {
-        TimerViewController(viewModel: TimerViewModel())
-            .showPreview()
-            .previewDevice(PreviewDevice(rawValue: DeviceType.iPhone11Pro.name()))
-            .environment(\.locale, .init(identifier: "en"))
-    }
-}
+//struct KoreanViewControllerPreview: PreviewProvider {
+//    static var previews: some View {
+//        TimerViewController(viewModel: TimerViewModel())
+//            .showPreview()
+//            .environment(\.locale, .init(identifier: "ko"))
+//    }
+//}
+//
+//struct EnglishViewControllerPreview: PreviewProvider {
+//    static var previews: some View {
+//        TimerViewController(viewModel: TimerViewModel())
+//            .showPreview()
+//            .previewDevice(PreviewDevice(rawValue: DeviceType.iPhone11Pro.name()))
+//            .environment(\.locale, .init(identifier: "en"))
+//    }
+//}
 #endif

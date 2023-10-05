@@ -10,11 +10,20 @@ import UIKit
 final class TimerDIContainer: TimerCoordinatorDependencies {
     
     // MARK: - Timer View
-    func makeTimerViewController() -> UIViewController {
-        return TimerViewController(viewModel: makeTimerViewModel())
+    func makeTimerViewController(coordinator: Coordinator) -> UIViewController {
+        return TimerViewController(viewModel: makeTimerViewModel(coordinator: coordinator))
     }
     
-    func makeTimerViewModel() -> TimerViewModel {
-        return TimerViewModel()
+    private func makeTimerViewModel(coordinator: Coordinator) -> TimerViewModel {
+        return TimerViewModel(coordinator: coordinator)
+    }
+    
+    // MARK: - Select Fast Mode View
+    func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController {
+        return SelectFastModeViewController(viewModel: makeSelectFastModeViewModel(coordinator: coordinator))
+    }
+    
+    private func makeSelectFastModeViewModel(coordinator: Coordinator) -> SelectFastModeViewModel {
+        return SelectFastModeViewModel(coordinator: coordinator)
     }
 }
