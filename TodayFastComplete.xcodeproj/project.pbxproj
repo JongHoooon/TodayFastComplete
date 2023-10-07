@@ -16,6 +16,8 @@
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
+		ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9612ACFCA3D00182922 /* WeekDay.swift */; };
+		ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9652ACFCB9B00182922 /* FastRoutine.swift */; };
 		ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */; };
 		ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E96B2AD104E600182922 /* UILabel+Extension.swift */; };
 		ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671D2AC8395400230621 /* Coordinator.swift */; };
@@ -62,6 +64,8 @@
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		ED50E9612ACFCA3D00182922 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
+		ED50E9652ACFCB9B00182922 /* FastRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRoutine.swift; sourceTree = "<group>"; };
 		ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		ED50E96B2AD104E600182922 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		ED6C671D2AC8395400230621 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 		ED8192322AC2F44500C7C830 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				ED50E9612ACFCA3D00182922 /* WeekDay.swift */,
+				ED50E9652ACFCB9B00182922 /* FastRoutine.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
+				ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */,
 				EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */,
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
@@ -583,6 +590,7 @@
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
 				ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
+				ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */,
 				EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */,
 				EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */,
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
