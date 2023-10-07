@@ -16,6 +16,7 @@
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
+		ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */; };
 		ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671D2AC8395400230621 /* Coordinator.swift */; };
 		ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67222AC83EA100230621 /* TimerViewController.swift */; };
 		ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67252AC83EB200230621 /* TimerViewModel.swift */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		ED6C671D2AC8395400230621 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		ED6C67222AC83EA100230621 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		ED6C67252AC83EB200230621 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */,
+				ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */,
 				EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */,
 				ED830EB42ACE97DE000B715A /* Reuseable.swift */,
 			);
@@ -568,6 +571,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
 				EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */,
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
