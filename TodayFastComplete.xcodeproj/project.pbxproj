@@ -29,6 +29,8 @@
 		ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */; };
 		ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E96B2AD104E600182922 /* UILabel+Extension.swift */; };
 		ED50E9742AD142D200182922 /* CustomRoutineCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9732AD142D200182922 /* CustomRoutineCollectionViewHeader.swift */; };
+		ED50E9762AD16C2700182922 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9752AD16C2700182922 /* Time.swift */; };
+		ED50E9782AD16C8700182922 /* TimerRoutineSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9772AD16C8700182922 /* TimerRoutineSetting.swift */; };
 		ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671D2AC8395400230621 /* Coordinator.swift */; };
 		ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67222AC83EA100230621 /* TimerViewController.swift */; };
 		ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67252AC83EB200230621 /* TimerViewModel.swift */; };
@@ -86,6 +88,8 @@
 		ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		ED50E96B2AD104E600182922 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		ED50E9732AD142D200182922 /* CustomRoutineCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoutineCollectionViewHeader.swift; sourceTree = "<group>"; };
+		ED50E9752AD16C2700182922 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		ED50E9772AD16C8700182922 /* TimerRoutineSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRoutineSetting.swift; sourceTree = "<group>"; };
 		ED6C671D2AC8395400230621 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		ED6C67222AC83EA100230621 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		ED6C67252AC83EB200230621 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -397,6 +401,8 @@
 			children = (
 				ED50E9612ACFCA3D00182922 /* WeekDay.swift */,
 				ED50E9652ACFCB9B00182922 /* FastRoutine.swift */,
+				ED50E9752AD16C2700182922 /* Time.swift */,
+				ED50E9772AD16C8700182922 /* TimerRoutineSetting.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -659,6 +665,7 @@
 				ED50E9682ACFFD3300182922 /* FastRoutineContentView.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
 				ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */,
+				ED50E9782AD16C8700182922 /* TimerRoutineSetting.swift in Sources */,
 				ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */,
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
@@ -683,6 +690,7 @@
 				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
 				ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */,
 				ED6C67292AC83EF300230621 /* BaseViewController.swift in Sources */,
+				ED50E9762AD16C2700182922 /* Time.swift in Sources */,
 				EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */,
 				ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */,
 				EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */,
