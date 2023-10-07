@@ -16,18 +16,22 @@ enum Constants {
         static let tintAccent = UIColor(resource: .tintAccent)
         
         static let backgroundMain = UIColor(resource: .backgroundMain)
+        
+        static let disactive = UIColor.systemGray6
     }
     
     // MARK: - Icon
     enum Icon {
-        static let timer = UIImage(systemName: "timer")
-        static let pencilLine = UIImage(systemName: "pencil.line")
         static let gear = UIImage(systemName: "gearshape")
+        static let pencilLine = UIImage(systemName: "pencil.line")
+        static let plusCircle = UIImage(systemName: "plus.circle")
+        static let timer = UIImage(systemName: "timer")
         static let xmark = UIImage(systemName: "xmark")
     }
     
     // MARK: - Image
     enum Imgage {
+        static let fasting = UIImage(resource: .fasting)
         static let sandglass = UIImage(resource: .sandglass)
         static let timer = UIImage(resource: .timer)
     }

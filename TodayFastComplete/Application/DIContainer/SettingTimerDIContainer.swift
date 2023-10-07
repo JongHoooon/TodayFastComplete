@@ -17,4 +17,13 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     private func makeSelectFastModeViewModel(coordinator: Coordinator) -> SelectFastModeViewModel {
         return SelectFastModeViewModel(coordinator: coordinator)
     }
+    
+    // MARK: - Setting Routine View
+    func makeSettingRoutineViewController(coordinator: Coordinator) -> UIViewController {
+        return SettingRoutineViewController(viewModel: makeSettingRoutineViewModel(coordinator: coordinator))
+    }
+    
+    private func makeSettingRoutineViewModel(coordinator: Coordinator) -> SettingRoutineViewModel {
+        return SettingRoutineViewModel(coordinator: coordinator)
+    }
 }

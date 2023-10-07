@@ -250,24 +250,3 @@ private extension TimerViewController {
             .disposed(by: disposeBag)
     }
 }
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-//struct KoreanViewControllerPreview: PreviewProvider {
-//    static var previews: some View {
-//        TimerViewController(viewModel: TimerViewModel())
-//            .showPreview()
-//            .environment(\.locale, .init(identifier: "ko"))
-//    }
-//}
-//
-//struct EnglishViewControllerPreview: PreviewProvider {
-//    static var previews: some View {
-//        TimerViewController(viewModel: TimerViewModel())
-//            .showPreview()
-//            .previewDevice(PreviewDevice(rawValue: DeviceType.iPhone11Pro.name()))
-//            .environment(\.locale, .init(identifier: "en"))
-//    }
-//}
-#endif

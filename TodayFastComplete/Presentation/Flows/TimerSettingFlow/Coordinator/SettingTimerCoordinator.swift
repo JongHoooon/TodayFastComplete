@@ -9,6 +9,7 @@ import UIKit
 
 protocol SettingTimerDependencies {
     func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController
+    func makeSettingRoutineViewController(coordinator: Coordinator) -> UIViewController
 }
 
 final class SettingTimerCoordinator: BaseCoordinator {
@@ -34,7 +35,7 @@ final class SettingTimerCoordinator: BaseCoordinator {
     override func navigate(to step: Step) {
         switch step {
         case .settingTimerFlowIsRequired:
-            showSelectTimerMode()
+            showSettingRoutine()
         case .settingTimerFlowDismissButtonTapped:
             rootViewController.dismiss(animated: true)
         default:
@@ -44,8 +45,15 @@ final class SettingTimerCoordinator: BaseCoordinator {
 }
 
 private extension SettingTimerCoordinator {
+    /*
     func showSelectTimerMode() {
         let selectTimerVC = dependencies.makeSelectFastModeViewController(coordinator: self)
         rootViewController.viewControllers = [selectTimerVC]
+    }
+    */
+    
+    func showSettingRoutine() {
+        let settingRoutineVC = dependencies.makeSettingRoutineViewController(coordinator: self)
+        rootViewController.viewControllers = [settingRoutineVC]
     }
 }

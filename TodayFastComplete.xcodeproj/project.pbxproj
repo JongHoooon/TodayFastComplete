@@ -16,10 +16,19 @@
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
+		ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */; };
+		ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */; };
+		ED50E9562ACF0B9700182922 /* SettingRoutineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9552ACF0B9700182922 /* SettingRoutineCollectionView.swift */; };
+		ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9572ACF0CC200182922 /* DayCollectionViewCell.swift */; };
+		ED50E95A2ACF903A00182922 /* StartTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9592ACF903A00182922 /* StartTimeCollectionViewCell.swift */; };
+		ED50E95C2ACF908200182922 /* FastRoutineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E95B2ACF908200182922 /* FastRoutineCollectionViewCell.swift */; };
+		ED50E9602ACF913E00182922 /* TitleCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E95F2ACF913E00182922 /* TitleCollectionViewHeader.swift */; };
 		ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9612ACFCA3D00182922 /* WeekDay.swift */; };
 		ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9652ACFCB9B00182922 /* FastRoutine.swift */; };
+		ED50E9682ACFFD3300182922 /* FastRoutineContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9672ACFFD3300182922 /* FastRoutineContentView.swift */; };
 		ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */; };
 		ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E96B2AD104E600182922 /* UILabel+Extension.swift */; };
+		ED50E9742AD142D200182922 /* CustomRoutineCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9732AD142D200182922 /* CustomRoutineCollectionViewHeader.swift */; };
 		ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671D2AC8395400230621 /* Coordinator.swift */; };
 		ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67222AC83EA100230621 /* TimerViewController.swift */; };
 		ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67252AC83EB200230621 /* TimerViewModel.swift */; };
@@ -64,10 +73,19 @@
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewModel.swift; sourceTree = "<group>"; };
+		ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewController.swift; sourceTree = "<group>"; };
+		ED50E9552ACF0B9700182922 /* SettingRoutineCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineCollectionView.swift; sourceTree = "<group>"; };
+		ED50E9572ACF0CC200182922 /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
+		ED50E9592ACF903A00182922 /* StartTimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		ED50E95B2ACF908200182922 /* FastRoutineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRoutineCollectionViewCell.swift; sourceTree = "<group>"; };
+		ED50E95F2ACF913E00182922 /* TitleCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewHeader.swift; sourceTree = "<group>"; };
 		ED50E9612ACFCA3D00182922 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		ED50E9652ACFCB9B00182922 /* FastRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRoutine.swift; sourceTree = "<group>"; };
+		ED50E9672ACFFD3300182922 /* FastRoutineContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRoutineContentView.swift; sourceTree = "<group>"; };
 		ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		ED50E96B2AD104E600182922 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		ED50E9732AD142D200182922 /* CustomRoutineCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoutineCollectionViewHeader.swift; sourceTree = "<group>"; };
 		ED6C671D2AC8395400230621 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		ED6C67222AC83EA100230621 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		ED6C67252AC83EB200230621 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -143,6 +161,54 @@
 				ED830EB42ACE97DE000B715A /* Reuseable.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ED50E94C2ACEF24E00182922 /* SettingRoutineView */ = {
+			isa = PBXGroup;
+			children = (
+				ED50E94D2ACEF29C00182922 /* ViewModel */,
+				ED50E94E2ACEF2A000182922 /* View */,
+			);
+			path = SettingRoutineView;
+			sourceTree = "<group>";
+		};
+		ED50E94D2ACEF29C00182922 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED50E94E2ACEF2A000182922 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */,
+				ED50E9712AD141CC00182922 /* SettingRoutineCollectionView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED50E9712AD141CC00182922 /* SettingRoutineCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				ED50E9552ACF0B9700182922 /* SettingRoutineCollectionView.swift */,
+				ED50E9722AD141ED00182922 /* Cells */,
+			);
+			path = SettingRoutineCollectionView;
+			sourceTree = "<group>";
+		};
+		ED50E9722AD141ED00182922 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				ED50E9572ACF0CC200182922 /* DayCollectionViewCell.swift */,
+				ED50E9592ACF903A00182922 /* StartTimeCollectionViewCell.swift */,
+				ED50E95B2ACF908200182922 /* FastRoutineCollectionViewCell.swift */,
+				ED50E95F2ACF913E00182922 /* TitleCollectionViewHeader.swift */,
+				ED50E9732AD142D200182922 /* CustomRoutineCollectionViewHeader.swift */,
+				ED50E9672ACFFD3300182922 /* FastRoutineContentView.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		ED6C671A2AC8392800230621 /* Coordinator */ = {
@@ -400,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				EDACF36B2ACECE4200F72CE8 /* Coordinator */,
+				ED50E94C2ACEF24E00182922 /* SettingRoutineView */,
 				EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */,
 			);
 			path = TimerSettingFlow;
@@ -586,9 +653,14 @@
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
 				ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */,
+				ED50E9602ACF913E00182922 /* TitleCollectionViewHeader.swift in Sources */,
+				ED50E9562ACF0B9700182922 /* SettingRoutineCollectionView.swift in Sources */,
 				ED6C67382AC9029400230621 /* Log.swift in Sources */,
+				ED50E9682ACFFD3300182922 /* FastRoutineContentView.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
+				ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */,
 				ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */,
+				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
 				ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */,
 				EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */,
@@ -596,6 +668,7 @@
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
 				EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */,
+				ED50E9742AD142D200182922 /* CustomRoutineCollectionViewHeader.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
@@ -606,7 +679,9 @@
 				EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */,
 				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,
 				EDACF3712ACED31000F72CE8 /* SettingTimerDIContainer.swift in Sources */,
+				ED50E95C2ACF908200182922 /* FastRoutineCollectionViewCell.swift in Sources */,
 				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
+				ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */,
 				ED6C67292AC83EF300230621 /* BaseViewController.swift in Sources */,
 				EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */,
 				ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */,
@@ -618,6 +693,7 @@
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
 				ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */,
 				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
+				ED50E95A2ACF903A00182922 /* StartTimeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

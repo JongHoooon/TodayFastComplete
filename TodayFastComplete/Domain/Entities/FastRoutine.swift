@@ -5,15 +5,19 @@
 //  Created by JongHoon on 10/6/23.
 //
 
+import UIKit
+
 struct FastRoutine: Hashable {
     let fastingTime: Int
     let mealTime: Int
     let mealCount: Int?
+    let image: UIImage?
     
-    init(fastingTime: Int, mealCount: Int? = nil) {
+    init(fastingTime: Int, mealCount: Int? = nil, image: UIImage? = nil) {
         self.fastingTime = fastingTime
         self.mealTime = 24 - fastingTime
         self.mealCount = mealCount
+        self.image = image
     }
     
     private var mealCountInfo: String {

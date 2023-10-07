@@ -15,7 +15,7 @@ final class SelectFastModeCollectionViewCell: UICollectionViewCell {
             case true:
                 baseView.backgroundColor = Constants.Color.tintMain
             case false:
-                baseView.backgroundColor = .systemGray4
+                baseView.backgroundColor = Constants.Color.disactive
             }
         }
     }
@@ -23,7 +23,7 @@ final class SelectFastModeCollectionViewCell: UICollectionViewCell {
     // MARK: - UI
     private let baseView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = Constants.Color.disactive
         view.layer.cornerRadius = 24.0
         return view
     }()
@@ -92,14 +92,3 @@ private extension SelectFastModeCollectionViewCell {
         }
     }
 }
-
-#if DEBUG
-import SwiftUI
-
-struct CellPreview: PreviewProvider {
-    static var previews: some View {
-        return SelectFastModeCollectionViewCell()
-            .showPreview()
-    }
-}
-#endif
