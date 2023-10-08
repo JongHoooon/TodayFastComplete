@@ -12,4 +12,3 @@ extension List {
         return self.compactMap { $0 as? T }
     }
 }
-

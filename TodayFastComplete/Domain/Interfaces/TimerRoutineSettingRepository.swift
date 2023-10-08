@@ -11,4 +11,3 @@ protocol TimerRoutineSettingRepository {
     func update(routineSetting: TimerRoutineSetting) -> Single<TimerRoutineSetting>
     func fetch() -> Single<TimerRoutineSetting?>
 }
-

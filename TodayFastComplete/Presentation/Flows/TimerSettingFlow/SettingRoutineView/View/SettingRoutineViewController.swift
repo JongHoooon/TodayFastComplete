@@ -130,7 +130,7 @@ private extension SettingRoutineViewController {
     }
     
     func configureCollectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnviroment in
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
             guard let settingRoutineSection = SettingRoutineSection(rawValue: sectionIndex) else { return nil }
             
             var section: NSCollectionLayoutSection?
