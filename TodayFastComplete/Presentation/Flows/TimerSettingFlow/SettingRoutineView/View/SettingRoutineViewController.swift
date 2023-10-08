@@ -15,6 +15,11 @@ final class SettingRoutineViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: SettingRoutineViewModel
     private let disposeBag: DisposeBag
+    private var cellDisposeBags: [UICollectionViewCell: DisposeBag] = [:] {
+        didSet {
+            Log.debug(cellDisposeBags)
+        }
+    }
     
     // MARK: - UI
     private let settingRoutineCollectionView: UICollectionView = {
@@ -63,7 +68,6 @@ final class SettingRoutineViewController: BaseViewController {
     
     override func configure() {
         super.configure()
-        configureDataSource()
         bindViewModel()
     }
     
@@ -89,13 +93,21 @@ final class SettingRoutineViewController: BaseViewController {
 
 private extension SettingRoutineViewController {
     func bindViewModel() {
+        settingRoutineCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
         let input = SettingRoutineViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewDidDismissed: self.rx.viewDidDismissed.asObservable(),
-            dismissButtonTapped: dismissBarButton.rx.tap.asObservable()
+            dismissButtonTapped: dismissBarButton.rx.tap.asObservable(), 
+            itemSelected: settingRoutineCollectionView.rx.itemSelected.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
+        configureDataSource(
+            selectedWeekDays: output.selectedWeekDays,
+            selectedRecommendRoutine: output.selectedRecommendRoutine
+        )
         var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
         snapshot.appendSections(output.sections)
         snapshot.appendItems(output.weekDayItems, toSection: .dayTime)
@@ -202,10 +214,13 @@ private extension SettingRoutineViewController {
         return layout
     }
     
-    func configureDataSource() {
-        let dayCellRegistration = createDayCellRegistration()
+    func configureDataSource(
+        selectedWeekDays: BehaviorRelay<[Int]>,
+        selectedRecommendRoutine: BehaviorRelay<Int?>
+    ) {
+        let dayCellRegistration = createDayCellRegistration(selectedDays: selectedWeekDays)
         let routineSettingCellRegistration = createRoutineSettingCellRegistration()
-        let fastRoutineCellRegistration = createFastRoutineCellRegistration()
+        let fastRoutineCellRegistration = createRoutineRecommendCellRegistration(selectedRecommendRoutine: selectedRecommendRoutine)
         let titleHeaderRegistration = createTitleCollectionHeaderCellRegistration()
         
         dataSource = UICollectionViewDiffableDataSource<SettingRoutineSection, SettingRoutineItem>(
@@ -264,8 +279,16 @@ private extension SettingRoutineViewController {
         }
     }
     
-    func createDayCellRegistration() -> UICollectionView.CellRegistration<DayCollectionViewCell, WeekDay> {
-        return UICollectionView.CellRegistration<DayCollectionViewCell, WeekDay> { cell, _, weekDay in
+    func createDayCellRegistration(selectedDays: BehaviorRelay<[Int]>) -> UICollectionView.CellRegistration<DayCollectionViewCell, WeekDay> {
+        return UICollectionView.CellRegistration<DayCollectionViewCell, WeekDay> { [weak self] cell, _, weekDay in
+            guard let self else { return }
+            let disposeBag = DisposeBag()
+            cellDisposeBags[cell] = disposeBag
+            selectedDays.asDriver()
+                .map { $0.contains(weekDay.rawValue) }
+                .map { $0 ? Constants.Color.tintBase : Constants.Color.disactive }
+                .drive { cell.configureBackgroundColor(with: $0) }
+                .disposed(by: disposeBag)
             cell.configureCell(with: weekDay)
         }
     }
@@ -275,8 +298,21 @@ private extension SettingRoutineViewController {
         }
     }
     
-    func createFastRoutineCellRegistration() -> UICollectionView.CellRegistration<FastRoutineCollectionViewCell, FastRoutine> {
-        return UICollectionView.CellRegistration<FastRoutineCollectionViewCell, FastRoutine> { cell, _, fastRoutine in
+    func createRoutineRecommendCellRegistration(selectedRecommendRoutine: BehaviorRelay<Int?>) -> UICollectionView.CellRegistration<FastRoutineCollectionViewCell, FastRoutine> {
+        return UICollectionView.CellRegistration<FastRoutineCollectionViewCell, FastRoutine> { [weak self] cell, indexPath, fastRoutine in
+            guard indexPath.section == SettingRoutineSection.recommendRoutine.rawValue
+            else {
+                assertionFailure("invalid section")
+                return
+            }
+            guard let self else { return }
+            let disposeBag = DisposeBag()
+            cellDisposeBags[cell] = disposeBag
+            selectedRecommendRoutine.asDriver()
+                .map { $0 == indexPath.item }
+                .map { $0 ? Constants.Color.tintBase : Constants.Color.disactive }
+                .drive { cell.configureBackgroundColor(with: $0) }
+                .disposed(by: disposeBag)
             cell.configureCell(routine: fastRoutine)
         }
     }
@@ -290,5 +326,14 @@ private extension SettingRoutineViewController {
             }
             supplementaryView.configureCell(with: title)
         }
+    }
+}
+
+extension SettingRoutineViewController: UICollectionViewDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        shouldSelectItemAt indexPath: IndexPath
+    ) -> Bool {
+        return indexPath.section == SettingRoutineSection.timeSetting.rawValue ? false : true
     }
 }

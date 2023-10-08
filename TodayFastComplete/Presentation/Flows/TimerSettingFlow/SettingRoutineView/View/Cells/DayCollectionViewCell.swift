@@ -9,16 +9,18 @@ import UIKit
 
 final class DayCollectionViewCell: UICollectionViewCell {
     
-    override var isSelected: Bool {
-        didSet {
-            switch isSelected {
-            case true:
-                baseView.backgroundColor = Constants.Color.tintBase
-            case false:
-                baseView.backgroundColor = Constants.Color.disactive
-            }
-        }
-    }
+//    override var isSelected: Bool {
+//        didSet {
+//            switch isSelected {
+//            case true:
+//                baseView.backgroundColor = Constants.Color.tintBase
+//            case false:
+//                baseView.backgroundColor = Constants.Color.disactive
+//            }
+//        }
+//    }
+    
+    
     
     private let baseView: UIView = {
         let view = UIView()
@@ -48,6 +50,10 @@ final class DayCollectionViewCell: UICollectionViewCell {
     
     func configureCell(with item: WeekDay) {
         dayLabel.text = item.weekDay
+    }
+    
+    func configureBackgroundColor(with color: UIColor) {
+        baseView.backgroundColor = color
     }
 }
 

@@ -9,18 +9,6 @@ import UIKit
 
 final class FastRoutineCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Properties
-    override var isSelected: Bool {
-        didSet {
-            switch isSelected {
-            case true:
-                baseView.backgroundColor = Constants.Color.tintBase
-            case false:
-                baseView.backgroundColor = Constants.Color.disactive
-            }
-        }
-    }
-    
     // MARK: - UI
     private let baseView: UIView = {
         let view = UIView()
@@ -67,6 +55,10 @@ final class FastRoutineCollectionViewCell: UICollectionViewCell {
         titleLabel.text = routine.routineTitle
         infoLabel.text = routine.routineInfo
         imageView.image = routine.image
+    }
+    
+    func configureBackgroundColor(with color: UIColor) {
+        baseView.backgroundColor = color
     }
 }
 
