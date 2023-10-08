@@ -20,13 +20,14 @@ final class TimerRoutineSettingTable: Object {
         return RealmUniqueKey.fastRoutine.rawValue
     }
     
-    init(
+    convenience init(
         uniqueKey: String = RealmUniqueKey.fastRoutine.rawValue,
         days: List<Int>,
         startTimeHour: Int,
         startTimeMinute: Int,
         fastTime: Int
     ) {
+        self.init()
         self.uniqueKey = uniqueKey
         self.days = days
         self.startTimeHour = startTimeHour
@@ -36,7 +37,7 @@ final class TimerRoutineSettingTable: Object {
     
     func toDomain() -> TimerRoutineSetting {
         return TimerRoutineSetting(
-            days: days.map { $0 },
+            days: days.toArray(),
             startTime: Time(hour: startTimeHour, minute: startTimeMinute),
             fastTime: fastTime
         )
