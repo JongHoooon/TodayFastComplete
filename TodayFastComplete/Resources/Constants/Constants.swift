@@ -14,6 +14,8 @@ enum Constants {
         static let tintMain = UIColor(resource: .tintMain)
         static let tintBase = UIColor(resource: .tintBase)
         static let tintAccent = UIColor(resource: .tintAccent)
+        static let tintAccentToBase = UIColor(resource: .tintAccentBase)
+        static let tintBaeseToAccent = UIColor(resource: .tintBaseAccent)
         
         static let backgroundMain = UIColor(resource: .backgroundMain)
         
@@ -23,6 +25,7 @@ enum Constants {
     // MARK: - Icon
     enum Icon {
         static let gear = UIImage(systemName: "gearshape")
+        static let info = UIImage(systemName: "info.circle.fill")
         static let pencilLine = UIImage(systemName: "pencil.line")
         static let plusCircle = UIImage(systemName: "plus.circle")
         static let timer = UIImage(systemName: "timer")
