@@ -68,9 +68,9 @@ final class SettingRoutineViewController: BaseViewController {
     
     override func configure() {
         super.configure()
-        bindViewModel()
         configureDataSource()
-        applySnapShots()
+        bindViewModel()
+//        applySnapShots()
     }
     
     override func configureNavigationBar() {
@@ -101,33 +101,18 @@ private extension SettingRoutineViewController {
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        
+        var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
+        snapshot.appendSections(output.sections)
+        snapshot.appendItems(output.weekDayItems, toSection: .day)
+        snapshot.appendItems(output.timeSetting, toSection: .timeSetting)
+        snapshot.appendItems(output.recommendItems, toSection: .recommendRoutine)
+        dataSource.apply(snapshot)
     }
 }
 
+// MARK: - Setting Routine Collection view
 private extension SettingRoutineViewController {
-    enum SettingRoutineSection: Int, CaseIterable {
-        case day = 0
-        case settingRoutine
-        case recommendRoutine
-        
-        var title: String {
-            switch self {
-            case .day:
-                return String(localized: "SELECT_WEEKDAY", defaultValue: "요일 선택")
-            case .settingRoutine:
-                return String(localized: "ROUTINE_SETTING", defaultValue: "루틴 설정")
-            case .recommendRoutine:
-                return String(localized: "RECOMMEND_FAST_ROUTINE", defaultValue: "추천 단식 루틴")
-            }
-        }
-    }
-
-    enum SettingRoutineItem: Hashable {
-        case dayItem(weekDay: WeekDay)
-        case settingRoutineItem
-        case recommendRoutineItem(routine: FastRoutine)
-        case customRoutineItem(routine: FastRoutine)
-    }
     
     func configureCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
@@ -149,12 +134,12 @@ private extension SettingRoutineViewController {
                 let group = NSCollectionLayoutGroup.horizontal(
                     layoutSize: groupSize,
                     repeatingSubitem: item,
-                    count: 7
+                    count: WeekDay.allCases.count
                 )
                 group.interItemSpacing = .fixed(4.0)
                 section = NSCollectionLayoutSection(group: group)
                 
-            case .settingRoutine:
+            case .timeSetting:
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .estimated(240.0)
@@ -167,8 +152,7 @@ private extension SettingRoutineViewController {
                 )
                 let group = NSCollectionLayoutGroup.vertical(
                     layoutSize: groupSize,
-                    repeatingSubitem: item,
-                    count: 1
+                    subitems: [item]
                 )
                 section = NSCollectionLayoutSection(group: group)
             case .recommendRoutine:
@@ -239,11 +223,9 @@ private extension SettingRoutineViewController {
                 switch itemIdentifier {
                 case .dayItem(let weekDay):
                     item = weekDay
-                case .settingRoutineItem:
+                case .timeSetting:
                     item = nil
                 case .recommendRoutineItem(let routine):
-                    item = routine
-                case .customRoutineItem(let routine):
                     item = routine
                 }
                 
@@ -254,7 +236,7 @@ private extension SettingRoutineViewController {
                         for: indexPath,
                         item: item as? WeekDay
                     )
-                case .settingRoutine:
+                case .timeSetting:
                     return collectionView.dequeueConfiguredReusableCell(
                         using: routineSettingCellRegistration,
                         for: indexPath,
@@ -288,28 +270,14 @@ private extension SettingRoutineViewController {
         }
     }
     
-    func applySnapShots() {
-        var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
-        snapshot.appendSections(SettingRoutineSection.allCases)
-        
-        weekDays.forEach {
-            snapshot.appendItems([.dayItem(weekDay: $0)], toSection: .day)
-        }
-        snapshot.appendItems([.settingRoutineItem], toSection: .settingRoutine)
-        reconmmendFastRoutines.forEach {
-            snapshot.appendItems([.recommendRoutineItem(routine: $0)], toSection: .recommendRoutine)
-        }
-        dataSource.apply(snapshot)
-    }
-    
     func createDayCellRegistration() -> UICollectionView.CellRegistration<DayCollectionViewCell, WeekDay> {
         return UICollectionView.CellRegistration<DayCollectionViewCell, WeekDay> { cell, _, weekDay in
             cell.configureCell(with: weekDay)
         }
     }
     
-    func createRoutineSettingCellRegistration() -> UICollectionView.CellRegistration<RoutineSettingCollectionViewCell, Int> {
-        return UICollectionView.CellRegistration<RoutineSettingCollectionViewCell, Int> { _, _, _ in
+    func createRoutineSettingCellRegistration() -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
+        return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { _, _, _ in
         }
     }
     

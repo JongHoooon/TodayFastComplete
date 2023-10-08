@@ -19,11 +19,20 @@ final class SettingRoutineViewModel: ViewModel {
     }
     
     struct Output {
-        
+        let sections = SettingRoutineSection.allCases
+        let weekDayItems = WeekDay.allCases.map { SettingRoutineItem.dayItem(weekDay: $0) }
+        let timeSetting = [SettingRoutineItem.timeSetting]
+        let recommendItems = RecommendFastRoutine.allCases.map {
+            SettingRoutineItem.recommendRoutineItem(routine: $0.fastRoutine)
+        }
+
+//        let settingRoutineSections = BehaviorRelay<[SettingRoutineSection]>(value: [])
+//        let weekDaysSectionItems = BehaviorRelay<[SettingRoutineItem]>(value: [])
+//        let settingRoutineSectionItems = BehaviorRelay<[SettingRoutineItem]>(value: [])
+//        let recommendRoutineSectionItems = BehaviorRelay<[SettingRoutineItem]>(value: [])
     }
     
     private weak var coordinator: Coordinator?
-    let repo = try? DefaultTimerRoutineSettingRepository()
     
     init(coordinator: Coordinator) {
         self.coordinator = coordinator
@@ -41,10 +50,8 @@ final class SettingRoutineViewModel: ViewModel {
         
         input.viewDidLoad
             .debug()
-            .bind(
-                with: self,
-                onNext: { owner, _ in
-                    
+            .bind(onNext: { _ in
+    
             })
             .disposed(by: disposeBag)
         

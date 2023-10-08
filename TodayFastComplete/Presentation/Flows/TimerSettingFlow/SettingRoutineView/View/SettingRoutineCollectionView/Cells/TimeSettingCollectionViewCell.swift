@@ -1,5 +1,5 @@
 //
-//  RoutineSettingCollectionViewCell.swift
+//  TimeSettingCollectionViewCell.swift
 //  TodayFastComplete
 //
 //  Created by JongHoon on 10/6/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RoutineSettingCollectionViewCell: UICollectionViewCell {
+final class TimeSettingCollectionViewCell: UICollectionViewCell {
  
     private let startTimeSettingView = TimeSettingView(kind: .startTime)
     private let fastTimeSettingView = TimeSettingView(kind: .fastTime)
@@ -46,7 +46,7 @@ final class RoutineSettingCollectionViewCell: UICollectionViewCell {
     }
 }
 
-private extension RoutineSettingCollectionViewCell {
+private extension TimeSettingCollectionViewCell {
     func configureLayout() {
         
         [

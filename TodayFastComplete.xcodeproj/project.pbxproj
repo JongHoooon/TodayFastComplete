@@ -21,7 +21,7 @@
 		ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */; };
 		ED50E9562ACF0B9700182922 /* SettingRoutineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9552ACF0B9700182922 /* SettingRoutineCollectionView.swift */; };
 		ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9572ACF0CC200182922 /* DayCollectionViewCell.swift */; };
-		ED50E95A2ACF903A00182922 /* RoutineSettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9592ACF903A00182922 /* RoutineSettingCollectionViewCell.swift */; };
+		ED50E95A2ACF903A00182922 /* TimeSettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9592ACF903A00182922 /* TimeSettingCollectionViewCell.swift */; };
 		ED50E95C2ACF908200182922 /* FastRoutineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E95B2ACF908200182922 /* FastRoutineCollectionViewCell.swift */; };
 		ED50E9602ACF913E00182922 /* TitleCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E95F2ACF913E00182922 /* TitleCollectionViewHeader.swift */; };
 		ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9612ACFCA3D00182922 /* WeekDay.swift */; };
@@ -69,6 +69,7 @@
 		EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */; };
 		EDACF3712ACED31000F72CE8 /* SettingTimerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF3702ACED31000F72CE8 /* SettingTimerDIContainer.swift */; };
 		EDBAAA2E2AD273C500CB84C8 /* TimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAAA2D2AD273C500CB84C8 /* TimeSettingView.swift */; };
+		EDBAAA302AD2B1D900CB84C8 /* SettingRoutineSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAAA2F2AD2B1D900CB84C8 /* SettingRoutineSection.swift */; };
 		EDBAAA322AD2BCEB00CB84C8 /* RecommendFastRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBAAA312AD2BCEB00CB84C8 /* RecommendFastRoutine.swift */; };
 		EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */; };
 		EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC262ACD9A8E0096D2F0 /* Step.swift */; };
@@ -88,7 +89,7 @@
 		ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewController.swift; sourceTree = "<group>"; };
 		ED50E9552ACF0B9700182922 /* SettingRoutineCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineCollectionView.swift; sourceTree = "<group>"; };
 		ED50E9572ACF0CC200182922 /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
-		ED50E9592ACF903A00182922 /* RoutineSettingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingCollectionViewCell.swift; sourceTree = "<group>"; };
+		ED50E9592ACF903A00182922 /* TimeSettingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED50E95B2ACF908200182922 /* FastRoutineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRoutineCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED50E95F2ACF913E00182922 /* TitleCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewHeader.swift; sourceTree = "<group>"; };
 		ED50E9612ACFCA3D00182922 /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
@@ -141,6 +142,7 @@
 		EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerCoordinator.swift; sourceTree = "<group>"; };
 		EDACF3702ACED31000F72CE8 /* SettingTimerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerDIContainer.swift; sourceTree = "<group>"; };
 		EDBAAA2D2AD273C500CB84C8 /* TimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingView.swift; sourceTree = "<group>"; };
+		EDBAAA2F2AD2B1D900CB84C8 /* SettingRoutineSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineSection.swift; sourceTree = "<group>"; };
 		EDBAAA312AD2BCEB00CB84C8 /* RecommendFastRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendFastRoutine.swift; sourceTree = "<group>"; };
 		EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Extension.swift"; sourceTree = "<group>"; };
 		EDC2CC262ACD9A8E0096D2F0 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */,
+				EDBAAA2F2AD2B1D900CB84C8 /* SettingRoutineSection.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -222,7 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				ED50E9572ACF0CC200182922 /* DayCollectionViewCell.swift */,
-				ED50E9592ACF903A00182922 /* RoutineSettingCollectionViewCell.swift */,
+				ED50E9592ACF903A00182922 /* TimeSettingCollectionViewCell.swift */,
 				EDBAAA2D2AD273C500CB84C8 /* TimeSettingView.swift */,
 				ED50E95B2ACF908200182922 /* FastRoutineCollectionViewCell.swift */,
 				ED50E95F2ACF913E00182922 /* TitleCollectionViewHeader.swift */,
@@ -711,6 +714,7 @@
 				ED50E9892AD1990400182922 /* List+Extension.swift in Sources */,
 				ED50E97F2AD17E4F00182922 /* TimerRoutineSettingRepository.swift in Sources */,
 				ED50E9562ACF0B9700182922 /* SettingRoutineCollectionView.swift in Sources */,
+				EDBAAA302AD2B1D900CB84C8 /* SettingRoutineSection.swift in Sources */,
 				ED6C67382AC9029400230621 /* Log.swift in Sources */,
 				EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
@@ -757,7 +761,7 @@
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
 				ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */,
 				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
-				ED50E95A2ACF903A00182922 /* RoutineSettingCollectionViewCell.swift in Sources */,
+				ED50E95A2ACF903A00182922 /* TimeSettingCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
