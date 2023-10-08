@@ -11,6 +11,7 @@ final class SettingRoutineCollectionView: UICollectionView {
     
     init() {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        showsVerticalScrollIndicator = false
     }
     
     @available(*, unavailable)

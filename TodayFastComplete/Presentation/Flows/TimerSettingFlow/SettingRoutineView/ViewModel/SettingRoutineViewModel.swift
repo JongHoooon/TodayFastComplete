@@ -7,14 +7,15 @@
 
 import Foundation
 
-import RxCocoa
+import RxRelay
 import RxSwift
 
 final class SettingRoutineViewModel: ViewModel {
     
     struct Input {
-        let viewDidDismissed: ControlEvent<Void>
-        let dismissButtonTapped: ControlEvent<Void>
+        let viewDidLoad: Observable<Void>
+        let viewDidDismissed: Observable<Void>
+        let dismissButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -22,6 +23,7 @@ final class SettingRoutineViewModel: ViewModel {
     }
     
     private weak var coordinator: Coordinator?
+    let repo = try? DefaultTimerRoutineSettingRepository()
     
     init(coordinator: Coordinator) {
         self.coordinator = coordinator
@@ -36,6 +38,15 @@ final class SettingRoutineViewModel: ViewModel {
         disposeBag: DisposeBag
     ) -> Output {
         let output = Output()
+        
+        input.viewDidLoad
+            .debug()
+            .bind(
+                with: self,
+                onNext: { owner, _ in
+                    
+            })
+            .disposed(by: disposeBag)
         
         input.viewDidDismissed
             .bind(

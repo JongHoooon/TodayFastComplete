@@ -24,7 +24,7 @@ final class DayCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.layer.borderColor = UIColor.label.cgColor
         view.backgroundColor = Constants.Color.disactive
-        view.layer.cornerRadius = 4.0
+        view.layer.cornerRadius = 8.0
         return view
     }()
     
