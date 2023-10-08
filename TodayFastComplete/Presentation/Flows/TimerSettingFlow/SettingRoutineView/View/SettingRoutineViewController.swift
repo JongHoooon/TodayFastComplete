@@ -16,20 +16,15 @@ final class SettingRoutineViewController: BaseViewController {
     private let viewModel: SettingRoutineViewModel
     private let disposeBag: DisposeBag
     
-    private let weekDays = WeekDay.allCases
-    private let reconmmendFastRoutines = [
-        FastRoutine(fastingTime: 16, mealCount: 2, image: Constants.Imgage.fasting),
-        FastRoutine(fastingTime: 12, mealCount: 3, image: Constants.Imgage.fasting),
-        FastRoutine(fastingTime: 23, mealCount: 1, image: Constants.Imgage.fasting)
-    ]
-    private let customFastRoutines = [
-        FastRoutine(fastingTime: 16),
-        FastRoutine(fastingTime: 12),
-        FastRoutine(fastingTime: 23)
-    ]
-    
     // MARK: - UI
-    private let settingRoutineCollectionView = SettingRoutineCollectionView()
+    private let settingRoutineCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewLayout()
+        )
+        collectionView.showsVerticalScrollIndicator = false
+        return collectionView
+    }()
     private var dataSource: UICollectionViewDiffableDataSource<SettingRoutineSection, SettingRoutineItem>!
     
     private let saveBarButton = UIBarButtonItem(
@@ -70,7 +65,6 @@ final class SettingRoutineViewController: BaseViewController {
         super.configure()
         configureDataSource()
         bindViewModel()
-//        applySnapShots()
     }
     
     override func configureNavigationBar() {
@@ -104,8 +98,8 @@ private extension SettingRoutineViewController {
         
         var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
         snapshot.appendSections(output.sections)
-        snapshot.appendItems(output.weekDayItems, toSection: .day)
-        snapshot.appendItems(output.timeSetting, toSection: .timeSetting)
+        snapshot.appendItems(output.weekDayItems, toSection: .dayTime)
+        snapshot.appendItems(output.timeSettingItems, toSection: .timeSetting)
         snapshot.appendItems(output.recommendItems, toSection: .recommendRoutine)
         dataSource.apply(snapshot)
     }
@@ -121,7 +115,7 @@ private extension SettingRoutineViewController {
             var section: NSCollectionLayoutSection?
             // item 설정
             switch settingRoutineSection {
-            case .day:
+            case .dayTime:
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0/7.0),
                     heightDimension: .fractionalHeight(1.0)
@@ -145,7 +139,6 @@ private extension SettingRoutineViewController {
                     heightDimension: .estimated(240.0)
                 )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                // TODO: info 정해지면 따라 heightDimension 조절 필요
                 let groupSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
                     heightDimension: .estimated(240.0)
@@ -155,6 +148,7 @@ private extension SettingRoutineViewController {
                     subitems: [item]
                 )
                 section = NSCollectionLayoutSection(group: group)
+                
             case .recommendRoutine:
                 let itemSize = NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1.0),
@@ -230,7 +224,7 @@ private extension SettingRoutineViewController {
                 }
                 
                 switch section {
-                case .day:
+                case .dayTime:
                     return collectionView.dequeueConfiguredReusableCell(
                         using: dayCellRegistration,
                         for: indexPath,

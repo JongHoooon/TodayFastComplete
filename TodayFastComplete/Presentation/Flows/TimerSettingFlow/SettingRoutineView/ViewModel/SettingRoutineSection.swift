@@ -8,13 +8,13 @@
 import Foundation
 
 enum SettingRoutineSection: Int, CaseIterable {
-    case day = 0
+    case dayTime = 0
     case timeSetting
     case recommendRoutine
     
     var title: String {
         switch self {
-        case .day:
+        case .dayTime:
             return String(localized: "SELECT_WEEKDAY", defaultValue: "요일 선택")
         case .timeSetting:
             return String(localized: "TIME_SETTING", defaultValue: "시간 설정")
