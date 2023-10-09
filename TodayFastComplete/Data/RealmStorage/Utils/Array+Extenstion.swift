@@ -1,5 +1,5 @@
 //
-//  Extenstion+Array.swift
+//  Array+Extenstion.swift
 //  TodayFastComplete
 //
 //  Created by JongHoon on 10/7/23.
