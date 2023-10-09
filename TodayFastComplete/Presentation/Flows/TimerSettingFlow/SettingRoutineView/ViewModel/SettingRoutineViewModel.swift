@@ -76,19 +76,21 @@ final class SettingRoutineViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         // TODO: Share 처리 필요
-        input.itemSelected
+        let itemSelected = input.itemSelected.share()
+        
+        itemSelected
             .filter { $0.section == SettingRoutineSection.dayTime.rawValue }
             .map { $0.item }
             .map { selectedDayRawValue in
                 let currentSelectedDays = output.selectedWeekDays.value
-                return currentSelectedDays.contains(selectedDayRawValue) 
-                    ? currentSelectedDays.filter { $0 != selectedDayRawValue } 
+                return currentSelectedDays.contains(selectedDayRawValue)
+                    ? currentSelectedDays.filter { $0 != selectedDayRawValue }
                     : currentSelectedDays + [selectedDayRawValue]
             }
             .bind { output.selectedWeekDays.accept($0) }
             .disposed(by: disposeBag)
         
-        input.itemSelected
+        itemSelected
             .filter { $0.section == SettingRoutineSection.recommendRoutine.rawValue }
             .map { $0.item }
             .bind { output.selectedRecommendRoutine.accept($0) }
