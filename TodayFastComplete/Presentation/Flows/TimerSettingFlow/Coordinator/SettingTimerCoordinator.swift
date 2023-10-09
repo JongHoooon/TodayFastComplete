@@ -12,8 +12,17 @@ import RxRelay
 protocol SettingTimerDependencies {
     func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController
     func makeSettingRoutineViewController(coordinator: Coordinator) -> UIViewController
-    func makeStartTimePickerViewController(coordinator: Coordinator, selectedStartTime: BehaviorRelay<String>) -> UIViewController
-    func makeFastTimePickerViewController(coordinator: Coordinator, selectedFastTime: BehaviorRelay<String>) -> UIViewController
+    func makeStartTimePickerViewController(
+        coordinator: Coordinator,
+        selectedStartTime: BehaviorRelay<Date>,
+        initialStartTime: Date
+    ) -> UIViewController
+    func makeFastTimePickerViewController(
+        coordinator: Coordinator,
+        selectedFastTime: BehaviorRelay<Int>,
+        recommendSectionNeedDeselect: PublishRelay<Void>,
+        initialFastTime: Int
+    ) -> UIViewController
 }
 
 final class SettingTimerCoordinator: BaseCoordinator {
@@ -48,12 +57,19 @@ final class SettingTimerCoordinator: BaseCoordinator {
             showSettingRoutine()
         case .settingTimerFlowIsComplete:
             rootViewController.dismiss(animated: true)
-        case .settingStartTimePickerViewTapped(let selectedStartTime):
-            presentStartTimePicker(selectedStartTime: selectedStartTime)
+        case let .settingStartTimePickerViewTapped(selectedStartTime, initialStartTime):
+            presentStartTimePicker(
+                selectedStartTime: selectedStartTime,
+                initialStartTime: initialStartTime
+            )
         case .settingStartTimePickerViewIsComplete:
             dismissStartTimePicker()
-        case .settingFastTimePickerViewTapped(let selectedFastTime):
-            presentFastTimePicker(selectedFastTime: selectedFastTime)
+        case let .settingFastTimePickerViewTapped(selectedFastTime, recommendSectionNeedDeselect, initialFastTime):
+            presentFastTimePicker(
+                selectedFastTime: selectedFastTime,
+                recommendSectionNeedDeselect: recommendSectionNeedDeselect, 
+                initialFastTime: initialFastTime
+            )
         case .settingFastTimePickerViewIsComplete:
             dismissFastTimePicker()
         default:
@@ -75,10 +91,14 @@ private extension SettingTimerCoordinator {
         rootViewController.viewControllers = [settingRoutineVC]
     }
     
-    func presentStartTimePicker(selectedStartTime: BehaviorRelay<String>) {
+    func presentStartTimePicker(
+        selectedStartTime: BehaviorRelay<Date>,
+        initialStartTime: Date
+    ) {
         let startTimePicerVC = dependencies.makeStartTimePickerViewController(
             coordinator: self,
-            selectedStartTime: selectedStartTime
+            selectedStartTime: selectedStartTime, 
+            initialStartTime: initialStartTime
         )
         rootViewController.present(startTimePicerVC, animated: true)
         presentedViews[.startTimePicker] = startTimePicerVC
@@ -90,10 +110,16 @@ private extension SettingTimerCoordinator {
         presentedViews.removeValue(forKey: .startTimePicker)
     }
     
-    func presentFastTimePicker(selectedFastTime: BehaviorRelay<String>) {
+    func presentFastTimePicker(
+        selectedFastTime: BehaviorRelay<Int>,
+        recommendSectionNeedDeselect: PublishRelay<Void>,
+        initialFastTime: Int
+    ) {
         let fastTimePicerVC = dependencies.makeFastTimePickerViewController(
             coordinator: self,
-            selectedFastTime: selectedFastTime
+            selectedFastTime: selectedFastTime, 
+            recommendSectionNeedDeselect: recommendSectionNeedDeselect, 
+            initialFastTime: initialFastTime
         )
         rootViewController.present(fastTimePicerVC, animated: true)
         presentedViews[.fastTimePicker] = fastTimePicerVC

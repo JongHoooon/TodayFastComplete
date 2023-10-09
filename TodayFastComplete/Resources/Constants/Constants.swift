@@ -114,4 +114,15 @@ enum Constants {
             defaultValue: "취소"
         )
     }
+    
+    enum DefaultValue {
+        static let fastTimeIndex = 15
+        static let fastTime = 16
+        static var startTime: Date {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            guard let date = formatter.date(from: "19:00") else { return Date() }
+            return date
+        }
+    }
 }

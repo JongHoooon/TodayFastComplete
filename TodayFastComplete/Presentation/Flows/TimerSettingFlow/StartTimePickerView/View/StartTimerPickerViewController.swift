@@ -41,11 +41,6 @@ final class StartTimerPickerViewController: BaseViewController {
         pickerView.preferredDatePickerStyle = .wheels
         pickerView.timeZone = .autoupdatingCurrent
         pickerView.backgroundColor = Constants.Color.backgroundMain
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        if let date = formatter.date(from: "19:00") {
-            pickerView.date = date
-        }
         return pickerView
     }()
     
@@ -105,6 +100,7 @@ private extension StartTimerPickerViewController {
         )
         
         _ = viewModel.transform(input: input, disposeBag: disposeBag)
+        datePickerView.date = viewModel.initialStartTime
     }
 }
 

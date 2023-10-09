@@ -103,7 +103,7 @@ private extension SettingRoutineViewController {
             itemSelected: settingRoutineCollectionView.rx.itemSelected.asObservable(),
             timePickerViewTapped: startTimePickerViewTapped.asObservable()
         )
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        var output = viewModel.transform(input: input, disposeBag: disposeBag)
         
         configureDataSource(
             selectedWeekDays: output.selectedWeekDays,
@@ -120,6 +120,11 @@ private extension SettingRoutineViewController {
         dataSource.apply(snapshot)
         
         settingRoutineCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        output.saveButtonIsEnable
+            .asDriver()
+            .drive(saveBarButton.rx.isEnabled)
             .disposed(by: disposeBag)
     }
 }
@@ -224,8 +229,8 @@ private extension SettingRoutineViewController {
     func configureDataSource(
         selectedWeekDays: BehaviorRelay<[Int]>,
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
-        selectedStartTime: BehaviorRelay<String>,
-        selectedFastTime: BehaviorRelay<String>,
+        selectedStartTime: BehaviorRelay<Date>,
+        selectedFastTime: BehaviorRelay<Int>,
         selectedRecommendRoutine: BehaviorRelay<Int?>
     ) {
         let dayCellRegistration = createDayCellRegistration(selectedDays: selectedWeekDays)
@@ -309,17 +314,21 @@ private extension SettingRoutineViewController {
     
     func createTimeSettingCellRegistration(
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
-        selectedStartTime: BehaviorRelay<String>,
-        selectedFastTime: BehaviorRelay<String>
+        selectedStartTime: BehaviorRelay<Date>,
+        selectedFastTime: BehaviorRelay<Int>
     ) -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
         return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { [weak self] cell, _, _ in
             guard let self else { return }
             let disposeBag = DisposeBag()
             cellDisposeBags[cell] = disposeBag
             selectedStartTime.asDriver()
+                .distinctUntilChanged()
+                .map { DateFormatter.toString(date: $0, format: .hourMinuteFormat) }
                 .drive { cell.configureStartTimeLabel(with: $0) }
                 .disposed(by: disposeBag)
             selectedFastTime.asDriver()
+                .distinctUntilChanged()
+                .map { String(localized: "HOURS", defaultValue: "\($0) 시간" ) }
                 .drive { cell.configureFastTimeLabel(with: $0) }
                 .disposed(by: disposeBag)
             cell.timePickerViewTapped = timePickerViewTapped
@@ -337,6 +346,7 @@ private extension SettingRoutineViewController {
             let disposeBag = DisposeBag()
             cellDisposeBags[cell] = disposeBag
             selectedRecommendRoutine.asDriver()
+                .distinctUntilChanged()
                 .map { $0 == indexPath.item }
                 .map { $0 ? Constants.Color.tintBase : Constants.Color.disactive }
                 .drive { cell.configureBackgroundColor(with: $0) }

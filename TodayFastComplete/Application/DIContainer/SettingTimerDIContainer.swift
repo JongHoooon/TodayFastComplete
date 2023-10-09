@@ -32,42 +32,54 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     // MARK: - Start Time Picker View
     func makeStartTimePickerViewController(
         coordinator: Coordinator,
-        selectedStartTime: BehaviorRelay<String>
+        selectedStartTime: BehaviorRelay<Date>,
+        initialStartTime: Date
     ) -> UIViewController {
         return StartTimerPickerViewController(viewModel: makeStartTimePickerViewModel(
             coordinator: coordinator,
-            selectedStartTime: selectedStartTime
+            selectedStartTime: selectedStartTime, 
+            initialStartTime: initialStartTime
         ))
     }
     
     private func makeStartTimePickerViewModel(
         coordinator: Coordinator,
-        selectedStartTime: BehaviorRelay<String>
+        selectedStartTime: BehaviorRelay<Date>,
+        initialStartTime: Date
     ) -> StartTimePickerViewModel {
         return StartTimePickerViewModel(
             coordinator: coordinator,
-            selectedStartTime: selectedStartTime
+            selectedStartTime: selectedStartTime, 
+            initialStartTime: initialStartTime
         )
     }
     
     // MARK: - Fast Time Picker View
     func makeFastTimePickerViewController(
         coordinator: Coordinator,
-        selectedFastTime: BehaviorRelay<String>
+        selectedFastTime: BehaviorRelay<Int>,
+        recommendSectionNeedDeselect: PublishRelay<Void>,
+        initialFastTime: Int
     ) -> UIViewController {
         return FastTimePickerViewController(viewModel: makeFastTimePickerViewModel(
             coordinator: coordinator,
-            selectedFastTime: selectedFastTime
+            selectedFastTime: selectedFastTime, 
+            recommendSectionNeedDeselect: recommendSectionNeedDeselect, 
+            initialFastTime: initialFastTime
         ))
     }
     
     private func makeFastTimePickerViewModel(
         coordinator: Coordinator,
-        selectedFastTime: BehaviorRelay<String>
+        selectedFastTime: BehaviorRelay<Int>,
+        recommendSectionNeedDeselect: PublishRelay<Void>,
+        initialFastTime: Int
     ) -> FastTimePickerViewModel {
         return FastTimePickerViewModel(
             coordinator: coordinator,
-            selectedFastTime: selectedFastTime
+            selectedFastTime: selectedFastTime, 
+            recommendSectionNeedDeselect: recommendSectionNeedDeselect, 
+            initialFastTime: initialFastTime
         )
     }
 }

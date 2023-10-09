@@ -21,16 +21,21 @@ final class FastTimePickerViewModel: ViewModel {
         let fastTimes = Array(1...23)
     }
     
-    private var coordinator: Coordinator
-    private var selectedFastTime: BehaviorRelay<String>
-    private var currentFastTime: Int = 0
+    private weak var coordinator: Coordinator?
+    private let selectedFastTime: BehaviorRelay<Int>
+    private let recommendSectionNeedDeselect: PublishRelay<Void>
+    var currentFastTime: Int
     
     init(
         coordinator: Coordinator,
-        selectedFastTime: BehaviorRelay<String>
+        selectedFastTime: BehaviorRelay<Int>,
+        recommendSectionNeedDeselect: PublishRelay<Void>,
+        initialFastTime: Int
     ) {
         self.coordinator = coordinator
         self.selectedFastTime = selectedFastTime
+        self.recommendSectionNeedDeselect = recommendSectionNeedDeselect
+        self.currentFastTime = initialFastTime
     }
     
     deinit {
@@ -46,7 +51,7 @@ final class FastTimePickerViewModel: ViewModel {
         input.cancelButtonTapped
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { [weak self] _ in
-                self?.coordinator.navigate(to: .settingFastTimePickerViewIsComplete)
+                self?.coordinator?.navigate(to: .settingFastTimePickerViewIsComplete)
             })
             .disposed(by: disposeBag)
         
@@ -63,11 +68,9 @@ final class FastTimePickerViewModel: ViewModel {
             .observe(on: MainScheduler.asyncInstance)
             .compactMap { [weak self] _ in self?.currentFastTime }
             .bind(onNext: { [weak self] fastTime in
-                self?.coordinator.navigate(to: .settingFastTimePickerViewIsComplete)
-                self?.selectedFastTime.accept(String(
-                    localized: "HOURS",
-                    defaultValue: "\(fastTime) 시간"
-                ))
+                self?.coordinator?.navigate(to: .settingFastTimePickerViewIsComplete)
+                self?.selectedFastTime.accept(fastTime)
+                self?.recommendSectionNeedDeselect.accept(Void())
             })
             .disposed(by: disposeBag)
         

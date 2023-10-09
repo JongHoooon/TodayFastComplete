@@ -21,15 +21,18 @@ final class StartTimePickerViewModel: ViewModel {
         
     }
     
-    private var coordinator: Coordinator
-    private let selectedStartTime: BehaviorRelay<String>
+    private weak var coordinator: Coordinator?
+    private let selectedStartTime: BehaviorRelay<Date>
+    let initialStartTime: Date
     
     init(
         coordinator: Coordinator,
-        selectedStartTime: BehaviorRelay<String>
+        selectedStartTime: BehaviorRelay<Date>,
+        initialStartTime: Date
     ) {
         self.coordinator = coordinator
         self.selectedStartTime = selectedStartTime
+        self.initialStartTime = initialStartTime
     }
     
     deinit {
@@ -45,15 +48,14 @@ final class StartTimePickerViewModel: ViewModel {
         input.cancelButtonTapped
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { [weak self] _ in
-                self?.coordinator.navigate(to: .settingStartTimePickerViewIsComplete)
+                self?.coordinator?.navigate(to: .settingStartTimePickerViewIsComplete)
             })
             .disposed(by: disposeBag)
         
         input.complteButtonTapped
             .observe(on: MainScheduler.asyncInstance)
-            .map { DateFormatter.toString(date: $0, format: .hourMinuteFormat) }
             .bind(onNext: { [weak self] date in
-                self?.coordinator.navigate(to: .settingStartTimePickerViewIsComplete)
+                self?.coordinator?.navigate(to: .settingStartTimePickerViewIsComplete)
                 self?.selectedStartTime.accept(date)
             })
             .disposed(by: disposeBag)

@@ -11,6 +11,7 @@ import RxRelay
 
 final class TimeSettingCollectionViewCell: UICollectionViewCell {
     
+    private var isViewDidLoadCount = 0
     var timePickerViewTapped: PublishRelay<TimePickerViewType>?
  
     private let startTimeSettingView = TimeSettingView(kind: .startTime)
@@ -116,6 +117,11 @@ private extension TimeSettingCollectionViewCell {
     }
     
     func animateInfoImage() {
+        guard isViewDidLoadCount >= 2
+        else {
+            isViewDidLoadCount += 1
+            return
+        }
         if #available(iOS 17.0, *) {
             infoImageView.addSymbolEffect(.bounce.up.byLayer)
         } else {

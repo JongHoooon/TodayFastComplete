@@ -102,8 +102,9 @@ private extension FastTimePickerViewController {
             )}
             .disposed(by: disposeBag)
         // TODO: GA 기반 인기 루틴 기본값으로 
+        let defaultFastTime = Constants.DefaultValue.fastTime
         pickerView.selectRow(
-            15,
+            output.fastTimes.firstIndex(of: viewModel.currentFastTime) ?? defaultFastTime,
             inComponent: 0,
             animated: false
         )
