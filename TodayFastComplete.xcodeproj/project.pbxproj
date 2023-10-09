@@ -16,6 +16,7 @@
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
 		ED3A93012AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A93002AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift */; };
+		ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
 		ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */; };
 		ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */; };
@@ -83,6 +84,7 @@
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED3A93002AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomRoutineTable+Mapping.swift"; sourceTree = "<group>"; };
+		ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewModel.swift; sourceTree = "<group>"; };
 		ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		ED5090462ACD3F5700CE1456 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */,
 				ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */,
 				ED50E96B2AD104E600182922 /* UILabel+Extension.swift */,
 				ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */,
@@ -697,6 +700,7 @@
 				ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */,
 				EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */,
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
+				ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
 				ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */,
 				ED50E9602ACF913E00182922 /* TitleCollectionViewHeader.swift in Sources */,
