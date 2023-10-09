@@ -94,22 +94,6 @@ final class StartTimerPickerViewController: BaseViewController {
 
 private extension StartTimerPickerViewController {
     func bindViewModel() {
-//        datePickerView.rx.date
-//            .subscribe(onNext: {
-//                Log.debug($0)
-//            })
-//            .disposed(by: disposeBag)
-//        
-//        datePickerView.rx.value
-//            .subscribe(onNext: {
-//                Log.debug($0)
-//                let formatter = DateFormatter()
-//                formatter.locale = .autoupdatingCurrent
-//                formatter.dateFormat = "a h시 m분"
-//                let formattedDate = formatter.string(from: $0)
-//                Log.debug(formattedDate)
-//            })
-//            .disposed(by: disposeBag)
         
         let complteTapped = completeBarButton.rx.tap
             .withLatestFrom(datePickerView.rx.date)
@@ -131,7 +115,6 @@ private extension StartTimerPickerViewController {
     }
     
     func configureSheet() {
-        // 밑으로 내려도 dissmiss 방지
         if let sheet = sheetPresentationController {
             sheet.detents = [.custom(resolver: { $0.maximumDetentValue * 0.45 })]
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false
