@@ -29,7 +29,6 @@ enum FastMode: Int, CaseIterable {
         }
     }
     
-    #warning("🚨 설명 작성 필요 🚨")
     var explanation: String {
         switch self {
         case .routine:

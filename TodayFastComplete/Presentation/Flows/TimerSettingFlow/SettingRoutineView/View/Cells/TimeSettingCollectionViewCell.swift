@@ -100,10 +100,19 @@ private extension TimeSettingCollectionViewCell {
             action: #selector(startTimeViewTapped)
         )
         startTimeSettingView.addGestureRecognizer(startTimeTapGesture)
+        let fastTimeTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(fastTimeViewTapped)
+        )
+        fastTimeSettingView.addGestureRecognizer(fastTimeTapGesture)
     }
     @objc
     func startTimeViewTapped() {
         timePickerViewTapped?.accept(.startTime)
+    }
+    @objc
+    func fastTimeViewTapped() {
+        timePickerViewTapped?.accept(.fastTime)
     }
     
     func animateInfoImage() {

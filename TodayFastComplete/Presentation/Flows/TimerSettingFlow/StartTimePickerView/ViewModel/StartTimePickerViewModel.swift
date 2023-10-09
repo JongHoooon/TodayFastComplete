@@ -16,16 +16,17 @@ final class StartTimePickerViewModel: ViewModel {
         let complteButtonTapped: Observable<Date> 
     }
     
+    // TODO: GA 기반 인기 시간 추천
     struct Output {
         
     }
     
     private var coordinator: Coordinator
-    private let selectedStartTime: PublishRelay<Date>
+    private let selectedStartTime: BehaviorRelay<String>
     
     init(
         coordinator: Coordinator,
-        selectedStartTime: PublishRelay<Date>
+        selectedStartTime: BehaviorRelay<String>
     ) {
         self.coordinator = coordinator
         self.selectedStartTime = selectedStartTime
@@ -50,6 +51,7 @@ final class StartTimePickerViewModel: ViewModel {
         
         input.complteButtonTapped
             .observe(on: MainScheduler.asyncInstance)
+            .map { DateFormatter.toString(date: $0, format: .hourMinuteFormat) }
             .bind(onNext: { [weak self] date in
                 self?.coordinator.navigate(to: .settingStartTimePickerViewIsComplete)
                 self?.selectedStartTime.accept(date)

@@ -33,6 +33,7 @@ final class SettingRoutineViewModel: ViewModel {
         let selectedRecommendRoutine = BehaviorRelay<Int?>(value: nil)
         
         let selectedStartTime = BehaviorRelay<String>(value: "")
+        let selectedFastTime = BehaviorRelay<String>(value: "")
     }
     
     private weak var coordinator: Coordinator?
@@ -50,7 +51,6 @@ final class SettingRoutineViewModel: ViewModel {
         disposeBag: DisposeBag
     ) -> Output {
         let output = Output()
-        let selectedStartTime = PublishRelay<Date>()
         
         input.viewDidLoad
             .debug()
@@ -75,7 +75,6 @@ final class SettingRoutineViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
-        // TODO: Share 처리 필요
         let itemSelected = input.itemSelected.share()
         
         itemSelected
@@ -99,19 +98,19 @@ final class SettingRoutineViewModel: ViewModel {
         input.timePickerViewTapped
             .debug()
             .observe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] type in
+            .subscribe(with: self, onNext: { owner, type in
                 switch type {
                 case .startTime:
-                    self?.coordinator?.navigate(to: .settingStartTimePickerViewTapped(selectedStartTime: selectedStartTime))
+                    owner.coordinator?.navigate(to: .settingStartTimePickerViewTapped(selectedStartTime: output.selectedStartTime))
                 case .fastTime:
-                    break
+                    guard let coordinator = owner.coordinator
+                    else {
+                        assertionFailure("coordinator is not linked")
+                        return
+                    }
+                    coordinator.navigate(to: .settingFastTimePickerViewTapped(selectedFastTime: output.selectedFastTime))
                 }
             })
-            .disposed(by: disposeBag)
-        
-        selectedStartTime
-            .map { DateFormatter.toString(date: $0, format: .hourMinuteFormat) }
-            .bind { output.selectedStartTime.accept($0) }
             .disposed(by: disposeBag)
         
         return output

@@ -18,6 +18,8 @@
 		ED3A93012AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A93002AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift */; };
 		ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */; };
 		ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */; };
+		ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */; };
+		ED4DB3B82AD3FC4A003535C9 /* FastTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B72AD3FC4A003535C9 /* FastTimePickerViewController.swift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
 		ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */; };
 		ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */; };
@@ -89,6 +91,8 @@
 		ED3A93002AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomRoutineTable+Mapping.swift"; sourceTree = "<group>"; };
 		ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewType.swift; sourceTree = "<group>"; };
 		ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTimePickerViewModel.swift; sourceTree = "<group>"; };
+		ED4DB3B72AD3FC4A003535C9 /* FastTimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTimePickerViewController.swift; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewModel.swift; sourceTree = "<group>"; };
 		ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +183,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED4DB3B02AD3FBFB003535C9 /* FastTimePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				ED4DB3B12AD3FC0F003535C9 /* ViewModel */,
+				ED4DB3B22AD3FC22003535C9 /* View */,
+			);
+			path = FastTimePickerView;
+			sourceTree = "<group>";
+		};
+		ED4DB3B12AD3FC0F003535C9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED4DB3B22AD3FC22003535C9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED4DB3B72AD3FC4A003535C9 /* FastTimePickerViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ED5090462ACD3F5700CE1456 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +578,7 @@
 				EDACF36B2ACECE4200F72CE8 /* Coordinator */,
 				ED50E94C2ACEF24E00182922 /* SettingRoutineView */,
 				ED65BEB72AD3859400534F7C /* StartTimePickerView */,
+				ED4DB3B02AD3FBFB003535C9 /* FastTimePickerView */,
 				EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */,
 			);
 			path = TimerSettingFlow;
@@ -730,6 +760,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
+				ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */,
 				ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */,
 				EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */,
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
@@ -757,6 +788,7 @@
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
 				EDBAAA322AD2BCEB00CB84C8 /* RecommendFastRoutine.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
+				ED4DB3B82AD3FC4A003535C9 /* FastTimePickerViewController.swift in Sources */,
 				ED50E9872AD198DB00182922 /* Array+Extenstion.swift in Sources */,
 				EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,

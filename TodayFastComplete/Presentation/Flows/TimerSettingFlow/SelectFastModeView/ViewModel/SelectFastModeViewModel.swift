@@ -63,14 +63,6 @@ final class SelectFastModeViewModel: ViewModel {
                     owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
             })
             .disposed(by: disposeBag)
-        
-        input.nextButtonTapped
-            .withLatestFrom(input.modeSelected)
-            .bind(with: self, onNext: { owner, mode in
-                
-            })
-            .disposed(by: disposeBag)
-        
         return output
     }
 }

@@ -12,14 +12,15 @@ import RxRelay
 protocol SettingTimerDependencies {
     func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController
     func makeSettingRoutineViewController(coordinator: Coordinator) -> UIViewController
-    func makeStartTimePickerViewController(coordinator: Coordinator, selectedStartTime: PublishRelay<Date>) -> UIViewController
+    func makeStartTimePickerViewController(coordinator: Coordinator, selectedStartTime: BehaviorRelay<String>) -> UIViewController
+    func makeFastTimePickerViewController(coordinator: Coordinator, selectedFastTime: BehaviorRelay<String>) -> UIViewController
 }
 
 final class SettingTimerCoordinator: BaseCoordinator {
     
     enum PresentedView {
         case startTimePicker
-        case fastTimePicer
+        case fastTimePicker
     }
     
     let rootViewController: UINavigationController
@@ -51,6 +52,10 @@ final class SettingTimerCoordinator: BaseCoordinator {
             presentStartTimePicker(selectedStartTime: selectedStartTime)
         case .settingStartTimePickerViewIsComplete:
             dismissStartTimePicker()
+        case .settingFastTimePickerViewTapped(let selectedFastTime):
+            presentFastTimePicker(selectedFastTime: selectedFastTime)
+        case .settingFastTimePickerViewIsComplete:
+            dismissFastTimePicker()
         default:
             assertionFailure("not configured step")
         }
@@ -70,7 +75,7 @@ private extension SettingTimerCoordinator {
         rootViewController.viewControllers = [settingRoutineVC]
     }
     
-    func presentStartTimePicker(selectedStartTime: PublishRelay<Date>) {
+    func presentStartTimePicker(selectedStartTime: BehaviorRelay<String>) {
         let startTimePicerVC = dependencies.makeStartTimePickerViewController(
             coordinator: self,
             selectedStartTime: selectedStartTime
@@ -83,5 +88,20 @@ private extension SettingTimerCoordinator {
         let vc = presentedViews[.startTimePicker]
         vc?.dismiss(animated: true)
         presentedViews.removeValue(forKey: .startTimePicker)
+    }
+    
+    func presentFastTimePicker(selectedFastTime: BehaviorRelay<String>) {
+        let fastTimePicerVC = dependencies.makeFastTimePickerViewController(
+            coordinator: self,
+            selectedFastTime: selectedFastTime
+        )
+        rootViewController.present(fastTimePicerVC, animated: true)
+        presentedViews[.fastTimePicker] = fastTimePicerVC
+    }
+    
+    func dismissFastTimePicker() {
+        let vc = presentedViews[.fastTimePicker]
+        vc?.dismiss(animated: true)
+        presentedViews.removeValue(forKey: .fastTimePicker)
     }
 }

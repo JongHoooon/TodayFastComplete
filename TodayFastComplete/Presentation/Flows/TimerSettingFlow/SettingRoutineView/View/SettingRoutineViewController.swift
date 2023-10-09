@@ -108,7 +108,8 @@ private extension SettingRoutineViewController {
         configureDataSource(
             selectedWeekDays: output.selectedWeekDays,
             timePickerViewTapped: startTimePickerViewTapped, 
-            selectedStartTime: output.selectedStartTime,
+            selectedStartTime: output.selectedStartTime, 
+            selectedFastTime: output.selectedFastTime,
             selectedRecommendRoutine: output.selectedRecommendRoutine
         )
         var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
@@ -224,12 +225,14 @@ private extension SettingRoutineViewController {
         selectedWeekDays: BehaviorRelay<[Int]>,
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
         selectedStartTime: BehaviorRelay<String>,
+        selectedFastTime: BehaviorRelay<String>,
         selectedRecommendRoutine: BehaviorRelay<Int?>
     ) {
         let dayCellRegistration = createDayCellRegistration(selectedDays: selectedWeekDays)
         let routineSettingCellRegistration = createTimeSettingCellRegistration(
             timePickerViewTapped: timePickerViewTapped,
-            selectedStartTime: selectedStartTime
+            selectedStartTime: selectedStartTime, 
+            selectedFastTime: selectedFastTime
         )
         let fastRoutineCellRegistration = createRoutineRecommendCellRegistration(selectedRecommendRoutine: selectedRecommendRoutine)
         let titleHeaderRegistration = createTitleCollectionHeaderCellRegistration()
@@ -306,7 +309,8 @@ private extension SettingRoutineViewController {
     
     func createTimeSettingCellRegistration(
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
-        selectedStartTime: BehaviorRelay<String>
+        selectedStartTime: BehaviorRelay<String>,
+        selectedFastTime: BehaviorRelay<String>
     ) -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
         return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { [weak self] cell, _, _ in
             guard let self else { return }
@@ -314,6 +318,9 @@ private extension SettingRoutineViewController {
             cellDisposeBags[cell] = disposeBag
             selectedStartTime.asDriver()
                 .drive { cell.configureStartTimeLabel(with: $0) }
+                .disposed(by: disposeBag)
+            selectedFastTime.asDriver()
+                .drive { cell.configureFastTimeLabel(with: $0) }
                 .disposed(by: disposeBag)
             cell.timePickerViewTapped = timePickerViewTapped
         }

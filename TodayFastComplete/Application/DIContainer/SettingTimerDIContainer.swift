@@ -32,7 +32,7 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     // MARK: - Start Time Picker View
     func makeStartTimePickerViewController(
         coordinator: Coordinator,
-        selectedStartTime: PublishRelay<Date>
+        selectedStartTime: BehaviorRelay<String>
     ) -> UIViewController {
         return StartTimerPickerViewController(viewModel: makeStartTimePickerViewModel(
             coordinator: coordinator,
@@ -42,11 +42,32 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     
     private func makeStartTimePickerViewModel(
         coordinator: Coordinator,
-        selectedStartTime: PublishRelay<Date>
+        selectedStartTime: BehaviorRelay<String>
     ) -> StartTimePickerViewModel {
         return StartTimePickerViewModel(
             coordinator: coordinator,
             selectedStartTime: selectedStartTime
+        )
+    }
+    
+    // MARK: - Fast Time Picker View
+    func makeFastTimePickerViewController(
+        coordinator: Coordinator,
+        selectedFastTime: BehaviorRelay<String>
+    ) -> UIViewController {
+        return FastTimePickerViewController(viewModel: makeFastTimePickerViewModel(
+            coordinator: coordinator,
+            selectedFastTime: selectedFastTime
+        ))
+    }
+    
+    private func makeFastTimePickerViewModel(
+        coordinator: Coordinator,
+        selectedFastTime: BehaviorRelay<String>
+    ) -> FastTimePickerViewModel {
+        return FastTimePickerViewModel(
+            coordinator: coordinator,
+            selectedFastTime: selectedFastTime
         )
     }
 }

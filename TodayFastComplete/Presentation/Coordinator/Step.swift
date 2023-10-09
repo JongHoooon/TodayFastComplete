@@ -23,7 +23,9 @@ enum Step {
     // Setting Timer
     case settingTimerFlowIsRequired
     case settingTimerFlowIsComplete
-    case settingStartTimePickerViewTapped(selectedStartTime: PublishRelay<Date>)
+    case settingStartTimePickerViewTapped(selectedStartTime: BehaviorRelay<String>)
     case settingStartTimePickerViewIsComplete
+    case settingFastTimePickerViewTapped(selectedFastTime: BehaviorRelay<String>)
+    case settingFastTimePickerViewIsComplete
     
 }
