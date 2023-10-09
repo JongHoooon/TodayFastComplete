@@ -11,12 +11,13 @@ import RxRelay
 import RxSwift
 
 final class SettingRoutineViewModel: ViewModel {
-    
+
     struct Input {
         let viewDidLoad: Observable<Void>
         let viewDidDismissed: Observable<Void>
         let dismissButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
+        let timePickerViewTapped: Observable<TimePickerViewType>
     }
     
     struct Output {
@@ -30,6 +31,8 @@ final class SettingRoutineViewModel: ViewModel {
         // TODO: view did 로드에서 저장된값있으면 넣주게 해야함
         let selectedWeekDays = BehaviorRelay<[Int]>(value: [])
         let selectedRecommendRoutine = BehaviorRelay<Int?>(value: nil)
+        
+        let selectedStartTime = BehaviorRelay<String>(value: "")
     }
     
     private weak var coordinator: Coordinator?
@@ -47,6 +50,7 @@ final class SettingRoutineViewModel: ViewModel {
         disposeBag: DisposeBag
     ) -> Output {
         let output = Output()
+        let selectedStartTime = PublishRelay<Date>()
         
         input.viewDidLoad
             .debug()
@@ -67,10 +71,11 @@ final class SettingRoutineViewModel: ViewModel {
             .bind(
                 with: self,
                 onNext: { owner, _ in
-                    owner.coordinator?.navigate(to: .settingTimerFlowDismissButtonTapped)
+                    owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
             })
             .disposed(by: disposeBag)
         
+        // TODO: Share 처리 필요
         input.itemSelected
             .filter { $0.section == SettingRoutineSection.dayTime.rawValue }
             .map { $0.item }
@@ -87,6 +92,24 @@ final class SettingRoutineViewModel: ViewModel {
             .filter { $0.section == SettingRoutineSection.recommendRoutine.rawValue }
             .map { $0.item }
             .bind { output.selectedRecommendRoutine.accept($0) }
+            .disposed(by: disposeBag)
+        
+        input.timePickerViewTapped
+            .debug()
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] type in
+                switch type {
+                case .startTime:
+                    self?.coordinator?.navigate(to: .settingStartTimePickerViewTapped(selectedStartTime: selectedStartTime))
+                case .fastTime:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        selectedStartTime
+            .map { DateFormatter.toString(date: $0, format: .hourMinuteFormat) }
+            .bind { output.selectedStartTime.accept($0) }
             .disposed(by: disposeBag)
         
         return output

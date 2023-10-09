@@ -93,19 +93,22 @@ final class SettingRoutineViewController: BaseViewController {
 
 private extension SettingRoutineViewController {
     func bindViewModel() {
-        settingRoutineCollectionView.rx.setDelegate(self)
-            .disposed(by: disposeBag)
+        
+        let startTimePickerViewTapped = PublishRelay<TimePickerViewType>()
         
         let input = SettingRoutineViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewDidDismissed: self.rx.viewDidDismissed.asObservable(),
-            dismissButtonTapped: dismissBarButton.rx.tap.asObservable(), 
-            itemSelected: settingRoutineCollectionView.rx.itemSelected.asObservable()
+            dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
+            itemSelected: settingRoutineCollectionView.rx.itemSelected.asObservable(),
+            timePickerViewTapped: startTimePickerViewTapped.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
         configureDataSource(
             selectedWeekDays: output.selectedWeekDays,
+            timePickerViewTapped: startTimePickerViewTapped, 
+            selectedStartTime: output.selectedStartTime,
             selectedRecommendRoutine: output.selectedRecommendRoutine
         )
         var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
@@ -114,6 +117,9 @@ private extension SettingRoutineViewController {
         snapshot.appendItems(output.timeSettingItems, toSection: .timeSetting)
         snapshot.appendItems(output.recommendItems, toSection: .recommendRoutine)
         dataSource.apply(snapshot)
+        
+        settingRoutineCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -216,10 +222,15 @@ private extension SettingRoutineViewController {
     
     func configureDataSource(
         selectedWeekDays: BehaviorRelay<[Int]>,
+        timePickerViewTapped: PublishRelay<TimePickerViewType>,
+        selectedStartTime: BehaviorRelay<String>,
         selectedRecommendRoutine: BehaviorRelay<Int?>
     ) {
         let dayCellRegistration = createDayCellRegistration(selectedDays: selectedWeekDays)
-        let routineSettingCellRegistration = createRoutineSettingCellRegistration()
+        let routineSettingCellRegistration = createTimeSettingCellRegistration(
+            timePickerViewTapped: timePickerViewTapped,
+            selectedStartTime: selectedStartTime
+        )
         let fastRoutineCellRegistration = createRoutineRecommendCellRegistration(selectedRecommendRoutine: selectedRecommendRoutine)
         let titleHeaderRegistration = createTitleCollectionHeaderCellRegistration()
         
@@ -293,8 +304,18 @@ private extension SettingRoutineViewController {
         }
     }
     
-    func createRoutineSettingCellRegistration() -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
-        return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { _, _, _ in
+    func createTimeSettingCellRegistration(
+        timePickerViewTapped: PublishRelay<TimePickerViewType>,
+        selectedStartTime: BehaviorRelay<String>
+    ) -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
+        return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { [weak self] cell, _, _ in
+            guard let self else { return }
+            let disposeBag = DisposeBag()
+            cellDisposeBags[cell] = disposeBag
+            selectedStartTime.asDriver()
+                .drive { cell.configureStartTimeLabel(with: $0) }
+                .disposed(by: disposeBag)
+            cell.timePickerViewTapped = timePickerViewTapped
         }
     }
     

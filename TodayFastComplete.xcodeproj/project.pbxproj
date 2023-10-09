@@ -16,6 +16,7 @@
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
 		ED3A93012AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A93002AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift */; };
+		ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */; };
 		ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
 		ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */; };
@@ -34,8 +35,10 @@
 		ED50E97D2AD1716D00182922 /* RealmUniqueKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E97C2AD1716D00182922 /* RealmUniqueKey.swift */; };
 		ED50E97F2AD17E4F00182922 /* TimerRoutineSettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E97E2AD17E4F00182922 /* TimerRoutineSettingRepository.swift */; };
 		ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9812AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift */; };
-		ED50E9872AD198DB00182922 /* Extenstion+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9862AD198DB00182922 /* Extenstion+Array.swift */; };
+		ED50E9872AD198DB00182922 /* Array+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9862AD198DB00182922 /* Array+Extenstion.swift */; };
 		ED50E9892AD1990400182922 /* List+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9882AD1990400182922 /* List+Extension.swift */; };
+		ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED65BEBA2AD385B900534F7C /* StartTimerPickerViewController.swift */; };
+		ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED65BEBC2AD3BF0600534F7C /* StartTimePickerViewModel.swift */; };
 		ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671D2AC8395400230621 /* Coordinator.swift */; };
 		ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67222AC83EA100230621 /* TimerViewController.swift */; };
 		ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67252AC83EB200230621 /* TimerViewModel.swift */; };
@@ -84,6 +87,7 @@
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED3A93002AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomRoutineTable+Mapping.swift"; sourceTree = "<group>"; };
+		ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewType.swift; sourceTree = "<group>"; };
 		ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewModel.swift; sourceTree = "<group>"; };
@@ -102,8 +106,10 @@
 		ED50E97C2AD1716D00182922 /* RealmUniqueKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUniqueKey.swift; sourceTree = "<group>"; };
 		ED50E97E2AD17E4F00182922 /* TimerRoutineSettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerRoutineSettingRepository.swift; sourceTree = "<group>"; };
 		ED50E9812AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerRoutineSettingRepository.swift; sourceTree = "<group>"; };
-		ED50E9862AD198DB00182922 /* Extenstion+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extenstion+Array.swift"; sourceTree = "<group>"; };
+		ED50E9862AD198DB00182922 /* Array+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extenstion.swift"; sourceTree = "<group>"; };
 		ED50E9882AD1990400182922 /* List+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extension.swift"; sourceTree = "<group>"; };
+		ED65BEBA2AD385B900534F7C /* StartTimerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimerPickerViewController.swift; sourceTree = "<group>"; };
+		ED65BEBC2AD3BF0600534F7C /* StartTimePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimePickerViewModel.swift; sourceTree = "<group>"; };
 		ED6C671D2AC8395400230621 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		ED6C67222AC83EA100230621 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		ED6C67252AC83EB200230621 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 			children = (
 				ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */,
 				EDBAAA2F2AD2B1D900CB84C8 /* SettingRoutineSection.swift */,
+				ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -247,11 +254,36 @@
 			isa = PBXGroup;
 			children = (
 				ED50E97C2AD1716D00182922 /* RealmUniqueKey.swift */,
-				ED50E9862AD198DB00182922 /* Extenstion+Array.swift */,
+				ED50E9862AD198DB00182922 /* Array+Extenstion.swift */,
 				ED50E9882AD1990400182922 /* List+Extension.swift */,
 				EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		ED65BEB72AD3859400534F7C /* StartTimePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				ED65BEB82AD385A500534F7C /* ViewModel */,
+				ED65BEB92AD385AA00534F7C /* View */,
+			);
+			path = StartTimePickerView;
+			sourceTree = "<group>";
+		};
+		ED65BEB82AD385A500534F7C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED65BEBC2AD3BF0600534F7C /* StartTimePickerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED65BEB92AD385AA00534F7C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED65BEBA2AD385B900534F7C /* StartTimerPickerViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		ED6C671A2AC8392800230621 /* Coordinator */ = {
@@ -516,6 +548,7 @@
 			children = (
 				EDACF36B2ACECE4200F72CE8 /* Coordinator */,
 				ED50E94C2ACEF24E00182922 /* SettingRoutineView */,
+				ED65BEB72AD3859400534F7C /* StartTimePickerView */,
 				EDC2CC2B2ACE44690096D2F0 /* SelectFastModeView */,
 			);
 			path = TimerSettingFlow;
@@ -703,6 +736,7 @@
 				ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
 				ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */,
+				ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */,
 				ED50E9602ACF913E00182922 /* TitleCollectionViewHeader.swift in Sources */,
 				ED50E9892AD1990400182922 /* List+Extension.swift in Sources */,
 				ED50E97F2AD17E4F00182922 /* TimerRoutineSettingRepository.swift in Sources */,
@@ -723,7 +757,7 @@
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
 				EDBAAA322AD2BCEB00CB84C8 /* RecommendFastRoutine.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
-				ED50E9872AD198DB00182922 /* Extenstion+Array.swift in Sources */,
+				ED50E9872AD198DB00182922 /* Array+Extenstion.swift in Sources */,
 				EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
 				ED3A93012AD246D1008EE6C3 /* CustomRoutineTable+Mapping.swift in Sources */,
@@ -747,11 +781,13 @@
 				EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */,
 				EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */,
 				ED50E97B2AD16DB300182922 /* TimerRoutineSettingTable+Mapping.swift in Sources */,
+				ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */,
 				EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */,
 				EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */,
 				EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */,
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
 				ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */,
+				ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */,
 				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
 				ED50E95A2ACF903A00182922 /* TimeSettingCollectionViewCell.swift in Sources */,
 			);

@@ -9,18 +9,7 @@ import UIKit
 
 final class DayCollectionViewCell: UICollectionViewCell {
     
-//    override var isSelected: Bool {
-//        didSet {
-//            switch isSelected {
-//            case true:
-//                baseView.backgroundColor = Constants.Color.tintBase
-//            case false:
-//                baseView.backgroundColor = Constants.Color.disactive
-//            }
-//        }
-//    }
-    
-    
+//    var 
     
     private let baseView: UIView = {
         let view = UIView()

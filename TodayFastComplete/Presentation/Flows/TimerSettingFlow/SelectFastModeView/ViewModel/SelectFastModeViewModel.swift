@@ -60,7 +60,7 @@ final class SelectFastModeViewModel: ViewModel {
             .bind(
                 with: self,
                 onNext: { owner, _ in
-                    owner.coordinator?.navigate(to: .settingTimerFlowDismissButtonTapped)
+                    owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
             })
             .disposed(by: disposeBag)
         

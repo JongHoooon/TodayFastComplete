@@ -97,6 +97,10 @@ enum Constants {
             defaultValue: "일"
         )
         
+        static let COMPLETE = String(
+            localized: "COMPLETE",
+            defaultValue: "완료"
+        )
         static let SAVE = String(
             localized: "SAVE",
             defaultValue: "저장"
@@ -104,6 +108,10 @@ enum Constants {
         static let NEXT = String(
             localized: "NEXT",
             defaultValue: "다음"
+        )
+        static let CANCEL = String(
+            localized: "CANCEL",
+            defaultValue: "취소"
         )
     }
 }

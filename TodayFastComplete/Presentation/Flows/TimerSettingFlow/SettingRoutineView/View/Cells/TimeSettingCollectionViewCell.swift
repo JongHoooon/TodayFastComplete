@@ -7,7 +7,11 @@
 
 import UIKit
 
+import RxRelay
+
 final class TimeSettingCollectionViewCell: UICollectionViewCell {
+    
+    var timePickerViewTapped: PublishRelay<TimePickerViewType>?
  
     private let startTimeSettingView = TimeSettingView(kind: .startTime)
     private let fastTimeSettingView = TimeSettingView(kind: .fastTime)
@@ -38,11 +42,22 @@ final class TimeSettingCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
+        addTapGesture()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureStartTimeLabel(with startTime: String) {
+        startTimeSettingView.configureTimeLabelText(with: startTime)
+        animateInfoImage()
+    }
+    
+    func configureFastTimeLabel(with fastTime: String) {
+        fastTimeSettingView.configureTimeLabelText(with: fastTime)
+        animateInfoImage()
     }
 }
 
@@ -61,7 +76,7 @@ private extension TimeSettingCollectionViewCell {
             $0.height.equalTo(60.0)
         }
         fastTimeSettingView.snp.makeConstraints {
-            $0.top.equalTo(startTimeSettingView.snp.bottom).offset(8.0)
+            $0.top.equalTo(startTimeSettingView.snp.bottom).offset(16.0)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(startTimeSettingView)
         }
@@ -76,6 +91,41 @@ private extension TimeSettingCollectionViewCell {
             $0.leading.equalTo(infoImageView.snp.trailing).offset(4.0)
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
+        }
+    }
+    
+    func addTapGesture() {
+        let startTimeTapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(startTimeViewTapped)
+        )
+        startTimeSettingView.addGestureRecognizer(startTimeTapGesture)
+    }
+    @objc
+    func startTimeViewTapped() {
+        timePickerViewTapped?.accept(.startTime)
+    }
+    
+    func animateInfoImage() {
+        if #available(iOS 17.0, *) {
+            infoImageView.addSymbolEffect(.bounce.up.byLayer)
+        } else {
+            UIView.animate(
+                withDuration: 0.15,
+                delay: 0.0,
+                options: .curveEaseIn,
+                animations: { [weak self] in
+                    self?.infoImageView.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+                },
+                completion: { [weak self] _ in
+                    UIView.animate(
+                        withDuration: 0.1,
+                        delay: 0.0,
+                        options: .curveEaseIn,
+                        animations: {
+                            self?.infoImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        }
+                )})
         }
     }
 }

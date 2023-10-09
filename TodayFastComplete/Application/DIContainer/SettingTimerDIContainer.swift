@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxRelay
+
 final class SettingTimerDIContainer: SettingTimerDependencies {
     
     // MARK: - Select Fast Mode View
@@ -25,5 +27,26 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     
     private func makeSettingRoutineViewModel(coordinator: Coordinator) -> SettingRoutineViewModel {
         return SettingRoutineViewModel(coordinator: coordinator)
+    }
+    
+    // MARK: - Start Time Picker View
+    func makeStartTimePickerViewController(
+        coordinator: Coordinator,
+        selectedStartTime: PublishRelay<Date>
+    ) -> UIViewController {
+        return StartTimerPickerViewController(viewModel: makeStartTimePickerViewModel(
+            coordinator: coordinator,
+            selectedStartTime: selectedStartTime
+        ))
+    }
+    
+    private func makeStartTimePickerViewModel(
+        coordinator: Coordinator,
+        selectedStartTime: PublishRelay<Date>
+    ) -> StartTimePickerViewModel {
+        return StartTimePickerViewModel(
+            coordinator: coordinator,
+            selectedStartTime: selectedStartTime
+        )
     }
 }
