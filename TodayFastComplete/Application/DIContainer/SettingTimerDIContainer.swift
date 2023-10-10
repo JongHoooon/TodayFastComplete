@@ -10,6 +10,22 @@ import UIKit
 import RxRelay
 
 final class SettingTimerDIContainer: SettingTimerDependencies {
+
+    // MARK: - Use Case
+    private func makeSettingTimerRoutineUseCase() -> SettingTimerRoutineUseCase {
+        return DefaultSettingTimerRoutineUseCase(routineSettingRepository: makeTimerRoutineSettingRepostory())
+    }
+                                                 
+    private func makeTimerRoutineSettingRepostory() -> TimerRoutineSettingRepository {
+        do {
+            let repository = try DefaultTimerRoutineSettingRepository()
+            return repository
+        } catch {
+            // TODO: Error 처리 개선 필요
+            Log.error(error)
+            fatalError("init realm repository failed")
+        }
+    }
     
     // MARK: - Select Fast Mode View
     func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController {
@@ -26,14 +42,17 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     }
     
     private func makeSettingRoutineViewModel(coordinator: Coordinator) -> SettingRoutineViewModel {
-        return SettingRoutineViewModel(coordinator: coordinator)
+        return SettingRoutineViewModel(
+            settingTimerRoutineUseCase: makeSettingTimerRoutineUseCase(),
+            coordinator: coordinator
+        )
     }
     
     // MARK: - Start Time Picker View
     func makeStartTimePickerViewController(
         coordinator: Coordinator,
-        selectedStartTime: BehaviorRelay<Date>,
-        initialStartTime: Date
+        selectedStartTime: BehaviorRelay<DateComponents>,
+        initialStartTime: DateComponents
     ) -> UIViewController {
         return StartTimerPickerViewController(viewModel: makeStartTimePickerViewModel(
             coordinator: coordinator,
@@ -44,8 +63,8 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     
     private func makeStartTimePickerViewModel(
         coordinator: Coordinator,
-        selectedStartTime: BehaviorRelay<Date>,
-        initialStartTime: Date
+        selectedStartTime: BehaviorRelay<DateComponents>,
+        initialStartTime: DateComponents
     ) -> StartTimePickerViewModel {
         return StartTimePickerViewModel(
             coordinator: coordinator,

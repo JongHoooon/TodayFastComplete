@@ -92,6 +92,7 @@ private extension StartTimerPickerViewController {
         
         let complteTapped = completeBarButton.rx.tap
             .withLatestFrom(datePickerView.rx.date)
+            .map { $0.timeDateComponents }
             .asObservable()
         
         let input = StartTimePickerViewModel.Input(
@@ -100,7 +101,7 @@ private extension StartTimerPickerViewController {
         )
         
         _ = viewModel.transform(input: input, disposeBag: disposeBag)
-        datePickerView.date = viewModel.initialStartTime
+        datePickerView.date = viewModel.initialStartTime.toDate()
     }
 }
 

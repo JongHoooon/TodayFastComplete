@@ -9,5 +9,6 @@ import RxSwift
 
 protocol TimerRoutineSettingRepository {
     func update(routineSetting: TimerRoutineSetting) -> Single<TimerRoutineSetting>
-    func fetch() -> Single<TimerRoutineSetting?>
+    func fetchRoutine() -> Single<TimerRoutineSetting?>
+    func deleteRoutine() -> Single<TimerRoutineSetting>
 }

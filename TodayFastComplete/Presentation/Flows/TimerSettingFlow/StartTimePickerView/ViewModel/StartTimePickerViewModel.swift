@@ -13,7 +13,7 @@ import RxSwift
 final class StartTimePickerViewModel: ViewModel {
     struct Input {
         let cancelButtonTapped: Observable<Void>
-        let complteButtonTapped: Observable<Date> 
+        let complteButtonTapped: Observable<DateComponents>
     }
     
     // TODO: GA 기반 인기 시간 추천
@@ -22,13 +22,13 @@ final class StartTimePickerViewModel: ViewModel {
     }
     
     private weak var coordinator: Coordinator?
-    private let selectedStartTime: BehaviorRelay<Date>
-    let initialStartTime: Date
+    private let selectedStartTime: BehaviorRelay<DateComponents>
+    let initialStartTime: DateComponents
     
     init(
         coordinator: Coordinator,
-        selectedStartTime: BehaviorRelay<Date>,
-        initialStartTime: Date
+        selectedStartTime: BehaviorRelay<DateComponents>,
+        initialStartTime: DateComponents
     ) {
         self.coordinator = coordinator
         self.selectedStartTime = selectedStartTime

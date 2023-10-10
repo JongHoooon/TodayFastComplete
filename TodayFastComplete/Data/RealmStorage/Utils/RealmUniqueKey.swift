@@ -6,5 +6,5 @@
 //
 
 enum RealmUniqueKey: String {
-    case fastRoutine
+    case fastRoutineSetting
 }

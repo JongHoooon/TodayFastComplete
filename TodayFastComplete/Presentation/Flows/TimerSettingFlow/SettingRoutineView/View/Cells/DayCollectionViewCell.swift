@@ -9,8 +9,6 @@ import UIKit
 
 final class DayCollectionViewCell: UICollectionViewCell {
     
-//    var 
-    
     private let baseView: UIView = {
         let view = UIView()
         view.layer.borderColor = UIColor.label.cgColor

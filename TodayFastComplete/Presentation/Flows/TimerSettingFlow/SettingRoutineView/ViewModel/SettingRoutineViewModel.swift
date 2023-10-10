@@ -18,30 +18,36 @@ final class SettingRoutineViewModel: ViewModel {
         let dismissButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
         let timePickerViewTapped: Observable<TimePickerViewType>
+        let saveButtonTapped: Observable<Void>
     }
     
     struct Output {
         let sections = SettingRoutineSection.allCases
-        let weekDayItems = WeekDay.allCases.map { SettingRoutineItem.dayItem(weekDay: $0) }
-        let timeSettingItems = [SettingRoutineItem.timeSetting]
+        let weekDaySectionItems = WeekDay.allCases.map { SettingRoutineItem.dayItem(weekDay: $0) }
+        let timeSettingSectionItems = [SettingRoutineItem.timeSetting]
         // TODO: GA 기반 인기순 정렬
         let recommendRoutines = RecommendFastRoutine.allCases
-        lazy var recommendItems = recommendRoutines.map {
+        lazy var recommendSectionItems = recommendRoutines.map {
             SettingRoutineItem.recommendRoutineItem(routine: $0.fastRoutine)
         }
         // TODO: view did 로드에서 저장된값있으면 넣주게 해야함
         let selectedWeekDays = BehaviorRelay<[Int]>(value: [])
         let selectedRecommendRoutine = BehaviorRelay<Int?>(value: nil)
         
-        let selectedStartTime = BehaviorRelay<Date>(value: Constants.DefaultValue.startTime)
+        let selectedStartTime = BehaviorRelay<DateComponents>(value: Constants.DefaultValue.startTime)
         let selectedFastTime = BehaviorRelay<Int>(value: Constants.DefaultValue.fastTime)
         
         let saveButtonIsEnable = BehaviorRelay<Bool>(value: false)
     }
     
+    private let settingTimerRoutineUseCase: SettingTimerRoutineUseCase
     private weak var coordinator: Coordinator?
     
-    init(coordinator: Coordinator) {
+    init(
+        settingTimerRoutineUseCase: SettingTimerRoutineUseCase,
+        coordinator: Coordinator
+    ) {
+        self.settingTimerRoutineUseCase = settingTimerRoutineUseCase
         self.coordinator = coordinator
     }
     
@@ -57,10 +63,7 @@ final class SettingRoutineViewModel: ViewModel {
         let recommendSectionNeedDeselect = PublishRelay<Void>()
         
         input.viewDidLoad
-            .debug()
-            .bind(onNext: { _ in
-                
-            })
+            .bind { fetchTimerRoutineSetting() }
             .disposed(by: disposeBag)
         
         input.viewDidDismissed
@@ -79,11 +82,13 @@ final class SettingRoutineViewModel: ViewModel {
                 })
             .disposed(by: disposeBag)
         
+        // TODO: 임팩 피드백 처리
         let itemSelected = input.itemSelected.share()
         
         itemSelected
             .filter { $0.section == SettingRoutineSection.dayTime.rawValue }
             .map { $0.item }
+            .map { WeekDay.allCases[$0].rawValue }
             .map { selectedDayRawValue in
                 let currentSelectedDays = output.selectedWeekDays.value
                 return currentSelectedDays.contains(selectedDayRawValue)
@@ -141,6 +146,42 @@ final class SettingRoutineViewModel: ViewModel {
             .bind { output.saveButtonIsEnable.accept($0) }
             .disposed(by: disposeBag)
         
+        input.saveButtonTapped
+            .map({
+                return TimerRoutineSetting(
+                    days: output.selectedWeekDays.value,
+                    startTime: output.selectedStartTime.value,
+                    fastTime: output.selectedFastTime.value
+            )})
+            .withUnretained(self)
+            .flatMap({ owner, settingRoutine in
+                return owner.settingTimerRoutineUseCase.updateRoutine(routineSeting: settingRoutine)
+            })
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(
+                with: self,
+                onNext: { owner, timerRoutineSetting in
+                    // TODO: 타이머 화면으로 값전달 필요
+                    owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
+                },
+                onError: { _, error in
+                    // TODO: Error handling 수정 필요
+                    Log.error(error)
+            })
+            .disposed(by: disposeBag)
+        
         return output
+        
+        func fetchTimerRoutineSetting() {
+            settingTimerRoutineUseCase.fetchTimerRoutine()
+                .subscribe(onSuccess: { routineSetting in
+                    if let routineSetting {
+                        output.selectedWeekDays.accept(routineSetting.days)
+                        output.selectedStartTime.accept(routineSetting.startTime)
+                        output.selectedFastTime.accept(routineSetting.fastTime)
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
     }
 }

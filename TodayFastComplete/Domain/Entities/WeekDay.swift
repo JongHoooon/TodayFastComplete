@@ -6,13 +6,13 @@
 //
 
 enum WeekDay: Int, Hashable, CaseIterable {
-    case mon
-    case tues
-    case wednes
-    case thurs
-    case fri
-    case satur
-    case sun
+    case mon = 2
+    case tues = 3
+    case wednes = 4
+    case thurs = 5
+    case fri = 6
+    case satur = 7
+    case sun = 1
     
     var weekDay: String {
         switch self {

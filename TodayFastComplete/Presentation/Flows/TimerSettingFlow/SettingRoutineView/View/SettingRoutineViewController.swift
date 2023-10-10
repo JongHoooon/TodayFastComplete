@@ -101,7 +101,8 @@ private extension SettingRoutineViewController {
             viewDidDismissed: self.rx.viewDidDismissed.asObservable(),
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
             itemSelected: settingRoutineCollectionView.rx.itemSelected.asObservable(),
-            timePickerViewTapped: startTimePickerViewTapped.asObservable()
+            timePickerViewTapped: startTimePickerViewTapped.asObservable(),
+            saveButtonTapped: saveBarButton.rx.tap.asObservable()
         )
         var output = viewModel.transform(input: input, disposeBag: disposeBag)
         
@@ -114,9 +115,9 @@ private extension SettingRoutineViewController {
         )
         var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
         snapshot.appendSections(output.sections)
-        snapshot.appendItems(output.weekDayItems, toSection: .dayTime)
-        snapshot.appendItems(output.timeSettingItems, toSection: .timeSetting)
-        snapshot.appendItems(output.recommendItems, toSection: .recommendRoutine)
+        snapshot.appendItems(output.weekDaySectionItems, toSection: .dayTime)
+        snapshot.appendItems(output.timeSettingSectionItems, toSection: .timeSetting)
+        snapshot.appendItems(output.recommendSectionItems, toSection: .recommendRoutine)
         dataSource.apply(snapshot)
         
         settingRoutineCollectionView.rx.setDelegate(self)
@@ -229,7 +230,7 @@ private extension SettingRoutineViewController {
     func configureDataSource(
         selectedWeekDays: BehaviorRelay<[Int]>,
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
-        selectedStartTime: BehaviorRelay<Date>,
+        selectedStartTime: BehaviorRelay<DateComponents>,
         selectedFastTime: BehaviorRelay<Int>,
         selectedRecommendRoutine: BehaviorRelay<Int?>
     ) {
@@ -314,7 +315,7 @@ private extension SettingRoutineViewController {
     
     func createTimeSettingCellRegistration(
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
-        selectedStartTime: BehaviorRelay<Date>,
+        selectedStartTime: BehaviorRelay<DateComponents>,
         selectedFastTime: BehaviorRelay<Int>
     ) -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
         return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { [weak self] cell, _, _ in
@@ -323,7 +324,7 @@ private extension SettingRoutineViewController {
             cellDisposeBags[cell] = disposeBag
             selectedStartTime.asDriver()
                 .distinctUntilChanged()
-                .map { DateFormatter.toString(date: $0, format: .hourMinuteFormat) }
+                .map { $0.timeString }
                 .drive { cell.configureStartTimeLabel(with: $0) }
                 .disposed(by: disposeBag)
             selectedFastTime.asDriver()

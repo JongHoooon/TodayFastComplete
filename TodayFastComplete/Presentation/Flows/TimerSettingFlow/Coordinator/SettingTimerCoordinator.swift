@@ -14,8 +14,8 @@ protocol SettingTimerDependencies {
     func makeSettingRoutineViewController(coordinator: Coordinator) -> UIViewController
     func makeStartTimePickerViewController(
         coordinator: Coordinator,
-        selectedStartTime: BehaviorRelay<Date>,
-        initialStartTime: Date
+        selectedStartTime: BehaviorRelay<DateComponents>,
+        initialStartTime: DateComponents
     ) -> UIViewController
     func makeFastTimePickerViewController(
         coordinator: Coordinator,
@@ -92,8 +92,8 @@ private extension SettingTimerCoordinator {
     }
     
     func presentStartTimePicker(
-        selectedStartTime: BehaviorRelay<Date>,
-        initialStartTime: Date
+        selectedStartTime: BehaviorRelay<DateComponents>,
+        initialStartTime: DateComponents
     ) {
         let startTimePicerVC = dependencies.makeStartTimePickerViewController(
             coordinator: self,

@@ -16,10 +16,16 @@ final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRout
         return Single<TimerRoutineSetting>
             .create { [weak self] single in
                 guard let self else { return Disposables.create() }
+                guard let hour = routineSetting.startTime.hour,
+                      let minute = routineSetting.startTime.minute
+                else {
+                    single(.failure(LocalRepositoryError.noData(message: "time component element")))
+                    return Disposables.create()
+                }
                 let object = TimerRoutineSettingTable(
                     days: routineSetting.days.toList(),
-                    startTimeHour: routineSetting.startTime.hour,
-                    startTimeMinute: routineSetting.startTime.minute,
+                    startTimeHour: hour,
+                    startTimeMinute: minute,
                     fastTime: routineSetting.fastTime
                 )
                 do {
@@ -35,14 +41,36 @@ final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRout
             .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
     }
     
-    func fetch() -> Single<TimerRoutineSetting?> {
+    func fetchRoutine() -> Single<TimerRoutineSetting?> {
         return Single<TimerRoutineSetting?>
             .create { [weak self] single in
                 guard let self else { return Disposables.create() }
-                let object = realm.object(ofType: TimerRoutineSettingTable.self, forPrimaryKey: RealmUniqueKey.fastRoutine.rawValue)
+                let object = realm.object(ofType: TimerRoutineSettingTable.self, forPrimaryKey: RealmUniqueKey.fastRoutineSetting.rawValue)
                 single(.success(object?.toDomain()))
                 return Disposables.create()
             }
             .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
+    }
+    
+    func deleteRoutine() -> Single<TimerRoutineSetting> {
+        return Single<TimerRoutineSetting>
+            .create { [weak self] single in
+                guard let self else { return Disposables.create() }
+                guard let object = realm.object(
+                    ofType: TimerRoutineSettingTable.self,
+                    forPrimaryKey: RealmUniqueKey.fastRoutineSetting.rawValue
+                ) else {
+                    return Disposables.create()
+                }
+                do {
+                    try realm.write {
+                        self.realm.delete(object)
+                        single(.success(object.toDomain()))
+                    }
+                } catch {
+                    single(.failure(error))
+                }
+                return Disposables.create()
+            }
     }
 }

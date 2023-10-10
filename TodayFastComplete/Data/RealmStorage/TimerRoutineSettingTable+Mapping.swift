@@ -10,18 +10,18 @@ import Foundation
 import RealmSwift
 
 final class TimerRoutineSettingTable: Object {
-    @Persisted(primaryKey: true) var uniqueKey = RealmUniqueKey.fastRoutine.rawValue
+    @Persisted(primaryKey: true) var uniqueKey = RealmUniqueKey.fastRoutineSetting.rawValue
     @Persisted var days: List<Int>
     @Persisted var startTimeHour: Int
     @Persisted var startTimeMinute: Int
     @Persisted var fastTime: Int
     
     override class func primaryKey() -> String? {
-        return RealmUniqueKey.fastRoutine.rawValue
+        return RealmUniqueKey.fastRoutineSetting.rawValue
     }
     
     convenience init(
-        uniqueKey: String = RealmUniqueKey.fastRoutine.rawValue,
+        uniqueKey: String = RealmUniqueKey.fastRoutineSetting.rawValue,
         days: List<Int>,
         startTimeHour: Int,
         startTimeMinute: Int,
@@ -38,7 +38,7 @@ final class TimerRoutineSettingTable: Object {
     func toDomain() -> TimerRoutineSetting {
         return TimerRoutineSetting(
             days: days.toArray(),
-            startTime: Time(hour: startTimeHour, minute: startTimeMinute),
+            startTime: DateComponents(hour: startTimeHour, minute: startTimeMinute),
             fastTime: fastTime
         )
     }
