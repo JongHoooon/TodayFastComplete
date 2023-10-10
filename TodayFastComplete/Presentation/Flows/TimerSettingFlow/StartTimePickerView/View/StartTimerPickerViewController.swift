@@ -90,14 +90,14 @@ final class StartTimerPickerViewController: BaseViewController {
 private extension StartTimerPickerViewController {
     func bindViewModel() {
         
-        let complteTapped = completeBarButton.rx.tap
-            .withLatestFrom(datePickerView.rx.date)
+        let complteButtonTappedWithSelectedTime = completeBarButton.rx.tap
+            .compactMap { [weak self] _ in self?.datePickerView.date }
             .map { $0.timeDateComponents }
             .asObservable()
         
         let input = StartTimePickerViewModel.Input(
             cancelButtonTapped: cancelBarButton.rx.tap.asObservable(),
-            complteButtonTapped: complteTapped
+            complteButtonTappedWithSelectedTime: complteButtonTappedWithSelectedTime
         )
         
         _ = viewModel.transform(input: input, disposeBag: disposeBag)

@@ -13,7 +13,7 @@ import RxSwift
 final class StartTimePickerViewModel: ViewModel {
     struct Input {
         let cancelButtonTapped: Observable<Void>
-        let complteButtonTapped: Observable<DateComponents>
+        let complteButtonTappedWithSelectedTime: Observable<DateComponents>
     }
     
     // TODO: GA 기반 인기 시간 추천
@@ -52,7 +52,7 @@ final class StartTimePickerViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.complteButtonTapped
+        input.complteButtonTappedWithSelectedTime
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { [weak self] date in
                 self?.coordinator?.navigate(to: .settingStartTimePickerViewIsComplete)
