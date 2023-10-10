@@ -11,14 +11,18 @@ extension DateFormatter {
     
     /// a h시 m분
     /// 오후 2시 23분
-    static let hourMinuteFormat = {
+    static var hourMinuteFormat: DateFormatter {
         let format = DateFormatter()
-        format.dateFormat = String(
-            localized: "HOUR_MINUTE_FORMAT",
-            defaultValue: "a h:mm"
-        )
+        format.dateFormat = "a h:mm"
         return format
-    }()
+    }
+    
+    /// 11 : 22 : 33
+    static var timerHourMinuteSecondFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = "HH : mm : ss"
+        return format
+    }
     
     static func toString(
         date: Date,

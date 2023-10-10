@@ -166,6 +166,7 @@ final class TimerViewController: BaseViewController {
 
         fastInfoLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(16.0)
+            $0.height.equalTo(52.0)
             $0.centerX.equalToSuperview()
         }
         let progressViewHorizontalInset = 24.0
@@ -224,13 +225,16 @@ private extension TimerViewController {
             .disposed(by: disposeBag)
         
         output.progressTime
-            .asSignal()
-            .emit(to: progressTimeLabel.rx.text)
+            .asDriver()
+            .map { $0.timerString }
+            .drive(progressTimeLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.remainTime
-            .asSignal()
-            .emit(to: remainTimeLabel.rx.text)
+            .asDriver()
+            .map { $0.timerString }
+            .map { String(localized: "REMAIN_TIMER_TIME", defaultValue: "남은 시간: \($0)") }
+            .drive(remainTimeLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }

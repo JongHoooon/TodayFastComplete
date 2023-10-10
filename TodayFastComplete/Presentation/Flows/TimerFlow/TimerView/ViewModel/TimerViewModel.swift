@@ -19,12 +19,16 @@ final class TimerViewModel: ViewModel {
     
     struct Output {
         // TODO: 단식 설정 안됐을때 문구 입력
-        let fastInfo = BehaviorRelay<String>(value: "")
+        let fastInfo = BehaviorRelay<String>(value: "단식 시간을 설정해 주세요 ⏳")
+        
         let messageText = PublishRelay<String>()
-        let progressTime = PublishRelay<String>()
-        let remainTime = PublishRelay<String>()
+        
+        let progressTime = BehaviorRelay<DateComponents>(value: Constants.DefaultValue.timerDateComponents)
+        let remainTime = BehaviorRelay<DateComponents>(value: Constants.DefaultValue.timerDateComponents)
+        
         let todayStartTime = PublishRelay<String>()
         let todayEndTime = PublishRelay<String>()
+        
         let fastControlButtonTitle = PublishRelay<String>()
     }
     

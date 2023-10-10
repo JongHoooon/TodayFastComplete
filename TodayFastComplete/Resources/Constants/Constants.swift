@@ -125,5 +125,6 @@ enum Constants {
             guard let date = formatter.date(from: "19:00") else { return Date() }
             return date
         }
+        static var timerDateComponents = DateComponents(hour: 0, minute: 0, second: 0)
     }
 }
