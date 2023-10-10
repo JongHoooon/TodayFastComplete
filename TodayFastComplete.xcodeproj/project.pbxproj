@@ -19,10 +19,12 @@
 		ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */; };
 		ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */; };
 		ED4DB3B82AD3FC4A003535C9 /* FastTimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B72AD3FC4A003535C9 /* FastTimePickerViewController.swift */; };
-		ED4DB3BA2AD4318A003535C9 /* SettingTimerRoutineUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B92AD4318A003535C9 /* SettingTimerRoutineUseCase.swift */; };
+		ED4DB3BA2AD4318A003535C9 /* TimerUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B92AD4318A003535C9 /* TimerUseCase.swift */; };
 		ED4DB3BE2AD4D457003535C9 /* LocalRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3BD2AD4D457003535C9 /* LocalRepositoryError.swift */; };
 		ED4DB3C02AD50DAD003535C9 /* DateComponents+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3BF2AD50DAD003535C9 /* DateComponents+Extension.swift */; };
 		ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C12AD5100F003535C9 /* Date+Extension.swift */; };
+		ED4DB3C62AD53337003535C9 /* RoutineSettingFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */; };
+		ED4DB3C82AD5334C003535C9 /* RoutineSettingUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
 		ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */; };
 		ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */; };
@@ -94,10 +96,12 @@
 		ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTimePickerViewModel.swift; sourceTree = "<group>"; };
 		ED4DB3B72AD3FC4A003535C9 /* FastTimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTimePickerViewController.swift; sourceTree = "<group>"; };
-		ED4DB3B92AD4318A003535C9 /* SettingTimerRoutineUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerRoutineUseCase.swift; sourceTree = "<group>"; };
+		ED4DB3B92AD4318A003535C9 /* TimerUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUseCase.swift; sourceTree = "<group>"; };
 		ED4DB3BD2AD4D457003535C9 /* LocalRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRepositoryError.swift; sourceTree = "<group>"; };
 		ED4DB3BF2AD50DAD003535C9 /* DateComponents+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+Extension.swift"; sourceTree = "<group>"; };
 		ED4DB3C12AD5100F003535C9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingFetchable.swift; sourceTree = "<group>"; };
+		ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingUpdatable.swift; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewModel.swift; sourceTree = "<group>"; };
 		ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +214,16 @@
 				ED4DB3B72AD3FC4A003535C9 /* FastTimePickerViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		ED4DB3C92AD533C9003535C9 /* TimerUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				ED4DB3B92AD4318A003535C9 /* TimerUseCase.swift */,
+				ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */,
+				ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */,
+			);
+			path = TimerUseCase;
 			sourceTree = "<group>";
 		};
 		ED5090462ACD3F5700CE1456 /* Extensions */ = {
@@ -518,7 +532,7 @@
 		ED8192332AC2F45F00C7C830 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				ED4DB3B92AD4318A003535C9 /* SettingTimerRoutineUseCase.swift */,
+				ED4DB3C92AD533C9003535C9 /* TimerUseCase */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -783,7 +797,7 @@
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
 				ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */,
 				ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */,
-				ED4DB3BA2AD4318A003535C9 /* SettingTimerRoutineUseCase.swift in Sources */,
+				ED4DB3BA2AD4318A003535C9 /* TimerUseCase.swift in Sources */,
 				ED50E9782AD16C8700182922 /* TimerRoutineSetting.swift in Sources */,
 				ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */,
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
@@ -801,12 +815,14 @@
 				ED50E9872AD198DB00182922 /* Array+Extenstion.swift in Sources */,
 				EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
+				ED4DB3C62AD53337003535C9 /* RoutineSettingFetchable.swift in Sources */,
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
 				EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */,
 				ED4DB3BE2AD4D457003535C9 /* LocalRepositoryError.swift in Sources */,
 				ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */,
+				ED4DB3C82AD5334C003535C9 /* RoutineSettingUpdatable.swift in Sources */,
 				EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */,
 				EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */,
 				EDBAAA2E2AD273C500CB84C8 /* TimeSettingView.swift in Sources */,

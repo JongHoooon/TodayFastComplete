@@ -40,6 +40,7 @@ final class SettingRoutineViewModel: ViewModel {
         let saveButtonIsEnable = BehaviorRelay<Bool>(value: false)
     }
     
+    typealias SettingTimerRoutineUseCase = RoutineSettingFetchable & RoutineSettingUpdatable
     private let settingTimerRoutineUseCase: SettingTimerRoutineUseCase
     private weak var coordinator: Coordinator?
     
@@ -154,8 +155,8 @@ final class SettingRoutineViewModel: ViewModel {
                     fastTime: output.selectedFastTime.value
             )})
             .withUnretained(self)
-            .flatMap({ owner, settingRoutine in
-                return owner.settingTimerRoutineUseCase.updateRoutine(routineSeting: settingRoutine)
+            .flatMap({ owner, routineSetting in
+                return owner.settingTimerRoutineUseCase.updateRouineSetting(with: routineSetting)
             })
             .observe(on: MainScheduler.asyncInstance)
             .subscribe(

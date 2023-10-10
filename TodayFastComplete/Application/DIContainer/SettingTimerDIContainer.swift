@@ -12,8 +12,8 @@ import RxRelay
 final class SettingTimerDIContainer: SettingTimerDependencies {
 
     // MARK: - Use Case
-    private func makeSettingTimerRoutineUseCase() -> SettingTimerRoutineUseCase {
-        return DefaultSettingTimerRoutineUseCase(routineSettingRepository: makeTimerRoutineSettingRepostory())
+    private func makeTimerUseCase() -> TimerUseCase {
+        return TimerUseCaseImp(routineSettingRepository: makeTimerRoutineSettingRepostory())
     }
                                                  
     private func makeTimerRoutineSettingRepostory() -> TimerRoutineSettingRepository {
@@ -43,7 +43,7 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     
     private func makeSettingRoutineViewModel(coordinator: Coordinator) -> SettingRoutineViewModel {
         return SettingRoutineViewModel(
-            settingTimerRoutineUseCase: makeSettingTimerRoutineUseCase(),
+            settingTimerRoutineUseCase: makeTimerUseCase(),
             coordinator: coordinator
         )
     }

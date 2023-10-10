@@ -1,5 +1,5 @@
 //
-//  SettingTimerRoutineUseCase.swift
+//  TimerUseCaseImp.swift
 //  TodayFastComplete
 //
 //  Created by JongHoon on 10/9/23.
@@ -9,19 +9,16 @@ import Foundation
 
 import RxSwift
 
-protocol SettingTimerRoutineUseCase {
-    func updateRoutine(routineSeting: TimerRoutineSetting) -> Single<TimerRoutineSetting>
-    func fetchTimerRoutine() -> Single<TimerRoutineSetting?>
-}
+typealias TimerUseCase = RoutineSettingUpdatable & RoutineSettingFetchable
 
-final class DefaultSettingTimerRoutineUseCase: SettingTimerRoutineUseCase {
+final class TimerUseCaseImp: TimerUseCase {
     private let routineSettingRepository: TimerRoutineSettingRepository
     
     init(routineSettingRepository: TimerRoutineSettingRepository) {
         self.routineSettingRepository = routineSettingRepository
     }
     
-    func updateRoutine(routineSeting: TimerRoutineSetting) -> Single<TimerRoutineSetting> {
+    func updateRouineSetting(with routineSeting: TimerRoutineSetting) -> Single<TimerRoutineSetting> {
         return routineSettingRepository.update(routineSetting: routineSeting)
     }
     

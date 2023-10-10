@@ -29,10 +29,17 @@ final class TimerViewModel: ViewModel {
     }
     
     // MARK: - Properties
+    typealias TimerViewUseCase = RoutineSettingFetchable
+    private let timerViewUseCase: TimerViewUseCase
     private weak var coordinator: Coordinator?
+    private var timerRoutineSetting: TimerRoutineSetting?
     
     // MARK: - Init
-    init(coordinator: Coordinator) {
+    init(
+        timerViewUseCase: TimerViewUseCase,
+        coordinator: Coordinator
+    ) {
+        self.timerViewUseCase = timerViewUseCase
         self.coordinator = coordinator
     }
     
