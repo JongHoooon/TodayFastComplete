@@ -18,10 +18,10 @@ enum Step {
     
     // Timer
     case timerFlowIsRequired
-    case timerSettingButtonTapped
+    case timerSettingButtonTapped(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>)
     
     // Setting Timer
-    case settingTimerFlowIsRequired
+    case settingTimerFlowIsRequired(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>)
     case settingTimerFlowIsComplete
     case settingStartTimePickerViewTapped(
         selectedStartTime: BehaviorRelay<DateComponents>,

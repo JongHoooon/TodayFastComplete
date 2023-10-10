@@ -7,7 +7,7 @@
 
 import Foundation
 
-import RxCocoa
+import RxRelay
 import RxSwift
 
 final class TimerViewModel: ViewModel {
@@ -18,8 +18,8 @@ final class TimerViewModel: ViewModel {
     }
     
     struct Output {
-        let fastTitle = PublishRelay<String>()
-        let fastInfoTitle = PublishRelay<String>()
+        // TODO: 단식 설정 안됐을때 문구 입력
+        let fastInfo = BehaviorRelay<String>(value: "")
         let messageText = PublishRelay<String>()
         let progressTime = PublishRelay<String>()
         let remainTime = PublishRelay<String>()
@@ -32,7 +32,8 @@ final class TimerViewModel: ViewModel {
     typealias TimerViewUseCase = RoutineSettingFetchable
     private let timerViewUseCase: TimerViewUseCase
     private weak var coordinator: Coordinator?
-    private var timerRoutineSetting: TimerRoutineSetting?
+    
+    private var currentRoutineSetting = BehaviorRelay<TimerRoutineSetting?>(value: nil)
     
     // MARK: - Init
     init(
@@ -54,15 +55,38 @@ final class TimerViewModel: ViewModel {
     ) -> Output {
         let output = Output()
         
+        input.viewDidLoad
+            .bind { fetchRoutineSetting() }
+            .disposed(by: disposeBag)
+        
+        currentRoutineSetting
+            .compactMap { $0 }
+            .bind { output.fastInfo.accept($0.routineInfo) }
+            .disposed(by: disposeBag)
+        
         input.selectFastModeButtonTapped
             .asSignal(onErrorJustReturn: Void())
             .emit(
                 with: self,
                 onNext: { owner, _ in
-                    owner.coordinator?.navigate(to: .timerSettingButtonTapped)
+                    owner.coordinator?.navigate(to: .timerSettingButtonTapped(currentRoutineSetting: owner.currentRoutineSetting))
             })
             .disposed(by: disposeBag)
         
         return output
+        
+        func fetchRoutineSetting() {
+            timerViewUseCase.fetchTimerRoutine()
+                .subscribe(
+                    with: self,
+                    onSuccess: { owner, routineSetting in
+                        if let routineSetting {
+                            owner.currentRoutineSetting.accept(routineSetting)
+                        } else {
+                            
+                        }
+                })
+                .disposed(by: disposeBag)
+        }
     }
 }

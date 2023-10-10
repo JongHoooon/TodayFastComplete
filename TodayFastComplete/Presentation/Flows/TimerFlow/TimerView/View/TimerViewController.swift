@@ -17,13 +17,6 @@ final class TimerViewController: BaseViewController {
     private let disposeBag: DisposeBag
     
     // MARK: - UI
-    private let fastTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .captionBold
-        label.text = "루틴 모드"
-        label.textColor = .systemGray
-        return label
-    }()
     private let fastInfoLabel: UILabel = {
         let label = UILabel()
         label.font = .captionRegural
@@ -32,9 +25,10 @@ final class TimerViewController: BaseViewController {
         단식 시간: 오후 07:00 ~ 오전 11:00 16시간
         식사 시간: 오전 11:00 ~ 오후 07:00 8시간
         """
-        label.textAlignment = .center
         label.textColor = .systemGray
-        label.numberOfLines = 0
+        label.numberOfLines = 3
+        label.addLineSpacing(with: 2.0)
+        label.textAlignment = .center
         return label
     }()
     
@@ -162,7 +156,6 @@ final class TimerViewController: BaseViewController {
         ].forEach { timerInfoStackView.addArrangedSubview($0) }
         
         [
-            fastTitleLabel,
             fastInfoLabel,
             timerProgressView,
             timerInfoStackView,
@@ -170,13 +163,9 @@ final class TimerViewController: BaseViewController {
             todayEndTimeLabel,
             fastControlButton
         ].forEach { view.addSubview($0) }
-        
-        fastTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(8.0)
-            $0.centerX.equalToSuperview()
-        }
+
         fastInfoLabel.snp.makeConstraints {
-            $0.top.equalTo(fastTitleLabel.snp.bottom).offset(4.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16.0)
             $0.centerX.equalToSuperview()
         }
         let progressViewHorizontalInset = 24.0
@@ -224,14 +213,9 @@ private extension TimerViewController {
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
-        output.fastTitle
-            .asSignal()
-            .emit(to: fastTitleLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        output.fastInfoTitle
-            .asSignal()
-            .emit(to: fastInfoLabel.rx.text)
+        output.fastInfo
+            .asDriver()
+            .drive(fastInfoLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.messageText

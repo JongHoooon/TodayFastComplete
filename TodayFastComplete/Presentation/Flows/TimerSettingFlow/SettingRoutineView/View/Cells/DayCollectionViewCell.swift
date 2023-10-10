@@ -36,7 +36,7 @@ final class DayCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(with item: WeekDay) {
-        dayLabel.text = item.weekDay
+        dayLabel.text = item.weekDayName
     }
     
     func configureBackgroundColor(with color: UIColor) {

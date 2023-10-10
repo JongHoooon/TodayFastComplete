@@ -12,7 +12,6 @@ extension DateComponents {
         return Calendar.current.date(from: self) ?? Constants.DefaultValue.startTimeDate
     }
     
-    
     var timeString: String {
         let calendar = Calendar.current
         let date = calendar.date(from: self) ?? Constants.DefaultValue.startTimeDate

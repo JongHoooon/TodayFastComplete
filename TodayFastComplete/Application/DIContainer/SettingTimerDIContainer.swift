@@ -37,14 +37,24 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     }
     
     // MARK: - Setting Routine View
-    func makeSettingRoutineViewController(coordinator: Coordinator) -> UIViewController {
-        return SettingRoutineViewController(viewModel: makeSettingRoutineViewModel(coordinator: coordinator))
+    func makeSettingRoutineViewController(
+        coordinator: Coordinator,
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
+    ) -> UIViewController {
+        return SettingRoutineViewController(viewModel: makeSettingRoutineViewModel(
+            coordinator: coordinator,
+            currentRoutineSetting: currentRoutineSetting
+        ))
     }
     
-    private func makeSettingRoutineViewModel(coordinator: Coordinator) -> SettingRoutineViewModel {
+    private func makeSettingRoutineViewModel(
+        coordinator: Coordinator,
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
+    ) -> SettingRoutineViewModel {
         return SettingRoutineViewModel(
             settingTimerRoutineUseCase: makeTimerUseCase(),
-            coordinator: coordinator
+            coordinator: coordinator,
+            currentRoutineSetting: currentRoutineSetting
         )
     }
     

@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxRelay
+
 protocol TimerCoordinatorDependencies {
     func makeTimerViewController(coordinator: Coordinator) -> UIViewController
     func makeSettingTimerCoordinator(rootViewController: UINavigationController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
@@ -36,8 +38,8 @@ final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate 
         switch step {
         case .timerFlowIsRequired:
             showTimer()
-        case .timerSettingButtonTapped:
-            presentToSelectFastMode()
+        case let .timerSettingButtonTapped(currentRoutineSetting):
+            presentToSelectFastMode(currentRoutineSetting: currentRoutineSetting)
         default:
             assertionFailure("not configured step")
         }
@@ -48,13 +50,13 @@ final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate 
         navigationController.setViewControllers([vc], animated: true)
     }
     
-    private func presentToSelectFastMode() {
+    private func presentToSelectFastMode(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>) {
         let settingTimerNavigationController = UINavigationController()
         let settingTimerCoordinator = dependencies.makeSettingTimerCoordinator(
             rootViewController: settingTimerNavigationController,
             finishDelegate: self
         )
-        settingTimerCoordinator.navigate(to: .settingTimerFlowIsRequired)
+        settingTimerCoordinator.navigate(to: .settingTimerFlowIsRequired(currentRoutineSetting: currentRoutineSetting))
         settingTimerNavigationController.modalPresentationStyle = .fullScreen
         navigationController.present(
             settingTimerNavigationController,

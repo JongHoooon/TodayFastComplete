@@ -44,12 +44,16 @@ final class SettingRoutineViewModel: ViewModel {
     private let settingTimerRoutineUseCase: SettingTimerRoutineUseCase
     private weak var coordinator: Coordinator?
     
+    private var currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
+    
     init(
         settingTimerRoutineUseCase: SettingTimerRoutineUseCase,
-        coordinator: Coordinator
+        coordinator: Coordinator,
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
     ) {
         self.settingTimerRoutineUseCase = settingTimerRoutineUseCase
         self.coordinator = coordinator
+        self.currentRoutineSetting = currentRoutineSetting
     }
     
     deinit {
@@ -113,7 +117,6 @@ final class SettingRoutineViewModel: ViewModel {
             .disposed(by: disposeBag)
 
         input.timePickerViewTapped
-            .debug()
             .observe(on: MainScheduler.asyncInstance)
             .subscribe(with: self, onNext: { owner, type in
                 switch type {
@@ -162,7 +165,7 @@ final class SettingRoutineViewModel: ViewModel {
             .subscribe(
                 with: self,
                 onNext: { owner, timerRoutineSetting in
-                    // TODO: 타이머 화면으로 값전달 필요
+                    owner.currentRoutineSetting.accept(timerRoutineSetting)
                     owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
                 },
                 onError: { _, error in

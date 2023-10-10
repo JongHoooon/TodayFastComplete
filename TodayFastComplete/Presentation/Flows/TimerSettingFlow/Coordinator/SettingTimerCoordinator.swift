@@ -11,7 +11,10 @@ import RxRelay
 
 protocol SettingTimerDependencies {
     func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController
-    func makeSettingRoutineViewController(coordinator: Coordinator) -> UIViewController
+    func makeSettingRoutineViewController(
+        coordinator: Coordinator,
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
+    ) -> UIViewController
     func makeStartTimePickerViewController(
         coordinator: Coordinator,
         selectedStartTime: BehaviorRelay<DateComponents>,
@@ -53,8 +56,8 @@ final class SettingTimerCoordinator: BaseCoordinator {
     
     override func navigate(to step: Step) {
         switch step {
-        case .settingTimerFlowIsRequired:
-            showSettingRoutine()
+        case let .settingTimerFlowIsRequired(currentRoutineSetting):
+            showSettingRoutine(currentRoutineSetting: currentRoutineSetting)
         case .settingTimerFlowIsComplete:
             rootViewController.dismiss(animated: true)
         case let .settingStartTimePickerViewTapped(selectedStartTime, initialStartTime):
@@ -86,8 +89,11 @@ private extension SettingTimerCoordinator {
     }
     */
     
-    func showSettingRoutine() {
-        let settingRoutineVC = dependencies.makeSettingRoutineViewController(coordinator: self)
+    func showSettingRoutine(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>) {
+        let settingRoutineVC = dependencies.makeSettingRoutineViewController(
+            coordinator: self,
+            currentRoutineSetting: currentRoutineSetting
+        )
         rootViewController.viewControllers = [settingRoutineVC]
     }
     

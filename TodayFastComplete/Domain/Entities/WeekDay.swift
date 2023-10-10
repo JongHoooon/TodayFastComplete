@@ -14,7 +14,7 @@ enum WeekDay: Int, Hashable, CaseIterable {
     case satur = 7
     case sun = 1
     
-    var weekDay: String {
+    var weekDayName: String {
         switch self {
         case .sun:
             Constants.Localization.SUNDAY

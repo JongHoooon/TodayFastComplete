@@ -25,6 +25,7 @@
 		ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C12AD5100F003535C9 /* Date+Extension.swift */; };
 		ED4DB3C62AD53337003535C9 /* RoutineSettingFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */; };
 		ED4DB3C82AD5334C003535C9 /* RoutineSettingUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */; };
+		ED4DB3CB2AD5420E003535C9 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3CA2AD5420E003535C9 /* TimerState.swift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
 		ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */; };
 		ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */; };
@@ -102,6 +103,7 @@
 		ED4DB3C12AD5100F003535C9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingFetchable.swift; sourceTree = "<group>"; };
 		ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingUpdatable.swift; sourceTree = "<group>"; };
+		ED4DB3CA2AD5420E003535C9 /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewModel.swift; sourceTree = "<group>"; };
 		ED50E9532ACEF2D200182922 /* SettingRoutineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewController.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6C67252AC83EB200230621 /* TimerViewModel.swift */,
+				ED4DB3CA2AD5420E003535C9 /* TimerState.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -792,6 +795,7 @@
 				ED50E9892AD1990400182922 /* List+Extension.swift in Sources */,
 				ED50E97F2AD17E4F00182922 /* TimerRoutineSettingRepository.swift in Sources */,
 				EDBAAA302AD2B1D900CB84C8 /* SettingRoutineSection.swift in Sources */,
+				ED4DB3CB2AD5420E003535C9 /* TimerState.swift in Sources */,
 				ED6C67382AC9029400230621 /* Log.swift in Sources */,
 				EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
