@@ -19,7 +19,7 @@ final class TimerViewModel: ViewModel {
     
     struct Output {
         // TODO: 단식 설정 안됐을때 문구 입력
-        let fastInfo = BehaviorRelay<String>(value: "")
+        let fastInfo = BehaviorRelay<String>(value: String(""))
         
         let messageText = PublishRelay<String>()
         
@@ -38,6 +38,7 @@ final class TimerViewModel: ViewModel {
     private weak var coordinator: Coordinator?
     
     private var currentRoutineSetting = BehaviorRelay<TimerRoutineSetting?>(value: nil)
+    var timerState = BehaviorRelay<TimerState>(value: .noRoutineSetting)
     
     // MARK: - Init
     init(
@@ -63,16 +64,28 @@ final class TimerViewModel: ViewModel {
             .bind { fetchRoutineSetting() }
             .disposed(by: disposeBag)
         
-        let currentRoutineSetting = currentRoutineSetting.share()
-        currentRoutineSetting
-            .compactMap { $0 }
-            .bind { output.fastInfo.accept($0.routineInfo) }
+        input.viewWillAppear
+            .flatMap { countCurrentTimerState() }
+            .subscribe(onNext: { [weak self] state in
+                self?.timerState.accept(state)
+            })
             .disposed(by: disposeBag)
         
-        currentRoutineSetting
-            .filter { $0 == nil }
-            .map { _ in String(localized: "PLEASE_SET_FAST_TIME", defaultValue: "단식 시간을 설정해 주세요 ⏳") }
+        let currentRoutineSettingShared = currentRoutineSetting.share()
+        
+        currentRoutineSettingShared
+            .map({
+                return $0 == nil
+                    ? String(localized: "PLEASE_SET_FAST_TIME", defaultValue: "단식 시간을 설정해 주세요 ⏳")
+                    : $0!.routineInfo
+            })
             .bind { output.fastInfo.accept($0) }
+            .disposed(by: disposeBag)
+    
+        timerState
+            .subscribe(onNext: { state in
+                Log.info(state)
+            })
             .disposed(by: disposeBag)
         
         input.selectFastModeButtonTapped
@@ -90,6 +103,66 @@ final class TimerViewModel: ViewModel {
             timerViewUseCase.fetchTimerRoutine()
                 .subscribe { [weak self] in self?.currentRoutineSetting.accept($0) }
                 .disposed(by: disposeBag)
+        }
+        
+        func countCurrentTimerState() -> Observable<TimerState> {
+            guard let _ = currentRoutineSetting.value
+            else {
+                return Observable.just(.noRoutineSetting)
+            }
+            
+            if isNoFastingDay() {
+                return Observable.just(.noFastDay)
+            }
+            
+            if isFastTime() {
+                return Observable.just(.fastTime)
+            }
+            
+            return Observable.just(.mealTime)
+        }
+        
+        func isNoFastingDay() -> Bool {
+            guard let currentRoutineSetting = currentRoutineSetting.value else {
+                assertionFailure("currentRoutineSetting value is not exist")
+                return false
+            }
+            
+            // 단식 하는 요일에 포함되어야 함
+            guard currentRoutineSetting.days.contains(Date().weekDay) == false
+            else {
+                return false
+            }
+            
+            // 전날이 단식 하는 요일에 포함 && 단식 시간 끝 이전(ascending)이면 false
+            let theDayBefore = WeekDay.theDayBeforRawValue(rawValue: Date().weekDay)
+            if currentRoutineSetting.days.contains(theDayBefore) == true && 
+                Date().timeDateComponents.timeCompare(with: currentRoutineSetting.fastEndTime) == .orderedAscending {
+                return false
+            }
+            
+            return true
+        }
+        
+        func isFastTime() -> Bool {
+            guard let currentRoutineSetting = currentRoutineSetting.value else {
+                assertionFailure("currentRoutineSetting value is not exist")
+                return false
+            }
+            
+            // 오늘이 단식하는 날에 포함 && 단식 시작 시간 이후(descending), 동일(same)
+            if currentRoutineSetting.days.contains(Date().weekDay) &&
+                Date().timeDateComponents.timeCompare(with: currentRoutineSetting.startTime) != .orderedAscending {
+                return true
+            }
+
+            // 전날이 단식하는 날에 포함 && 단식 끝나는 시간 이전(ascending)
+            if currentRoutineSetting.days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay)) &&
+                Date().timeDateComponents.timeCompare(with: currentRoutineSetting.fastEndTime) == .orderedAscending {
+                return true
+            }
+            
+            return false
         }
     }
 }

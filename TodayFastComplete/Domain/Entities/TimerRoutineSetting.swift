@@ -25,6 +25,16 @@ struct TimerRoutineSetting {
         self.fastTime = fastTime
     }
     
+    var fastEndTime: DateComponents {
+        guard let hour = startTime.hour,
+              let minute = startTime.minute
+        else {
+            assertionFailure("no hour or minute")
+            return DateComponents()
+        }
+        return DateComponents(hour: hour + fastTime, minute: minute)
+    }
+    
     var routineInfo: String {
         let days = WeekDay.allCases
             .filter { self.days.contains($0.rawValue) == true }

@@ -32,4 +32,12 @@ enum WeekDay: Int, Hashable, CaseIterable {
             Constants.Localization.SATURDAY
         }
     }
+    
+    static func theDayBeforRawValue(rawValue: Int) -> Int {
+        if rawValue == 1 { 
+            return 7
+        } else {
+            return rawValue - 1
+        }
+    }
 }
