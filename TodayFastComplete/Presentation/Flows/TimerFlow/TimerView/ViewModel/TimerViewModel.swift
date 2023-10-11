@@ -85,6 +85,7 @@ final class TimerViewModel: ViewModel {
         timerState
             .subscribe(onNext: { state in
                 Log.info(state)
+                runTimer(state: state)
             })
             .disposed(by: disposeBag)
         
@@ -128,20 +129,22 @@ final class TimerViewModel: ViewModel {
                 return false
             }
             
-            // 단식 하는 요일에 포함되어야 함
-            guard currentRoutineSetting.days.contains(Date().weekDay) == false
-            else {
-                return false
-            }
+            let isYesterdayFast = currentRoutineSetting.days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay))
+            let isTodayFast = currentRoutineSetting.days.contains(Date().weekDay)
             
-            // 전날이 단식 하는 요일에 포함 && 단식 시간 끝 이전(ascending)이면 false
-            let theDayBefore = WeekDay.theDayBeforRawValue(rawValue: Date().weekDay)
-            if currentRoutineSetting.days.contains(theDayBefore) == true && 
-                Date().timeDateComponents.timeCompare(with: currentRoutineSetting.fastEndTime) == .orderedAscending {
+            switch (isYesterdayFast, isTodayFast) {
+                
+            // 오늘 단식이면 false
+            case (_, true):
                 return false
-            }
             
-            return true
+            // 어제 단식이면 어제 단식 끝나는 시간 이전(ascending)이면 안됨
+            case (true, false):
+                return Date().compare(currentRoutineSetting.yesterdayFastEndTimeDate) != .orderedAscending
+                
+            default:
+                return true
+            }
         }
         
         func isFastTime() -> Bool {
@@ -150,19 +153,39 @@ final class TimerViewModel: ViewModel {
                 return false
             }
             
-            // 오늘이 단식하는 날에 포함 && 단식 시작 시간 이후(descending), 동일(same)
-            if currentRoutineSetting.days.contains(Date().weekDay) &&
-                Date().timeDateComponents.timeCompare(with: currentRoutineSetting.startTime) != .orderedAscending {
-                return true
-            }
-
-            // 전날이 단식하는 날에 포함 && 단식 끝나는 시간 이전(ascending)
-            if currentRoutineSetting.days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay)) &&
-                Date().timeDateComponents.timeCompare(with: currentRoutineSetting.fastEndTime) == .orderedAscending {
-                return true
-            }
+            let isYesterdayFast = currentRoutineSetting.days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay))
+            let isTodayFast = currentRoutineSetting.days.contains(Date().weekDay)
             
-            return false
+            /// 어제 단식 끝나는 시간보다 이전(ascending) 인지
+            let isAscendAtYesterDayFastEndTime = Date().compare(currentRoutineSetting.yesterdayFastEndTimeDate) == .orderedAscending
+            /// 오늘 단식 시작 시간과 이후(descending), 동일(same) && 오늘 단식 끝나는 시간 이전(ascending) 인지
+            let isBetweenTodayFastTime = Date().compare(currentRoutineSetting.todayFastStartTimeDate) != .orderedAscending && Date().compare(currentRoutineSetting.todayFastEndTimeDate) == .orderedAscending
+            
+            switch (isYesterdayFast, isTodayFast) {
+                
+            case (true, true):
+                return isAscendAtYesterDayFastEndTime || isBetweenTodayFastTime
+
+            case (true, false):
+                return isAscendAtYesterDayFastEndTime
+                
+            case (false, true):
+                return isBetweenTodayFastTime
+                
+            default:
+                return false
+            }
+        }
+        
+        func runTimer(state: TimerState) {
+            switch state {
+            case .fastTime:
+                break
+            case .mealTime:
+                break
+            default:
+                break
+            }
         }
     }
 }

@@ -130,7 +130,7 @@ final class TimerViewController: BaseViewController {
             repeats: true,
             block: { [weak self] timer in
                 if time == 1.0 { timer.invalidate() }
-                time += 0.05
+                time += 1 / 3600
                 self?.timerProgressView.progressValue = time
             })
         timer.fire()

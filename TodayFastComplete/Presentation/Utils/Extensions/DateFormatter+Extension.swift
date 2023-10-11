@@ -24,6 +24,13 @@ extension DateFormatter {
         return format
     }
     
+    /// "2018-05-13 15:05:40"
+    static var dateTimeFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return format
+    }
+    
     static func toString(
         date: Date,
         format: DateFormatter

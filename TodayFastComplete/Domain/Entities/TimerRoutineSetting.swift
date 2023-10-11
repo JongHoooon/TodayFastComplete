@@ -25,14 +25,35 @@ struct TimerRoutineSetting {
         self.fastTime = fastTime
     }
     
-    var fastEndTime: DateComponents {
-        guard let hour = startTime.hour,
-              let minute = startTime.minute
-        else {
-            assertionFailure("no hour or minute")
-            return DateComponents()
-        }
-        return DateComponents(hour: hour + fastTime, minute: minute)
+    var todayFastStartTimeDate: Date {
+        let todayFastTimeDate = Calendar.current.date(
+            bySettingHour: startTime.hour ?? 0,
+            minute: startTime.minute ?? 0,
+            second: 0,
+            of: Date()
+        )
+        return todayFastTimeDate ?? Date()
+    }
+    
+    var todayFastEndTimeDate: Date {
+        let todayFastEndTimeDate = todayFastStartTimeDate.addingTimeInterval(TimeInterval(fastTime * 3600))
+        return todayFastEndTimeDate
+    }
+    
+    var yesterdayFastStartTimeDate: Date {
+        let yesterdayDate = Date().addingTimeInterval(TimeInterval(-24 * 3600))
+        let yesterdayFastTimeDate =  Calendar.current.date(
+            bySettingHour: startTime.hour ?? 0,
+            minute: startTime.minute ?? 0,
+            second: 0,
+            of: yesterdayDate
+        )
+        return yesterdayFastTimeDate ?? Date()
+    }
+    
+    var yesterdayFastEndTimeDate: Date {
+        let yesterdayFastEndTimeDate = yesterdayFastStartTimeDate.addingTimeInterval(TimeInterval(fastTime * 3600))
+        return yesterdayFastEndTimeDate
     }
     
     var routineInfo: String {
