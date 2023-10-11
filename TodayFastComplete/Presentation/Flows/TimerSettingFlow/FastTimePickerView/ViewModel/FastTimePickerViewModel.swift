@@ -18,7 +18,7 @@ final class FastTimePickerViewModel: ViewModel {
     }
     
     struct Output {
-        let fastTimes = Array(1...23)
+        let fastTimes = Array(4...23)
     }
     
     private weak var coordinator: Coordinator?
