@@ -30,7 +30,7 @@ final class SettingRoutineViewModel: ViewModel {
         lazy var recommendSectionItems = recommendRoutines.map {
             SettingRoutineItem.recommendRoutineItem(routine: $0.fastRoutine)
         }
-        // TODO: view did 로드에서 저장된값있으면 넣주게 해야함
+        
         let selectedWeekDays = BehaviorRelay<[Int]>(value: [])
         let selectedRecommendRoutine = BehaviorRelay<Int?>(value: nil)
         
