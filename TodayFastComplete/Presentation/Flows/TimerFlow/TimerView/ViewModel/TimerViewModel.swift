@@ -19,7 +19,7 @@ final class TimerViewModel: ViewModel {
     
     struct Output {
         // TODO: 단식 설정 안됐을때 문구 입력
-        let fastInfo = BehaviorRelay<String>(value: "단식 시간을 설정해 주세요 ⏳")
+        let fastInfo = BehaviorRelay<String>(value: "")
         
         let messageText = PublishRelay<String>()
         
@@ -63,9 +63,16 @@ final class TimerViewModel: ViewModel {
             .bind { fetchRoutineSetting() }
             .disposed(by: disposeBag)
         
+        let currentRoutineSetting = currentRoutineSetting.share()
         currentRoutineSetting
             .compactMap { $0 }
             .bind { output.fastInfo.accept($0.routineInfo) }
+            .disposed(by: disposeBag)
+        
+        currentRoutineSetting
+            .filter { $0 == nil }
+            .map { _ in String(localized: "PLEASE_SET_FAST_TIME", defaultValue: "단식 시간을 설정해 주세요 ⏳") }
+            .bind { output.fastInfo.accept($0) }
             .disposed(by: disposeBag)
         
         input.selectFastModeButtonTapped
@@ -81,15 +88,7 @@ final class TimerViewModel: ViewModel {
         
         func fetchRoutineSetting() {
             timerViewUseCase.fetchTimerRoutine()
-                .subscribe(
-                    with: self,
-                    onSuccess: { owner, routineSetting in
-                        if let routineSetting {
-                            owner.currentRoutineSetting.accept(routineSetting)
-                        } else {
-                            
-                        }
-                })
+                .subscribe { [weak self] in self?.currentRoutineSetting.accept($0) }
                 .disposed(by: disposeBag)
         }
     }
