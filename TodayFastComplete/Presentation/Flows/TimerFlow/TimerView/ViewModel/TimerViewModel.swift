@@ -27,8 +27,8 @@ final class TimerViewModel: ViewModel {
         let progressTime = BehaviorRelay<TimeInterval>(value: 0)
         let remainTime = BehaviorRelay<TimeInterval>(value: 0)
         
-        let todayStartTime = PublishRelay<String>()
-        let todayEndTime = PublishRelay<String>()
+        let currentFastStartTime = PublishRelay<String>()
+        let currentFastEndTime = PublishRelay<String>()
         
         let fastControlButtonTitle = PublishRelay<String>()
     }
@@ -162,18 +162,15 @@ final class TimerViewModel: ViewModel {
             let isYesterdayFast = currentRoutineSetting.days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay))
             let isTodayFast = currentRoutineSetting.days.contains(Date().weekDay)
             
-            /// 어제 단식 끝나는 시간보다 이전(ascending) 인지
-            let isAscendAtYesterDayFastEndTime = Date().compare(currentRoutineSetting.yesterdayFastEndTimeDate) == .orderedAscending
-            /// 오늘 단식 시작 시간과 이후(descending), 동일(same) && 오늘 단식 끝나는 시간 이전(ascending) 인지
             let isBetweenTodayFastTime = Date().compare(currentRoutineSetting.todayFastStartTimeDate) != .orderedAscending && Date().compare(currentRoutineSetting.todayFastEndTimeDate) == .orderedAscending
             
             switch (isYesterdayFast, isTodayFast) {
                 
             case (true, true):
-                return isAscendAtYesterDayFastEndTime || isBetweenTodayFastTime
+                return isYesterdayFastOnGoing || isBetweenTodayFastTime
 
             case (true, false):
-                return isAscendAtYesterDayFastEndTime
+                return isYesterdayFastOnGoing
                 
             case (false, true):
                 return isBetweenTodayFastTime
@@ -188,6 +185,7 @@ final class TimerViewModel: ViewModel {
             case .fastTime:
                 guard let routineSetting = currentRoutineSetting.value else { return }
                 output.progressPercent.accept(fastProgressPercent)
+                
                 timer
                     .map { _ in return (1 / routineSetting.startToEndInterval) }
                     .subscribe(with: self, onNext: { owner, stack in
@@ -213,7 +211,7 @@ private extension TimerViewModel {
         else {
             return 0.0
         }
-        if Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending {
+        if isYesterdayFastOnGoing {
             return routineSetting.yesterdayFastProgressPercent
         } else {
             return routineSetting.todayFastProgressPerecent
@@ -225,7 +223,7 @@ private extension TimerViewModel {
         else {
             return TimeInterval()
         }
-        if Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending {
+        if isYesterdayFastOnGoing {
             return routineSetting.yesterdayFastStartToNow
         } else {
             return routineSetting.todayFastStartToNow
@@ -237,10 +235,19 @@ private extension TimerViewModel {
         else {
             return TimeInterval()
         }
-        if Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending {
+        if isYesterdayFastOnGoing {
             return routineSetting.nowToYesterdayFastEndInterval
         } else {
             return routineSetting.nowToFastStartInterval
         }
+    }
+    
+    var isYesterdayFastOnGoing: Bool {
+        guard let routineSetting = currentRoutineSetting.value,
+              routineSetting.days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay))
+        else {
+            return false
+        }
+        return Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending
     }
 }
