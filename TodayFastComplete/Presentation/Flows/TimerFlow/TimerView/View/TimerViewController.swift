@@ -124,16 +124,6 @@ final class TimerViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var time = 0.0
-        let timer = Timer.scheduledTimer(
-            withTimeInterval: 1,
-            repeats: true,
-            block: { [weak self] timer in
-                if time == 1.0 { timer.invalidate() }
-                time += 1 / 3600
-                self?.timerProgressView.progressValue = time
-            })
-        timer.fire()
     }
     
     // MARK: - Configure
@@ -235,6 +225,13 @@ private extension TimerViewController {
             .map { $0.timerString }
             .map { String(localized: "REMAIN_TIMER_TIME", defaultValue: "남은 시간: \($0)") }
             .drive(remainTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.progressPercent
+            .subscribe(with: self, onNext: { owner, progress in
+                owner.timerProgressView.progressValue = progress
+                Log.debug(progress)
+            })
             .disposed(by: disposeBag)
     }
 }

@@ -64,6 +64,8 @@
 		ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB02ACE8BF2000B715A /* SelectFastModeCollectionView.swift */; };
 		ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB12ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift */; };
 		ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB42ACE97DE000B715A /* Reuseable.swift */; };
+		EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */; };
+		EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */; };
 		EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */; };
 		EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EF2ACAB5CA0019DCB1 /* AppCoordinator.swift */; };
 		EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */; };
@@ -145,6 +147,8 @@
 		ED830EB02ACE8BF2000B715A /* SelectFastModeCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFastModeCollectionView.swift; sourceTree = "<group>"; };
 		ED830EB12ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFastModeCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED830EB42ACE97DE000B715A /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
+		EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
+		EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../Desktop/Study/iOS/TabBarController.swift; sourceTree = "<group>"; };
 		EDA776ED2ACAB58B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EDA776EF2ACAB5CA0019DCB1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -234,11 +238,13 @@
 				ED4DB3C12AD5100F003535C9 /* Date+Extension.swift */,
 				ED4DB3BF2AD50DAD003535C9 /* DateComponents+Extension.swift */,
 				ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */,
+				EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */,
+				ED830EB42ACE97DE000B715A /* Reuseable.swift */,
+				EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */,
 				ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */,
 				ED50E96B2AD104E600182922 /* UILabel+Extension.swift */,
 				ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */,
-				EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */,
-				ED830EB42ACE97DE000B715A /* Reuseable.swift */,
+				EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -798,6 +804,7 @@
 				ED4DB3CB2AD5420E003535C9 /* TimerState.swift in Sources */,
 				ED6C67382AC9029400230621 /* Log.swift in Sources */,
 				EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */,
+				EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
 				ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */,
 				ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */,
@@ -826,6 +833,7 @@
 				EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */,
 				ED4DB3BE2AD4D457003535C9 /* LocalRepositoryError.swift in Sources */,
 				ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */,
+				EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */,
 				ED4DB3C82AD5334C003535C9 /* RoutineSettingUpdatable.swift in Sources */,
 				EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */,
 				EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */,

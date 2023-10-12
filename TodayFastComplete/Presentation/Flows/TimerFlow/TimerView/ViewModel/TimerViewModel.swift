@@ -23,8 +23,9 @@ final class TimerViewModel: ViewModel {
         
         let messageText = PublishRelay<String>()
         
-        let progressTime = BehaviorRelay<DateComponents>(value: Constants.DefaultValue.timerDateComponents)
-        let remainTime = BehaviorRelay<DateComponents>(value: Constants.DefaultValue.timerDateComponents)
+        let progressPercent = BehaviorRelay<Double>(value: 0.0)
+        let progressTime = BehaviorRelay<TimeInterval>(value: 0)
+        let remainTime = BehaviorRelay<TimeInterval>(value: 0)
         
         let todayStartTime = PublishRelay<String>()
         let todayEndTime = PublishRelay<String>()
@@ -37,7 +38,12 @@ final class TimerViewModel: ViewModel {
     private let timerViewUseCase: TimerViewUseCase
     private weak var coordinator: Coordinator?
     
-    private var currentRoutineSetting = BehaviorRelay<TimerRoutineSetting?>(value: nil)
+    private let timer = Observable<Int>.timer(
+        .seconds(0),
+        period: .seconds(1),
+        scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
+    )
+    private let currentRoutineSetting = BehaviorRelay<TimerRoutineSetting?>(value: nil)
     var timerState = BehaviorRelay<TimerState>(value: .noRoutineSetting)
     
     // MARK: - Init
@@ -180,12 +186,63 @@ final class TimerViewModel: ViewModel {
         func runTimer(state: TimerState) {
             switch state {
             case .fastTime:
-                break
+                guard let routineSetting = currentRoutineSetting.value else { return }
+                output.progressPercent.accept(fastProgressPercent)
+                timer
+                    .map { _ in return (1 / routineSetting.startToEndInterval) }
+                    .subscribe(
+                        with: self,
+                        onNext: { owner, stack in
+                            let currentProgressPercent = output.progressPercent.value
+                            output.progressPercent.accept(currentProgressPercent + stack)
+                            output.progressTime.accept(owner.fastProgressTime)
+                            output.remainTime.accept(owner.fastRemainTime)
+                    })
+                    .disposed(by: disposeBag)
+                
             case .mealTime:
                 break
             default:
                 break
             }
+        }
+    }
+}
+
+private extension TimerViewModel {
+    var fastProgressPercent: Double {
+        guard let routineSetting = currentRoutineSetting.value
+        else {
+            return 0.0
+        }
+        if Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending {
+            return routineSetting.yesterdayFastProgressPercent
+        } else {
+            return routineSetting.todayFastProgressPerecent
+        }
+    }
+    
+    var fastProgressTime: TimeInterval {
+        guard let routineSetting = currentRoutineSetting.value
+        else {
+            return TimeInterval()
+        }
+        if Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending {
+            return routineSetting.yesterdayFastStartToNow
+        } else {
+            return routineSetting.todayFastStartToNow
+        }
+    }
+    
+    var fastRemainTime: TimeInterval {
+        guard let routineSetting = currentRoutineSetting.value
+        else {
+            return TimeInterval()
+        }
+        if Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending {
+            return routineSetting.nowToYesterdayFastEndInterval
+        } else {
+            return routineSetting.nowToFastStartInterval
         }
     }
 }
