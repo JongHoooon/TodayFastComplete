@@ -24,6 +24,15 @@ extension DateFormatter {
         return format
     }
     
+    static var currentFastTimeFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = String(
+            localized: "CURRENT_FAST_TIME_FORMAT",
+            defaultValue: "M월 d일 H시 m분"
+        )
+        return format
+    }
+    
     /// "2018-05-13 15:05:40"
     static var dateTimeFormat: DateFormatter {
         let format = DateFormatter()

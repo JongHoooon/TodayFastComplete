@@ -56,7 +56,7 @@ final class TimerProgressView: UIView {
         label.backgroundColor = Constants.Color.tintAccent
         label.textAlignment = .center
         label.font = .bodyMedium
-        label.layer.borderWidth = 2.0
+        label.layer.borderWidth = 2.5
         label.layer.borderColor = Constants.Color.tintMain.cgColor
         return label
     }()

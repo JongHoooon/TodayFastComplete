@@ -9,6 +9,10 @@ import Foundation
 
 extension Date {
     
+    func toString(format: DateFormatter) -> String {
+        return DateFormatter.toString(date: self, format: format)
+    }
+    
     /// 시, 분, 초 date components
     var timeDateComponents: DateComponents {
         return Calendar.current.dateComponents([.hour, .minute, .second], from: self)

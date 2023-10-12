@@ -27,8 +27,8 @@ final class TimerViewModel: ViewModel {
         let progressTime = BehaviorRelay<TimeInterval>(value: 0)
         let remainTime = BehaviorRelay<TimeInterval>(value: 0)
         
-        let currentFastStartTime = PublishRelay<String>()
-        let currentFastEndTime = PublishRelay<String>()
+        let currentFastStartTime = BehaviorRelay<Date>(value: Date())
+        let currentFastEndTime = BehaviorRelay<Date>(value: Date())
         
         let fastControlButtonTitle = PublishRelay<String>()
     }
@@ -185,6 +185,8 @@ final class TimerViewModel: ViewModel {
             case .fastTime:
                 guard let routineSetting = currentRoutineSetting.value else { return }
                 output.progressPercent.accept(fastProgressPercent)
+                output.currentFastStartTime.accept(currentFastStartDate)
+                output.currentFastEndTime.accept(currentFastEndDate)
                 
                 timer
                     .map { _ in return (1 / routineSetting.startToEndInterval) }
@@ -240,6 +242,26 @@ private extension TimerViewModel {
         } else {
             return routineSetting.nowToFastStartInterval
         }
+    }
+    
+    var currentFastStartDate: Date {
+        guard let routineSetting = currentRoutineSetting.value
+        else {
+            return Date()
+        }
+        return isYesterdayFastOnGoing 
+            ? routineSetting.yesterdayFastStartTimeDate
+            : routineSetting.todayFastStartTimeDate
+    }
+    
+    var currentFastEndDate: Date {
+        guard let routineSetting = currentRoutineSetting.value
+        else {
+            return Date()
+        }
+        return isYesterdayFastOnGoing
+            ? routineSetting.yesterdayFastEndTimeDate
+            : routineSetting.todayFastEndTimeDate
     }
     
     var isYesterdayFastOnGoing: Bool {

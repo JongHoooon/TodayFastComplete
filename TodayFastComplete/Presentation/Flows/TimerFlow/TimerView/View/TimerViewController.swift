@@ -67,7 +67,7 @@ final class TimerViewController: BaseViewController {
         return label
     }()
     
-    private let todayStartTimeLabel: UILabel = {
+    private let currentFastStartLabel: UILabel = {
         let label = UILabel()
         label.font = .subtitleBold
         label.text = "‧ 시작: 09월 24일 19시 23분"
@@ -75,7 +75,7 @@ final class TimerViewController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
-    private let todayEndTimeLabel: UILabel = {
+    private let currentFastEndLabel: UILabel = {
         let label = UILabel()
         label.font = .subtitleBold
         label.text = "‧ 종료: 09월 25일 11시 23분"
@@ -150,8 +150,8 @@ final class TimerViewController: BaseViewController {
             fastInfoLabel,
             timerProgressView,
             timerInfoStackView,
-            todayStartTimeLabel, todayStartTimeEditButton,
-            todayEndTimeLabel,
+            currentFastStartLabel, todayStartTimeEditButton,
+            currentFastEndLabel,
             fastControlButton
         ].forEach { view.addSubview($0) }
 
@@ -173,17 +173,17 @@ final class TimerViewController: BaseViewController {
         }
         
         let offset = (UIScreen.main.bounds.width - progressViewHorizontalInset * 2) / 4.0
-        todayStartTimeLabel.snp.makeConstraints {
+        currentFastStartLabel.snp.makeConstraints {
             $0.top.equalTo(timerProgressView.snp.bottom).offset(-offset + 32.0)
             $0.centerX.equalToSuperview()
         }
-        todayEndTimeLabel.snp.makeConstraints {
-            $0.top.equalTo(todayStartTimeLabel.snp.bottom).offset(16.0)
+        currentFastEndLabel.snp.makeConstraints {
+            $0.top.equalTo(currentFastStartLabel.snp.bottom).offset(16.0)
             $0.centerX.equalToSuperview()
         }
         todayStartTimeEditButton.snp.makeConstraints {
-            $0.centerY.equalTo(todayStartTimeLabel)
-            $0.leading.equalTo(todayStartTimeLabel.snp.trailing).offset(8.0)
+            $0.centerY.equalTo(currentFastStartLabel)
+            $0.leading.equalTo(currentFastStartLabel.snp.trailing).offset(8.0)
             $0.width.equalTo(42.0)
         }
         
@@ -229,18 +229,34 @@ private extension TimerViewController {
             .disposed(by: disposeBag)
         
         let progressPercentDriver = output.progressPercent.asDriver()
-        
         progressPercentDriver
             .drive(with: self, onNext: { owner, progress in
                 owner.timerProgressView.progressValue = progress
                 Log.debug(progress)
             })
             .disposed(by: disposeBag)
-        
         progressPercentDriver
             .compactMap { Int($0 * 100) }
             .distinctUntilChanged()
             .drive { [weak self] in self?.timerProgressView.setProgressLabel(with: $0) }
+            .disposed(by: disposeBag)
+        
+        output.currentFastStartTime
+            .asDriver()
+            .map {
+                String(localized: "START", defaultValue: "‧ 시작: ")
+                    + $0.toString(format: .currentFastTimeFormat)
+            }
+            .drive(currentFastStartLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.currentFastEndTime
+            .asDriver()
+            .map {
+                String(localized: "END", defaultValue: "‧ 종료: ")
+                    + $0.toString(format: .currentFastTimeFormat)
+            }
+            .drive(currentFastEndLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }
