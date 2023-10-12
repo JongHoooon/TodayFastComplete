@@ -81,11 +81,11 @@ struct TimerRoutineSetting {
     }
     
     var todayFastProgressPerecent: Double {
-        Double(Int(nowToFastEndInterval)) / Double(Int(startToEndInterval))
+        Double(Int(todayFastStartToNow)) / Double(Int(startToEndInterval))
     }
     
     var yesterdayFastProgressPercent: Double {
-        Double(Int(nowToYesterdayFastEndInterval)) / Double(Int(startToEndInterval))
+        Double(Int(yesterdayFastStartToNow)) / Double(Int(startToEndInterval))
     }
     
     var routineInfo: String {
