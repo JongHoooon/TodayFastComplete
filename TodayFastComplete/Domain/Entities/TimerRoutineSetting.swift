@@ -52,15 +52,37 @@ struct TimerRoutineSetting {
     }
     
     var yesterdayFastEndTimeDate: Date {
-        let yesterdayFastEndTimeDate = yesterdayFastStartTimeDate.addingTimeInterval(TimeInterval(fastTime * 3600))
+        let yesterdayFastEndTimeDate = yesterdayFastStartTimeDate
+            .addingTimeInterval(TimeInterval(fastTime * 3600))
         return yesterdayFastEndTimeDate
     }
     
-    var startToEndInterval: TimeInterval {
+    var tomorrowFastStartTimeDate: Date {
+        let tomorrowDate = Date().addingTimeInterval(TimeInterval(24 * 3600))
+        let tomorrowFastStartTimeDate =  Calendar.current.date(
+            bySettingHour: startTime.hour ?? 0,
+            minute: startTime.minute ?? 0,
+            second: 0,
+            of: tomorrowDate
+        )
+        return tomorrowFastStartTimeDate ?? Date()
+    }
+    
+    var currentMealStartDate: Date {
+        return currentMealEndDate.addingTimeInterval(-(24.0 - Double(fastTime)) * 3600.0)
+    }
+    
+    var currentMealEndDate: Date {
+        return Date().compare(todayFastEndTimeDate) != .orderedAscending
+            ? tomorrowFastStartTimeDate 
+            : todayFastStartTimeDate
+    }
+    
+    var FaststartToFastEndInterval: TimeInterval {
         todayFastStartTimeDate.distance(to: todayFastEndTimeDate)
     }
     
-    var nowToFastEndInterval: TimeInterval {
+    var nowToTodayFastEndInterval: TimeInterval {
         todayFastEndTimeDate.timeIntervalSinceNow
     }
     
@@ -76,16 +98,16 @@ struct TimerRoutineSetting {
         yesterdayFastStartTimeDate.distance(to: Date())
     }
     
-    var nowToFastStartInterval: TimeInterval {
+    var nowToTodayFastStartInterval: TimeInterval {
         todayFastStartTimeDate.timeIntervalSinceNow
     }
     
     var todayFastProgressPerecent: Double {
-        Double(Int(todayFastStartToNow)) / Double(Int(startToEndInterval))
+        Double(Int(todayFastStartToNow)) / Double(Int(FaststartToFastEndInterval))
     }
     
     var yesterdayFastProgressPercent: Double {
-        Double(Int(yesterdayFastStartToNow)) / Double(Int(startToEndInterval))
+        Double(Int(yesterdayFastStartToNow)) / Double(Int(FaststartToFastEndInterval))
     }
     
     var fastProgressPercent: Double {
@@ -108,8 +130,12 @@ struct TimerRoutineSetting {
         if isYesterdayFastOnGoing {
             return nowToYesterdayFastEndInterval
         } else {
-            return nowToFastStartInterval
+            return nowToTodayFastEndInterval
         }
+    }
+    
+    var mealRemainTime: TimeInterval {
+        return currentMealEndDate.timeIntervalSinceNow
     }
     
     var currentFastStartDate: Date {
@@ -123,8 +149,13 @@ struct TimerRoutineSetting {
             ? yesterdayFastEndTimeDate
             : todayFastEndTimeDate
     }
-
+    
     var isYesterdayFastOnGoing: Bool {
+        guard days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay))
+        else {
+            return false
+        }
+        
         return Date().compare(yesterdayFastEndTimeDate) == .orderedAscending
     }
     

@@ -98,9 +98,15 @@ final class TimerProgressView: UIView {
             layer.addSublayer($0)
         }
         trackLayer.strokeEnd = 1.0
+        progressLayer.strokeEnd = 0.0
         trackLayer.strokeColor = Constants.Color.tintBase.cgColor
         progressLayer.strokeColor = Constants.Color.tintAccent.cgColor
         addSubview(progressLabel)
+        let currentProgressLayerEndPoint = currentProgressLayerEndPoint(progress: 0)
+        progressLabel.snp.updateConstraints {
+            $0.center.equalTo(currentProgressLayerEndPoint)
+            $0.size.equalTo(progressLabelSize)
+        }
     }
 
     private func currentProgressLayerEndPoint(progress: CGFloat) -> CGPoint {

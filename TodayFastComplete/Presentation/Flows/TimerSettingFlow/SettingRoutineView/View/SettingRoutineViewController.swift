@@ -28,6 +28,7 @@ final class SettingRoutineViewController: BaseViewController {
             collectionViewLayout: UICollectionViewLayout()
         )
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = Constants.Color.backgroundMain
         return collectionView
     }()
     private var dataSource: UICollectionViewDiffableDataSource<SettingRoutineSection, SettingRoutineItem>!

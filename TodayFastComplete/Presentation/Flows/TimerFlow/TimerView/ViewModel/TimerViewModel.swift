@@ -27,9 +27,11 @@ final class TimerViewModel: ViewModel {
         let progressPercent = BehaviorRelay<Double>(value: 0.0)
         let progressTime = BehaviorRelay<TimeInterval>(value: 0)
         let remainTime = BehaviorRelay<TimeInterval>(value: 0)
+        let remainTimeLabelIsHiddend = BehaviorRelay<Bool>(value: true)
         
-        let currentFastStartTime = BehaviorRelay<Date>(value: Date())
-        let currentFastEndTime = BehaviorRelay<Date>(value: Date())
+        let currentLoopTimeLabelIsHidden = BehaviorRelay<Bool>(value: false)
+        let currentLoopStartTime = BehaviorRelay<Date>(value: Date())
+        let currentLoopEndTime = BehaviorRelay<Date>(value: Date())
         
         let fastControlButtonTitle = PublishRelay<String>()
     }
@@ -40,7 +42,7 @@ final class TimerViewModel: ViewModel {
     private weak var coordinator: Coordinator?
     
     private var timerDisposeBag = DisposeBag()
-    private let timer = Observable<Int>.timer(
+    private let loopTimer = Observable<Int>.timer(
         .seconds(0),
         period: .seconds(1),
         scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
@@ -73,10 +75,11 @@ final class TimerViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         input.viewWillAppear
-            .flatMap { countCurrentTimerState() }
-            .subscribe(onNext: { [weak self] state in
-                self?.timerState.accept(state)
-            })
+            .bind { [weak self] in
+                guard let self else { return }
+                countCurrentTimerState()
+                configureMessageLabel(state: self.timerState.value)
+            }
             .disposed(by: disposeBag)
         
         input.viewDidDisappear
@@ -99,6 +102,8 @@ final class TimerViewModel: ViewModel {
         timerState
             .subscribe(onNext: { state in
                 Log.info(state)
+                configureMessageLabel(state: state)
+                configureLoopLabels(state: state)
                 runTimer(state: state)
             })
             .disposed(by: disposeBag)
@@ -118,24 +123,28 @@ final class TimerViewModel: ViewModel {
                 .disposed(by: disposeBag)
         }
         
-        func countCurrentTimerState() -> Observable<TimerState> {
+        func countCurrentTimerState() {
             guard let _ = currentRoutineSetting.value
             else {
-                return Observable.just(.noRoutineSetting)
+                timerState.accept(.noRoutineSetting)
+                return
             }
             
-            if isNoFastingDay() {
-                return Observable.just(.noFastDay)
+            if isNoFastDay() {
+                timerState.accept(.noFastDay)
+                return
             }
             
             if isFastTime() {
-                return Observable.just(.fastTime)
+                timerState.accept(.fastTime)
+                return
             }
             
-            return Observable.just(.mealTime)
+            timerState.accept(.mealTime)
+            return
         }
         
-        func isNoFastingDay() -> Bool {
+        func isNoFastDay() -> Bool {
             guard let currentRoutineSetting = currentRoutineSetting.value else {
                 assertionFailure("currentRoutineSetting value is not exist")
                 return false
@@ -186,17 +195,60 @@ final class TimerViewModel: ViewModel {
             }
         }
         
+        func configureMessageLabel(state: TimerState) {
+            switch state {
+            case .fastTime:
+                output.messageText.accept(String(localized: "FAST_TIME_MESSAGE_1", defaultValue: "지방이 타고 있어요 🔥"))
+            case .mealTime:
+                output.messageText.accept(String(
+                    localized: "MEAL_TIME_MESSAGE_1",
+                    defaultValue: "식사시간 입니다 \(["🍜", "🍕", "🍔", "🍲", "🍱", "🍽️", "🥙", "🥗"].randomElement() ?? "🍽️")"
+                ))
+            case .noFastDay:
+                output.messageText.accept(String(localized: "NO_FAST_TIME_MESSAGE_1", defaultValue: "오늘은 단식이 없어요 🥳"))
+            case .noRoutineSetting:
+                output.messageText.accept(String(localized: "NO_ROUTINE_SETTING", defaultValue: "단식 시간을 설정해주세요 😊"))
+            }
+        }
+        
+        func configureLoopLabels(state: TimerState) {
+            switch state {
+            case .fastTime:
+                guard let routineSetting = currentRoutineSetting.value else { return }
+                output.currentLoopTimeLabelIsHidden.accept(false)
+                output.currentLoopStartTime.accept(routineSetting.currentFastStartDate)
+                output.currentLoopEndTime.accept(routineSetting.currentFastEndDate)
+                
+            case .mealTime:
+                guard let routineSetting = currentRoutineSetting.value else { return }
+                output.currentLoopTimeLabelIsHidden.accept(false)
+                output.currentLoopStartTime.accept(routineSetting.currentMealStartDate)
+                output.currentLoopEndTime.accept(routineSetting.currentMealEndDate)
+                
+            case .noFastDay:
+                output.currentLoopTimeLabelIsHidden.accept(true)
+                
+            case .noRoutineSetting:
+                output.currentLoopTimeLabelIsHidden.accept(true)
+            }
+        }
+        
         func runTimer(state: TimerState) {
             switch state {
             case .fastTime:
                 guard let routineSetting = currentRoutineSetting.value else { return }
                 output.progressPercent.accept(routineSetting.fastProgressPercent)
-                output.currentFastStartTime.accept(routineSetting.currentFastStartDate)
-                output.currentFastEndTime.accept(routineSetting.currentFastEndDate)
+                output.remainTimeLabelIsHiddend.accept(false)
                 
                 timerDisposeBag = DisposeBag()
-                timer
-                    .map { _ in return (1 / routineSetting.startToEndInterval) }
+                loopTimer
+                    .map { _ in return (1 / routineSetting.FaststartToFastEndInterval) }
+                    .do(onNext: { [weak self] _ in
+                        if output.progressPercent.value >= 1.0 {
+                            self?.timerDisposeBag = DisposeBag()
+                            countCurrentTimerState()
+                        }
+                    })
                     .subscribe(onNext: { stack in
                         let currentProgressPercent = output.progressPercent.value
                         output.progressPercent.accept(currentProgressPercent + stack)
@@ -206,10 +258,52 @@ final class TimerViewModel: ViewModel {
                     .disposed(by: timerDisposeBag)
                 
             case .mealTime:
-                break
-            default:
-                break
+                guard let routineSetting = currentRoutineSetting.value else { return }
+                output.progressPercent.accept(0.0)
+                output.progressTime.accept(TimeInterval())
+                output.remainTimeLabelIsHiddend.accept(false)
+                
+                timerDisposeBag = DisposeBag()
+                loopTimer
+                    .do(afterNext: { _ in
+                        if Date().compare(routineSetting.currentMealEndDate) != .orderedAscending {
+                            countCurrentTimerState()
+                        }
+                    })
+                    .subscribe(onNext: { _ in
+                        output.remainTime.accept(routineSetting.mealRemainTime)
+                    })
+                    .disposed(by: timerDisposeBag)
+                
+            case .noFastDay:
+                output.progressPercent.accept(0.0)
+                output.progressTime.accept(TimeInterval())
+                output.remainTime.accept(TimeInterval())
+                output.remainTimeLabelIsHiddend.accept(true)
+                
+                let nowToMidnightInterval = Calendar.current
+                    .date(
+                        bySettingHour: 0,
+                        minute: 0,
+                        second: 0,
+                        of: Date().addingTimeInterval(24*3600)
+                    )?
+                    .timeIntervalSinceNow ?? 0
+                
+                timerDisposeBag = DisposeBag()
+                Observable<Int>.timer(.seconds(Int(nowToMidnightInterval)), scheduler: ConcurrentDispatchQueueScheduler(queue: .global()))
+                    .subscribe(onNext: { _ in
+                        countCurrentTimerState()
+                    })
+                    .disposed(by: timerDisposeBag)
+                
+            case .noRoutineSetting:
+                output.progressPercent.accept(0.0)
+                output.progressTime.accept(TimeInterval())
+                output.remainTime.accept(TimeInterval())
+                output.remainTimeLabelIsHiddend.accept(true)
             }
         }
+        
     }
 }

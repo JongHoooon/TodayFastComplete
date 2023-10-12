@@ -67,7 +67,7 @@ final class TimerViewController: BaseViewController {
         return label
     }()
     
-    private let currentFastStartLabel: UILabel = {
+    private let currentLoopStartLabel: UILabel = {
         let label = UILabel()
         label.font = .subtitleBold
         label.text = "‧ 시작: 09월 24일 19시 23분"
@@ -75,7 +75,7 @@ final class TimerViewController: BaseViewController {
         label.textAlignment = .center
         return label
     }()
-    private let currentFastEndLabel: UILabel = {
+    private let currentLoopEndLabel: UILabel = {
         let label = UILabel()
         label.font = .subtitleBold
         label.text = "‧ 종료: 09월 25일 11시 23분"
@@ -151,8 +151,8 @@ final class TimerViewController: BaseViewController {
             fastInfoLabel,
             timerProgressView,
             timerInfoStackView,
-            currentFastStartLabel, todayStartTimeEditButton,
-            currentFastEndLabel,
+            currentLoopStartLabel, todayStartTimeEditButton,
+            currentLoopEndLabel,
             fastControlButton
         ].forEach { view.addSubview($0) }
 
@@ -174,17 +174,17 @@ final class TimerViewController: BaseViewController {
         }
         
         let offset = (UIScreen.main.bounds.width - progressViewHorizontalInset * 2) / 4.0
-        currentFastStartLabel.snp.makeConstraints {
+        currentLoopStartLabel.snp.makeConstraints {
             $0.top.equalTo(timerProgressView.snp.bottom).offset(-offset + 32.0)
             $0.centerX.equalToSuperview()
         }
-        currentFastEndLabel.snp.makeConstraints {
-            $0.top.equalTo(currentFastStartLabel.snp.bottom).offset(16.0)
+        currentLoopEndLabel.snp.makeConstraints {
+            $0.top.equalTo(currentLoopStartLabel.snp.bottom).offset(16.0)
             $0.centerX.equalToSuperview()
         }
         todayStartTimeEditButton.snp.makeConstraints {
-            $0.centerY.equalTo(currentFastStartLabel)
-            $0.leading.equalTo(currentFastStartLabel.snp.trailing).offset(8.0)
+            $0.centerY.equalTo(currentLoopStartLabel)
+            $0.leading.equalTo(currentLoopStartLabel.snp.trailing).offset(8.0)
             $0.width.equalTo(42.0)
         }
         
@@ -209,11 +209,13 @@ private extension TimerViewController {
         
         output.fastInfo
             .asDriver()
+            .distinctUntilChanged()
             .drive(fastInfoLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.messageText
             .asSignal()
+            .distinctUntilChanged()
             .emit(to: messageLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -223,10 +225,24 @@ private extension TimerViewController {
             .drive(progressTimeLabel.rx.text)
             .disposed(by: disposeBag)
         
+        output.remainTimeLabelIsHiddend
+            .asDriver()
+            .drive(remainTimeLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         output.remainTime
             .asDriver()
             .map { $0.timerString }
-            .map { String(localized: "REMAIN_TIMER_TIME", defaultValue: "남은 시간: \($0)") }
+            .map { [weak self] in
+                switch self?.viewModel.timerState.value {
+                case .fastTime:
+                    return String(localized: "REMAIN_TIMER_TIME", defaultValue: "남은 시간: \($0)")
+                case .mealTime:
+                    return String(localized: "REMAIN_MEAL_TIME", defaultValue: "다음 단식 까지: \($0)")
+                default:
+                    return $0
+                }
+            }
             .drive(remainTimeLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -243,22 +259,30 @@ private extension TimerViewController {
             .drive { [weak self] in self?.timerProgressView.setProgressLabel(with: $0) }
             .disposed(by: disposeBag)
         
-        output.currentFastStartTime
+        output.currentLoopTimeLabelIsHidden
             .asDriver()
+            .distinctUntilChanged()
+            .drive(currentLoopStartLabel.rx.isHidden, currentLoopEndLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        output.currentLoopStartTime
+            .asDriver()
+            .distinctUntilChanged()
             .map {
                 String(localized: "START", defaultValue: "‧ 시작: ")
                     + $0.toString(format: .currentFastTimeFormat)
             }
-            .drive(currentFastStartLabel.rx.text)
+            .drive(currentLoopStartLabel.rx.text)
             .disposed(by: disposeBag)
         
-        output.currentFastEndTime
+        output.currentLoopEndTime
             .asDriver()
+            .distinctUntilChanged()
             .map {
                 String(localized: "END", defaultValue: "‧ 종료: ")
                     + $0.toString(format: .currentFastTimeFormat)
             }
-            .drive(currentFastEndLabel.rx.text)
+            .drive(currentLoopEndLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }
