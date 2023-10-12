@@ -190,13 +190,11 @@ final class TimerViewModel: ViewModel {
                 output.progressPercent.accept(fastProgressPercent)
                 timer
                     .map { _ in return (1 / routineSetting.startToEndInterval) }
-                    .subscribe(
-                        with: self,
-                        onNext: { owner, stack in
-                            let currentProgressPercent = output.progressPercent.value
-                            output.progressPercent.accept(currentProgressPercent + stack)
-                            output.progressTime.accept(owner.fastProgressTime)
-                            output.remainTime.accept(owner.fastRemainTime)
+                    .subscribe(with: self, onNext: { owner, stack in
+                        let currentProgressPercent = output.progressPercent.value
+                        output.progressPercent.accept(currentProgressPercent + stack)
+                        output.progressTime.accept(owner.fastProgressTime)
+                        output.remainTime.accept(owner.fastRemainTime)
                     })
                     .disposed(by: disposeBag)
                 

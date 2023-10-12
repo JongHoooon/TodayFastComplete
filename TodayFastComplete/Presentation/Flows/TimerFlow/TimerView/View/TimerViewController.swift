@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxCocoa
 import RxSwift
 import SnapKit
 
@@ -227,11 +228,19 @@ private extension TimerViewController {
             .drive(remainTimeLabel.rx.text)
             .disposed(by: disposeBag)
         
-        output.progressPercent
-            .subscribe(with: self, onNext: { owner, progress in
+        let progressPercentDriver = output.progressPercent.asDriver()
+        
+        progressPercentDriver
+            .drive(with: self, onNext: { owner, progress in
                 owner.timerProgressView.progressValue = progress
                 Log.debug(progress)
             })
+            .disposed(by: disposeBag)
+        
+        progressPercentDriver
+            .compactMap { Int($0 * 100) }
+            .distinctUntilChanged()
+            .drive { [weak self] in self?.timerProgressView.setProgressLabel(with: $0) }
             .disposed(by: disposeBag)
     }
 }
