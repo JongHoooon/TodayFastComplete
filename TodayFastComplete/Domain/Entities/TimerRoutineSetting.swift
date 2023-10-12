@@ -88,6 +88,46 @@ struct TimerRoutineSetting {
         Double(Int(yesterdayFastStartToNow)) / Double(Int(startToEndInterval))
     }
     
+    var fastProgressPercent: Double {
+        if isYesterdayFastOnGoing {
+            return yesterdayFastProgressPercent
+        } else {
+            return todayFastProgressPerecent
+        }
+    }
+    
+    var fastProgressTime: TimeInterval {
+        if isYesterdayFastOnGoing {
+            return yesterdayFastStartToNow
+        } else {
+            return todayFastStartToNow
+        }
+    }
+    
+    var fastRemainTime: TimeInterval {
+        if isYesterdayFastOnGoing {
+            return nowToYesterdayFastEndInterval
+        } else {
+            return nowToFastStartInterval
+        }
+    }
+    
+    var currentFastStartDate: Date {
+        return isYesterdayFastOnGoing
+            ? yesterdayFastStartTimeDate
+            : todayFastStartTimeDate
+    }
+    
+    var currentFastEndDate: Date {
+        return isYesterdayFastOnGoing
+            ? yesterdayFastEndTimeDate
+            : todayFastEndTimeDate
+    }
+
+    var isYesterdayFastOnGoing: Bool {
+        return Date().compare(yesterdayFastEndTimeDate) == .orderedAscending
+    }
+    
     var routineInfo: String {
         let days = WeekDay.allCases
             .filter { self.days.contains($0.rawValue) == true }

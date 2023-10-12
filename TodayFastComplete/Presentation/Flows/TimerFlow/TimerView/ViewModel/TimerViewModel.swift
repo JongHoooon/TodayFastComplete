@@ -97,10 +97,8 @@ final class TimerViewModel: ViewModel {
         
         input.selectFastModeButtonTapped
             .asSignal(onErrorJustReturn: Void())
-            .emit(
-                with: self,
-                onNext: { owner, _ in
-                    owner.coordinator?.navigate(to: .timerSettingButtonTapped(currentRoutineSetting: owner.currentRoutineSetting))
+            .emit(with: self, onNext: { owner, _ in
+                owner.coordinator?.navigate(to: .timerSettingButtonTapped(currentRoutineSetting: owner.currentRoutineSetting))
             })
             .disposed(by: disposeBag)
         
@@ -167,10 +165,10 @@ final class TimerViewModel: ViewModel {
             switch (isYesterdayFast, isTodayFast) {
                 
             case (true, true):
-                return isYesterdayFastOnGoing || isBetweenTodayFastTime
+                return currentRoutineSetting.isYesterdayFastOnGoing || isBetweenTodayFastTime
 
             case (true, false):
-                return isYesterdayFastOnGoing
+                return currentRoutineSetting.isYesterdayFastOnGoing
                 
             case (false, true):
                 return isBetweenTodayFastTime
@@ -184,17 +182,17 @@ final class TimerViewModel: ViewModel {
             switch state {
             case .fastTime:
                 guard let routineSetting = currentRoutineSetting.value else { return }
-                output.progressPercent.accept(fastProgressPercent)
-                output.currentFastStartTime.accept(currentFastStartDate)
-                output.currentFastEndTime.accept(currentFastEndDate)
+                output.progressPercent.accept(routineSetting.fastProgressPercent)
+                output.currentFastStartTime.accept(routineSetting.currentFastStartDate)
+                output.currentFastEndTime.accept(routineSetting.currentFastEndDate)
                 
                 timer
                     .map { _ in return (1 / routineSetting.startToEndInterval) }
-                    .subscribe(with: self, onNext: { owner, stack in
+                    .subscribe(onNext: { stack in
                         let currentProgressPercent = output.progressPercent.value
                         output.progressPercent.accept(currentProgressPercent + stack)
-                        output.progressTime.accept(owner.fastProgressTime)
-                        output.remainTime.accept(owner.fastRemainTime)
+                        output.progressTime.accept(routineSetting.fastProgressTime)
+                        output.remainTime.accept(routineSetting.fastRemainTime)
                     })
                     .disposed(by: disposeBag)
                 
@@ -204,72 +202,5 @@ final class TimerViewModel: ViewModel {
                 break
             }
         }
-    }
-}
-
-private extension TimerViewModel {
-    var fastProgressPercent: Double {
-        guard let routineSetting = currentRoutineSetting.value
-        else {
-            return 0.0
-        }
-        if isYesterdayFastOnGoing {
-            return routineSetting.yesterdayFastProgressPercent
-        } else {
-            return routineSetting.todayFastProgressPerecent
-        }
-    }
-    
-    var fastProgressTime: TimeInterval {
-        guard let routineSetting = currentRoutineSetting.value
-        else {
-            return TimeInterval()
-        }
-        if isYesterdayFastOnGoing {
-            return routineSetting.yesterdayFastStartToNow
-        } else {
-            return routineSetting.todayFastStartToNow
-        }
-    }
-    
-    var fastRemainTime: TimeInterval {
-        guard let routineSetting = currentRoutineSetting.value
-        else {
-            return TimeInterval()
-        }
-        if isYesterdayFastOnGoing {
-            return routineSetting.nowToYesterdayFastEndInterval
-        } else {
-            return routineSetting.nowToFastStartInterval
-        }
-    }
-    
-    var currentFastStartDate: Date {
-        guard let routineSetting = currentRoutineSetting.value
-        else {
-            return Date()
-        }
-        return isYesterdayFastOnGoing 
-            ? routineSetting.yesterdayFastStartTimeDate
-            : routineSetting.todayFastStartTimeDate
-    }
-    
-    var currentFastEndDate: Date {
-        guard let routineSetting = currentRoutineSetting.value
-        else {
-            return Date()
-        }
-        return isYesterdayFastOnGoing
-            ? routineSetting.yesterdayFastEndTimeDate
-            : routineSetting.todayFastEndTimeDate
-    }
-    
-    var isYesterdayFastOnGoing: Bool {
-        guard let routineSetting = currentRoutineSetting.value,
-              routineSetting.days.contains(WeekDay.theDayBeforRawValue(rawValue: Date().weekDay))
-        else {
-            return false
-        }
-        return Date().compare(routineSetting.yesterdayFastEndTimeDate) == .orderedAscending
     }
 }
