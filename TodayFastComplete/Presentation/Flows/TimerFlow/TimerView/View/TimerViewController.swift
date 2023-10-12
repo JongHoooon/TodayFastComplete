@@ -202,6 +202,7 @@ private extension TimerViewController {
         let input = TimerViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
+            viewDidDisappear: self.rx.viewDidDisappear.asObservable(),
             selectFastModeButtonTapped: selectFastModelBarButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)

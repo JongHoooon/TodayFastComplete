@@ -14,6 +14,7 @@ final class TimerViewModel: ViewModel {
     struct Input {
         let viewDidLoad: Observable<Void>
         let viewWillAppear: Observable<Void>
+        let viewDidDisappear: Observable<Void>
         let selectFastModeButtonTapped: Observable<Void>
     }
     
@@ -38,6 +39,7 @@ final class TimerViewModel: ViewModel {
     private let timerViewUseCase: TimerViewUseCase
     private weak var coordinator: Coordinator?
     
+    private var timerDisposeBag = DisposeBag()
     private let timer = Observable<Int>.timer(
         .seconds(0),
         period: .seconds(1),
@@ -77,6 +79,12 @@ final class TimerViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
+        input.viewDidDisappear
+            .bind { [weak self] _ in
+                self?.timerDisposeBag = DisposeBag()
+            }
+            .disposed(by: disposeBag)
+            
         let currentRoutineSettingShared = currentRoutineSetting.share()
         
         currentRoutineSettingShared
@@ -186,6 +194,7 @@ final class TimerViewModel: ViewModel {
                 output.currentFastStartTime.accept(routineSetting.currentFastStartDate)
                 output.currentFastEndTime.accept(routineSetting.currentFastEndDate)
                 
+                timerDisposeBag = DisposeBag()
                 timer
                     .map { _ in return (1 / routineSetting.startToEndInterval) }
                     .subscribe(onNext: { stack in
@@ -194,7 +203,7 @@ final class TimerViewModel: ViewModel {
                         output.progressTime.accept(routineSetting.fastProgressTime)
                         output.remainTime.accept(routineSetting.fastRemainTime)
                     })
-                    .disposed(by: disposeBag)
+                    .disposed(by: timerDisposeBag)
                 
             case .mealTime:
                 break

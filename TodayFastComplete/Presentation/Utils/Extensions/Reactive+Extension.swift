@@ -22,6 +22,11 @@ extension Reactive where Base: UIViewController {
         return ControlEvent(events: source)
     }
     
+    var viewDidDisappear: ControlEvent<Void> {
+        let source = self.methodInvoked(#selector(Base.viewDidDisappear)).map { _ in }
+        return ControlEvent(events: source)
+    }
+    
     var viewDidDismissed: ControlEvent<Void> {
         let source = self.methodInvoked(#selector(Base.viewDidDisappear))
             .filter { [weak base] _ in base?.navigationController?.isBeingDismissed == true }
