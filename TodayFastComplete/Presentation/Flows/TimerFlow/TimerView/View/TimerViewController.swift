@@ -101,7 +101,7 @@ final class TimerViewController: BaseViewController {
         return button
     }()
     
-    private let selectFastModelBarButton = UIBarButtonItem(
+    private let setTimerButton = UIBarButtonItem(
         image: Constants.Icon.gear,
         style: .plain,
         target: nil,
@@ -136,7 +136,7 @@ final class TimerViewController: BaseViewController {
     
     override func configureNavigationBar() {
         navigationItem.title = Constants.Localization.TIMER_TITLE
-        navigationItem.rightBarButtonItem = selectFastModelBarButton
+        navigationItem.rightBarButtonItem = setTimerButton
         navigationItem.backButtonTitle = ""
     }
     
@@ -199,11 +199,13 @@ final class TimerViewController: BaseViewController {
 
 private extension TimerViewController {
     func bindViewModel() {
+        
         let input = TimerViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             viewDidDisappear: self.rx.viewDidDisappear.asObservable(),
-            selectFastModeButtonTapped: selectFastModelBarButton.rx.tap.asObservable()
+            progressViewEndpoinButtonTapped: timerProgressView.endPointButton.rx.tap.asObservable(),
+            setTimerButtonTapped: setTimerButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         
@@ -256,7 +258,7 @@ private extension TimerViewController {
         progressPercentDriver
             .compactMap { Int($0 * 100) }
             .distinctUntilChanged()
-            .drive { [weak self] in self?.timerProgressView.setProgressLabel(with: $0) }
+            .drive { [weak self] in self?.timerProgressView.setEndPointTitle(with: $0) }
             .disposed(by: disposeBag)
         
         output.currentLoopTimeLabelIsHidden
@@ -273,6 +275,13 @@ private extension TimerViewController {
                     + $0.toString(format: .currentFastTimeFormat)
             }
             .drive(currentLoopStartLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.endpointButtonTitle
+            .asDriver()
+            .distinctUntilChanged()
+            .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
+            .drive(timerProgressView.endPointButton.rx.title())
             .disposed(by: disposeBag)
         
         output.currentLoopEndTime

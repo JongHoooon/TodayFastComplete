@@ -15,7 +15,8 @@ final class TimerViewModel: ViewModel {
         let viewDidLoad: Observable<Void>
         let viewWillAppear: Observable<Void>
         let viewDidDisappear: Observable<Void>
-        let selectFastModeButtonTapped: Observable<Void>
+        let progressViewEndpoinButtonTapped: Observable<Void>
+        let setTimerButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -32,6 +33,8 @@ final class TimerViewModel: ViewModel {
         let currentLoopTimeLabelIsHidden = BehaviorRelay<Bool>(value: false)
         let currentLoopStartTime = BehaviorRelay<Date>(value: Date())
         let currentLoopEndTime = BehaviorRelay<Date>(value: Date())
+        
+        let endpointButtonTitle = BehaviorRelay<String>(value: "")
         
         let fastControlButtonTitle = PublishRelay<String>()
     }
@@ -108,7 +111,21 @@ final class TimerViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.selectFastModeButtonTapped
+        var endpointString: [String] {
+            ["\(Int(output.progressPercent.value * 100))%", "🔥", "💪", "🤐", "❌", "🚫", "🚨", "🏃🏻", "🏃🏼‍♀️"]
+        }
+        var index = 1
+        input.progressViewEndpoinButtonTapped
+            .bind { _ in
+                output.endpointButtonTitle.accept(endpointString[index])
+                index += 1
+                if index >= endpointString.count {
+                    index %= endpointString.count
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        input.setTimerButtonTapped
             .asSignal(onErrorJustReturn: Void())
             .emit(with: self, onNext: { owner, _ in
                 owner.coordinator?.navigate(to: .timerSettingButtonTapped(currentRoutineSetting: owner.currentRoutineSetting))

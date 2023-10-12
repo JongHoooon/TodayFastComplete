@@ -40,30 +40,31 @@ final class TimerProgressView: UIView {
                 
                 progressLayer.strokeEnd = _progressValue
                 let currentProgressLayerEndPoint = currentProgressLayerEndPoint(progress: _progressValue)
-                progressLabel.snp.updateConstraints {
+                endPointButton.snp.updateConstraints {
                     $0.center.equalTo(currentProgressLayerEndPoint)
-                    $0.size.equalTo(progressLabelSize)
+                    $0.size.equalTo(endPointButtonSize)
                 }
             }
         }
     }
 
-    private let progressLabelSize = 52.0
-    private let progressLabel: UILabel = {
-        let label = UILabel()
-        label.layer.cornerRadius = 26.0
-        label.clipsToBounds = true
-        label.backgroundColor = Constants.Color.tintAccent
-        label.textAlignment = .center
-        label.font = .bodyMedium
-        label.layer.borderWidth = 2.5
-        label.layer.borderColor = Constants.Color.tintMain.cgColor
-        return label
+    private let endPointButtonSize = 52.0
+    let endPointButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 26.0
+        button.clipsToBounds = true
+        button.backgroundColor = Constants.Color.tintAccent
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.font = .bodyMedium
+        button.setTitle("0%", for: .normal)
+        button.layer.borderWidth = 2.5
+        button.layer.borderColor = Constants.Color.tintMain.cgColor
+        return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(progressLabel)
+        addSubview(endPointButton)
     }
     
     override func draw(_ rect: CGRect) {
@@ -101,11 +102,11 @@ final class TimerProgressView: UIView {
         progressLayer.strokeEnd = 0.0
         trackLayer.strokeColor = Constants.Color.tintBase.cgColor
         progressLayer.strokeColor = Constants.Color.tintAccent.cgColor
-        addSubview(progressLabel)
+        addSubview(endPointButton)
         let currentProgressLayerEndPoint = currentProgressLayerEndPoint(progress: 0)
-        progressLabel.snp.updateConstraints {
+        endPointButton.snp.updateConstraints {
             $0.center.equalTo(currentProgressLayerEndPoint)
-            $0.size.equalTo(progressLabelSize)
+            $0.size.equalTo(endPointButtonSize)
         }
     }
 
@@ -116,7 +117,9 @@ final class TimerProgressView: UIView {
         return CGPoint(x: currentX, y: currentY)
     }
     
-    func setProgressLabel(with progress: Int) {
-        progressLabel.text = String(progress)+"%"
+    func setEndPointTitle(with progress: Int) {
+        if endPointButton.titleLabel?.text?.last == "%" {
+            endPointButton.setTitle(String(progress)+"%", for: .normal)
+        }
     }
 }
