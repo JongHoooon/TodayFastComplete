@@ -90,6 +90,7 @@ final class TimerViewController: BaseViewController {
             .systemGray2,
             renderingMode: .alwaysOriginal
         )
+        button.isHidden = true
         return button
     }()
     
