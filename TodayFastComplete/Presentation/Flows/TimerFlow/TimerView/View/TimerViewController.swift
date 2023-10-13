@@ -208,11 +208,15 @@ final class TimerViewController: BaseViewController {
 private extension TimerViewController {
     func bindViewModel() {
         
+        let progressViewEndpoinButtonTapped = timerProgressView.endPointButton.rx.tap
+            .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
+            .asObservable()
+        
         let input = TimerViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             viewDidDisappear: self.rx.viewDidDisappear.asObservable(),
-            progressViewEndpoinButtonTapped: timerProgressView.endPointButton.rx.tap.asObservable(),
+            progressViewEndpoinButtonTapped: progressViewEndpoinButtonTapped,
             setTimerButtonTapped: setTimerButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
@@ -288,7 +292,6 @@ private extension TimerViewController {
         output.endpointButtonTitle
             .asDriver()
             .distinctUntilChanged()
-            .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
             .drive(timerProgressView.endPointButton.rx.title())
             .disposed(by: disposeBag)
         
