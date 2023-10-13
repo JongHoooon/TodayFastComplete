@@ -109,7 +109,7 @@ final class TimerViewModel: ViewModel {
                 configureMessageLabel(state: state)
                 configureLoopLabels(state: state)
                 configureFastControlButton(state: state)
-                runTimer(state: state)
+                configureTimer(state: state)
             })
             .disposed(by: disposeBag)
         
@@ -252,7 +252,7 @@ final class TimerViewModel: ViewModel {
             }
         }
         
-        func runTimer(state: TimerState) {
+        func configureTimer(state: TimerState) {
             switch state {
             case .fastTime:
                 guard let routineSetting = currentRoutineSetting.value else { return }
@@ -278,7 +278,7 @@ final class TimerViewModel: ViewModel {
                 
             case .mealTime:
                 guard let routineSetting = currentRoutineSetting.value else { return }
-                output.progressPercent.accept(0.0)
+                output.progressPercent.accept(1.0)
                 output.progressTime.accept(TimeInterval())
                 output.remainTimeLabelIsHiddend.accept(false)
                 

@@ -128,6 +128,14 @@ final class TimerViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     // MARK: - Configure
     override func configure() {
         super.configure()
@@ -252,7 +260,7 @@ private extension TimerViewController {
         progressPercentDriver
             .drive(with: self, onNext: { owner, progress in
                 owner.timerProgressView.progressValue = progress
-                Log.debug(progress)
+//                Log.debug(progress)
             })
             .disposed(by: disposeBag)
         progressPercentDriver

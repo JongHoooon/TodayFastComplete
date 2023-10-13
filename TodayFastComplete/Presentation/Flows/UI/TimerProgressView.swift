@@ -9,6 +9,8 @@ import UIKit
 
 final class TimerProgressView: UIView {
      
+    private var isViewDidLoad = true
+    
     private let progressLayer = CAShapeLayer()
     private let trackLayer = CAShapeLayer()
     
@@ -34,17 +36,14 @@ final class TimerProgressView: UIView {
             return _preProgressValue
         }
         set {
-            if _preProgressValue != newValue {
-                _preProgressValue = _progressValue
-                _progressValue = newValue < 0 ? 0 : newValue > 1 ? 1 : newValue
-                
-                progressLayer.strokeEnd = _progressValue
-                let currentProgressLayerEndPoint = currentProgressLayerEndPoint(progress: _progressValue)
-                endPointButton.snp.updateConstraints {
-                    $0.center.equalTo(currentProgressLayerEndPoint)
-                    $0.size.equalTo(endPointButtonSize)
-                }
-            }
+            _progressValue = newValue < 0 ? 0 : newValue > 1 ? 1 : newValue
+            
+            progressLayer.strokeEnd = _progressValue
+            let currentProgressLayerEndPoint = currentProgressLayerEndPoint(progress: _progressValue)
+            endPointButton.snp.updateConstraints {
+                $0.center.equalTo(currentProgressLayerEndPoint)
+                $0.size.equalTo(endPointButtonSize)
+            }   
         }
     }
 
@@ -100,14 +99,17 @@ final class TimerProgressView: UIView {
             layer.addSublayer($0)
         }
         trackLayer.strokeEnd = 1.0
-        progressLayer.strokeEnd = 0.0
+        progressLayer.strokeEnd = _progressValue
         trackLayer.strokeColor = Constants.Color.tintBase.cgColor
         progressLayer.strokeColor = Constants.Color.tintAccent.cgColor
         addSubview(endPointButton)
-        let currentProgressLayerEndPoint = currentProgressLayerEndPoint(progress: 0)
-        endPointButton.snp.updateConstraints {
-            $0.center.equalTo(currentProgressLayerEndPoint)
-            $0.size.equalTo(endPointButtonSize)
+        if isViewDidLoad {
+            let currentProgressLayerEndPoint = currentProgressLayerEndPoint(progress: _progressValue)
+            endPointButton.snp.updateConstraints {
+                $0.center.equalTo(currentProgressLayerEndPoint)
+                $0.size.equalTo(endPointButtonSize)
+            }
+            isViewDidLoad = false
         }
     }
 
