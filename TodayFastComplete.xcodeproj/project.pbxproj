@@ -15,6 +15,8 @@
 		ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E62AC2FE5D0050E631 /* FSCalendar */; };
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
+		ED4D40E92AD8DB7B00C49C8A /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */; };
+		ED4D40EB2AD8DB8A00C49C8A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */; };
 		ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */; };
 		ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */; };
 		ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */; };
@@ -74,8 +76,6 @@
 		EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FA2ACAF9C50019DCB1 /* TabBarDIContainer.swift */; };
 		EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FC2ACAFE540019DCB1 /* TabBarEnum.swift */; };
 		EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */; };
-		EDA777012ACB17070019DCB1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EDA777002ACB17070019DCB1 /* Localizable.xcstrings */; };
-		EDA777092ACBD85C0019DCB1 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */; };
 		EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */; };
 		EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF3662ACEA32A00F72CE8 /* FastMode.swift */; };
 		EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */; };
@@ -95,6 +95,9 @@
 
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		ED4D40E72AD8DB3000C49C8A /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
+		ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewType.swift; sourceTree = "<group>"; };
 		ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTimePickerViewModel.swift; sourceTree = "<group>"; };
@@ -158,9 +161,6 @@
 		EDA776FA2ACAF9C50019DCB1 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
 		EDA776FC2ACAFE540019DCB1 /* TabBarEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarEnum.swift; sourceTree = "<group>"; };
 		EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDIContainer.swift; sourceTree = "<group>"; };
-		EDA777002ACB17070019DCB1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		EDA777072ACBD82E0019DCB1 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
-		EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		EDACF3662ACEA32A00F72CE8 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerCoordinator.swift; sourceTree = "<group>"; };
@@ -481,8 +481,8 @@
 				ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */,
 				ED81921F2AC2ECEB00C7C830 /* LaunchScreen.storyboard */,
 				ED8192222AC2ECEB00C7C830 /* Info.plist */,
-				EDA777082ACBD85C0019DCB1 /* InfoPlist.xcstrings */,
-				EDA777002ACB17070019DCB1 /* Localizable.xcstrings */,
+				ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */,
+				ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -726,9 +726,9 @@
 			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				ko,
+				en,
 			);
 			mainGroup = ED8192082AC2ECEA00C7C830;
 			packageReferences = (
@@ -752,9 +752,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDA777092ACBD85C0019DCB1 /* InfoPlist.xcstrings in Resources */,
 				ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */,
-				EDA777012ACB17070019DCB1 /* Localizable.xcstrings in Resources */,
+				ED4D40E92AD8DB7B00C49C8A /* InfoPlist.xcstrings in Resources */,
+				ED4D40EB2AD8DB8A00C49C8A /* Localizable.xcstrings in Resources */,
 				ED8192292AC2EE2700C7C830 /* .gitignore in Resources */,
 				ED8192212AC2ECEB00C7C830 /* LaunchScreen.storyboard in Resources */,
 				ED81921E2AC2ECEB00C7C830 /* Assets.xcassets in Resources */,
@@ -868,7 +868,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				ED8192202AC2ECEB00C7C830 /* Base */,
-				EDA777072ACBD82E0019DCB1 /* mul */,
+				ED4D40E72AD8DB3000C49C8A /* mul */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
