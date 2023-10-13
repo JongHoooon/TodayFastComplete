@@ -331,7 +331,7 @@ final class TimerViewModel: ViewModel {
             case .mealTime:
                 output.fastControlButtonIsEnabled.accept(true)
             case .noFastDay:
-                output.fastControlButtonIsEnabled.accept(false)
+                output.fastControlButtonIsEnabled.accept(true)
             case .noRoutineSetting:
                 output.fastControlButtonIsEnabled.accept(false)
             }
