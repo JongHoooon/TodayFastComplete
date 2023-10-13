@@ -299,7 +299,5 @@ private extension TimerViewController {
             .distinctUntilChanged()
             .drive(fastControlButton.rx.isEnabled)
             .disposed(by: disposeBag)
-        
-        
     }
 }
