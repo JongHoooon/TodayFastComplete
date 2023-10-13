@@ -36,6 +36,7 @@ final class TimerViewModel: ViewModel {
         
         let endpointButtonTitle = BehaviorRelay<String>(value: "0%")
         
+        let fastControlButtonIsEnabled = BehaviorRelay<Bool>(value: false)
         let fastControlButtonTitle = PublishRelay<String>()
     }
     
@@ -107,6 +108,7 @@ final class TimerViewModel: ViewModel {
                 Log.info(state)
                 configureMessageLabel(state: state)
                 configureLoopLabels(state: state)
+                configureFastControlButton(state: state)
                 runTimer(state: state)
             })
             .disposed(by: disposeBag)
@@ -319,6 +321,19 @@ final class TimerViewModel: ViewModel {
                 output.progressTime.accept(TimeInterval())
                 output.remainTime.accept(TimeInterval())
                 output.remainTimeLabelIsHiddend.accept(true)
+            }
+        }
+        
+        func configureFastControlButton(state: TimerState) {
+            switch state {
+            case .fastTime:
+                output.fastControlButtonIsEnabled.accept(true)
+            case .mealTime:
+                output.fastControlButtonIsEnabled.accept(true)
+            case .noFastDay:
+                output.fastControlButtonIsEnabled.accept(false)
+            case .noRoutineSetting:
+                output.fastControlButtonIsEnabled.accept(false)
             }
         }
     }

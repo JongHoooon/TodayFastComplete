@@ -293,5 +293,13 @@ private extension TimerViewController {
             }
             .drive(currentLoopEndLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        output.fastControlButtonIsEnabled
+            .asDriver()
+            .distinctUntilChanged()
+            .drive(fastControlButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        
     }
 }
