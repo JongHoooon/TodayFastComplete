@@ -34,7 +34,7 @@ final class TimerViewModel: ViewModel {
         let currentLoopStartTime = BehaviorRelay<Date>(value: Date())
         let currentLoopEndTime = BehaviorRelay<Date>(value: Date())
         
-        let endpointButtonTitle = BehaviorRelay<String>(value: "")
+        let endpointButtonTitle = BehaviorRelay<String>(value: "0%")
         
         let fastControlButtonTitle = PublishRelay<String>()
     }
@@ -321,6 +321,5 @@ final class TimerViewModel: ViewModel {
                 output.remainTimeLabelIsHiddend.accept(true)
             }
         }
-        
     }
 }
