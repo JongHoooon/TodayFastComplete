@@ -114,13 +114,13 @@ final class TimerViewModel: ViewModel {
         var endpointString: [String] {
             ["\(Int(output.progressPercent.value * 100))%", "🔥", "💪", "🤐", "❌", "🚫", "🚨", "🏃🏻", "🏃🏼‍♀️"]
         }
-        var index = 1
+        var endpointStringIndex = 1
         input.progressViewEndpoinButtonTapped
             .bind { _ in
-                output.endpointButtonTitle.accept(endpointString[index])
-                index += 1
-                if index >= endpointString.count {
-                    index %= endpointString.count
+                output.endpointButtonTitle.accept(endpointString[endpointStringIndex])
+                endpointStringIndex += 1
+                if endpointStringIndex >= endpointString.count {
+                    endpointStringIndex %= endpointString.count
                 }
             }
             .disposed(by: disposeBag)
