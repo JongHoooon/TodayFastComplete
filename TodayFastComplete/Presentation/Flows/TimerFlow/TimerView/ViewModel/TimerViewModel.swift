@@ -52,6 +52,7 @@ final class TimerViewModel: ViewModel {
         scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
     )
     private let currentRoutineSetting = BehaviorRelay<TimerRoutineSetting?>(value: nil)
+    private var endpointStringIndex = 0
     var timerState = BehaviorRelay<TimerState>(value: .noRoutineSetting)
     
     // MARK: - Init
@@ -103,7 +104,9 @@ final class TimerViewModel: ViewModel {
             .bind { output.fastInfo.accept($0) }
             .disposed(by: disposeBag)
     
-        timerState
+        let timerStateShare = timerState.share()
+        
+        timerStateShare
             .subscribe(onNext: { state in
                 Log.info(state)
                 configureMessageLabel(state: state)
@@ -113,18 +116,18 @@ final class TimerViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
-        var endpointString: [String] {
-            ["\(Int(output.progressPercent.value * 100))%", "🔥", "💪", "🤐", "❌", "🚫", "🚨", "🏃🏻", "🏃🏼‍♀️"]
-        }
-        var endpointStringIndex = 1
-        input.progressViewEndpoinButtonTapped
-            .bind { _ in
-                output.endpointButtonTitle.accept(endpointString[endpointStringIndex])
-                endpointStringIndex += 1
-                if endpointStringIndex >= endpointString.count {
-                    endpointStringIndex %= endpointString.count
-                }
+        timerStateShare
+            .distinctUntilChanged()
+            .flatMap { [weak self] _ in
+                self?.endpointStringIndex = 0
+                return configureEndpoingButtonTitle()
             }
+            .bind { output.endpointButtonTitle.accept($0) }
+            .disposed(by: disposeBag)
+            
+        input.progressViewEndpoinButtonTapped
+            .flatMap { configureEndpoingButtonTitle() }
+            .bind { output.endpointButtonTitle.accept($0) }
             .disposed(by: disposeBag)
         
         input.setTimerButtonTapped
@@ -221,12 +224,12 @@ final class TimerViewModel: ViewModel {
             case .mealTime:
                 output.messageText.accept(String(
                     localized: "MEAL_TIME_MESSAGE_1",
-                    defaultValue: "식사시간 입니다 \(["🍜", "🍕", "🍔", "🍲", "🍱", "🍽️", "🥙", "🥗"].randomElement() ?? "🍽️")"
+                    defaultValue: "식사시간 입니다!"
                 ))
             case .noFastDay:
-                output.messageText.accept(String(localized: "NO_FAST_TIME_MESSAGE_1", defaultValue: "오늘은 단식이 없어요 🥳"))
+                output.messageText.accept(String(localized: "NO_FAST_TIME_MESSAGE_1", defaultValue: "오늘은 단식이 없어요!"))
             case .noRoutineSetting:
-                output.messageText.accept(String(localized: "NO_ROUTINE_SETTING", defaultValue: "단식 시간을 설정해주세요 😊"))
+                output.messageText.accept(String(localized: "NO_ROUTINE_SETTING", defaultValue: "단식 시간을 설정해주세요!"))
             }
         }
         
@@ -336,5 +339,29 @@ final class TimerViewModel: ViewModel {
                 output.fastControlButtonIsEnabled.accept(false)
             }
         }
+        
+        func configureEndpoingButtonTitle() -> Observable<String> {
+            var titles: [String]
+            switch timerState.value {
+            case .fastTime:
+                titles = ["\(Int(output.progressPercent.value * 100))%"]
+            case .mealTime:
+                titles = ["🍽️"]
+            case .noFastDay:
+                titles = ["🥳"]
+            case .noRoutineSetting:
+                titles = ["🫠"]
+            }
+            
+            titles.append(contentsOf: ["🔥", "💪", "🤐", "❌", "🚫", "🚨", "🏃🏻", "🏃🏼‍♀️"])
+            let title = titles[endpointStringIndex]
+            endpointStringIndex += 1
+            if endpointStringIndex >= titles.count {
+                endpointStringIndex %= titles.count
+            }
+            
+            return Observable.just(title)
+        }
     }
+    
 }

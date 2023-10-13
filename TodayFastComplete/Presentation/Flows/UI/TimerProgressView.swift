@@ -43,7 +43,7 @@ final class TimerProgressView: UIView {
             endPointButton.snp.updateConstraints {
                 $0.center.equalTo(currentProgressLayerEndPoint)
                 $0.size.equalTo(endPointButtonSize)
-            }   
+            }
         }
     }
 
