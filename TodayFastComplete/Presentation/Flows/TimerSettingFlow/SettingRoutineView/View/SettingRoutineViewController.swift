@@ -96,12 +96,15 @@ private extension SettingRoutineViewController {
     func bindViewModel() {
         
         let startTimePickerViewTapped = PublishRelay<TimePickerViewType>()
+        let itemSelected = settingRoutineCollectionView.rx.itemSelected
+            .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
+            .asObservable()
         
         let input = SettingRoutineViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewDidDismissed: self.rx.viewDidDismissed.asObservable(),
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
-            itemSelected: settingRoutineCollectionView.rx.itemSelected.asObservable(),
+            itemSelected: itemSelected,
             timePickerViewTapped: startTimePickerViewTapped.asObservable(),
             saveButtonTapped: saveBarButton.rx.tap.asObservable()
         )
