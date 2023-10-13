@@ -111,8 +111,7 @@ private extension SettingTimerCoordinator {
     }
     
     func dismissStartTimePicker() {
-        let vc = presentedViews[.startTimePicker]
-        vc?.dismiss(animated: true)
+        rootViewController.presentedViewController?.dismiss(animated: true)
         presentedViews.removeValue(forKey: .startTimePicker)
     }
     
@@ -132,8 +131,7 @@ private extension SettingTimerCoordinator {
     }
     
     func dismissFastTimePicker() {
-        let vc = presentedViews[.fastTimePicker]
-        vc?.dismiss(animated: true)
+        rootViewController.presentedViewController?.dismiss(animated: true)
         presentedViews.removeValue(forKey: .fastTimePicker)
     }
 }
