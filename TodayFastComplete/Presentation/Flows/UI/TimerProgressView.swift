@@ -56,6 +56,7 @@ final class TimerProgressView: UIView {
         button.backgroundColor = Constants.Color.tintAccent
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = .bodyMedium
+        button.setTitleColor(.label, for: .normal)
         button.setTitle("0%", for: .normal)
         button.layer.borderWidth = 2.5
         button.layer.borderColor = Constants.Color.tintMain.cgColor
