@@ -15,8 +15,13 @@
 		ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E62AC2FE5D0050E631 /* FSCalendar */; };
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
+		ED38F90E2ADA3042005126F3 /* LocalNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */; };
+		ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */; };
+		ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */; };
 		ED4D40E92AD8DB7B00C49C8A /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */; };
 		ED4D40EB2AD8DB8A00C49C8A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */; };
+		ED4D40F12AD95DF500C49C8A /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D40F02AD95DF500C49C8A /* UserNotificationManager.swift */; };
+		ED4D40F42AD971C300C49C8A /* CalendarNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D40F32AD971C300C49C8A /* CalendarNotification.swift */; };
 		ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */; };
 		ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */; };
 		ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */; };
@@ -26,7 +31,6 @@
 		ED4DB3C02AD50DAD003535C9 /* DateComponents+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3BF2AD50DAD003535C9 /* DateComponents+Extension.swift */; };
 		ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C12AD5100F003535C9 /* Date+Extension.swift */; };
 		ED4DB3C62AD53337003535C9 /* RoutineSettingFetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */; };
-		ED4DB3C82AD5334C003535C9 /* RoutineSettingUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */; };
 		ED4DB3CB2AD5420E003535C9 /* TimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4DB3CA2AD5420E003535C9 /* TimerState.swift */; };
 		ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */; };
 		ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */; };
@@ -95,9 +99,14 @@
 
 /* Begin PBXFileReference section */
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationRepository.swift; sourceTree = "<group>"; };
+		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
+		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
 		ED4D40E72AD8DB3000C49C8A /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
 		ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		ED4D40F02AD95DF500C49C8A /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
+		ED4D40F32AD971C300C49C8A /* CalendarNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNotification.swift; sourceTree = "<group>"; };
 		ED4DB3AC2AD3DA3C003535C9 /* TimePickerViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewType.swift; sourceTree = "<group>"; };
 		ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		ED4DB3B52AD3FC3F003535C9 /* FastTimePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTimePickerViewModel.swift; sourceTree = "<group>"; };
@@ -107,7 +116,6 @@
 		ED4DB3BF2AD50DAD003535C9 /* DateComponents+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateComponents+Extension.swift"; sourceTree = "<group>"; };
 		ED4DB3C12AD5100F003535C9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingFetchable.swift; sourceTree = "<group>"; };
-		ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingUpdatable.swift; sourceTree = "<group>"; };
 		ED4DB3CA2AD5420E003535C9 /* TimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerState.swift; sourceTree = "<group>"; };
 		ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		ED50E9512ACEF2C200182922 /* SettingRoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRoutineViewModel.swift; sourceTree = "<group>"; };
@@ -197,6 +205,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED4D40F22AD9716A00C49C8A /* UserNotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				ED4D40F02AD95DF500C49C8A /* UserNotificationManager.swift */,
+				ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */,
+				ED4D40F32AD971C300C49C8A /* CalendarNotification.swift */,
+			);
+			path = UserNotificationManager;
+			sourceTree = "<group>";
+		};
 		ED4DB3B02AD3FBFB003535C9 /* FastTimePickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +245,7 @@
 			children = (
 				ED4DB3B92AD4318A003535C9 /* TimerUseCase.swift */,
 				ED4DB3C52AD53337003535C9 /* RoutineSettingFetchable.swift */,
-				ED4DB3C72AD5334C003535C9 /* RoutineSettingUpdatable.swift */,
+				ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */,
 			);
 			path = TimerUseCase;
 			sourceTree = "<group>";
@@ -420,6 +438,7 @@
 		ED6C67352AC9027600230621 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				ED4D40F22AD9716A00C49C8A /* UserNotificationManager */,
 				ED6C67362AC9028100230621 /* Log */,
 			);
 			path = Infrastructure;
@@ -550,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				ED50E97E2AD17E4F00182922 /* TimerRoutineSettingRepository.swift */,
+				ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -803,8 +823,10 @@
 				EDBAAA302AD2B1D900CB84C8 /* SettingRoutineSection.swift in Sources */,
 				ED4DB3CB2AD5420E003535C9 /* TimerState.swift in Sources */,
 				ED6C67382AC9029400230621 /* Log.swift in Sources */,
+				ED4D40F12AD95DF500C49C8A /* UserNotificationManager.swift in Sources */,
 				EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */,
 				EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */,
+				ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
 				ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */,
 				ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */,
@@ -823,6 +845,7 @@
 				EDBAAA322AD2BCEB00CB84C8 /* RecommendFastRoutine.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
 				ED4DB3B82AD3FC4A003535C9 /* FastTimePickerViewController.swift in Sources */,
+				ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */,
 				ED50E9872AD198DB00182922 /* Array+Extenstion.swift in Sources */,
 				EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */,
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
@@ -834,7 +857,6 @@
 				ED4DB3BE2AD4D457003535C9 /* LocalRepositoryError.swift in Sources */,
 				ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */,
 				EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */,
-				ED4DB3C82AD5334C003535C9 /* RoutineSettingUpdatable.swift in Sources */,
 				EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */,
 				EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */,
 				EDBAAA2E2AD273C500CB84C8 /* TimeSettingView.swift in Sources */,
@@ -850,11 +872,13 @@
 				EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */,
 				ED50E97B2AD16DB300182922 /* TimerRoutineSettingTable+Mapping.swift in Sources */,
 				ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */,
+				ED38F90E2ADA3042005126F3 /* LocalNotificationRepository.swift in Sources */,
 				EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */,
 				EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */,
 				EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */,
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
 				ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */,
+				ED4D40F42AD971C300C49C8A /* CalendarNotification.swift in Sources */,
 				ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */,
 				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
 				ED50E95A2ACF903A00182922 /* TimeSettingCollectionViewCell.swift in Sources */,

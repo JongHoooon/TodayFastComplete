@@ -58,4 +58,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            
+            // 특정 화면, 특정 조건에서만 포그라운드 알림 받기,
+            // 특정 화면에서는 알림 안받기
+            completionHandler([.sound, .badge, .banner, .list])
+        }
+    
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse
+    ) async {
+        
+        print(response.notification.request.identifier)
+        print(response.notification.request.content.userInfo)
+        print(response.notification.date.toString(format: .dateTimeFormat))
+        
+        if response.notification.request.identifier == "" {
+            print("deep link!")
+        }
+    }
 }

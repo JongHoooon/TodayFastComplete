@@ -18,8 +18,17 @@ extension Date {
         return Calendar.current.dateComponents([.hour, .minute, .second], from: self)
     }
     
+    var year: Int {
+        guard let year = Calendar.current.dateComponents([.year], from: self).year
+        else {
+            assertionFailure("no year")
+            return -1
+        }
+        return year
+    }
+    
     var month: Int {
-        guard let month = Calendar.current.dateComponents([.minute], from: self).month
+        guard let month = Calendar.current.dateComponents([.month], from: self).month
         else {
             assertionFailure("no month")
             return -1

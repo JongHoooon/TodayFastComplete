@@ -13,7 +13,10 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
 
     // MARK: - Use Case
     private func makeTimerUseCase() -> TimerUseCase {
-        return TimerUseCaseImp(routineSettingRepository: makeTimerRoutineSettingRepostory())
+        return TimerUseCaseImp(
+            routineSettingRepository: makeTimerRoutineSettingRepostory(),
+            userNotificationManager: DefaultUserNotificationManager()
+        )
     }
                                                  
     private func makeTimerRoutineSettingRepostory() -> TimerRoutineSettingRepository {

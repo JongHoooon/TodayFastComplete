@@ -126,5 +126,6 @@ enum Constants {
             return date
         }
         static var timerDateComponents = DateComponents(hour: 0, minute: 0, second: 0)
+        static var localNotificationMaxCount = 64
     }
 }

@@ -40,7 +40,7 @@ final class SettingRoutineViewModel: ViewModel {
         let saveButtonIsEnable = BehaviorRelay<Bool>(value: false)
     }
     
-    typealias SettingTimerRoutineUseCase = RoutineSettingFetchable & RoutineSettingUpdatable
+    typealias SettingTimerRoutineUseCase = RoutineSettingFetchable & RoutineSettingSaveable
     private let settingTimerRoutineUseCase: SettingTimerRoutineUseCase
     private weak var coordinator: Coordinator?
     
@@ -87,7 +87,6 @@ final class SettingRoutineViewModel: ViewModel {
                 })
             .disposed(by: disposeBag)
         
-        // TODO: 임팩 피드백 처리
         let itemSelected = input.itemSelected.share()
         
         itemSelected
@@ -159,7 +158,7 @@ final class SettingRoutineViewModel: ViewModel {
             )})
             .withUnretained(self)
             .flatMap({ owner, routineSetting in
-                return owner.settingTimerRoutineUseCase.updateRouineSetting(with: routineSetting)
+                return owner.settingTimerRoutineUseCase.saveRoutineSetting(with: routineSetting)
             })
             .observe(on: MainScheduler.asyncInstance)
             .subscribe(

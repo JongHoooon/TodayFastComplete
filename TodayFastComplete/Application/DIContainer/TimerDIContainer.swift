@@ -11,7 +11,10 @@ final class TimerDIContainer: TimerCoordinatorDependencies {
     
     // MARK: - Use Case
     private func makeTimerUseCase() -> TimerUseCase {
-        return TimerUseCaseImp(routineSettingRepository: makeTimerRoutineSettingRepostory())
+        return TimerUseCaseImp(
+            routineSettingRepository: makeTimerRoutineSettingRepostory(),
+            userNotificationManager: DefaultUserNotificationManager()
+        )
     }
                                                  
     private func makeTimerRoutineSettingRepostory() -> TimerRoutineSettingRepository {
@@ -24,7 +27,6 @@ final class TimerDIContainer: TimerCoordinatorDependencies {
             fatalError("init realm repository failed")
         }
     }
-    
     // MARK: - Coordinator
     func makeSettingTimerCoordinator(
         rootViewController: UINavigationController,
