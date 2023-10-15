@@ -150,6 +150,7 @@ final class SettingRoutineViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         input.saveButtonTapped
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.asyncInstance)
             .map({
                 return TimerRoutineSetting(
                     days: output.selectedWeekDays.value,
