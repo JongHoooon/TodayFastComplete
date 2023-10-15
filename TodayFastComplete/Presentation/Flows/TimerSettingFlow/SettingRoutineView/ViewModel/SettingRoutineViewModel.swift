@@ -37,6 +37,8 @@ final class SettingRoutineViewModel: ViewModel {
         let selectedStartTime = BehaviorRelay<DateComponents>(value: Constants.DefaultValue.startTime)
         let selectedFastTime = BehaviorRelay<Int>(value: Constants.DefaultValue.fastTime)
         
+        let selectedRoutineInfo = BehaviorRelay<String>(value: "")
+        
         let saveButtonIsEnable = BehaviorRelay<Bool>(value: false)
     }
     
@@ -173,6 +175,40 @@ final class SettingRoutineViewModel: ViewModel {
                     Log.error(error)
             })
             .disposed(by: disposeBag)
+        
+        BehaviorRelay.combineLatest(
+            output.selectedWeekDays,
+            output.selectedStartTime,
+            output.selectedFastTime
+        )
+        .map {
+            let weekDays = $0.0
+            let startTime = $0.1
+            let fastTime = $0.2
+            var days = WeekDay.allCases
+                .filter { weekDays.contains($0.rawValue) == true }
+                .map { $0.weekDayName }
+                .joined(separator: ", ")
+            if days == "" {
+                days = Constants.Localization.PLEASE_SELECT_WEEKDAYS
+            }
+            let fastStartTime = startTime.timeString
+            let mealStartTime = DateComponents(
+                hour: (startTime.hour ?? 0) + fastTime,
+                minute: startTime.minute
+            ).timeString
+            return String(
+                format: Constants.Localization.TIMER_VIEW_FAST_INFO,
+                arguments: [
+                    days,
+                    fastStartTime, mealStartTime, fastTime,
+                    mealStartTime, fastStartTime, (24-fastTime)
+                ])
+        }
+        .bind {
+            output.selectedRoutineInfo.accept($0)
+        }
+        .disposed(by: disposeBag)
         
         return output
         

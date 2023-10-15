@@ -66,6 +66,18 @@ enum Constants {
             localized: "START_TIME_TEXTFIELD_PLACEHOLDER",
             defaultValue: "🕐 단식을 언제 시작할까요?"
         )
+        static let TIMER_VIEW_FAST_INFO = String(
+            localized: "TIMER_VIEW_FAST_INFO",
+            defaultValue: """
+            단식 요일: %1$@
+            단식 시간: %2$@ - %3$@ %4$lld시간
+            식사 시간: %5$@ - %6$@ %7$lld시간
+            """
+        )
+        static let PLEASE_SELECT_WEEKDAYS = String(
+            localized: "PLEASE_SELECT_WEEKDAYS",
+            defaultValue: "(단식 요일을 선택해 주세요.)"
+        )
         
         // 요일
         static let MONDAY = String(
@@ -117,7 +129,7 @@ enum Constants {
     
     enum DefaultValue {
         static let fastTimeIndex = 15
-        static let fastTime = 16
+        static let fastTime = 15
         static var startTime = DateComponents(hour: 19, minute: 0)
         static var startTimeDate: Date {
             let formatter = DateFormatter()

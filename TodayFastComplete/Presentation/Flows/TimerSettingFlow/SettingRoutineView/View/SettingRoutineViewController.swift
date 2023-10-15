@@ -113,7 +113,8 @@ private extension SettingRoutineViewController {
             timePickerViewTapped: startTimePickerViewTapped, 
             selectedStartTime: output.selectedStartTime, 
             selectedFastTime: output.selectedFastTime,
-            selectedRecommendRoutine: output.selectedRecommendRoutine
+            selectedRecommendRoutine: output.selectedRecommendRoutine,
+            selectedFastInfo: output.selectedRoutineInfo
         )
         var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
         snapshot.appendSections(output.sections)
@@ -234,13 +235,15 @@ private extension SettingRoutineViewController {
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
         selectedStartTime: BehaviorRelay<DateComponents>,
         selectedFastTime: BehaviorRelay<Int>,
-        selectedRecommendRoutine: BehaviorRelay<Int?>
+        selectedRecommendRoutine: BehaviorRelay<Int?>,
+        selectedFastInfo: BehaviorRelay<String>
     ) {
         let dayCellRegistration = createDayCellRegistration(selectedDays: selectedWeekDays)
         let routineSettingCellRegistration = createTimeSettingCellRegistration(
             timePickerViewTapped: timePickerViewTapped,
             selectedStartTime: selectedStartTime, 
-            selectedFastTime: selectedFastTime
+            selectedFastTime: selectedFastTime,
+            selectedFastInfo: selectedFastInfo
         )
         let fastRoutineCellRegistration = createRoutineRecommendCellRegistration(selectedRecommendRoutine: selectedRecommendRoutine)
         let titleHeaderRegistration = createTitleCollectionHeaderCellRegistration()
@@ -318,7 +321,8 @@ private extension SettingRoutineViewController {
     func createTimeSettingCellRegistration(
         timePickerViewTapped: PublishRelay<TimePickerViewType>,
         selectedStartTime: BehaviorRelay<DateComponents>,
-        selectedFastTime: BehaviorRelay<Int>
+        selectedFastTime: BehaviorRelay<Int>,
+        selectedFastInfo: BehaviorRelay<String>
     ) -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
         return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { [weak self] cell, _, _ in
             guard let self else { return }
@@ -334,6 +338,11 @@ private extension SettingRoutineViewController {
                 .map { String(localized: "HOURS", defaultValue: "\($0) 시간" ) }
                 .drive { cell.configureFastTimeLabel(with: $0) }
                 .disposed(by: disposeBag)
+            selectedFastInfo.asDriver()
+                .distinctUntilChanged()
+                .drive { cell.configureSelectedFastInfoLabel(with: $0) }
+                .disposed(by: disposeBag)
+                
             cell.timePickerViewTapped = timePickerViewTapped
         }
     }

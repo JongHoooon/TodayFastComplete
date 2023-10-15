@@ -170,12 +170,12 @@ struct TimerRoutineSetting {
             minute: startTime.minute
         ).timeString
         return String(
-            localized: "TIMER_VIEW_FAST_INFO",
-            defaultValue: """
-            단식 요일: \(days)
-            단식 시간: \(fastStartTime) - \(mealStartTime) \(fastTime)시간
-            식사 시간: \(mealStartTime) - \(fastStartTime) \(24 - fastTime)시간
-            """
+            format: Constants.Localization.TIMER_VIEW_FAST_INFO, 
+            arguments: [
+                days,
+                fastStartTime, mealStartTime, fastTime,
+                mealStartTime, fastStartTime, (24-fastTime)
+            ]
         )
     }
 }
