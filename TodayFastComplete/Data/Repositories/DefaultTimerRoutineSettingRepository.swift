@@ -12,6 +12,10 @@ import RxSwift
 
 final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRoutineSettingRepository {
     
+    deinit {
+        Log.deinit()
+    }
+    
     func update(routineSetting: TimerRoutineSetting) -> Single<TimerRoutineSetting> {
         return Single<TimerRoutineSetting>
             .create { [weak self] single in

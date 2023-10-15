@@ -27,6 +27,10 @@ final class TimerUseCaseImp: TimerUseCase {
         self.disposeBag = DisposeBag()
     }
     
+    deinit {
+        Log.deinit()
+    }
+    
     func fetchTimerRoutine() -> Single<TimerRoutineSetting?> {
         return routineSettingRepository.fetchRoutine()
     }
