@@ -7,6 +7,7 @@
 
 import RxSwift
 
-protocol RoutineSettingSaveable {
+protocol RoutineSettingStoragable {
     func saveRoutineSetting(with routineSetting: TimerRoutineSetting) -> Single<TimerRoutineSetting>
+    func deleteRoutineSetting() -> Completable
 }

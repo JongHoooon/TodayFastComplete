@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */; };
+		ED01F8582ADC049300A300DC /* CancelOkAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */; };
 		ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ED1407D92AC2FC240050E631 /* .swiftlint.yml */; };
 		ED1407DD2AC2FDDE0050E631 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DC2AC2FDDE0050E631 /* RxCocoa */; };
 		ED1407DF2AC2FDDE0050E631 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DE2AC2FDDE0050E631 /* RxRelay */; };
@@ -101,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRoutineSettingCell.swift; sourceTree = "<group>"; };
+		ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOkAlertPresentable.swift; sourceTree = "<group>"; };
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationRepository.swift; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6C671D2AC8395400230621 /* Coordinator.swift */,
+				ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */,
 				EDC2CC262ACD9A8E0096D2F0 /* Step.swift */,
 				ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */,
 				EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */,
@@ -849,6 +852,7 @@
 				ED4DB3C02AD50DAD003535C9 /* DateComponents+Extension.swift in Sources */,
 				EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */,
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
+				ED01F8582ADC049300A300DC /* CancelOkAlertPresentable.swift in Sources */,
 				EDBAAA322AD2BCEB00CB84C8 /* RecommendFastRoutine.swift in Sources */,
 				EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */,
 				ED4DB3B82AD3FC4A003535C9 /* FastTimePickerViewController.swift in Sources */,

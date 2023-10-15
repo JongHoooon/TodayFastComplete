@@ -18,6 +18,7 @@ final class SettingRoutineViewController: BaseViewController {
     private var dayCellDisposeBag: [UICollectionViewCell: DisposeBag] = [:]
     private var timeSettingCellDisposeBag: [UICollectionViewCell: DisposeBag] = [:]
     private var recommendRoutineCellDisposeBag: [UICollectionViewCell: DisposeBag] = [:]
+    private var deleteSettingCellDisposeBag: [UICollectionViewCell: DisposeBag] = [:]
     
     // MARK: - UI
     private let settingRoutineCollectionView: UICollectionView = {
@@ -96,14 +97,17 @@ private extension SettingRoutineViewController {
         let timePickerViewTapped = PublishRelay<TimePickerViewType>()
         let itemSelected = settingRoutineCollectionView.rx.itemSelected
             .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
-            .asObservable()
-        
+            
+        let deleteRoutineSettingButtonTapped = PublishRelay<Void>()
+            
         let input = SettingRoutineViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewDidDismissed: self.rx.viewDidDismissed.asObservable(),
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
             itemSelected: itemSelected,
             timePickerViewTapped: timePickerViewTapped.asObservable(),
+            deleteRoutineSettingButtonTapped: deleteRoutineSettingButtonTapped
+                .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
             saveButtonTapped: saveBarButton.rx.tap.asObservable()
         )
         var output = viewModel.transform(input: input, disposeBag: disposeBag)
@@ -114,7 +118,9 @@ private extension SettingRoutineViewController {
             selectedStartTime: output.selectedStartTime, 
             selectedFastTime: output.selectedFastTime,
             selectedRecommendRoutine: output.selectedRecommendRoutine,
-            selectedFastInfo: output.selectedRoutineInfo
+            selectedFastInfo: output.selectedRoutineInfo, 
+            deleteRoutineSettingButtonTapped: deleteRoutineSettingButtonTapped, 
+            deleteButtonIsEnable: output.deleteButtonIsEnable
         )
         var snapshot = NSDiffableDataSourceSnapshot<SettingRoutineSection, SettingRoutineItem>()
         snapshot.appendSections(output.sections)
@@ -261,7 +267,9 @@ private extension SettingRoutineViewController {
         selectedStartTime: BehaviorRelay<DateComponents>,
         selectedFastTime: BehaviorRelay<Int>,
         selectedRecommendRoutine: BehaviorRelay<Int?>,
-        selectedFastInfo: BehaviorRelay<String>
+        selectedFastInfo: BehaviorRelay<String>,
+        deleteRoutineSettingButtonTapped: PublishRelay<Void>,
+        deleteButtonIsEnable: BehaviorRelay<Bool>
     ) {
         let dayCellRegistration = createDayCellRegistration(selectedDays: selectedWeekDays)
         let routineSettingCellRegistration = createTimeSettingCellRegistration(
@@ -272,7 +280,10 @@ private extension SettingRoutineViewController {
         )
         let fastRoutineCellRegistration = createRoutineRecommendCellRegistration(selectedRecommendRoutine: selectedRecommendRoutine)
         let titleHeaderRegistration = createTitleCollectionHeaderCellRegistration()
-        let deleteRoutineCellRegistration = createDeleteRoutineSettingCellRegistration()
+        let deleteRoutineCellRegistration = createDeleteRoutineSettingCellRegistration(
+            deleteRoutineSettingButtonTapped: deleteRoutineSettingButtonTapped,
+            deleteButtonIsEnable: deleteButtonIsEnable
+        )
         
         dataSource = UICollectionViewDiffableDataSource<SettingRoutineSection, SettingRoutineItem>(
             collectionView: settingRoutineCollectionView,
@@ -401,15 +412,23 @@ private extension SettingRoutineViewController {
         }
     }
     
-    func createDeleteRoutineSettingCellRegistration() -> UICollectionView.CellRegistration<DeleteRoutineSettingCell, Void> {
-        return UICollectionView.CellRegistration<DeleteRoutineSettingCell, Void> {
-            cell, indexPath, FastRoutine in
+    func createDeleteRoutineSettingCellRegistration(
+        deleteRoutineSettingButtonTapped: PublishRelay<Void>,
+        deleteButtonIsEnable: BehaviorRelay<Bool>
+    ) -> UICollectionView.CellRegistration<DeleteRoutineSettingCell, Void> {
+        return UICollectionView.CellRegistration<DeleteRoutineSettingCell, Void> { [weak self] cell, indexPath, _ in
+            guard let self else { return }
             guard indexPath.section == SettingRoutineSection.deleteRoutineSetting.rawValue
             else {
                 assertionFailure("invalid section")
                 return
             }
-            
+            let disposeBag = DisposeBag()
+            self.deleteSettingCellDisposeBag[cell] = disposeBag
+            cell.deleteRoutineSettingButtonTapped = deleteRoutineSettingButtonTapped
+            deleteButtonIsEnable.asDriver()
+                .drive { cell.configureDeleteButtonEnable(with: $0) }
+                .disposed(by: disposeBag)
         }
     }
     
@@ -429,6 +448,8 @@ extension SettingRoutineViewController: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         shouldSelectItemAt indexPath: IndexPath
     ) -> Bool {
-        return indexPath.section == SettingRoutineSection.timeSetting.rawValue ? false : true
+        return indexPath.section == SettingRoutineSection.timeSetting.rawValue || indexPath.section == SettingRoutineSection.deleteRoutineSetting.rawValue
+                ? false
+                : true
     }
 }

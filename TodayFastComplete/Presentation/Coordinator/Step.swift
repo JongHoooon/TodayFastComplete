@@ -34,5 +34,5 @@ enum Step {
         initialFastTime: Int
     )
     case settingFastTimePickerViewIsComplete
-    
+    case deleteRoutineSettingButtonTapped(deleteAlertActionRelay: PublishRelay<AlertActionType>)
 }

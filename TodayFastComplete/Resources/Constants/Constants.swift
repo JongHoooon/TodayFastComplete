@@ -86,6 +86,14 @@ enum Constants {
             localized: "DELETE_ROUTINE_SETTING",
             defaultValue: "타이머 설정 삭제"
         )
+        static let DELETE_FAST_ALERT_MESSAGE = String(
+            localized: "DELETE_FAST_ALERT_MESSAGE",
+            defaultValue: "타이머 설정을 삭제할까요?"
+        )
+        static let DO_DELETE = String(
+            localized: "DO_DELETE",
+            defaultValue: "삭제하기"
+        )
         
         // 요일
         static let MONDAY = String(
@@ -128,6 +136,10 @@ enum Constants {
         static let NEXT = String(
             localized: "NEXT",
             defaultValue: "다음"
+        )
+        static let CONFIRM = String(
+            localized: "CONFIRM",
+            defaultValue: "확인"
         )
         static let CANCEL = String(
             localized: "CANCEL",

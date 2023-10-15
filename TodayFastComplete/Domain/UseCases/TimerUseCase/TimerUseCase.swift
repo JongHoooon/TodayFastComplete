@@ -11,7 +11,7 @@ import UIKit
 
 import RxSwift
 
-typealias TimerUseCase = RoutineSettingFetchable & RoutineSettingSaveable
+typealias TimerUseCase = RoutineSettingFetchable & RoutineSettingStoragable
 
 final class TimerUseCaseImp: TimerUseCase {
     private let routineSettingRepository: TimerRoutineSettingRepository
@@ -41,6 +41,15 @@ final class TimerUseCaseImp: TimerUseCase {
                 )
             }
             .map { $0.1 }
+    }
+    
+    func deleteRoutineSetting() -> Completable {
+        return Single.zip(
+            routineSettingRepository.deleteRoutine(),
+            userNotificationManager.removeNotifications(type: .fastEnd),
+            userNotificationManager.removeNotifications(type: .fastStart)
+        )
+        .asCompletable()
     }
 }
 

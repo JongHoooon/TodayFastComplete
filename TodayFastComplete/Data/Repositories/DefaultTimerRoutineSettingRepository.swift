@@ -62,15 +62,17 @@ final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRout
                 ) else {
                     return Disposables.create()
                 }
+                let timerRoutineSetting = object.toDomain()
                 do {
                     try realm.write {
                         self.realm.delete(object)
-                        single(.success(object.toDomain()))
+                        single(.success(timerRoutineSetting))
                     }
                 } catch {
                     single(.failure(error))
                 }
                 return Disposables.create()
             }
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
     }
 }

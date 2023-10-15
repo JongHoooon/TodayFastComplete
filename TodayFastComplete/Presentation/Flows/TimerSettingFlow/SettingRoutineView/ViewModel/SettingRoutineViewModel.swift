@@ -18,6 +18,7 @@ final class SettingRoutineViewModel: ViewModel {
         let dismissButtonTapped: Observable<Void>
         let itemSelected: Observable<IndexPath>
         let timePickerViewTapped: Observable<TimePickerViewType>
+        let deleteRoutineSettingButtonTapped: Observable<Void>
         let saveButtonTapped: Observable<Void>
     }
     
@@ -41,9 +42,11 @@ final class SettingRoutineViewModel: ViewModel {
         let selectedRoutineInfo = BehaviorRelay<String>(value: "")
         
         let saveButtonIsEnable = BehaviorRelay<Bool>(value: false)
+        
+        let deleteButtonIsEnable = BehaviorRelay<Bool>(value: false)
     }
     
-    typealias SettingTimerRoutineUseCase = RoutineSettingFetchable & RoutineSettingSaveable
+    typealias SettingTimerRoutineUseCase = RoutineSettingFetchable & RoutineSettingStoragable
     private let settingTimerRoutineUseCase: SettingTimerRoutineUseCase
     private weak var coordinator: Coordinator?
     
@@ -177,6 +180,46 @@ final class SettingRoutineViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
+        let deleteAlertActionRelay =  PublishRelay<AlertActionType>()
+        input.deleteRoutineSettingButtonTapped
+            .throttle(
+                .milliseconds(500),
+                latest: false,
+                scheduler: MainScheduler.asyncInstance
+            )
+            .observe(on: MainScheduler.asyncInstance)
+            .bind { [weak self] in
+                self?.coordinator?.navigate(to: .deleteRoutineSettingButtonTapped(deleteAlertActionRelay: deleteAlertActionRelay))
+            }
+            .disposed(by: disposeBag)
+        
+        deleteAlertActionRelay
+            .asSignal()
+            .emit { actionType in
+                switch actionType {
+                case .ok:
+                    deleteRoutineSetting()
+                case .cancel:
+                    break
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        func deleteRoutineSetting() {
+            settingTimerRoutineUseCase.deleteRoutineSetting()
+                .observe(on: MainScheduler.asyncInstance)
+                .subscribe(
+                    onCompleted: { [weak self] in
+                        self?.currentRoutineSetting.accept(nil)
+                        self?.coordinator?.navigate(to: .settingTimerFlowIsComplete)
+                    },
+                    onError: { error in
+                        Log.error(error)
+                })
+                .disposed(by: disposeBag)
+                
+        }
+        
         BehaviorRelay.combineLatest(
             output.selectedWeekDays,
             output.selectedStartTime,
@@ -215,8 +258,12 @@ final class SettingRoutineViewModel: ViewModel {
         
         func fetchTimerRoutineSetting() {
             settingTimerRoutineUseCase.fetchTimerRoutine()
-                .compactMap { $0 }
                 .subscribe(onSuccess: { routineSetting in
+                    guard let routineSetting else {
+                        output.deleteButtonIsEnable.accept(false)
+                        return
+                    }
+                    output.deleteButtonIsEnable.accept(true)
                     output.selectedWeekDays.accept(routineSetting.days)
                     output.selectedStartTime.accept(routineSetting.startTime)
                     output.selectedFastTime.accept(routineSetting.fastTime)

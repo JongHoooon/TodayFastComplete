@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxSwift
 import RxRelay
 
 protocol SettingTimerDependencies {
@@ -28,7 +29,7 @@ protocol SettingTimerDependencies {
     ) -> UIViewController
 }
 
-final class SettingTimerCoordinator: BaseCoordinator {
+final class SettingTimerCoordinator: BaseCoordinator, CancelOkAlertPresentable {
     
     enum PresentedView {
         case startTimePicker
@@ -38,6 +39,7 @@ final class SettingTimerCoordinator: BaseCoordinator {
     let rootViewController: UINavigationController
     let dependencies: SettingTimerDependencies
     private var presentedViews: [PresentedView: UIViewController] = [:]
+    private let disposeBag = DisposeBag()
         
     init(
         rootViewController: UINavigationController,
@@ -75,6 +77,8 @@ final class SettingTimerCoordinator: BaseCoordinator {
             )
         case .settingFastTimePickerViewIsComplete:
             dismissFastTimePicker()
+        case let .deleteRoutineSettingButtonTapped(deleteAlertActionRelay):
+            presentDeleteRoutineSettingAlert(deleteAlertActionRelay: deleteAlertActionRelay)
         default:
             assertionFailure("not configured step")
         }
@@ -133,5 +137,15 @@ private extension SettingTimerCoordinator {
     func dismissFastTimePicker() {
         rootViewController.presentedViewController?.dismiss(animated: true)
         presentedViews.removeValue(forKey: .fastTimePicker)
+    }
+    
+    func presentDeleteRoutineSettingAlert(deleteAlertActionRelay: PublishRelay<AlertActionType>) {
+        presentCancelOkAlert(
+            navigationController: rootViewController,
+            message: Constants.Localization.DELETE_FAST_ALERT_MESSAGE,
+            okTitle: Constants.Localization.DO_DELETE
+        )
+        .bind { deleteAlertActionRelay.accept($0) }
+        .disposed(by: disposeBag)
     }
 }
