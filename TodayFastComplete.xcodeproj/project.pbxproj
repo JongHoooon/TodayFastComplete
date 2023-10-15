@@ -18,6 +18,7 @@
 		ED38F90E2ADA3042005126F3 /* LocalNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */; };
 		ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */; };
 		ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */; };
+		ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */; };
 		ED4D40E92AD8DB7B00C49C8A /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */; };
 		ED4D40EB2AD8DB8A00C49C8A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */; };
 		ED4D40F12AD95DF500C49C8A /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D40F02AD95DF500C49C8A /* UserNotificationManager.swift */; };
@@ -102,6 +103,7 @@
 		ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationRepository.swift; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
 		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
+		ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extension.swift"; sourceTree = "<group>"; };
 		ED4D40E72AD8DB3000C49C8A /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
 		ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				ED50E96B2AD104E600182922 /* UILabel+Extension.swift */,
 				ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */,
 				EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */,
+				ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
 				ED4DB3C62AD53337003535C9 /* RoutineSettingFetchable.swift in Sources */,
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
+				ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
 				EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */,

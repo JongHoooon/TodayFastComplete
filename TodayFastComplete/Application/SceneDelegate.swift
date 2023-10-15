@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneWillEnterForeground(_ scene: UIScene) { 
         UNUserNotificationCenter.current().setBadgeCount(0)
+        NotificationCenter.default.post(name: .sceneWillEnterForeground, object: nil)
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) { }

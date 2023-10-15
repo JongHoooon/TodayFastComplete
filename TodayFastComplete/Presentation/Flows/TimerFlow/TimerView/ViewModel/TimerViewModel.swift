@@ -92,6 +92,13 @@ final class TimerViewModel: ViewModel {
                 self?.timerDisposeBag = DisposeBag()
             }
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.rx.notification(.sceneWillEnterForeground)
+            .bind { [unowned self] _ in
+                countCurrentTimerState()
+                configureMessageLabel(state: self.timerState.value)
+            }
+            .disposed(by: disposeBag)
             
         let currentRoutineSettingShared = currentRoutineSetting.share()
         
