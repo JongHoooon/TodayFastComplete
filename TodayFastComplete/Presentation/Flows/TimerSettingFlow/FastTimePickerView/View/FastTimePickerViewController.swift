@@ -92,7 +92,7 @@ private extension FastTimePickerViewController {
             itemSelected: pickerView.rx.itemSelected.map { $0.row }
         )
         
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        let output = viewModel.transform(input: input)
         
         Observable.just(output.fastTimes)
             .bind(to: pickerView.rx.itemTitles) { _, time in

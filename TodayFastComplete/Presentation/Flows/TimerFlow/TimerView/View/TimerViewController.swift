@@ -211,7 +211,7 @@ private extension TimerViewController {
             progressViewEndpoinButtonTapped: progressViewEndpoinButtonTapped,
             setTimerButtonTapped: setTimerButton.rx.tap.asObservable()
         )
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        let output = viewModel.transform(input: input)
         
         output.fastInfo
             .asDriver()

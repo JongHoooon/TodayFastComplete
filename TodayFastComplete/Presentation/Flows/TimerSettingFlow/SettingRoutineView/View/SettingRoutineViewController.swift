@@ -110,7 +110,7 @@ private extension SettingRoutineViewController {
                 .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
             saveButtonTapped: saveBarButton.rx.tap.asObservable()
         )
-        var output = viewModel.transform(input: input, disposeBag: disposeBag)
+        var output = viewModel.transform(input: input)
         
         configureDataSource(
             selectedWeekDays: output.selectedWeekDays,

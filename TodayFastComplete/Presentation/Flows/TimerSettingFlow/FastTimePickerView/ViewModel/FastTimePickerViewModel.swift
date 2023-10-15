@@ -25,6 +25,7 @@ final class FastTimePickerViewModel: ViewModel {
     private let selectedFastTime: BehaviorRelay<Int>
     private let recommendSectionNeedDeselect: PublishRelay<Void>
     var currentFastTime: Int
+    private let disposeBag = DisposeBag()
     
     init(
         coordinator: Coordinator,
@@ -42,10 +43,7 @@ final class FastTimePickerViewModel: ViewModel {
         Log.deinit()
     }
     
-    func transform(
-        input: Input,
-        disposeBag: DisposeBag
-    ) -> Output {
+    func transform(input: Input) -> Output {
         let output = Output()
         
         input.cancelButtonTapped

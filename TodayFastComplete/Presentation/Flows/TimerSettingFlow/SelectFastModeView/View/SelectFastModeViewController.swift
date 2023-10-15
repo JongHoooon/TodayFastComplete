@@ -100,7 +100,7 @@ private extension SelectFastModeViewController {
             nextButtonTapped: nextBarButton.rx.tap.asObservable(),
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable()
         )
-        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        let output = viewModel.transform(input: input)
         
         output.fastModeItems
             .asDriver()

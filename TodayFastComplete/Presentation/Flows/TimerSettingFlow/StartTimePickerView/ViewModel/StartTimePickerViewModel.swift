@@ -24,6 +24,7 @@ final class StartTimePickerViewModel: ViewModel {
     private weak var coordinator: Coordinator?
     private let selectedStartTime: BehaviorRelay<DateComponents>
     let initialStartTime: DateComponents
+    private let disposeBag = DisposeBag()
     
     init(
         coordinator: Coordinator,
@@ -39,10 +40,7 @@ final class StartTimePickerViewModel: ViewModel {
         Log.deinit()
     }
     
-    func transform(
-        input: Input,
-        disposeBag: DisposeBag
-    ) -> Output {
+    func transform(input: Input) -> Output {
         let output = Output()
         
         input.cancelButtonTapped

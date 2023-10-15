@@ -26,6 +26,7 @@ final class SelectFastModeViewModel: ViewModel {
     }
     
     private weak var coordinator: Coordinator?
+    private let disposeBag = DisposeBag()
     
     init(coordinator: Coordinator) {
         self.coordinator = coordinator
@@ -35,10 +36,7 @@ final class SelectFastModeViewModel: ViewModel {
         Log.deinit()
     }
     
-    func transform(
-        input: Input,
-        disposeBag: DisposeBag
-    ) -> Output {
+    func transform(input: Input) -> Output {
         let output = Output()
         
         input.viewDidDismissed

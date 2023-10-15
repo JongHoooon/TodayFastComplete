@@ -54,6 +54,7 @@ final class TimerViewModel: ViewModel {
     private let currentRoutineSetting = BehaviorRelay<TimerRoutineSetting?>(value: nil)
     private var endpointStringIndex = 0
     var timerState = BehaviorRelay<TimerState>(value: .noRoutineSetting)
+    private let disposeBag = DisposeBag()
     
     // MARK: - Init
     init(
@@ -69,10 +70,7 @@ final class TimerViewModel: ViewModel {
         coordinator?.finish()
     }
     
-    func transform(
-        input: Input,
-        disposeBag: DisposeBag
-    ) -> Output {
+    func transform(input: Input) -> Output {
         let output = Output()
         
         input.viewDidLoad

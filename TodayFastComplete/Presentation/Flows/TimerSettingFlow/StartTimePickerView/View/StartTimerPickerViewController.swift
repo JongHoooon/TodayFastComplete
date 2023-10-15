@@ -100,7 +100,7 @@ private extension StartTimerPickerViewController {
             complteButtonTappedWithSelectedTime: complteButtonTappedWithSelectedTime
         )
         
-        _ = viewModel.transform(input: input, disposeBag: disposeBag)
+        _ = viewModel.transform(input: input)
         datePickerView.date = viewModel.initialStartTime.toDate()
     }
 }
