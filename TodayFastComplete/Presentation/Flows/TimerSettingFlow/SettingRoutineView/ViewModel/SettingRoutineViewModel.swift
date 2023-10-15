@@ -177,12 +177,11 @@ final class SettingRoutineViewModel: ViewModel {
         
         func fetchTimerRoutineSetting() {
             settingTimerRoutineUseCase.fetchTimerRoutine()
+                .compactMap { $0 }
                 .subscribe(onSuccess: { routineSetting in
-                    if let routineSetting {
-                        output.selectedWeekDays.accept(routineSetting.days)
-                        output.selectedStartTime.accept(routineSetting.startTime)
-                        output.selectedFastTime.accept(routineSetting.fastTime)
-                    }
+                    output.selectedWeekDays.accept(routineSetting.days)
+                    output.selectedStartTime.accept(routineSetting.startTime)
+                    output.selectedFastTime.accept(routineSetting.fastTime)
                 })
                 .disposed(by: disposeBag)
         }
