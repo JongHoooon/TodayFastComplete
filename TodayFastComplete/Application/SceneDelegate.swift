@@ -70,7 +70,6 @@ private extension SceneDelegate {
             userNotificationManager.pendingNotificationCount()
         )
         .asObservable()
-        .debug()
         .filter { $0.0 != nil && $0.1 + $0.2 < 8 }
         .map { routinsetting, _, _, pendingNotiCount in
              return userNotificationManager.fastNotifications(
