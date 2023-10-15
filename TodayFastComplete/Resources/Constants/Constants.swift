@@ -78,6 +78,14 @@ enum Constants {
             localized: "PLEASE_SELECT_WEEKDAYS",
             defaultValue: "(단식 요일을 선택해 주세요.)"
         )
+        static let FINISH_FAST = String(
+            localized: "FINISH_FAST",
+            defaultValue: "단식 종료"
+        )
+        static let DELETE_FAST_ROUTINE_SETTING = String(
+            localized: "DELETE_ROUTINE_SETTING",
+            defaultValue: "타이머 설정 삭제"
+        )
         
         // 요일
         static let MONDAY = String(

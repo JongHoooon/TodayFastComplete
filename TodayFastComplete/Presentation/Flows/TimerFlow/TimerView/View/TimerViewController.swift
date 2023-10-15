@@ -95,7 +95,7 @@ final class TimerViewController: BaseViewController {
     }()
     
     private let fastControlButton: UIButton = {
-        let button = UIButton(configuration: .titleCapsuleStyle(title: "단식 종료"))
+        let button = UIButton(configuration: .titleCapsuleStyle(title: Constants.Localization.FINISH_FAST))
         button.configuration?.baseBackgroundColor = Constants.Color.tintMain
         button.configuration?.baseForegroundColor = .label
         return button

@@ -19,7 +19,10 @@ extension UIButton.Configuration {
         configuration.title = title
         configuration.attributedTitle = AttributedString(
             title,
-            attributes: AttributeContainer([.font: UIFont.subtitleBold])
+            attributes: AttributeContainer([
+                .font: UIFont.subtitleBold,
+                .foregroundColor: UIColor.label
+            ])
         )
         configuration.cornerStyle = .capsule
         return configuration

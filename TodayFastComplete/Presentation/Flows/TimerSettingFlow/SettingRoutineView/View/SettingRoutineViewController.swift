@@ -121,6 +121,7 @@ private extension SettingRoutineViewController {
         snapshot.appendItems(output.weekDaySectionItems, toSection: .dayTime)
         snapshot.appendItems(output.timeSettingSectionItems, toSection: .timeSetting)
         snapshot.appendItems(output.recommendSectionItems, toSection: .recommendRoutine)
+        snapshot.appendItems(output.deleteRoutineSettingSectionItems, toSection: .deleteRoutineSetting)
         dataSource.apply(snapshot)
         
         settingRoutineCollectionView.rx.setDelegate(self)
@@ -193,6 +194,25 @@ private extension SettingRoutineViewController {
                 )
                 section = NSCollectionLayoutSection(group: group)
                 section?.interGroupSpacing = 16.0
+                
+            case .deleteRoutineSetting:
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .fractionalHeight(1.0)
+                )
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                
+                let buttonHeiht = 64.0
+                let buttonInest = 16.0
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(buttonHeiht + buttonInest * 2)
+                )
+                let group = NSCollectionLayoutGroup.vertical(
+                    layoutSize: groupSize,
+                    subitems: [item]
+                )
+                section = NSCollectionLayoutSection(group: group)
             }
             
             // section insets 설정
@@ -214,16 +234,21 @@ private extension SettingRoutineViewController {
             }
             
             // header 설정
-            let headerSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(40.0)
-            )
-            let header = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerSize,
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top
-            )
-            section?.boundarySupplementaryItems = [header]
+            switch settingRoutineSection {
+            case .deleteRoutineSetting:
+                break
+            default:
+                let headerSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .estimated(40.0)
+                )
+                let header = NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: headerSize,
+                    elementKind: UICollectionView.elementKindSectionHeader,
+                    alignment: .top
+                )
+                section?.boundarySupplementaryItems = [header]
+            }
             
             return section
         }
@@ -247,6 +272,7 @@ private extension SettingRoutineViewController {
         )
         let fastRoutineCellRegistration = createRoutineRecommendCellRegistration(selectedRecommendRoutine: selectedRecommendRoutine)
         let titleHeaderRegistration = createTitleCollectionHeaderCellRegistration()
+        let deleteRoutineCellRegistration = createDeleteRoutineSettingCellRegistration()
         
         dataSource = UICollectionViewDiffableDataSource<SettingRoutineSection, SettingRoutineItem>(
             collectionView: settingRoutineCollectionView,
@@ -257,10 +283,12 @@ private extension SettingRoutineViewController {
                 switch itemIdentifier {
                 case .dayItem(let weekDay):
                     item = weekDay
-                case .timeSetting:
+                case .timeSettingItem:
                     item = nil
                 case .recommendRoutineItem(let routine):
                     item = routine
+                case .deleteRoutineItem:
+                    item = nil
                 }
                 
                 switch section {
@@ -274,13 +302,19 @@ private extension SettingRoutineViewController {
                     return collectionView.dequeueConfiguredReusableCell(
                         using: routineSettingCellRegistration,
                         for: indexPath,
-                        item: 0
+                        item: Void()
                     )
                 case .recommendRoutine:
                     return collectionView.dequeueConfiguredReusableCell(
                         using: fastRoutineCellRegistration,
                         for: indexPath,
                         item: item as? FastRoutine
+                    )
+                case .some(.deleteRoutineSetting):
+                    return collectionView.dequeueConfiguredReusableCell(
+                        using: deleteRoutineCellRegistration,
+                        for: indexPath,
+                        item: Void()
                     )
                 case nil:
                     assertionFailure("section is not exist")
@@ -323,8 +357,8 @@ private extension SettingRoutineViewController {
         selectedStartTime: BehaviorRelay<DateComponents>,
         selectedFastTime: BehaviorRelay<Int>,
         selectedFastInfo: BehaviorRelay<String>
-    ) -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> {
-        return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { [weak self] cell, _, _ in
+    ) -> UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Void> {
+        return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Void> { [weak self] cell, _, _ in
             guard let self else { return }
             let disposeBag = DisposeBag()
             timeSettingCellDisposeBag[cell] = disposeBag
@@ -367,11 +401,22 @@ private extension SettingRoutineViewController {
         }
     }
     
+    func createDeleteRoutineSettingCellRegistration() -> UICollectionView.CellRegistration<DeleteRoutineSettingCell, Void> {
+        return UICollectionView.CellRegistration<DeleteRoutineSettingCell, Void> {
+            cell, indexPath, FastRoutine in
+            guard indexPath.section == SettingRoutineSection.deleteRoutineSetting.rawValue
+            else {
+                assertionFailure("invalid section")
+                return
+            }
+            
+        }
+    }
+    
     func createTitleCollectionHeaderCellRegistration() -> UICollectionView.SupplementaryRegistration<TitleCollectionViewHeader> {
         return UICollectionView.SupplementaryRegistration(elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, _, indexPath in
             guard let title = SettingRoutineSection(rawValue: indexPath.section)?.title
             else {
-                assertionFailure("no section title")
                 return
             }
             supplementaryView.configureCell(with: title)

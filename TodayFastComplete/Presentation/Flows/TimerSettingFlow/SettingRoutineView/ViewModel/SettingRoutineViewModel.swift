@@ -24,7 +24,8 @@ final class SettingRoutineViewModel: ViewModel {
     struct Output {
         let sections = SettingRoutineSection.allCases
         let weekDaySectionItems = WeekDay.allCases.map { SettingRoutineItem.dayItem(weekDay: $0) }
-        let timeSettingSectionItems = [SettingRoutineItem.timeSetting]
+        let timeSettingSectionItems = [SettingRoutineItem.timeSettingItem]
+        let deleteRoutineSettingSectionItems = [SettingRoutineItem.deleteRoutineItem]
         // TODO: GA 기반 인기순 정렬
         let recommendRoutines = RecommendFastRoutine.allCases
         lazy var recommendSectionItems = recommendRoutines.map {

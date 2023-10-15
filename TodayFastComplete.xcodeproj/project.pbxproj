@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */; };
 		ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ED1407D92AC2FC240050E631 /* .swiftlint.yml */; };
 		ED1407DD2AC2FDDE0050E631 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DC2AC2FDDE0050E631 /* RxCocoa */; };
 		ED1407DF2AC2FDDE0050E631 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DE2AC2FDDE0050E631 /* RxRelay */; };
@@ -99,6 +100,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRoutineSettingCell.swift; sourceTree = "<group>"; };
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationRepository.swift; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				ED50E9592ACF903A00182922 /* TimeSettingCollectionViewCell.swift */,
 				EDBAAA2D2AD273C500CB84C8 /* TimeSettingView.swift */,
 				ED50E95B2ACF908200182922 /* FastRoutineCollectionViewCell.swift */,
+				ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */,
 				ED50E95F2ACF913E00182922 /* TitleCollectionViewHeader.swift */,
 			);
 			path = Cells;
@@ -839,6 +842,7 @@
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
 				ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */,
+				ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */,
 				ED50E97D2AD1716D00182922 /* RealmUniqueKey.swift in Sources */,
 				ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */,
 				EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */,
