@@ -93,7 +93,7 @@ final class SettingRoutineViewController: BaseViewController {
 private extension SettingRoutineViewController {
     func bindViewModel() {
         
-        let startTimePickerViewTapped = PublishRelay<TimePickerViewType>()
+        let timePickerViewTapped = PublishRelay<TimePickerViewType>()
         let itemSelected = settingRoutineCollectionView.rx.itemSelected
             .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
             .asObservable()
@@ -103,14 +103,14 @@ private extension SettingRoutineViewController {
             viewDidDismissed: self.rx.viewDidDismissed.asObservable(),
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
             itemSelected: itemSelected,
-            timePickerViewTapped: startTimePickerViewTapped.asObservable(),
+            timePickerViewTapped: timePickerViewTapped.asObservable(),
             saveButtonTapped: saveBarButton.rx.tap.asObservable()
         )
         var output = viewModel.transform(input: input, disposeBag: disposeBag)
         
         configureDataSource(
             selectedWeekDays: output.selectedWeekDays,
-            timePickerViewTapped: startTimePickerViewTapped, 
+            timePickerViewTapped: timePickerViewTapped, 
             selectedStartTime: output.selectedStartTime, 
             selectedFastTime: output.selectedFastTime,
             selectedRecommendRoutine: output.selectedRecommendRoutine,
