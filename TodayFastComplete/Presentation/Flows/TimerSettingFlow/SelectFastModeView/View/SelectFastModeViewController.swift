@@ -94,11 +94,11 @@ private extension SelectFastModeViewController {
     func bindViewModel() {
         
         let input = SelectFastModeViewModel.Input(
-            viewDidLoad: self.rx.viewDidLoad,
-            viewDidDismissed: self.rx.viewDidDismissed,
-            modeSelected: selectFastModeCollectionView.rx.modelSelected(FastMode.self),
-            nextButtonTapped: nextBarButton.rx.tap,
-            dismissButtonTapped: dismissBarButton.rx.tap
+            viewDidLoad: self.rx.viewDidLoad.asObservable(),
+            viewDidDismissed: self.rx.viewDidDismissed.asObservable(),
+            modeSelected: selectFastModeCollectionView.rx.modelSelected(FastMode.self).asObservable(),
+            nextButtonTapped: nextBarButton.rx.tap.asObservable(),
+            dismissButtonTapped: dismissBarButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input, disposeBag: disposeBag)
         

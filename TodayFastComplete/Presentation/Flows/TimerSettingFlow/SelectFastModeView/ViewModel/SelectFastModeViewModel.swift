@@ -7,17 +7,17 @@
 
 import Foundation
 
-import RxCocoa
+import RxRelay
 import RxSwift
 
 final class SelectFastModeViewModel: ViewModel {
     
     struct Input {
-        let viewDidLoad: ControlEvent<Void>
-        let viewDidDismissed: ControlEvent<Void>
-        let modeSelected: ControlEvent<FastMode>
-        let nextButtonTapped: ControlEvent<Void>
-        let dismissButtonTapped: ControlEvent<Void>
+        let viewDidLoad: Observable<Void>
+        let viewDidDismissed: Observable<Void>
+        let modeSelected: Observable<FastMode>
+        let nextButtonTapped: Observable<Void>
+        let dismissButtonTapped: Observable<Void>
     }
     
     struct Output {
