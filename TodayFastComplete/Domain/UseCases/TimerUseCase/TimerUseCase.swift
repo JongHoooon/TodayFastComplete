@@ -43,14 +43,13 @@ final class TimerUseCaseImp: TimerUseCase {
             .map { $0.1 }
     }
     
-    func deleteRoutineSetting() -> Completable {
-//        return Single.zip(
-//            routineSettingRepository.deleteRoutine(),
-//            userNotificationManager.removeNotifications(type: .fastEnd),
-//            userNotificationManager.removeNotifications(type: .fastStart)
-//        )
-//        .asCompletable()
-        return Observable.just(Void()).asSingle().asCompletable()
+    func deleteRoutineSetting() -> Single<Void> {
+        return Single.zip(
+            routineSettingRepository.deleteRoutine(),
+            userNotificationManager.removeNotifications(type: .fastEnd),
+            userNotificationManager.removeNotifications(type: .fastStart)
+        )
+        .map { _ in }
     }
 }
 

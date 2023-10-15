@@ -191,58 +191,19 @@ final class SettingRoutineViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
-//            .bind { [weak self] in
-//                guard let self else { return }
-//                self.coordinator?.navigate(to: .deleteRoutineSettingButtonTapped(deleteAlertActionRelay: deleteAlertActionRelay))
-//            }
-//            .disposed(by: disposeBag)
-        
-//        deleteAlertActionRelay
-//            .asSignal()
-//            .emit(
-//                with: self,
-//                onNext: { owner, actionType in
-//                    switch actionType {
-//                    case .ok:
-//                        owner.settingTimerRoutineUseCase.deleteRoutineSetting()
-//                            .observe(on: MainScheduler.asyncInstance)
-//                            .subscribe(
-//                                onCompleted: { [weak self] in
-//                                    self?.currentRoutineSetting.accept(nil)
-//                                    self?.coordinator?.navigate(to: .settingTimerFlowIsComplete)
-//                                },
-//                                onError: { error in
-//                                    Log.error(error)
-//                            })
-//                            .disposed(by: owner.disposeBag)
-//                    case .cancel:
-//                        break
-//                    }
-//            })
-//            .disposed(by: disposeBag)
-        
         deleteAlertActionRelay
             .filter { $0 == .ok }
             .flatMap { [unowned self] _ in return self.settingTimerRoutineUseCase.deleteRoutineSetting() }
             .observe(on: MainScheduler.asyncInstance)
-            .bind { [weak self] _ in
-                self?.coordinator?.navigate(to: .settingTimerFlowIsComplete)
-            }
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    owner.currentRoutineSetting.accept(nil)
+                    owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
+            }, onError: { _, error in
+                Log.error(error)
+            })
             .disposed(by: disposeBag)
-        
-//        func deleteRoutineSetting() {
-//            settingTimerRoutineUseCase.deleteRoutineSetting()
-//                .observe(on: MainScheduler.asyncInstance)
-//                .subscribe(
-//                    onCompleted: { [weak self] in
-//                        self?.currentRoutineSetting.accept(nil)
-//                        self?.coordinator?.navigate(to: .settingTimerFlowIsComplete)
-//                    },
-//                    onError: { error in
-//                        Log.error(error)
-//                })
-//                .disposed(by: disposeBag)
-//        }
         
         BehaviorRelay.combineLatest(
             output.selectedWeekDays,
