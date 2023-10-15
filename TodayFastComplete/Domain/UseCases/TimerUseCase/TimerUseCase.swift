@@ -88,7 +88,7 @@ private extension TimerUseCaseImp {
         maxCount: Int, days: [Int]
     ) -> [Date] {
         let maxWeekCount = min(maxCount / (days.count * 2), 2)
-        let current = Date()
+        let current = Date().addingTimeInterval(-24*3600)
         let currentWeek = days
             .map { Calendar.current.date(bySetting: .weekday, value: $0, of: current) }
             .compactMap { $0 }
