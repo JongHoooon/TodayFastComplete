@@ -15,11 +15,9 @@ final class SettingRoutineViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: SettingRoutineViewModel
     private let disposeBag: DisposeBag
-    private var cellDisposeBags: [UICollectionViewCell: DisposeBag] = [:] {
-        didSet {
-            Log.debug(cellDisposeBags)
-        }
-    }
+    private var dayCellDisposeBag: [UICollectionViewCell: DisposeBag] = [:]
+    private var timeSettingCellDisposeBag: [UICollectionViewCell: DisposeBag] = [:]
+    private var recommendRoutineCellDisposeBag: [UICollectionViewCell: DisposeBag] = [:]
     
     // MARK: - UI
     private let settingRoutineCollectionView: UICollectionView = {
@@ -307,7 +305,7 @@ private extension SettingRoutineViewController {
         return UICollectionView.CellRegistration<DayCollectionViewCell, WeekDay> { [weak self] cell, _, weekDay in
             guard let self else { return }
             let disposeBag = DisposeBag()
-            cellDisposeBags[cell] = disposeBag
+            dayCellDisposeBag[cell] = disposeBag
             selectedDays.asDriver()
                 .map { $0.contains(weekDay.rawValue) }
                 .map { $0 ? Constants.Color.tintBase : Constants.Color.disactive }
@@ -325,7 +323,7 @@ private extension SettingRoutineViewController {
         return UICollectionView.CellRegistration<TimeSettingCollectionViewCell, Int> { [weak self] cell, _, _ in
             guard let self else { return }
             let disposeBag = DisposeBag()
-            cellDisposeBags[cell] = disposeBag
+            timeSettingCellDisposeBag[cell] = disposeBag
             selectedStartTime.asDriver()
                 .distinctUntilChanged()
                 .map { $0.timeString }
@@ -349,7 +347,7 @@ private extension SettingRoutineViewController {
             }
             guard let self else { return }
             let disposeBag = DisposeBag()
-            cellDisposeBags[cell] = disposeBag
+            recommendRoutineCellDisposeBag[cell] = disposeBag
             selectedRecommendRoutine.asDriver()
                 .distinctUntilChanged()
                 .map { $0 == indexPath.item }
