@@ -77,7 +77,7 @@ final class SettingTimerCoordinator: BaseCoordinator, CancelOkAlertPresentable {
             )
         case .settingFastTimePickerViewIsComplete:
             dismissFastTimePicker()
-        case let .deleteRoutineSettingButtonTapped(deleteAlertActionRelay):
+        case let .settingDeleteRoutineSettingButtonTapped(deleteAlertActionRelay):
             presentDeleteRoutineSettingAlert(deleteAlertActionRelay: deleteAlertActionRelay)
         default:
             assertionFailure("not configured step")

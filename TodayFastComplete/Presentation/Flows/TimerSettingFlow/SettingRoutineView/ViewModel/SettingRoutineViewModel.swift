@@ -187,7 +187,7 @@ final class SettingRoutineViewModel: ViewModel {
             )
             .observe(on: MainScheduler.asyncInstance)
             .bind(with: self, onNext: { owner, _ in
-                owner.coordinator?.navigate(to: .deleteRoutineSettingButtonTapped(deleteAlertActionRelay: deleteAlertActionRelay))
+                owner.coordinator?.navigate(to: .settingDeleteRoutineSettingButtonTapped(deleteAlertActionRelay: deleteAlertActionRelay))
             })
             .disposed(by: disposeBag)
         

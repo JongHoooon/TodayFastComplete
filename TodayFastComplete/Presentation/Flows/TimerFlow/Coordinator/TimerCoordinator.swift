@@ -8,16 +8,18 @@
 import UIKit
 
 import RxRelay
+import RxSwift
 
 protocol TimerCoordinatorDependencies {
     func makeTimerViewController(coordinator: Coordinator) -> UIViewController
     func makeSettingTimerCoordinator(rootViewController: UINavigationController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
 }
 
-final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
+final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate, CancelOkAlertPresentable {
     
-    let navigationController: UINavigationController
-    let dependencies: TimerCoordinatorDependencies
+    private let navigationController: UINavigationController
+    private let dependencies: TimerCoordinatorDependencies
+    private let disposeBag = DisposeBag()
     
     init(
         navigationController: UINavigationController,
@@ -40,6 +42,8 @@ final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate 
             showTimer()
         case let .timerSettingButtonTapped(currentRoutineSetting):
             presentToSelectFastMode(currentRoutineSetting: currentRoutineSetting)
+        case let .timerFinishFastButtonTapped(finishAlertRelay):
+            presentFinishFastAlert(finishAlertRelay: finishAlertRelay)
         default:
             assertionFailure("not configured step")
         }
@@ -63,5 +67,15 @@ final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate 
             animated: true
         )
         addChild(child: settingTimerCoordinator)
+    }
+    
+    private func presentFinishFastAlert(finishAlertRelay: PublishRelay<AlertActionType>) {
+        presentCancelOkAlert(
+            navigationController: navigationController,
+            message: Constants.Localization.FINISH_FAST_ALERT_MESSAGE,
+            okTitle: Constants.Localization.DO_FINISH
+        )
+        .bind { finishAlertRelay.accept($0) }
+        .disposed(by: disposeBag)
     }
 }

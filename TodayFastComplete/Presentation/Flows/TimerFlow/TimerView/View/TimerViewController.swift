@@ -202,14 +202,17 @@ private extension TimerViewController {
         
         let progressViewEndpoinButtonTapped = timerProgressView.endPointButton.rx.tap
             .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
-            .asObservable()
+        
+        let finishFastButtonTapped = fastControlButton.rx.tap
+            .do(onNext: { _ in UIImpactFeedbackGenerator(style: .rigid ).impactOccurred() })
         
         let input = TimerViewModel.Input(
             viewDidLoad: self.rx.viewDidLoad.asObservable(),
             viewWillAppear: self.rx.viewWillAppear.asObservable(),
             viewDidDisappear: self.rx.viewDidDisappear.asObservable(),
             progressViewEndpoinButtonTapped: progressViewEndpoinButtonTapped,
-            setTimerButtonTapped: setTimerButton.rx.tap.asObservable()
+            setTimerButtonTapped: setTimerButton.rx.tap.asObservable(),
+            finishFastButtonTapped: finishFastButtonTapped
         )
         let output = viewModel.transform(input: input)
         

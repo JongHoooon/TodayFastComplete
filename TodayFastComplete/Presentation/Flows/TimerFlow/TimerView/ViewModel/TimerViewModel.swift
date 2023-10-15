@@ -17,6 +17,7 @@ final class TimerViewModel: ViewModel {
         let viewDidDisappear: Observable<Void>
         let progressViewEndpoinButtonTapped: Observable<Void>
         let setTimerButtonTapped: Observable<Void>
+        let finishFastButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -142,6 +143,17 @@ final class TimerViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
+        let finishAlertRelay = PublishRelay<AlertActionType>()
+        input.finishFastButtonTapped
+            .observe(on: MainScheduler.asyncInstance)
+            .bind { [weak self] _ in self?.coordinator?.navigate(to: .timerFinishFastButtonTapped(finishAlertRelay: finishAlertRelay)) }
+            .disposed(by: disposeBag)
+        
+        finishAlertRelay
+            .filter { $0 == .ok }
+            .subscribe(onNext: { print($0) })
+            .disposed(by: disposeBag)
+            
         return output
         
         func fetchRoutineSetting() {
@@ -337,9 +349,9 @@ final class TimerViewModel: ViewModel {
             case .fastTime:
                 output.fastControlButtonIsEnabled.accept(true)
             case .mealTime:
-                output.fastControlButtonIsEnabled.accept(true)
+                output.fastControlButtonIsEnabled.accept(false)
             case .noFastDay:
-                output.fastControlButtonIsEnabled.accept(true)
+                output.fastControlButtonIsEnabled.accept(false)
             case .noRoutineSetting:
                 output.fastControlButtonIsEnabled.accept(false)
             }

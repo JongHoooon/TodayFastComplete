@@ -19,6 +19,7 @@ enum Step {
     // Timer
     case timerFlowIsRequired
     case timerSettingButtonTapped(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>)
+    case timerFinishFastButtonTapped(finishAlertRelay: PublishRelay<AlertActionType>)
     
     // Setting Timer
     case settingTimerFlowIsRequired(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>)
@@ -34,5 +35,5 @@ enum Step {
         initialFastTime: Int
     )
     case settingFastTimePickerViewIsComplete
-    case deleteRoutineSettingButtonTapped(deleteAlertActionRelay: PublishRelay<AlertActionType>)
+    case settingDeleteRoutineSettingButtonTapped(deleteAlertActionRelay: PublishRelay<AlertActionType>)
 }

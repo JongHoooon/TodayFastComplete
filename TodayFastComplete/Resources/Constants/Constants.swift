@@ -94,6 +94,14 @@ enum Constants {
             localized: "DO_DELETE",
             defaultValue: "삭제하기"
         )
+        static let FINISH_FAST_ALERT_MESSAGE = String(
+            localized: "FINISH_FAST_ALERT_MESSAGE",
+            defaultValue: "정말로 단식을 종료할까요?"
+        )
+        static let DO_FINISH = String(
+            localized: "DO_FINISH",
+            defaultValue: "종료하기"
+        )
         
         // 요일
         static let MONDAY = String(
