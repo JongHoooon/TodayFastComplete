@@ -15,6 +15,8 @@ protocol UserNotificationManager {
     func removeNotifications(type: LocalNotificationType) -> Single<Void>
     func removeNotification(ids: [String]) -> Single<Void>
     func pendingNotificationCount() -> Single<Int>
+    func pendingNotificationCount(type: LocalNotificationType) -> Single<Int>
+    func fastNotifications(maxCount: Int, fastDays: [Int], routineSetting: TimerRoutineSetting) -> [CalendarNotification]
 }
 
 final class DefaultUserNotificationManager: UserNotificationManager {
@@ -99,5 +101,135 @@ final class DefaultUserNotificationManager: UserNotificationManager {
             return Disposables.create()
         }
         .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+    }
+    
+    func pendingNotificationCount(type: LocalNotificationType) -> Single<Int> {
+        return Single.create { [weak self] single in
+            self?.center.getPendingNotificationRequests(completionHandler: { requests in
+                let filteredRequests = requests.filter { ($0.identifier.split(separator: "-").first ?? "") == type.rawValue }
+                single(.success(filteredRequests.count))
+            })
+            return Disposables.create()
+        }
+        .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+    }
+    
+    func fastNotifications(
+        maxCount: Int,
+        fastDays: [Int],
+        routineSetting: TimerRoutineSetting
+    ) -> [CalendarNotification] {
+        let datesForNotification = datesForNotification(
+            maxCount: maxCount,
+            days: routineSetting.days
+        )
+        let fastStartNotifications = fastStartNotifications(
+            dates: datesForNotification,
+            startTimeHour: routineSetting.startTime.hour ?? 0,
+            startTimeMinute: routineSetting.startTime.minute ?? 0,
+            fastTime: routineSetting.fastTime
+        )
+        let fastEndNotifications = fastEndNotifications(
+            dates: datesForNotification,
+            startTimeHour: routineSetting.startTime.hour ?? 0,
+            startTimeMinute: routineSetting.startTime.minute ?? 0,
+            fastTime: routineSetting.fastTime
+        )
+        let notifications = (fastStartNotifications + fastEndNotifications)
+            .sorted {
+                
+                guard let firstDate = Calendar.current.date(from: $0.dateComponents),
+                      let secondDate = Calendar.current.date(from: $1.dateComponents)
+                else {
+                    return false
+                }
+                return firstDate.compare(secondDate) == .orderedAscending
+            }
+        return notifications
+    }
+    
+    func datesForNotification(
+        maxCount: Int, days: [Int]
+    ) -> [Date] {
+        let maxWeekCount = min(maxCount / (days.count * 2), 2)
+        let current = Date().addingTimeInterval(-24*3600)
+        let currentWeek = days
+            .map { Calendar.current.date(bySetting: .weekday, value: $0, of: current) }
+            .compactMap { $0 }
+        var datesForNotification = currentWeek
+        guard 1 <= maxWeekCount 
+        else {
+            assertionFailure("max week count smaller than 1")
+            return []
+        }
+        for i in 1..<maxWeekCount {
+            let days = currentWeek
+                .map { Calendar.current.date(byAdding: .weekdayOrdinal, value: i, to: $0) }
+                .compactMap { $0 }
+            datesForNotification += days
+        }
+        
+        return datesForNotification
+    }
+    
+    private func fastStartNotifications(
+        dates: [Date],
+        startTimeHour: Int,
+        startTimeMinute: Int,
+        fastTime: Int
+    ) -> [CalendarNotification] {
+        return dates.map { fastStartDate in
+            return CalendarNotification(
+                type: .fastStart,
+                title: String(
+                    localized: "FAST_START_NOTI_TITLE",
+                    defaultValue: "단식이 시작됐습니다.🍚🍜🍔❌"
+                ),
+                body: String(
+                    localized: "FAST_START_NOTI_BODY",
+                    defaultValue: "지금부터 \(fastTime)시간 동안 단식 시간입니다."
+                ),
+                year: fastStartDate.year,
+                month: fastStartDate.month,
+                day: fastStartDate.day,
+                hour: startTimeHour,
+                minute: startTimeMinute
+            )
+        }
+    }
+    
+    private func fastEndNotifications(
+        dates: [Date],
+        startTimeHour: Int,
+        startTimeMinute: Int,
+        fastTime: Int
+    ) -> [CalendarNotification] {
+        return dates
+            .compactMap { date in
+                return Calendar.current.date(from: DateComponents(
+                    year: date.year,
+                    month: date.month,
+                    day: date.day,
+                    hour: startTimeHour + fastTime,
+                    minute: startTimeMinute
+                ))}
+            .map { fastEndDate in
+                return CalendarNotification(
+                    type: .fastEnd,
+                    title: String(
+                        localized: "FAST_END_NOTI_TITLE",
+                        defaultValue: "단식이 종료됐습니다👍"
+                    ),
+                    body: String(
+                        localized: "FAST_END_NOTI_BODY",
+                        defaultValue: "고생하셨습니다! 앱으로 돌아와서 단식 정보를 기록해주세요🤗"
+                    ),
+                    year: fastEndDate.year,
+                    month: fastEndDate.month,
+                    day: fastEndDate.day,
+                    hour: fastEndDate.hour,
+                    minute: fastEndDate.minute
+                )
+            }
     }
 }
