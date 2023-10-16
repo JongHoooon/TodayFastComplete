@@ -26,7 +26,13 @@ struct CalendarNotification {
         minute: Int
     ) {
         self.type = type
-        self.id = "\(type.rawValue)-\(year)\(month)\(day)\(hour)\(minute)"
+        self.id = type.fastNotificationID(
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute
+        )
         self.title = title
         self.body = body
         self.dateComponents = DateComponents(

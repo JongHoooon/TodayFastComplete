@@ -17,7 +17,7 @@ final class TimerViewModel: ViewModel {
         let viewDidDisappear: Observable<Void>
         let progressViewEndpoinButtonTapped: Observable<Void>
         let setTimerButtonTapped: Observable<Void>
-        let finishFastButtonTapped: Observable<Void>
+        let interruptFastButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -42,7 +42,7 @@ final class TimerViewModel: ViewModel {
     }
     
     // MARK: - Properties
-    typealias TimerViewUseCase = RoutineSettingFetchable
+    typealias TimerViewUseCase = RoutineSettingFetchable & FastInterruptable
     private let timerViewUseCase: TimerViewUseCase
     private weak var coordinator: Coordinator?
     
@@ -52,9 +52,12 @@ final class TimerViewModel: ViewModel {
         period: .seconds(1),
         scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
     )
+    
     private let currentRoutineSetting = BehaviorRelay<TimerRoutineSetting?>(value: nil)
+    private let interruptedFast = BehaviorRelay<InterruptedFast?>(value: nil)
     private var endpointStringIndex = 0
-    var timerState = BehaviorRelay<TimerState>(value: .noRoutineSetting)
+    
+    let timerState = BehaviorRelay<TimerState>(value: .noRoutineSetting)
     private let disposeBag = DisposeBag()
     
     // MARK: - Init
@@ -75,7 +78,10 @@ final class TimerViewModel: ViewModel {
         let output = Output()
         
         input.viewDidLoad
-            .bind { fetchRoutineSetting() }
+            .bind {
+                fetchRoutineSetting()
+                fetchInterruptedFast()
+            }
             .disposed(by: disposeBag)
         
         input.viewWillAppear
@@ -107,19 +113,41 @@ final class TimerViewModel: ViewModel {
         input.setTimerButtonTapped
             .asSignal(onErrorJustReturn: Void())
             .emit(with: self, onNext: { owner, _ in
-                owner.coordinator?.navigate(to: .timerSettingButtonTapped(currentRoutineSetting: owner.currentRoutineSetting))
+                owner.coordinator?.navigate(to: .timerSettingButtonTapped(
+                    currentRoutineSetting: owner.currentRoutineSetting,
+                    interruptedFast: owner.interruptedFast)
+                )
             })
             .disposed(by: disposeBag)
         
-        let finishAlertRelay = PublishRelay<AlertActionType>()
-        input.finishFastButtonTapped
+        let interruptFastAlertRelay = PublishRelay<AlertActionType>()
+        input.interruptFastButtonTapped
             .observe(on: MainScheduler.asyncInstance)
-            .bind { [weak self] _ in self?.coordinator?.navigate(to: .timerFinishFastButtonTapped(finishAlertRelay: finishAlertRelay)) }
+            .bind { [weak self] _ in self?.coordinator?.navigate(to: .timerInterruptFastButtonTapped(interruptFastAlertRelay: interruptFastAlertRelay)) }
             .disposed(by: disposeBag)
         
-        finishAlertRelay
+        // TODO: 한만큼만 단식 기록
+        interruptFastAlertRelay
             .filter { $0 == .ok }
-            .subscribe(onNext: { print($0) })
+            .flatMap { [unowned self] _ in
+                guard let currentFastEndDate = self.currentRoutineSetting.value?.currentFastEndDate
+                else {
+                    fatalError("current Fast Date is not exsit")
+                }
+                return self.timerViewUseCase.interruptFast(
+                    currentFastEndDate: currentFastEndDate,
+                    interruptedDate: Date()
+                )
+            }
+            .subscribe(
+                with: self,
+                onNext: { owner, interruptedDay in
+                    owner.interruptedFast.accept(interruptedDay)
+                    countCurrentTimerState()
+                },
+                onError: { _, error in
+                    Log.error(error)
+            })
             .disposed(by: disposeBag)
             
         let currentRoutineSettingShared = currentRoutineSetting.share()
@@ -160,10 +188,28 @@ final class TimerViewModel: ViewModel {
                 .disposed(by: disposeBag)
         }
         
-        func countCurrentTimerState() {
+        func fetchInterruptedFast() {
+            timerViewUseCase.fetchInterruptedFastDate()
+                .subscribe(
+                    with: self,
+                    onSuccess: { owner, interruptedFast in
+                        owner.interruptedFast.accept(interruptedFast)
+                    },
+                    onFailure: { _, error in
+                        Log.error(error)
+                })
+                .disposed(by: disposeBag)
+        }
+        
+        func countCurrentTimerState(interruptedDate: Date? = nil) {
             guard let _ = currentRoutineSetting.value
             else {
                 timerState.accept(.noRoutineSetting)
+                return
+            }
+            
+            if isInterruptedDay() {
+                timerState.accept(.interruptedDay)
                 return
             }
             
@@ -179,6 +225,18 @@ final class TimerViewModel: ViewModel {
             
             timerState.accept(.mealTime)
             return
+        }
+        
+        func isInterruptedDay() -> Bool {
+            let current = Date()
+            guard let interruptedFast = interruptedFast.value 
+            else {
+                return false
+            }
+            if interruptedFast.interruptedDate <= current && current < interruptedFast.interruptedFastEndDate {
+                return true
+            }
+            return false
         }
         
         func isNoFastDay() -> Bool {
@@ -246,8 +304,7 @@ final class TimerViewModel: ViewModel {
             case .noRoutineSetting:
                 output.messageText.accept(String(localized: "NO_ROUTINE_SETTING", defaultValue: "단식 시간을 설정해주세요!"))
             case .interruptedDay:
-                #warning("TODO")
-                break
+                output.messageText.accept(String(localized: "INTERRUPTED_DATE_MESSAGE", defaultValue: "오늘 단식이 중단되었습니다."))
             }
         }
         
@@ -271,8 +328,7 @@ final class TimerViewModel: ViewModel {
             case .noRoutineSetting:
                 output.currentLoopTimeLabelIsHidden.accept(true)
             case .interruptedDay:
-                #warning("TODO")
-                break
+                output.currentLoopTimeLabelIsHidden.accept(true)
             }
         }
         
@@ -347,8 +403,23 @@ final class TimerViewModel: ViewModel {
                 output.remainTimeLabelIsHiddend.accept(true)
                 
             case .interruptedDay:
-                #warning("TODO")
-                break
+                output.progressPercent.accept(0.0)
+                output.progressTime.accept(TimeInterval())
+                output.remainTime.accept(TimeInterval())
+                output.remainTimeLabelIsHiddend.accept(true)
+                
+                guard let interruptedFast = interruptedFast.value else { return }
+                
+                let nowToInterruptInterval = Date().distance(to: interruptedFast.interruptedFastEndDate)
+                timerDisposeBag = DisposeBag()
+                Observable<Int>.timer(
+                    .seconds(Int(nowToInterruptInterval)),
+                    scheduler: ConcurrentDispatchQueueScheduler(queue: .global())
+                )
+                .subscribe(onNext: { _ in
+                    countCurrentTimerState()
+                })
+                .disposed(by: timerDisposeBag)
             }
         }
         
@@ -362,10 +433,8 @@ final class TimerViewModel: ViewModel {
                 output.fastControlButtonIsEnabled.accept(false)
             case .noRoutineSetting:
                 output.fastControlButtonIsEnabled.accept(false)
-                
             case .interruptedDay:
-                #warning("TODO")
-                break
+                output.fastControlButtonIsEnabled.accept(false)
             }
         }
         
@@ -381,8 +450,7 @@ final class TimerViewModel: ViewModel {
             case .noRoutineSetting:
                 titles = ["🫠"]
             case .interruptedDay:
-                #warning("TODO")
-                titles = ["TODO"]
+                titles = ["😢"]
             }
             
             titles.append(contentsOf: ["🔥", "💪", "🤐", "❌", "🚫", "🚨", "🏃🏻", "🏃🏼‍♀️"])
@@ -395,5 +463,4 @@ final class TimerViewModel: ViewModel {
             return Observable.just(title)
         }
     }
-    
 }

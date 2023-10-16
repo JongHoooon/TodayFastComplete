@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol FastInterruptedDayRepository {
-    func update(interruptedDay: Date) -> Single<Date>
-    func fetchInterruptedDay() -> Single<Date?>
-    func deleteInterruptedDay() -> Single<Date>
+    func update(interruptedFastDate: Date, interruptedFastEndDate: Date) -> Single<InterruptedFast>
+    func fetchInterruptedDay() -> Single<InterruptedFast?>
+    func deleteInterruptedDay() -> Single<InterruptedFast>
 }

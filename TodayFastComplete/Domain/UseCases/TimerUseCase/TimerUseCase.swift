@@ -11,18 +11,21 @@ import UIKit
 
 import RxSwift
 
-typealias TimerUseCase = RoutineSettingFetchable & RoutineSettingStoragable
+typealias TimerUseCase = RoutineSettingFetchable & RoutineSettingStoragable & FastInterruptable
 
 final class TimerUseCaseImp: TimerUseCase {
     private let routineSettingRepository: TimerRoutineSettingRepository
+    private let fastInterruptedDayRepository: FastInterruptedDayRepository
     private let userNotificationManager: UserNotificationManager
     private let disposeBag: DisposeBag
     
     init(
         routineSettingRepository: TimerRoutineSettingRepository,
+        fastInterruptedDayRepository: FastInterruptedDayRepository,
         userNotificationManager: UserNotificationManager
     ) {
         self.routineSettingRepository = routineSettingRepository
+        self.fastInterruptedDayRepository = fastInterruptedDayRepository
         self.userNotificationManager = userNotificationManager
         self.disposeBag = DisposeBag()
     }
@@ -35,16 +38,21 @@ final class TimerUseCaseImp: TimerUseCase {
         return routineSettingRepository.fetchRoutine()
     }
     
-    func saveRoutineSetting(with routineSetting: TimerRoutineSetting) -> Single<TimerRoutineSetting> {
+    func saveRoutineSetting(with routineSetting: TimerRoutineSetting, isDeleteInterruptedDay: Bool) -> Single<TimerRoutineSetting> {
         removePreviousFastNotifications()
             .flatMap { [unowned self] _ in self.removePreviousFastNotifications() }
             .flatMap { [unowned self] _ in
-                return Single.zip(
-                    self.scheduleNotifications(routineSetting: routineSetting),
-                    self.routineSettingRepository.update(routineSetting: routineSetting)
-                )
+                var tasks = [
+                    self.scheduleNotifications(routineSetting: routineSetting).map { _ in },
+                    self.routineSettingRepository.update(routineSetting: routineSetting).map { _ in}
+                ]
+                if isDeleteInterruptedDay {
+                    tasks.append(self.fastInterruptedDayRepository.deleteInterruptedDay().map { _ in })
+                }
+                return Single
+                    .zip(tasks)
+                    .map { _ in routineSetting}
             }
-            .map { $0.1 }
     }
     
     func deleteRoutineSetting() -> Single<Void> {
@@ -54,6 +62,19 @@ final class TimerUseCaseImp: TimerUseCase {
             userNotificationManager.removeNotifications(type: .fastStart)
         )
         .map { _ in }
+    }
+    
+    func interruptFast(currentFastEndDate: Date, interruptedDate: Date) -> Single<InterruptedFast> {
+        let id = LocalNotificationType.fastEnd.fastNotificationID(date: currentFastEndDate)
+        return Single.zip(
+            userNotificationManager.removeNotification(ids: [id]),
+            fastInterruptedDayRepository.update(interruptedFastDate: interruptedDate, interruptedFastEndDate: currentFastEndDate)
+        )
+        .map { $0.1 }
+    }
+    
+    func fetchInterruptedFastDate() -> Single<InterruptedFast?> {
+        return fastInterruptedDayRepository.fetchInterruptedDay()
     }
 }
 

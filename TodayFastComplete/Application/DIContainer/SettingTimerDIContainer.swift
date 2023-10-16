@@ -15,13 +15,26 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     private func makeTimerUseCase() -> TimerUseCase {
         return TimerUseCaseImp(
             routineSettingRepository: makeTimerRoutineSettingRepostory(),
+            fastInterruptedDayRepository: makeFastInterruptedDayRepository(),
             userNotificationManager: DefaultUserNotificationManager()
         )
     }
-                                                 
+    
+    // MARK: - Repository
     private func makeTimerRoutineSettingRepostory() -> TimerRoutineSettingRepository {
         do {
             let repository = try DefaultTimerRoutineSettingRepository()
+            return repository
+        } catch {
+            // TODO: Error 처리 개선 필요
+            Log.error(error)
+            fatalError("init realm repository failed")
+        }
+    }
+    
+    private func makeFastInterruptedDayRepository() -> FastInterruptedDayRepository {
+        do {
+            let repository = try DefaultFastInterruptedDayRepository()
             return repository
         } catch {
             // TODO: Error 처리 개선 필요
@@ -42,20 +55,24 @@ final class SettingTimerDIContainer: SettingTimerDependencies {
     // MARK: - Setting Routine View
     func makeSettingRoutineViewController(
         coordinator: Coordinator,
-        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
+        interruptedFast: BehaviorRelay<InterruptedFast?>
     ) -> UIViewController {
         return SettingRoutineViewController(viewModel: makeSettingRoutineViewModel(
             coordinator: coordinator,
-            currentRoutineSetting: currentRoutineSetting
+            currentRoutineSetting: currentRoutineSetting, 
+            interruptedFast: interruptedFast
         ))
     }
     
     private func makeSettingRoutineViewModel(
         coordinator: Coordinator,
-        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
+        interruptedFast: BehaviorRelay<InterruptedFast?>
     ) -> SettingRoutineViewModel {
         return SettingRoutineViewModel(
-            settingTimerRoutineUseCase: makeTimerUseCase(),
+            settingTimerRoutineUseCase: makeTimerUseCase(), 
+            interruptedFast: interruptedFast,
             coordinator: coordinator,
             currentRoutineSetting: currentRoutineSetting
         )

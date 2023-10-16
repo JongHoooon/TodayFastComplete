@@ -8,6 +8,6 @@
 import RxSwift
 
 protocol RoutineSettingStoragable {
-    func saveRoutineSetting(with routineSetting: TimerRoutineSetting) -> Single<TimerRoutineSetting>
+    func saveRoutineSetting(with routineSetting: TimerRoutineSetting, isDeleteInterruptedDay: Bool) -> Single<TimerRoutineSetting>
     func deleteRoutineSetting() -> Single<Void>
 }

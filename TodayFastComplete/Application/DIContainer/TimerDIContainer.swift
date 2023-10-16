@@ -13,10 +13,12 @@ final class TimerDIContainer: TimerCoordinatorDependencies {
     private func makeTimerUseCase() -> TimerUseCase {
         return TimerUseCaseImp(
             routineSettingRepository: makeTimerRoutineSettingRepostory(),
+            fastInterruptedDayRepository: makeFastInterruptedDayRepository(),
             userNotificationManager: DefaultUserNotificationManager()
         )
     }
-                                                 
+                                         
+    // MARK: - Repository
     private func makeTimerRoutineSettingRepostory() -> TimerRoutineSettingRepository {
         do {
             let repository = try DefaultTimerRoutineSettingRepository()
@@ -27,6 +29,18 @@ final class TimerDIContainer: TimerCoordinatorDependencies {
             fatalError("init realm repository failed")
         }
     }
+    
+    private func makeFastInterruptedDayRepository() -> FastInterruptedDayRepository {
+        do {
+            let repository = try DefaultFastInterruptedDayRepository()
+            return repository
+        } catch {
+            // TODO: Error 처리 개선 필요
+            Log.error(error)
+            fatalError("init realm repository failed")
+        }
+    }
+    
     // MARK: - Coordinator
     func makeSettingTimerCoordinator(
         rootViewController: UINavigationController,

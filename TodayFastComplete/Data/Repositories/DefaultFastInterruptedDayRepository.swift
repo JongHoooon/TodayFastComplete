@@ -16,12 +16,16 @@ final class DefaultFastInterruptedDayRepository: BaseRealmRepository, FastInterr
         Log.deinit()
     }
     
-    func update(interruptedDay: Date) -> Single<Date> {
+    func update(
+        interruptedFastDate: Date,
+        interruptedFastEndDate: Date
+    ) -> Single<InterruptedFast> {
         return Single.create { [weak self] single in
             guard let self else { return Disposables.create() }
             let object = FastInterruptedDayTable(
                 uniqueKey: RealmUniqueKey.fastInterruptedDay.rawValue,
-                interruptedDay: interruptedDay
+                interruptedDay: interruptedFastDate, 
+                interruptedFastEndDate: interruptedFastEndDate
             )
             do {
                 try realm.write {
@@ -34,11 +38,11 @@ final class DefaultFastInterruptedDayRepository: BaseRealmRepository, FastInterr
             }
             return Disposables.create()
         }
-        .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+        .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
     }
     
-    func fetchInterruptedDay() -> Single<Date?> {
-        return Single<Date?>
+    func fetchInterruptedDay() -> Single<InterruptedFast?> {
+        return Single<InterruptedFast?>
             .create { [weak self] single in
                 guard let self else { return Disposables.create() }
                 let object = realm.object(
@@ -49,11 +53,11 @@ final class DefaultFastInterruptedDayRepository: BaseRealmRepository, FastInterr
                 Log.debug(object?.toDomain())
                 return Disposables.create()
             }
-            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
     }
     
-    func deleteInterruptedDay() -> Single<Date> {
-        return Single<Date>
+    func deleteInterruptedDay() -> Single<InterruptedFast> {
+        return Single<InterruptedFast>
             .create { [weak self] single in
                 guard let self else { return Disposables.create() }
                 guard let object = realm.object(
@@ -74,6 +78,6 @@ final class DefaultFastInterruptedDayRepository: BaseRealmRepository, FastInterr
                 }
                 return Disposables.create()
             }
-            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
     }
 }

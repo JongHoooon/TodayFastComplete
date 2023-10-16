@@ -48,6 +48,7 @@ final class SettingRoutineViewModel: ViewModel {
     
     typealias SettingTimerRoutineUseCase = RoutineSettingFetchable & RoutineSettingStoragable
     private let settingTimerRoutineUseCase: SettingTimerRoutineUseCase
+    private let interruptedFast: BehaviorRelay<InterruptedFast?>
     private weak var coordinator: Coordinator?
     private let disposeBag = DisposeBag()
     
@@ -55,10 +56,12 @@ final class SettingRoutineViewModel: ViewModel {
     
     init(
         settingTimerRoutineUseCase: SettingTimerRoutineUseCase,
+        interruptedFast: BehaviorRelay<InterruptedFast?>,
         coordinator: Coordinator,
         currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
     ) {
         self.settingTimerRoutineUseCase = settingTimerRoutineUseCase
+        self.interruptedFast = interruptedFast
         self.coordinator = coordinator
         self.currentRoutineSetting = currentRoutineSetting
     }
@@ -163,13 +166,17 @@ final class SettingRoutineViewModel: ViewModel {
             )})
             .withUnretained(self)
             .flatMap({ owner, routineSetting in
-                return owner.settingTimerRoutineUseCase.saveRoutineSetting(with: routineSetting)
+                return owner.settingTimerRoutineUseCase.saveRoutineSetting(
+                    with: routineSetting,
+                    isDeleteInterruptedDay: owner.interruptedFast.value != nil
+                )
             })
             .observe(on: MainScheduler.asyncInstance)
             .subscribe(
                 with: self,
                 onNext: { owner, timerRoutineSetting in
                     owner.currentRoutineSetting.accept(timerRoutineSetting)
+                    owner.interruptedFast.accept(nil)
                     owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
                 },
                 onError: { _, error in

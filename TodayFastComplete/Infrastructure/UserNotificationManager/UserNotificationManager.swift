@@ -78,9 +78,19 @@ final class DefaultUserNotificationManager: UserNotificationManager {
     
     func removeNotification(ids: [String]) -> Single<Void> {
         return Single.create { [weak self] single in
+            #if DEBUG
+            UNUserNotificationCenter.current().getPendingNotificationRequests { request in
+                Log.debug("before delete noti count: \(request.map { $0.identifier }.count)")
+            }
+            #endif
             self?.center.removePendingNotificationRequests(withIdentifiers: ids)
             single(.success(Void()))
             Log.debug(ids)
+            #if DEBUG
+            UNUserNotificationCenter.current().getPendingNotificationRequests { request in
+                Log.debug("after delete noti count: \(request.map { $0.identifier }.count)")
+            }
+            #endif
             return Disposables.create()
         }
         .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))

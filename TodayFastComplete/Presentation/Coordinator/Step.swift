@@ -18,11 +18,17 @@ enum Step {
     
     // Timer
     case timerFlowIsRequired
-    case timerSettingButtonTapped(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>)
-    case timerFinishFastButtonTapped(finishAlertRelay: PublishRelay<AlertActionType>)
+    case timerSettingButtonTapped(
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
+        interruptedFast: BehaviorRelay<InterruptedFast?>
+    )
+    case timerInterruptFastButtonTapped(interruptFastAlertRelay: PublishRelay<AlertActionType>)
     
     // Setting Timer
-    case settingTimerFlowIsRequired(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>)
+    case settingTimerFlowIsRequired(
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
+        interruptedFast: BehaviorRelay<InterruptedFast?>
+    )
     case settingTimerFlowIsComplete
     case settingStartTimePickerViewTapped(
         selectedStartTime: BehaviorRelay<DateComponents>,

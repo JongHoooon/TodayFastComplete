@@ -212,7 +212,7 @@ private extension TimerViewController {
             viewDidDisappear: self.rx.viewDidDisappear.asObservable(),
             progressViewEndpoinButtonTapped: progressViewEndpoinButtonTapped,
             setTimerButtonTapped: setTimerButton.rx.tap.asObservable(),
-            finishFastButtonTapped: finishFastButtonTapped
+            interruptFastButtonTapped: finishFastButtonTapped
         )
         let output = viewModel.transform(input: input)
         

@@ -14,7 +14,8 @@ protocol SettingTimerDependencies {
     func makeSelectFastModeViewController(coordinator: Coordinator) -> UIViewController
     func makeSettingRoutineViewController(
         coordinator: Coordinator,
-        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
+        interruptedFast: BehaviorRelay<InterruptedFast?>
     ) -> UIViewController
     func makeStartTimePickerViewController(
         coordinator: Coordinator,
@@ -58,8 +59,11 @@ final class SettingTimerCoordinator: BaseCoordinator, CancelOkAlertPresentable {
     
     override func navigate(to step: Step) {
         switch step {
-        case let .settingTimerFlowIsRequired(currentRoutineSetting):
-            showSettingRoutine(currentRoutineSetting: currentRoutineSetting)
+        case let .settingTimerFlowIsRequired(currentRoutineSetting, interruptedFast):
+            showSettingRoutine(
+                currentRoutineSetting: currentRoutineSetting,
+                interruptedFast: interruptedFast
+            )
         case .settingTimerFlowIsComplete:
             rootViewController.dismiss(animated: true)
         case let .settingStartTimePickerViewTapped(selectedStartTime, initialStartTime):
@@ -93,10 +97,14 @@ private extension SettingTimerCoordinator {
     }
     */
     
-    func showSettingRoutine(currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>) {
+    func showSettingRoutine(
+        currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
+        interruptedFast: BehaviorRelay<InterruptedFast?>
+    ) {
         let settingRoutineVC = dependencies.makeSettingRoutineViewController(
             coordinator: self,
-            currentRoutineSetting: currentRoutineSetting
+            currentRoutineSetting: currentRoutineSetting,
+            interruptedFast: interruptedFast
         )
         rootViewController.viewControllers = [settingRoutineVC]
     }
