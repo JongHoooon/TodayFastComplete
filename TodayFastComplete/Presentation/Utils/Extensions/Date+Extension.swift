@@ -80,4 +80,24 @@ extension Date {
         }
         return second
     }
+    
+    static func < (lhs: Date, rhs: Date) -> Bool {
+        return lhs.compare(rhs) == .orderedAscending
+    }
+    
+    static func <= (lhs: Date, rhs: Date) -> Bool {
+        return lhs.compare(rhs) != .orderedDescending
+    }
+    
+    static func == (lhs: Date, rhs: Date) -> Bool {
+        return lhs.compare(rhs) == .orderedSame
+    }
+    
+    static func > (lhs: Date, rhs: Date) -> Bool {
+        return lhs.compare(rhs) == .orderedDescending
+    }
+    
+    static func >= (lhs: Date, rhs: Date) -> Bool {
+        return lhs.compare(rhs) != .orderedAscending
+    }
 }
