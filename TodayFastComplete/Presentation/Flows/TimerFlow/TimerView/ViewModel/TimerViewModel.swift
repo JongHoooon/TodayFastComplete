@@ -245,6 +245,9 @@ final class TimerViewModel: ViewModel {
                 output.messageText.accept(String(localized: "NO_FAST_TIME_MESSAGE_1", defaultValue: "오늘은 단식이 없어요!"))
             case .noRoutineSetting:
                 output.messageText.accept(String(localized: "NO_ROUTINE_SETTING", defaultValue: "단식 시간을 설정해주세요!"))
+            case .interruptedDay:
+                #warning("TODO")
+                break
             }
         }
         
@@ -267,6 +270,9 @@ final class TimerViewModel: ViewModel {
                 
             case .noRoutineSetting:
                 output.currentLoopTimeLabelIsHidden.accept(true)
+            case .interruptedDay:
+                #warning("TODO")
+                break
             }
         }
         
@@ -339,6 +345,10 @@ final class TimerViewModel: ViewModel {
                 output.progressTime.accept(TimeInterval())
                 output.remainTime.accept(TimeInterval())
                 output.remainTimeLabelIsHiddend.accept(true)
+                
+            case .interruptedDay:
+                #warning("TODO")
+                break
             }
         }
         
@@ -352,6 +362,10 @@ final class TimerViewModel: ViewModel {
                 output.fastControlButtonIsEnabled.accept(false)
             case .noRoutineSetting:
                 output.fastControlButtonIsEnabled.accept(false)
+                
+            case .interruptedDay:
+                #warning("TODO")
+                break
             }
         }
         
@@ -366,6 +380,9 @@ final class TimerViewModel: ViewModel {
                 titles = ["🥳"]
             case .noRoutineSetting:
                 titles = ["🫠"]
+            case .interruptedDay:
+                #warning("TODO")
+                titles = ["TODO"]
             }
             
             titles.append(contentsOf: ["🔥", "💪", "🤐", "❌", "🚫", "🚨", "🏃🏻", "🏃🏼‍♀️"])

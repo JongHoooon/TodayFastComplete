@@ -8,6 +8,7 @@
 enum TimerState {
     case noRoutineSetting
     case noFastDay
+    case interruptedDay
     case fastTime
     case mealTime
 }
