@@ -98,39 +98,7 @@ final class TimerViewModel: ViewModel {
                 configureMessageLabel(state: self.timerState.value)
             }
             .disposed(by: disposeBag)
-            
-        let currentRoutineSettingShared = currentRoutineSetting.share()
         
-        currentRoutineSettingShared
-            .map({
-                return $0 == nil
-                    ? String(localized: "PLEASE_SET_FAST_TIME", defaultValue: "단식 시간을 설정해 주세요 ⏳")
-                    : $0!.routineInfo
-            })
-            .bind { output.fastInfo.accept($0) }
-            .disposed(by: disposeBag)
-    
-        let timerStateShare = timerState.share()
-        
-        timerStateShare
-            .subscribe(onNext: { state in
-                Log.info(state)
-                configureMessageLabel(state: state)
-                configureLoopLabels(state: state)
-                configureFastControlButton(state: state)
-                configureTimer(state: state)
-            })
-            .disposed(by: disposeBag)
-        
-        timerStateShare
-            .distinctUntilChanged()
-            .flatMap { [weak self] _ in
-                self?.endpointStringIndex = 0
-                return configureEndpoingButtonTitle()
-            }
-            .bind { output.endpointButtonTitle.accept($0) }
-            .disposed(by: disposeBag)
-            
         input.progressViewEndpoinButtonTapped
             .flatMap { configureEndpoingButtonTitle() }
             .bind { output.endpointButtonTitle.accept($0) }
@@ -152,6 +120,36 @@ final class TimerViewModel: ViewModel {
         finishAlertRelay
             .filter { $0 == .ok }
             .subscribe(onNext: { print($0) })
+            .disposed(by: disposeBag)
+            
+        let currentRoutineSettingShared = currentRoutineSetting.share()
+        currentRoutineSettingShared
+            .map({
+                return $0 == nil
+                    ? String(localized: "PLEASE_SET_FAST_TIME", defaultValue: "단식 시간을 설정해 주세요 ⏳")
+                    : $0!.routineInfo
+            })
+            .bind { output.fastInfo.accept($0) }
+            .disposed(by: disposeBag)
+    
+        let timerStateShare = timerState.share()
+        timerStateShare
+            .subscribe(onNext: { state in
+                Log.info(state)
+                configureMessageLabel(state: state)
+                configureLoopLabels(state: state)
+                configureFastControlButton(state: state)
+                configureTimer(state: state)
+            })
+            .disposed(by: disposeBag)
+        
+        timerStateShare
+            .distinctUntilChanged()
+            .flatMap { [weak self] _ in
+                self?.endpointStringIndex = 0
+                return configureEndpoingButtonTitle()
+            }
+            .bind { output.endpointButtonTitle.accept($0) }
             .disposed(by: disposeBag)
             
         return output
