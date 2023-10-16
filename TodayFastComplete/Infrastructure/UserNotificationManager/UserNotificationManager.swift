@@ -46,6 +46,7 @@ final class DefaultUserNotificationManager: UserNotificationManager {
                     single(.failure(error))
                 } else {
                     single(.success(Void()))
+                    Log.debug(request)
                 }
             })
             
@@ -79,7 +80,7 @@ final class DefaultUserNotificationManager: UserNotificationManager {
         return Single.create { [weak self] single in
             self?.center.removePendingNotificationRequests(withIdentifiers: ids)
             single(.success(Void()))
-            
+            Log.debug(ids)
             return Disposables.create()
         }
         .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
@@ -147,6 +148,7 @@ final class DefaultUserNotificationManager: UserNotificationManager {
                 }
                 return firstDate.compare(secondDate) == .orderedAscending
             }
+        Log.debug(notifications)
         return notifications
     }
     

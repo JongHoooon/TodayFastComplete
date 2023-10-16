@@ -135,7 +135,7 @@ final class TimerViewModel: ViewModel {
         let timerStateShare = timerState.share()
         timerStateShare
             .subscribe(onNext: { state in
-                Log.info(state)
+                Log.info("current timer state \(state) ⏱️")
                 configureMessageLabel(state: state)
                 configureLoopLabels(state: state)
                 configureFastControlButton(state: state)

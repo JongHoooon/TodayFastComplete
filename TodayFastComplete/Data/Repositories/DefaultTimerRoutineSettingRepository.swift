@@ -36,6 +36,7 @@ final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRout
                     try realm.write {
                         self.realm.add(object, update: .modified)
                         single(.success(object.toDomain()))
+                        Log.debug(object.toDomain())
                     }
                 } catch {
                     single(.failure(error))
@@ -51,6 +52,7 @@ final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRout
                 guard let self else { return Disposables.create() }
                 let object = realm.object(ofType: TimerRoutineSettingTable.self, forPrimaryKey: RealmUniqueKey.fastRoutineSetting.rawValue)
                 single(.success(object?.toDomain()))
+                Log.debug(object?.toDomain())
                 return Disposables.create()
             }
             .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
@@ -71,6 +73,7 @@ final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRout
                     try realm.write {
                         self.realm.delete(object)
                         single(.success(timerRoutineSetting))
+                        Log.debug(timerRoutineSetting)
                     }
                 } catch {
                     single(.failure(error))

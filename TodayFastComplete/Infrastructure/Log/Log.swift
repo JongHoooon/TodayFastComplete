@@ -88,6 +88,6 @@ extension Log {
     }
     
     static func `deinit`(filename: String = #fileID, line: Int = #line, funcName: String = #function) {
-        log(nil, level: .info, filename: filename, line: line, funcName: funcName)
+        log("🗑️", level: .info, filename: filename, line: line, funcName: funcName)
     }
 }
