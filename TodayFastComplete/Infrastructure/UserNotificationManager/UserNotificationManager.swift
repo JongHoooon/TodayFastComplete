@@ -72,6 +72,7 @@ final class DefaultUserNotificationManager: UserNotificationManager {
                 return self.removeNotification(ids: filteredIDs)
             }
             .map { _ in }
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
     }
     
     func removeNotification(ids: [String]) -> Single<Void> {
@@ -91,6 +92,7 @@ final class DefaultUserNotificationManager: UserNotificationManager {
             })
             return Disposables.create()
         }
+        .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
     }
     
     func pendingNotificationCount() -> Single<Int> {
