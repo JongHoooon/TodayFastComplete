@@ -93,6 +93,9 @@
 		EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC262ACD9A8E0096D2F0 /* Step.swift */; };
 		EDC2CC2F2ACE458F0096D2F0 /* SelectFastModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC2E2ACE458F0096D2F0 /* SelectFastModeViewController.swift */; };
 		EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2CC302ACE459A0096D2F0 /* SelectFastModeViewModel.swift */; };
+		EDC66EC82ADCFA120085B184 /* FastInterruptedDay+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EC72ADCFA120085B184 /* FastInterruptedDay+Mapping.swift */; };
+		EDC66ECA2ADCFB470085B184 /* FastInterruptedDayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EC92ADCFB470085B184 /* FastInterruptedDayRepository.swift */; };
+		EDC66ECC2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66ECB2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
@@ -184,6 +187,9 @@
 		EDC2CC262ACD9A8E0096D2F0 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		EDC2CC2E2ACE458F0096D2F0 /* SelectFastModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFastModeViewController.swift; sourceTree = "<group>"; };
 		EDC2CC302ACE459A0096D2F0 /* SelectFastModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFastModeViewModel.swift; sourceTree = "<group>"; };
+		EDC66EC72ADCFA120085B184 /* FastInterruptedDay+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FastInterruptedDay+Mapping.swift"; sourceTree = "<group>"; };
+		EDC66EC92ADCFB470085B184 /* FastInterruptedDayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastInterruptedDayRepository.swift; sourceTree = "<group>"; };
+		EDC66ECB2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFastInterruptedDayRepository.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
@@ -318,6 +324,7 @@
 			children = (
 				ED50E9852AD1893600182922 /* Utils */,
 				ED50E97A2AD16DB300182922 /* TimerRoutineSettingTable+Mapping.swift */,
+				EDC66EC72ADCFA120085B184 /* FastInterruptedDay+Mapping.swift */,
 			);
 			path = RealmStorage;
 			sourceTree = "<group>";
@@ -326,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				ED50E9812AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift */,
+				EDC66ECB2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -576,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				ED50E97E2AD17E4F00182922 /* TimerRoutineSettingRepository.swift */,
+				EDC66EC92ADCFB470085B184 /* FastInterruptedDayRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -818,6 +827,7 @@
 				ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */,
 				ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */,
 				EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */,
+				EDC66ECA2ADCFB470085B184 /* FastInterruptedDayRepository.swift in Sources */,
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
@@ -842,6 +852,7 @@
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
 				ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */,
+				EDC66EC82ADCFA120085B184 /* FastInterruptedDay+Mapping.swift in Sources */,
 				ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */,
 				ED50E97D2AD1716D00182922 /* RealmUniqueKey.swift in Sources */,
 				ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */,
@@ -887,6 +898,7 @@
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
 				ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */,
 				ED4D40F42AD971C300C49C8A /* CalendarNotification.swift in Sources */,
+				EDC66ECC2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift in Sources */,
 				ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */,
 				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
 				ED50E95A2ACF903A00182922 /* TimeSettingCollectionViewCell.swift in Sources */,

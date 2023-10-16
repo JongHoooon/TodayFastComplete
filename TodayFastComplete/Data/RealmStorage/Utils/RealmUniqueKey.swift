@@ -7,4 +7,5 @@
 
 enum RealmUniqueKey: String {
     case fastRoutineSetting
+    case fastInterruptedDay
 }
