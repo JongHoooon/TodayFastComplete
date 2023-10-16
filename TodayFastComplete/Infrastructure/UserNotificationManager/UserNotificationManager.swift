@@ -138,9 +138,8 @@ final class DefaultUserNotificationManager: UserNotificationManager {
             startTimeMinute: routineSetting.startTime.minute ?? 0,
             fastTime: routineSetting.fastTime
         )
-        let notifications = (fastStartNotifications + fastEndNotifications)
+        var notifications = (fastStartNotifications + fastEndNotifications)
             .sorted {
-                
                 guard let firstDate = Calendar.current.date(from: $0.dateComponents),
                       let secondDate = Calendar.current.date(from: $1.dateComponents)
                 else {
@@ -148,6 +147,9 @@ final class DefaultUserNotificationManager: UserNotificationManager {
                 }
                 return firstDate.compare(secondDate) == .orderedAscending
             }
+        if notifications.count > maxCount {
+            notifications = Array(notifications.prefix(maxCount))
+        }
         Log.debug(notifications)
         return notifications
     }
