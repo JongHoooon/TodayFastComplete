@@ -17,7 +17,6 @@
 		ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E62AC2FE5D0050E631 /* FSCalendar */; };
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
-		ED38F90E2ADA3042005126F3 /* LocalNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */; };
 		ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */; };
 		ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */; };
 		ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */; };
@@ -104,7 +103,6 @@
 		ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRoutineSettingCell.swift; sourceTree = "<group>"; };
 		ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOkAlertPresentable.swift; sourceTree = "<group>"; };
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationRepository.swift; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
 		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
 		ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extension.swift"; sourceTree = "<group>"; };
@@ -578,7 +576,6 @@
 			isa = PBXGroup;
 			children = (
 				ED50E97E2AD17E4F00182922 /* TimerRoutineSettingRepository.swift */,
-				ED38F90D2ADA3042005126F3 /* LocalNotificationRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -884,7 +881,6 @@
 				EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */,
 				ED50E97B2AD16DB300182922 /* TimerRoutineSettingTable+Mapping.swift in Sources */,
 				ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */,
-				ED38F90E2ADA3042005126F3 /* LocalNotificationRepository.swift in Sources */,
 				EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */,
 				EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */,
 				EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */,
