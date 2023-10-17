@@ -14,15 +14,15 @@ protocol TabBarDependencies {
 
 final class TabBarCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
     
-    let window: UIWindow
-    let dependencies: TabBarDependencies
+    private let rootViewController: UITabBarController
+    private let dependencies: TabBarDependencies
     
     init(
-        window: UIWindow,
+        rootViewController: UITabBarController,
         dependencies: TabBarDependencies,
         finishDelegate: CoordinatorFinishDelegate
     ) {
-        self.window = window
+        self.rootViewController = rootViewController
         self.dependencies = dependencies
         super.init()
         self.finishDelegate = finishDelegate
@@ -50,16 +50,6 @@ final class TabBarCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
         timerCoordinator.navigate(to: .timerFlowIsRequired)
         addChild(child: timerCoordinator)
         
-        let tabBarController = dependencies.makeTabBarController()
-        tabBarController.setViewControllers([timerNavigationController], animated: true)
-        let transition = CATransition()
-        transition.duration = 0.25
-        transition.type = .fade
-        transition.timingFunction = CAMediaTimingFunction(
-            name: CAMediaTimingFunctionName.easeInEaseOut
-        )
-        window.layer.add(transition, forKey: kCATransition)
-        window.rootViewController = tabBarController
-        window.makeKeyAndVisible()
+        rootViewController.setViewControllers([timerNavigationController], animated: true)
     }
 }

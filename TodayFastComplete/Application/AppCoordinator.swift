@@ -8,7 +8,9 @@
 import UIKit
 
 protocol AppCoordinatorDependencies {
-    func makeTabBarCoordinator(window: UIWindow, finishDelegate: CoordinatorFinishDelegate) -> Coordinator}
+    func makeTabBarController() -> UITabBarController
+    func makeTabBarCoordinator(rootViewController: UITabBarController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
+}
 
 final class AppCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
     
@@ -39,11 +41,14 @@ final class AppCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
     }
     
     private func showTabBarScene() {
+        let tabBar = dependencies.makeTabBarController()
         let tabBarCoordinator = dependencies.makeTabBarCoordinator(
-            window: window,
+            rootViewController: tabBar,
             finishDelegate: self
         )
-        tabBarCoordinator.navigate(to: .tabBarFlowIsRequired)
         addChild(child: tabBarCoordinator)
+        tabBarCoordinator.navigate(to: .tabBarFlowIsRequired)
+        window.rootViewController = tabBar
+        window.makeKeyAndVisible()
     }
 }

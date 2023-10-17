@@ -11,13 +11,17 @@ final class AppDIContainer: AppCoordinatorDependencies {
         
     // MARK: - Tab Bar Coordinator
     func makeTabBarCoordinator(
-        window: UIWindow,
+        rootViewController: UITabBarController,
         finishDelegate: CoordinatorFinishDelegate
     ) -> Coordinator {
         return TabBarCoordinator(
-            window: window,
+            rootViewController: rootViewController,
             dependencies: TabBarDIContainer(),
             finishDelegate: finishDelegate
         )
+    }
+    
+    func makeTabBarController() -> UITabBarController {
+        return TabBarController()
     }
 }
