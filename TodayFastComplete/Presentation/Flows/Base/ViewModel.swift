@@ -7,7 +7,7 @@
 
 import RxSwift
 
-protocol ViewModel {
+protocol ViewModel: AnyObject {
     associatedtype Input
     associatedtype Output
     
