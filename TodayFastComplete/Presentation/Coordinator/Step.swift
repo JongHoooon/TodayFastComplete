@@ -42,4 +42,7 @@ enum Step {
     )
     case settingFastTimePickerViewIsComplete
     case settingDeleteRoutineSettingButtonTapped(deleteAlertActionRelay: PublishRelay<AlertActionType>)
+    
+    // Record
+    case recordFlowIsRequired
 }

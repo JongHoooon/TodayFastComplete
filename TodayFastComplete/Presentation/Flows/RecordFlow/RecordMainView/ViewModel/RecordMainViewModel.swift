@@ -17,6 +17,12 @@ final class RecordMainViewModel: ViewModel {
         
     }
     
+    private let viewModel: Coordinator
+    
+    init(coordinator: Coordinator) {
+        self.viewModel = coordinator
+    }
+    
     func transform(input: Input) -> Output {
         return Output()
     }

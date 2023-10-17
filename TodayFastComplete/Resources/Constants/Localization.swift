@@ -12,6 +12,10 @@ extension Constants {
             localized: "TIMER_TITLE",
             defaultValue: "타이머"
         )
+        static let RECORD_TITLE = String(
+            localized: "RECORD_TITLE",
+            defaultValue: "기록"
+        )
         
         static let TIMER_MODE_SELECT_VIEW_TITLE = String(
             localized: "TIMER_MODE_SELECT_VIEW_TITLE",

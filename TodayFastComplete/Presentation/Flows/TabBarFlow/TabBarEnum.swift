@@ -9,6 +9,7 @@ import UIKit
 
 enum TabBarEnum {
     case timer
+    case record
     
     private var tabBarItem: UITabBarItem {
         switch self {
@@ -17,6 +18,13 @@ enum TabBarEnum {
                 title: Constants.Localization.TIMER_TITLE,
                 image: Constants.Icon.timer,
                 selectedImage: Constants.Icon.timer
+            )
+            
+        case .record:
+            return UITabBarItem(
+                title: Constants.Localization.RECORD_TITLE,
+                image: Constants.Icon.calendarBadgeClock,
+                selectedImage: Constants.Icon.calendarBadgeClock
             )
         }
     }
@@ -27,6 +35,11 @@ enum TabBarEnum {
             let timerNavigationController = UINavigationController()
             timerNavigationController.tabBarItem = tabBarItem
             return timerNavigationController
+        
+        case .record:
+            let recordNavigationController = UINavigationController()
+            recordNavigationController.tabBarItem = tabBarItem
+            return recordNavigationController
         }
     }
 }

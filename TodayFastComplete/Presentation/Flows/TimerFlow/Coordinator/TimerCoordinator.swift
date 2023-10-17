@@ -15,18 +15,20 @@ protocol TimerCoordinatorDependencies {
     func makeSettingTimerCoordinator(rootViewController: UINavigationController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
 }
 
-final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate, CancelOkAlertPresentable {
+final class TimerCoordinator: BaseCoordinator, 
+                                CoordinatorFinishDelegate,
+                              CancelOkAlertPresentable {
     
-    private let navigationController: UINavigationController
+    private let rootViewController: UINavigationController
     private let dependencies: TimerCoordinatorDependencies
     private let disposeBag = DisposeBag()
     
     init(
-        navigationController: UINavigationController,
+        rootViewController: UINavigationController,
         dependencies: TimerCoordinatorDependencies,
         finishDelegate: CoordinatorFinishDelegate
     ) {
-        self.navigationController = navigationController
+        self.rootViewController = rootViewController
         self.dependencies = dependencies
         super.init()
         self.finishDelegate = finishDelegate
@@ -51,13 +53,15 @@ final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate,
             assertionFailure("not configured step")
         }
     }
-    
-    private func showTimer() {
+}
+
+private extension TimerCoordinator {
+    func showTimer() {
         let vc = dependencies.makeTimerViewController(coordinator: self)
-        navigationController.setViewControllers([vc], animated: true)
+        rootViewController.setViewControllers([vc], animated: true)
     }
     
-    private func presentToSelectFastMode(
+    func presentToSelectFastMode(
         currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
         interruptedFast: BehaviorRelay<InterruptedFast?>
     ) {
@@ -71,16 +75,16 @@ final class DefaultTimerCoordinator: BaseCoordinator, CoordinatorFinishDelegate,
             interruptedFast: interruptedFast)
         )
         settingTimerNavigationController.modalPresentationStyle = .fullScreen
-        navigationController.present(
+        rootViewController.present(
             settingTimerNavigationController,
             animated: true
         )
         addChild(child: settingTimerCoordinator)
     }
     
-    private func presentInterruptFastAlert(interruptFastAlertRelay: PublishRelay<AlertActionType>) {
+    func presentInterruptFastAlert(interruptFastAlertRelay: PublishRelay<AlertActionType>) {
         presentCancelOkAlert(
-            navigationController: navigationController,
+            navigationController: rootViewController,
             message: Constants.Localization.FINISH_FAST_ALERT_MESSAGE,
             okTitle: Constants.Localization.DO_FINISH
         )

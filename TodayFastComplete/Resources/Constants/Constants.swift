@@ -29,6 +29,7 @@ enum Constants {
         static let pencilLine = UIImage(systemName: "pencil.line")
         static let plusCircle = UIImage(systemName: "plus.circle")
         static let timer = UIImage(systemName: "timer")
+        static let calendarBadgeClock = UIImage(systemName: "calendar.badge.clock")
         static let xmark = UIImage(systemName: "xmark")
     }
     

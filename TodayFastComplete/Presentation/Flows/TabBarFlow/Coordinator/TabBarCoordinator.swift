@@ -10,6 +10,7 @@ import UIKit
 protocol TabBarDependencies {
     func makeTabBarController() -> UITabBarController
     func makeTimerCoordinator(navigationController: UINavigationController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
+    func makeRecordCoordinator(navigationController: UINavigationController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
 }
 
 final class TabBarCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
@@ -50,6 +51,17 @@ final class TabBarCoordinator: BaseCoordinator, CoordinatorFinishDelegate {
         timerCoordinator.navigate(to: .timerFlowIsRequired)
         addChild(child: timerCoordinator)
         
-        rootViewController.setViewControllers([timerNavigationController], animated: true)
+        let recordNavigationController = TabBarEnum.record.rootNavigationController
+        let recordCoordinator = dependencies.makeRecordCoordinator(
+            navigationController: recordNavigationController,
+            finishDelegate: self
+        )
+        recordCoordinator.navigate(to: .recordFlowIsRequired)
+        addChild(child: recordCoordinator)
+        
+        rootViewController.setViewControllers(
+            [timerNavigationController, recordNavigationController],
+            animated: false
+        )
     }
 }
