@@ -192,7 +192,7 @@ final class TimerViewController: BaseViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(2.0 / 3.0)
             $0.height.equalTo(64.0)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-8.0)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16.0)
         }
     }
 }
