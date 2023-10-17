@@ -102,6 +102,7 @@
 		EDC66ED92ADE5E1A0085B184 /* RecordMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66ED82ADE5E1A0085B184 /* RecordMainViewModel.swift */; };
 		EDC66EDB2ADE5E270085B184 /* RecordMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */; };
 		EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDC2ADE5F340085B184 /* RecordCoordinator.swift */; };
+		EDC66EDF2ADE66F20085B184 /* RecordDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
@@ -202,6 +203,7 @@
 		EDC66ED82ADE5E1A0085B184 /* RecordMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMainViewModel.swift; sourceTree = "<group>"; };
 		EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMainViewController.swift; sourceTree = "<group>"; };
 		EDC66EDC2ADE5F340085B184 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
+		EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDIContainer.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 				EDA776FA2ACAF9C50019DCB1 /* TabBarDIContainer.swift */,
 				EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */,
 				EDACF3702ACED31000F72CE8 /* SettingTimerDIContainer.swift */,
+				EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -884,6 +887,7 @@
 				EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */,
 				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
 				EDC66ECE2ADD10480085B184 /* FastInterruptable.swift in Sources */,
+				EDC66EDF2ADE66F20085B184 /* RecordDIContainer.swift in Sources */,
 				ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */,
 				ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */,
 				EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */,
