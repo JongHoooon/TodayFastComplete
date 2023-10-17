@@ -99,6 +99,9 @@
 		EDC66ECE2ADD10480085B184 /* FastInterruptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66ECD2ADD10480085B184 /* FastInterruptable.swift */; };
 		EDC66ED02ADD9B5C0085B184 /* InterruptedFast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66ECF2ADD9B5C0085B184 /* InterruptedFast.swift */; };
 		EDC66ED22ADE441F0085B184 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66ED12ADE441F0085B184 /* Localization.swift */; };
+		EDC66ED92ADE5E1A0085B184 /* RecordMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66ED82ADE5E1A0085B184 /* RecordMainViewModel.swift */; };
+		EDC66EDB2ADE5E270085B184 /* RecordMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */; };
+		EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDC2ADE5F340085B184 /* RecordCoordinator.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
@@ -196,6 +199,9 @@
 		EDC66ECD2ADD10480085B184 /* FastInterruptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastInterruptable.swift; sourceTree = "<group>"; };
 		EDC66ECF2ADD9B5C0085B184 /* InterruptedFast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptedFast.swift; sourceTree = "<group>"; };
 		EDC66ED12ADE441F0085B184 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		EDC66ED82ADE5E1A0085B184 /* RecordMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMainViewModel.swift; sourceTree = "<group>"; };
+		EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMainViewController.swift; sourceTree = "<group>"; };
+		EDC66EDC2ADE5F340085B184 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
@@ -402,6 +408,7 @@
 				EDA776E92ACAB4680019DCB1 /* TabBarFlow */,
 				ED6C67202AC83E7100230621 /* TimerFlow */,
 				EDACF36A2ACECDE900F72CE8 /* TimerSettingFlow */,
+				EDC66ED32ADE5DB20085B184 /* RecordFlow */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -702,6 +709,48 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EDC66ED32ADE5DB20085B184 /* RecordFlow */ = {
+			isa = PBXGroup;
+			children = (
+				EDC66ED42ADE5DD50085B184 /* Coordinator */,
+				EDC66ED52ADE5DDC0085B184 /* RecordMainView */,
+			);
+			path = RecordFlow;
+			sourceTree = "<group>";
+		};
+		EDC66ED42ADE5DD50085B184 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				EDC66EDC2ADE5F340085B184 /* RecordCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		EDC66ED52ADE5DDC0085B184 /* RecordMainView */ = {
+			isa = PBXGroup;
+			children = (
+				EDC66ED62ADE5DF70085B184 /* ViewModel */,
+				EDC66ED72ADE5E030085B184 /* View */,
+			);
+			path = RecordMainView;
+			sourceTree = "<group>";
+		};
+		EDC66ED62ADE5DF70085B184 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EDC66ED82ADE5E1A0085B184 /* RecordMainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EDC66ED72ADE5E030085B184 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EDF700E42AC80D4E00DBA5E8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -832,6 +881,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */,
 				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
 				EDC66ECE2ADD10480085B184 /* FastInterruptable.swift in Sources */,
 				ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */,
@@ -860,6 +910,7 @@
 				ED4DB3BA2AD4318A003535C9 /* TimerUseCase.swift in Sources */,
 				ED50E9782AD16C8700182922 /* TimerRoutineSetting.swift in Sources */,
 				ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */,
+				EDC66EDB2ADE5E270085B184 /* RecordMainViewController.swift in Sources */,
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
 				ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */,
@@ -903,6 +954,7 @@
 				EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */,
 				EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */,
 				ED50E97B2AD16DB300182922 /* TimerRoutineSettingTable+Mapping.swift in Sources */,
+				EDC66ED92ADE5E1A0085B184 /* RecordMainViewModel.swift in Sources */,
 				ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */,
 				EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */,
 				EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */,
