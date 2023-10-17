@@ -84,24 +84,20 @@ final class TimerViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
-        input.viewWillAppear
-            .bind { [weak self] in
-                guard let self else { return }
-                countCurrentTimerState()
-                configureMessageLabel(state: self.timerState.value)
-            }
-            .disposed(by: disposeBag)
-        
+        Observable.merge(
+            input.viewWillAppear,
+            NotificationCenter.default.rx.notification(.sceneWillEnterForeground).map { _ in }
+        )
+        .bind { [weak self] _ in
+            guard let self else { return }
+            countCurrentTimerState()
+            configureMessageLabel(state: self.timerState.value)
+        }
+        .disposed(by: disposeBag)
+
         input.viewDidDisappear
             .bind { [weak self] _ in
                 self?.timerDisposeBag = DisposeBag()
-            }
-            .disposed(by: disposeBag)
-        
-        NotificationCenter.default.rx.notification(.sceneWillEnterForeground)
-            .bind { [unowned self] _ in
-                countCurrentTimerState()
-                configureMessageLabel(state: self.timerState.value)
             }
             .disposed(by: disposeBag)
         
