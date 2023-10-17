@@ -244,8 +244,11 @@ private extension TimerViewController {
             .map { $0.timerString }
             .map { [weak self] in
                 switch self?.viewModel.timerState.value {
-                case .fastTime:
-                    return String(localized: "REMAIN_TIMER_TIME", defaultValue: "남은 시간: \($0)")
+                case .fastTime, .interruptedDay:
+                    return String(
+                        format: Constants.Localization.REMAIN_TIMER_TIME,
+                        arguments: [$0]
+                    )
                 case .mealTime:
                     return String(localized: "REMAIN_MEAL_TIME", defaultValue: "다음 단식 까지: \($0)")
                 default:

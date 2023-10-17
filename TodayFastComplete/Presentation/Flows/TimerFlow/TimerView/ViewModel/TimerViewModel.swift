@@ -304,7 +304,13 @@ final class TimerViewModel: ViewModel {
             case .noRoutineSetting:
                 output.messageText.accept(String(localized: "NO_ROUTINE_SETTING", defaultValue: "단식 시간을 설정해주세요!"))
             case .interruptedDay:
-                output.messageText.accept(String(localized: "INTERRUPTED_DATE_MESSAGE", defaultValue: "오늘 단식이 중단되었습니다."))
+                let day = Date().day == interruptedFast.value?.interruptedDate.day
+                    ? Constants.Localization.TODAY
+                    : Constants.Localization.TOMORROW
+                output.messageText.accept(String(
+                    localized: "INTERRUPTED_DATE_MESSAGE",
+                    defaultValue: "\(day) 단식이 중단되었어요."
+                ))
             }
         }
         
@@ -328,7 +334,10 @@ final class TimerViewModel: ViewModel {
             case .noRoutineSetting:
                 output.currentLoopTimeLabelIsHidden.accept(true)
             case .interruptedDay:
-                output.currentLoopTimeLabelIsHidden.accept(true)
+                guard let routineSetting = currentRoutineSetting.value else { return }
+                output.currentLoopTimeLabelIsHidden.accept(false)
+                output.currentLoopStartTime.accept(routineSetting.currentFastStartDate)
+                output.currentLoopEndTime.accept(routineSetting.currentFastEndDate)
             }
         }
         
@@ -403,10 +412,10 @@ final class TimerViewModel: ViewModel {
                 output.remainTimeLabelIsHiddend.accept(true)
                 
             case .interruptedDay:
-                output.progressPercent.accept(0.0)
-                output.progressTime.accept(TimeInterval())
-                output.remainTime.accept(TimeInterval())
-                output.remainTimeLabelIsHiddend.accept(true)
+                output.progressPercent.accept(currentRoutineSetting.value?.fastProgressPercent ?? 0)
+                output.progressTime.accept(currentRoutineSetting.value?.fastProgressTime ?? 0)
+                output.remainTime.accept(currentRoutineSetting.value?.fastRemainTime ?? 0)
+                output.remainTimeLabelIsHiddend.accept(false)
                 
                 guard let interruptedFast = interruptedFast.value else { return }
                 
@@ -450,7 +459,7 @@ final class TimerViewModel: ViewModel {
             case .noRoutineSetting:
                 titles = ["🫠"]
             case .interruptedDay:
-                titles = ["😢"]
+                titles = ["😢", "\(Int(output.progressPercent.value * 100))%"]
             }
             
             titles.append(contentsOf: ["🔥", "💪", "🤐", "❌", "🚫", "🚨", "🏃🏻", "🏃🏼‍♀️"])
