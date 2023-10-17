@@ -78,6 +78,10 @@ extension Constants {
             defaultValue: "종료하기"
         )
         
+        static let YESTERDAY = String(
+            localized: "YESTERDAY",
+            defaultValue: "어제"
+        )
         static let TODAY = String(
             localized: "TODAY",
             defaultValue: "오늘"

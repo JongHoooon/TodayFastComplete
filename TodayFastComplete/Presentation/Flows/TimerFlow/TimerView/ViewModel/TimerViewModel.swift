@@ -302,7 +302,7 @@ final class TimerViewModel: ViewModel {
             case .interruptedDay:
                 let day = Date().day == interruptedFast.value?.interruptedDate.day
                     ? Constants.Localization.TODAY
-                    : Constants.Localization.TOMORROW
+                    : Constants.Localization.YESTERDAY
                 output.messageText.accept(String(
                     localized: "INTERRUPTED_DATE_MESSAGE",
                     defaultValue: "\(day) 단식이 중단되었어요."
