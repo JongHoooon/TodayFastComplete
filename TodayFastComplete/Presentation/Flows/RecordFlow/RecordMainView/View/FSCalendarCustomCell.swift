@@ -11,27 +11,25 @@ import FSCalendar
 
 final class FSCalendarCustomCell: FSCalendarCell {
     
+    var date: Date?
+    
     override var isSelected: Bool {
         didSet {
             switch isSelected {
             case true:
-                selectionLayer.isHidden = false
                 weightLabel.textColor = .tintAccent
                 selectionLayer.fillColor = UIColor.white.cgColor
+                selectionLayer.isHidden = false
             case false:
-                if dateIsToday {
-                    selectionLayer.fillColor = UIColor.white.withAlphaComponent(0.3).cgColor
-                    weightLabel.textColor = .white.withAlphaComponent(0.8)
-                } else {
-                    selectionLayer.isHidden = true
-                    weightLabel.textColor = .white.withAlphaComponent(0.8)
-                }
+                selectionLayer.isHidden = true
+                weightLabel.textColor = .white.withAlphaComponent(0.8)
             }
         }
     }
     
     private let selectionLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
+        layer.isHidden = true
         layer.fillColor = UIColor.white.cgColor
         layer.actions = ["hidden": NSNull()]
         return layer
@@ -101,5 +99,9 @@ final class FSCalendarCustomCell: FSCalendarCell {
             endAngle: .pi * 2,
             clockwise: true
         ).cgPath
+    }
+    
+    func configureCell(date: Date) {
+        self.date = date
     }
 }

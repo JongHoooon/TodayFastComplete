@@ -27,7 +27,7 @@ final class RecordMainViewController: BaseViewController {
         calendar.appearance.selectionColor = .white
         calendar.appearance.titleSelectionColor = .tintAccent
         calendar.appearance.subtitleSelectionColor = .tintAccent
-        calendar.appearance.titleTodayColor = .white
+        calendar.appearance.titleTodayColor = .black
         calendar.appearance.titleDefaultColor = .white
         calendar.appearance.weekdayTextColor = .white
         calendar.appearance.weekdayFont = .custom(size: 14.0, weight: .regular)
@@ -122,6 +122,7 @@ final class RecordMainViewController: BaseViewController {
         ])
         return segmentedControl
     }()
+    
     private let vc1: UIViewController = {
         let vc = UIViewController()
         vc.view.backgroundColor = .clear
@@ -340,7 +341,8 @@ private extension RecordMainViewController {
         calendarView.rx.willDisplay
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { cell, date in
-                
+                guard let cell = cell as? FSCalendarCustomCell else { return }
+                cell.configureCell(date: date)
             })
             .disposed(by: disposeBag)
     }
