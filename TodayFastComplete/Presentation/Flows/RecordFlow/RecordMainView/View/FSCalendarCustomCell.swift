@@ -17,9 +17,15 @@ final class FSCalendarCustomCell: FSCalendarCell {
             case true:
                 selectionLayer.isHidden = false
                 weightLabel.textColor = .tintAccent
+                selectionLayer.fillColor = UIColor.white.cgColor
             case false:
-                selectionLayer.isHidden = true
-                weightLabel.textColor = .white.withAlphaComponent(0.8)
+                if dateIsToday {
+                    selectionLayer.fillColor = UIColor.white.withAlphaComponent(0.3).cgColor
+                    weightLabel.textColor = .white.withAlphaComponent(0.8)
+                } else {
+                    selectionLayer.isHidden = true
+                    weightLabel.textColor = .white.withAlphaComponent(0.8)
+                }
             }
         }
     }
@@ -63,6 +69,11 @@ final class FSCalendarCustomCell: FSCalendarCell {
     
     required init!(coder aDecoder: NSCoder!) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        selectionLayer.isHidden = true
     }
     
     override func layoutSubviews() {
