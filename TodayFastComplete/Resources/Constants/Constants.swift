@@ -31,6 +31,9 @@ enum Constants {
         static let timer = UIImage(systemName: "timer")
         static let calendarBadgeClock = UIImage(systemName: "calendar.badge.clock")
         static let xmark = UIImage(systemName: "xmark")
+        static let chevronLeft = UIImage(systemName: "chevron.left")
+        static let chevronRight = UIImage(systemName: "chevron.right")
+        static let arrowtriagleDownFill = UIImage(systemName: "arrowtriangle.down.fill")
     }
     
     // MARK: - Image

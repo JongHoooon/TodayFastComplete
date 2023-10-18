@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */; };
 		ED01F8582ADC049300A300DC /* CancelOkAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */; };
+		ED0E74AB2ADFC8A600E94419 /* FSCalendarCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0E74AA2ADFC8A600E94419 /* FSCalendarCustomCell.swift */; };
 		ED1407DA2AC2FC250050E631 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = ED1407D92AC2FC240050E631 /* .swiftlint.yml */; };
 		ED1407DD2AC2FDDE0050E631 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DC2AC2FDDE0050E631 /* RxCocoa */; };
 		ED1407DF2AC2FDDE0050E631 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407DE2AC2FDDE0050E631 /* RxRelay */; };
@@ -72,6 +73,9 @@
 		ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB02ACE8BF2000B715A /* SelectFastModeCollectionView.swift */; };
 		ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB12ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift */; };
 		ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB42ACE97DE000B715A /* Reuseable.swift */; };
+		ED86F5572ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F5562ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift */; };
+		ED86F55C2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */; };
+		ED86F55E2ADF8B3F00CA83AE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F55D2ADF8B3F00CA83AE /* TestViewController.swift */; };
 		EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */; };
 		EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */; };
 		EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */; };
@@ -112,6 +116,7 @@
 /* Begin PBXFileReference section */
 		ED01F8552ADBF04900A300DC /* DeleteRoutineSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteRoutineSettingCell.swift; sourceTree = "<group>"; };
 		ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOkAlertPresentable.swift; sourceTree = "<group>"; };
+		ED0E74AA2ADFC8A600E94419 /* FSCalendarCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarCustomCell.swift; sourceTree = "<group>"; };
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
 		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
@@ -172,6 +177,9 @@
 		ED830EB02ACE8BF2000B715A /* SelectFastModeCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFastModeCollectionView.swift; sourceTree = "<group>"; };
 		ED830EB12ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFastModeCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED830EB42ACE97DE000B715A /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
+		ED86F5562ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFSCalendarDelegateProxy.swift; sourceTree = "<group>"; };
+		ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentContorl.swift; sourceTree = "<group>"; };
+		ED86F55D2ADF8B3F00CA83AE /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../Desktop/Study/iOS/TabBarController.swift; sourceTree = "<group>"; };
@@ -282,6 +290,7 @@
 				ED4DB3BF2AD50DAD003535C9 /* DateComponents+Extension.swift */,
 				ED4DB3AE2AD3EF31003535C9 /* DateFormatter+Extension.swift */,
 				EDC2CC222ACD89F90096D2F0 /* Reactive+Extension.swift */,
+				ED86F5562ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift */,
 				ED830EB42ACE97DE000B715A /* Reuseable.swift */,
 				EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */,
 				ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */,
@@ -651,6 +660,7 @@
 			children = (
 				EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */,
 				EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */,
+				ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -717,6 +727,7 @@
 			children = (
 				EDC66ED42ADE5DD50085B184 /* Coordinator */,
 				EDC66ED52ADE5DDC0085B184 /* RecordMainView */,
+				ED86F55D2ADF8B3F00CA83AE /* TestViewController.swift */,
 			);
 			path = RecordFlow;
 			sourceTree = "<group>";
@@ -750,6 +761,7 @@
 			isa = PBXGroup;
 			children = (
 				EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */,
+				ED0E74AA2ADFC8A600E94419 /* FSCalendarCustomCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -886,6 +898,7 @@
 			files = (
 				EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */,
 				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
+				ED86F55E2ADF8B3F00CA83AE /* TestViewController.swift in Sources */,
 				EDC66ECE2ADD10480085B184 /* FastInterruptable.swift in Sources */,
 				EDC66EDF2ADE66F20085B184 /* RecordDIContainer.swift in Sources */,
 				ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */,
@@ -938,6 +951,7 @@
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
 				ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
+				ED86F5572ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
 				EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */,
 				ED4DB3BE2AD4D457003535C9 /* LocalRepositoryError.swift in Sources */,
@@ -949,6 +963,7 @@
 				EDBAAA2E2AD273C500CB84C8 /* TimeSettingView.swift in Sources */,
 				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,
 				EDACF3712ACED31000F72CE8 /* SettingTimerDIContainer.swift in Sources */,
+				ED86F55C2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift in Sources */,
 				ED50E95C2ACF908200182922 /* FastRoutineCollectionViewCell.swift in Sources */,
 				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
 				ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */,
@@ -968,6 +983,7 @@
 				ED4D40F42AD971C300C49C8A /* CalendarNotification.swift in Sources */,
 				EDC66ECC2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift in Sources */,
 				ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */,
+				ED0E74AB2ADFC8A600E94419 /* FSCalendarCustomCell.swift in Sources */,
 				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
 				ED50E95A2ACF903A00182922 /* TimeSettingCollectionViewCell.swift in Sources */,
 			);

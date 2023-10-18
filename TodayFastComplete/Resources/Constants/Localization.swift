@@ -16,6 +16,14 @@ extension Constants {
             localized: "RECORD_TITLE",
             defaultValue: "기록"
         )
+        static let FAST_TITLE = String(
+            localized: "FAST_TITLE",
+            defaultValue: "단식"
+        )
+        static let WEIGHT_TITLE = String(
+            localized: "WEIGHT_TITLE",
+            defaultValue: "몸무게"
+        )
         
         static let TIMER_MODE_SELECT_VIEW_TITLE = String(
             localized: "TIMER_MODE_SELECT_VIEW_TITLE",

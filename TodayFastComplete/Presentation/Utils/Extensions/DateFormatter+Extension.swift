@@ -40,6 +40,13 @@ extension DateFormatter {
         return format
     }
     
+    /// 2018-10-18
+    static var yearMonthDayFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        return format
+    }
+    
     static func toString(
         date: Date,
         format: DateFormatter
