@@ -18,6 +18,9 @@ final class RecordMainViewController: BaseViewController {
     private let disposeBag: DisposeBag
     
     // MARK: - UI
+    private let recordPageViewController: UIPageViewController
+    private let pageViewChildViewControllers: [UIViewController]
+    
     private let calendarView: FSCalendar = {
         let calendar = FSCalendar()
         calendar.register(FSCalendarCustomCell.self, forCellReuseIdentifier: FSCalendarCustomCell.identifier)
@@ -122,29 +125,15 @@ final class RecordMainViewController: BaseViewController {
         ])
         return segmentedControl
     }()
-    
-    private let vc1: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .clear
-        return vc
-    }()
-    private let vc2: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .clear
-        return vc
-    }()
-    
-    private var dataViewControllers: [UIViewController] {
-        [vc1, vc2]
-    }
+
     var currentPage: Int = 0 {
         // segment control -> pageView controller 업데이트
         didSet {
             let direction: UIPageViewController.NavigationDirection = oldValue <= self.currentPage
                 ? .forward
                 : .reverse
-            pageViewController.setViewControllers(
-                [dataViewControllers[currentPage]],
+            recordPageViewController.setViewControllers(
+                [pageViewChildViewControllers[currentPage]],
                 direction: direction,
                 animated: true,
                 completion: nil
@@ -152,24 +141,18 @@ final class RecordMainViewController: BaseViewController {
         }
     }
     
-    private lazy var pageViewController: UIPageViewController = {
-        let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        vc.setViewControllers([self.dataViewControllers[0]], direction: .forward, animated: true)
-        vc.delegate = self
-        vc.dataSource = self
-        vc.view.subviews.forEach {
-            if let subView = $0 as? UIScrollView {
-                subView.isScrollEnabled = false
-            }
-        }
-        return vc
-    }()
-    
     // MARK: - Lifecycle
-    init(viewModel: RecordMainViewModel) {
+    init(
+        viewModel: RecordMainViewModel,
+        pageViewController: UIPageViewController,
+        pageViewChildViewControllers: [UIViewController]
+    ) {
         self.viewModel = viewModel
+        self.recordPageViewController = pageViewController
+        self.pageViewChildViewControllers = pageViewChildViewControllers
         self.disposeBag = DisposeBag()
         super.init(nibName: nil, bundle: nil)
+        baseView.addSubview(recordPageViewController.view)
     }
     
     @available(*, unavailable)
@@ -188,8 +171,10 @@ final class RecordMainViewController: BaseViewController {
     
     override func configure() {
         view.backgroundColor = Constants.Color.tintAccent
-        bindViewModel()
+        configurePageViewController()
+        configureSegmentController()
         calendarView.dataSource = self
+        bindViewModel()
     }
     
     override func configureNavigationBar() {
@@ -213,7 +198,7 @@ final class RecordMainViewController: BaseViewController {
             grabberView,
             infoStackView,
             segmentedControl,
-            pageViewController.view
+            recordPageViewController.view
         ].forEach { baseView.addSubview($0) }
         
         [
@@ -261,34 +246,12 @@ final class RecordMainViewController: BaseViewController {
             $0.height.equalTo(36.0)
         }
         
-        pageViewController.view.snp.makeConstraints {
+        recordPageViewController.view.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(4.0)
             $0.top.equalTo(segmentedControl.snp.bottom).offset(4.0)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
-        segmentedControl.setTitleTextAttributes(
-            [
-                .foregroundColor: UIColor.systemGray,
-                .font: UIFont.custom(size: 14.0, weight: .light)
-            ],
-            for: .normal
-        )
-        segmentedControl.setTitleTextAttributes(
-            [
-                .foregroundColor: UIColor.label,
-                .font: UIFont.custom(size: 14.0, weight: .medium)
-            ],
-            for: .selected
-        )
-        segmentedControl.addTarget(self, action: #selector(changeValue(control:)), for: .valueChanged)
-        segmentedControl.selectedSegmentIndex = 0
-        changeValue(control: segmentedControl)
-    }
-    
-    @objc
-    private func changeValue(control: UISegmentedControl) {
-        currentPage = control.selectedSegmentIndex
+
     }
 }
 
@@ -353,44 +316,24 @@ extension RecordMainViewController: UIPageViewControllerDataSource {
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        guard let index = dataViewControllers.firstIndex(of: viewController),
+        guard let index = pageViewChildViewControllers.firstIndex(of: viewController),
               index - 1 >= 0
         else { return nil }
-        return dataViewControllers[index-1]
+        return pageViewChildViewControllers[index-1]
     }
     
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
-        guard let index = dataViewControllers.firstIndex(of: viewController),
-              index < dataViewControllers.count - 1
+        guard let index = pageViewChildViewControllers.firstIndex(of: viewController),
+              index < pageViewChildViewControllers.count - 1
         else { return nil }
-        return dataViewControllers[index+1]
-    }
-    
-    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        CGSize(width: 20.0, height: 20.0)
-    }
-}
-
-extension RecordMainViewController: UIPageViewControllerDelegate {
-    func pageViewController(
-        _ pageViewController: UIPageViewController,
-        didFinishAnimating finished: Bool,
-        previousViewControllers: [UIViewController],
-        transitionCompleted completed: Bool
-    ) {
-        guard let viewController = pageViewController.viewControllers?[0],
-              let index = dataViewControllers.firstIndex(of: viewController)
-        else { return }
-        currentPage = index
-        segmentedControl.selectedSegmentIndex = index
+        return pageViewChildViewControllers[index+1]
     }
 }
 
 extension RecordMainViewController: FSCalendarDataSource {
-    
     func calendar(
         _ calendar: FSCalendar,
         cellFor date: Date,
@@ -401,5 +344,48 @@ extension RecordMainViewController: FSCalendarDataSource {
             for: date,
             at: position
         )
+    }
+}
+
+private extension RecordMainViewController {
+    func configureSegmentController() {
+        
+        segmentedControl.setTitleTextAttributes(
+            [
+                .foregroundColor: UIColor.systemGray,
+                .font: UIFont.custom(size: 14.0, weight: .light)
+            ],
+            for: .normal
+        )
+        segmentedControl.setTitleTextAttributes(
+            [
+                .foregroundColor: UIColor.label,
+                .font: UIFont.custom(size: 14.0, weight: .medium)
+            ],
+            for: .selected
+        )
+        
+        segmentedControl.addTarget(self, action: #selector(changeValue(control:)), for: .valueChanged)
+        segmentedControl.selectedSegmentIndex = 0
+        changeValue(control: segmentedControl)
+    }
+    
+    @objc
+    private func changeValue(control: UISegmentedControl) {
+        currentPage = control.selectedSegmentIndex
+    }
+    
+    func configurePageViewController() {
+        recordPageViewController.setViewControllers(
+            [pageViewChildViewControllers[0]],
+            direction: .forward,
+            animated: true
+        )
+        recordPageViewController.dataSource = self
+        recordPageViewController.view.subviews.forEach {
+            if let subview = $0 as? UIScrollView {
+                subview.isScrollEnabled = false
+            }
+        }
     }
 }

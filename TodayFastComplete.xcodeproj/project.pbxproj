@@ -53,6 +53,8 @@
 		ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9812AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift */; };
 		ED50E9872AD198DB00182922 /* Array+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9862AD198DB00182922 /* Array+Extenstion.swift */; };
 		ED50E9892AD1990400182922 /* List+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED50E9882AD1990400182922 /* List+Extension.swift */; };
+		ED622C392AE00FD8004DCF1F /* FastRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED622C382AE00FD8004DCF1F /* FastRecordViewController.swift */; };
+		ED622C3B2AE00FF6004DCF1F /* WeightRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED622C3A2AE00FF6004DCF1F /* WeightRecordViewController.swift */; };
 		ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED65BEBA2AD385B900534F7C /* StartTimerPickerViewController.swift */; };
 		ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED65BEBC2AD3BF0600534F7C /* StartTimePickerViewModel.swift */; };
 		ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C671D2AC8395400230621 /* Coordinator.swift */; };
@@ -75,7 +77,6 @@
 		ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB42ACE97DE000B715A /* Reuseable.swift */; };
 		ED86F5572ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F5562ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift */; };
 		ED86F55C2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */; };
-		ED86F55E2ADF8B3F00CA83AE /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F55D2ADF8B3F00CA83AE /* TestViewController.swift */; };
 		EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */; };
 		EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */; };
 		EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */; };
@@ -154,6 +155,8 @@
 		ED50E9812AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTimerRoutineSettingRepository.swift; sourceTree = "<group>"; };
 		ED50E9862AD198DB00182922 /* Array+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extenstion.swift"; sourceTree = "<group>"; };
 		ED50E9882AD1990400182922 /* List+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Extension.swift"; sourceTree = "<group>"; };
+		ED622C382AE00FD8004DCF1F /* FastRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRecordViewController.swift; sourceTree = "<group>"; };
+		ED622C3A2AE00FF6004DCF1F /* WeightRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordViewController.swift; sourceTree = "<group>"; };
 		ED65BEBA2AD385B900534F7C /* StartTimerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimerPickerViewController.swift; sourceTree = "<group>"; };
 		ED65BEBC2AD3BF0600534F7C /* StartTimePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTimePickerViewModel.swift; sourceTree = "<group>"; };
 		ED6C671D2AC8395400230621 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -179,7 +182,6 @@
 		ED830EB42ACE97DE000B715A /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
 		ED86F5562ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFSCalendarDelegateProxy.swift; sourceTree = "<group>"; };
 		ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentContorl.swift; sourceTree = "<group>"; };
-		ED86F55D2ADF8B3F00CA83AE /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../Desktop/Study/iOS/TabBarController.swift; sourceTree = "<group>"; };
@@ -372,6 +374,54 @@
 				EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		ED622C362AE00FAB004DCF1F /* FastRecordView */ = {
+			isa = PBXGroup;
+			children = (
+				ED622C3E2AE01071004DCF1F /* ViewModel */,
+				ED622C3C2AE0106C004DCF1F /* View */,
+			);
+			path = FastRecordView;
+			sourceTree = "<group>";
+		};
+		ED622C372AE00FB1004DCF1F /* WeightRecordView */ = {
+			isa = PBXGroup;
+			children = (
+				ED622C3F2AE01073004DCF1F /* ViewModel */,
+				ED622C3D2AE0106F004DCF1F /* View */,
+			);
+			path = WeightRecordView;
+			sourceTree = "<group>";
+		};
+		ED622C3C2AE0106C004DCF1F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED622C382AE00FD8004DCF1F /* FastRecordViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED622C3D2AE0106F004DCF1F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED622C3A2AE00FF6004DCF1F /* WeightRecordViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED622C3E2AE01071004DCF1F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED622C3F2AE01073004DCF1F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		ED65BEB72AD3859400534F7C /* StartTimePickerView */ = {
@@ -727,7 +777,8 @@
 			children = (
 				EDC66ED42ADE5DD50085B184 /* Coordinator */,
 				EDC66ED52ADE5DDC0085B184 /* RecordMainView */,
-				ED86F55D2ADF8B3F00CA83AE /* TestViewController.swift */,
+				ED622C362AE00FAB004DCF1F /* FastRecordView */,
+				ED622C372AE00FB1004DCF1F /* WeightRecordView */,
 			);
 			path = RecordFlow;
 			sourceTree = "<group>";
@@ -898,7 +949,6 @@
 			files = (
 				EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */,
 				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
-				ED86F55E2ADF8B3F00CA83AE /* TestViewController.swift in Sources */,
 				EDC66ECE2ADD10480085B184 /* FastInterruptable.swift in Sources */,
 				EDC66EDF2ADE66F20085B184 /* RecordDIContainer.swift in Sources */,
 				ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */,
@@ -950,6 +1000,7 @@
 				ED4DB3C62AD53337003535C9 /* RoutineSettingFetchable.swift in Sources */,
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
 				ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */,
+				ED622C392AE00FD8004DCF1F /* FastRecordViewController.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
 				ED86F5572ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
@@ -959,6 +1010,7 @@
 				ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */,
 				EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */,
 				EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */,
+				ED622C3B2AE00FF6004DCF1F /* WeightRecordViewController.swift in Sources */,
 				EDC2CC312ACE459A0096D2F0 /* SelectFastModeViewModel.swift in Sources */,
 				EDBAAA2E2AD273C500CB84C8 /* TimeSettingView.swift in Sources */,
 				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,

@@ -8,13 +8,14 @@
 import UIKit
 
 protocol RecordCoordinatorDependencies: AnyObject { 
-    func makeRecordMainViewController(coordinator: Coordinator) -> UIViewController
+    func makeRecordMainViewController(coordinator: Coordinator, pageViewController: UIPageViewController) -> UIViewController
 }
 
 final class RecordCoordinator: BaseCoordinator,
                                CoordinatorFinishDelegate {
 
     private let rootViewController: UINavigationController
+    private var mainPageViewController: UIPageViewController?
     private let dependencies: RecordCoordinatorDependencies
     
     init(
@@ -38,7 +39,16 @@ final class RecordCoordinator: BaseCoordinator,
 
 private extension RecordCoordinator {
     func showRecordMain() {
-        let vc = dependencies.makeRecordMainViewController(coordinator: self)
+        let pageViewController = UIPageViewController(
+            transitionStyle: .scroll,
+            navigationOrientation: .horizontal
+        )
+        mainPageViewController = pageViewController
+        
+        let vc = dependencies.makeRecordMainViewController(
+            coordinator: self,
+            pageViewController: pageViewController
+        )
         rootViewController.viewControllers = [vc]
     }
 }

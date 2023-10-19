@@ -17,10 +17,10 @@ final class RecordMainViewModel: ViewModel {
         
     }
     
-    private let viewModel: Coordinator
+    private let coordinator: Coordinator
     
     init(coordinator: Coordinator) {
-        self.viewModel = coordinator
+        self.coordinator = coordinator
     }
     
     func transform(input: Input) -> Output {
