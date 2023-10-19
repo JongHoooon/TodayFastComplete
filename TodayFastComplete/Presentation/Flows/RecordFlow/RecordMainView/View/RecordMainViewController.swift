@@ -123,7 +123,20 @@ final class RecordMainViewController: BaseViewController {
             Constants.Localization.FAST_TITLE,
             Constants.Localization.WEIGHT_TITLE
         ])
+        segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
+    }()
+    
+    private let swipeDownGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer()
+        gesture.direction = .down
+        return gesture
+    }()
+    
+    private let swipeUpGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer()
+        gesture.direction = .up
+        return gesture
     }()
     
     // MARK: - Lifecycle
@@ -158,6 +171,7 @@ final class RecordMainViewController: BaseViewController {
         view.backgroundColor = Constants.Color.tintAccent
         configurePageViewController()
         configureSegmentController()
+        addGesture()
         calendarView.dataSource = self
         bindViewModel()
     }
@@ -236,15 +250,16 @@ final class RecordMainViewController: BaseViewController {
             $0.top.equalTo(segmentedControl.snp.bottom).offset(4.0)
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-
     }
 }
 
 private extension RecordMainViewController {
     func bindViewModel() {
-        
         let input = RecordMainViewModel.Input(
-            selectedSegmentIndex: segmentedControl.rx.selectedSegmentIndex.asObservable()
+            selectedSegmentIndex: segmentedControl.rx.selectedSegmentIndex.asObservable(),
+            swipeUpGesture: swipeUpGesture.rx.event.asObservable().map { _ in },
+            swipeDownGesture: swipeDownGesture.rx.event.asObservable().map { _ in },
+            calendarDidSelect: calendarView.rx.didSelect
         )
         
         let output = viewModel.transform(input: input)
@@ -264,31 +279,15 @@ private extension RecordMainViewController {
             )})
             .disposed(by: disposeBag)
         
-        
-        let swipeDown = UISwipeGestureRecognizer()
-        swipeDown.direction = .down
-        let swipeUp = UISwipeGestureRecognizer()
-        swipeUp.direction = .up
-        [
-            swipeUp,
-            swipeDown
-        ].forEach {
-            view.addGestureRecognizer($0)
-//            calendarView.addGestureRecognizer($0)
-        }
-        
-        swipeDown.rx.event
-            .subscribe(with: self, onNext: { owner, _ in
-                owner.calendarView.setScope(.month, animated: true)
+        output.calendarScope
+            .map { UInt($0) }
+            .compactMap { FSCalendarScope(rawValue: $0) }
+            .asDriver(onErrorJustReturn: .week)
+            .drive(with: self, onNext: { owner, scope in
+                owner.calendarView.setScope(scope, animated: true)
             })
             .disposed(by: disposeBag)
-        
-        swipeUp.rx.event
-            .subscribe(with: self, onNext: { owner, _ in
-                owner.calendarView.setScope(.week, animated: true)
-            })
-            .disposed(by: disposeBag)
-        
+
         calendarView.rx.boundingRectWillChange
             .asDriver(onErrorJustReturn: .zero)
             .drive(with: self, onNext: { owner, bounds in
@@ -301,25 +300,11 @@ private extension RecordMainViewController {
             })
             .disposed(by: disposeBag)
         
-        calendarView.rx.didSelect
-            .asDriver(onErrorJustReturn: Date())
-            .drive(with: self, onNext: { owner, date in
-                print(date, date.toString(format: .dateTimeFormat))
-            })
-            .disposed(by: disposeBag)
-        
         calendarView.rx.willDisplay
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { cell, date in
                 guard let cell = cell as? FSCalendarCustomCell else { return }
                 cell.configureCell(date: date)
-            })
-            .disposed(by: disposeBag)
-        
-        segmentedControl.rx.selectedSegmentIndex
-            .asDriver()
-            .drive(with: self, onNext: { owner, index in
-                
             })
             .disposed(by: disposeBag)
     }
@@ -376,9 +361,8 @@ private extension RecordMainViewController {
                 .foregroundColor: UIColor.label,
                 .font: UIFont.custom(size: 14.0, weight: .medium)
             ],
-            for: .selected
+        for: .selected
         )
-        segmentedControl.selectedSegmentIndex = 0
     }
     func configurePageViewController() {
         recordPageViewController.setViewControllers(
@@ -392,5 +376,11 @@ private extension RecordMainViewController {
                 subview.isScrollEnabled = false
             }
         }
+    }
+    func addGesture() {
+        [
+            swipeUpGesture,
+            swipeDownGesture
+        ].forEach { view.addGestureRecognizer($0) }
     }
 }
