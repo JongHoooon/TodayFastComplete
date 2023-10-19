@@ -125,21 +125,6 @@ final class RecordMainViewController: BaseViewController {
         ])
         return segmentedControl
     }()
-
-    var currentPage: Int = 0 {
-        // segment control -> pageView controller 업데이트
-        didSet {
-            let direction: UIPageViewController.NavigationDirection = oldValue <= self.currentPage
-                ? .forward
-                : .reverse
-            recordPageViewController.setViewControllers(
-                [pageViewChildViewControllers[currentPage]],
-                direction: direction,
-                animated: true,
-                completion: nil
-            )
-        }
-    }
     
     // MARK: - Lifecycle
     init(
@@ -258,6 +243,28 @@ final class RecordMainViewController: BaseViewController {
 private extension RecordMainViewController {
     func bindViewModel() {
         
+        let input = RecordMainViewModel.Input(
+            selectedSegmentIndex: segmentedControl.rx.selectedSegmentIndex.asObservable()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.currentPage
+            .withPrevious(startWith: 0)
+            .bind(with: self, onNext: { owner, pages in
+                let oldPage = pages.0
+                let currentPage = pages.1
+                let direction: UIPageViewController.NavigationDirection = oldPage <= currentPage
+                    ? .forward
+                    : .reverse
+                owner.recordPageViewController.setViewControllers(
+                    [owner.pageViewChildViewControllers[currentPage]],
+                    direction: direction,
+                    animated: true
+            )})
+            .disposed(by: disposeBag)
+        
+        
         let swipeDown = UISwipeGestureRecognizer()
         swipeDown.direction = .down
         let swipeUp = UISwipeGestureRecognizer()
@@ -306,6 +313,13 @@ private extension RecordMainViewController {
             .bind(onNext: { cell, date in
                 guard let cell = cell as? FSCalendarCustomCell else { return }
                 cell.configureCell(date: date)
+            })
+            .disposed(by: disposeBag)
+        
+        segmentedControl.rx.selectedSegmentIndex
+            .asDriver()
+            .drive(with: self, onNext: { owner, index in
+                
             })
             .disposed(by: disposeBag)
     }
@@ -364,17 +378,8 @@ private extension RecordMainViewController {
             ],
             for: .selected
         )
-        
-        segmentedControl.addTarget(self, action: #selector(changeValue(control:)), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
-        changeValue(control: segmentedControl)
     }
-    
-    @objc
-    private func changeValue(control: UISegmentedControl) {
-        currentPage = control.selectedSegmentIndex
-    }
-    
     func configurePageViewController() {
         recordPageViewController.setViewControllers(
             [pageViewChildViewControllers[0]],

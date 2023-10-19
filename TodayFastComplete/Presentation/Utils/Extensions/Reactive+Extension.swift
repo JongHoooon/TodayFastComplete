@@ -34,3 +34,9 @@ extension Reactive where Base: UIViewController {
          return ControlEvent(events: source)
     }
 }
+
+extension ObservableType {
+    func withPrevious(startWith first: Element) -> Observable<(Element, Element)> {
+        return scan((first, first)) { ($0.1, $1) }.skip(1)
+    }
+}

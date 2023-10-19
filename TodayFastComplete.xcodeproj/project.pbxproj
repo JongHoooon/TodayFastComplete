@@ -67,6 +67,7 @@
 		ED6C67382AC9029400230621 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C67372AC9029400230621 /* Log.swift */; };
 		ED6C673B2AC9033D00230621 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C673A2AC9033D00230621 /* OSLog.framework */; };
 		ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */; };
+		ED80B9F12AE0E6A500F85A66 /* RecordEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80B9F02AE0E6A500F85A66 /* RecordEnum.swift */; };
 		ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */; };
 		ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */; };
 		ED81921E2AC2ECEB00C7C830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */; };
@@ -169,6 +170,7 @@
 		ED6C67372AC9029400230621 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		ED6C673A2AC9033D00230621 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishDelegate.swift; sourceTree = "<group>"; };
+		ED80B9F02AE0E6A500F85A66 /* RecordEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordEnum.swift; sourceTree = "<group>"; };
 		ED8192112AC2ECEA00C7C830 /* TodayFastComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayFastComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -804,6 +806,7 @@
 			isa = PBXGroup;
 			children = (
 				EDC66ED82ADE5E1A0085B184 /* RecordMainViewModel.swift */,
+				ED80B9F02AE0E6A500F85A66 /* RecordEnum.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				ED50E97D2AD1716D00182922 /* RealmUniqueKey.swift in Sources */,
 				ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */,
 				EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */,
+				ED80B9F12AE0E6A500F85A66 /* RecordEnum.swift in Sources */,
 				ED4DB3C02AD50DAD003535C9 /* DateComponents+Extension.swift in Sources */,
 				EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */,
 				EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */,
