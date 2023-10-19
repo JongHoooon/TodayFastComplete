@@ -45,4 +45,5 @@ enum Step {
     
     // Record
     case recordFlowIsRequired
+    case writeFastRecord
 }

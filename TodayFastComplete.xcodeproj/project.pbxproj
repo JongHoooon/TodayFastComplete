@@ -68,6 +68,9 @@
 		ED6C673B2AC9033D00230621 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6C673A2AC9033D00230621 /* OSLog.framework */; };
 		ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */; };
 		ED80B9F12AE0E6A500F85A66 /* RecordEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80B9F02AE0E6A500F85A66 /* RecordEnum.swift */; };
+		ED80B9F72AE10B0400F85A66 /* WriteFastRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80B9F62AE10B0400F85A66 /* WriteFastRecordViewController.swift */; };
+		ED80B9F92AE10B2D00F85A66 /* WriteFastRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80B9F82AE10B2D00F85A66 /* WriteFastRecordViewModel.swift */; };
+		ED80B9FB2AE10CA000F85A66 /* FastRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED80B9FA2AE10CA000F85A66 /* FastRecordViewModel.swift */; };
 		ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */; };
 		ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */; };
 		ED81921E2AC2ECEB00C7C830 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */; };
@@ -171,6 +174,9 @@
 		ED6C673A2AC9033D00230621 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
 		ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishDelegate.swift; sourceTree = "<group>"; };
 		ED80B9F02AE0E6A500F85A66 /* RecordEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordEnum.swift; sourceTree = "<group>"; };
+		ED80B9F62AE10B0400F85A66 /* WriteFastRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFastRecordViewController.swift; sourceTree = "<group>"; };
+		ED80B9F82AE10B2D00F85A66 /* WriteFastRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteFastRecordViewModel.swift; sourceTree = "<group>"; };
+		ED80B9FA2AE10CA000F85A66 /* FastRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRecordViewModel.swift; sourceTree = "<group>"; };
 		ED8192112AC2ECEA00C7C830 /* TodayFastComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayFastComplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED8192142AC2ECEA00C7C830 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -415,6 +421,7 @@
 		ED622C3E2AE01071004DCF1F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				ED80B9FA2AE10CA000F85A66 /* FastRecordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -551,6 +558,31 @@
 				ED6C673A2AC9033D00230621 /* OSLog.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED80B9F32AE10ADE00F85A66 /* WriteFastView */ = {
+			isa = PBXGroup;
+			children = (
+				ED80B9F42AE10AF300F85A66 /* ViewModel */,
+				ED80B9F52AE10AF700F85A66 /* View */,
+			);
+			path = WriteFastView;
+			sourceTree = "<group>";
+		};
+		ED80B9F42AE10AF300F85A66 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ED80B9F82AE10B2D00F85A66 /* WriteFastRecordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ED80B9F52AE10AF700F85A66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED80B9F62AE10B0400F85A66 /* WriteFastRecordViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		ED8192082AC2ECEA00C7C830 = {
@@ -781,6 +813,7 @@
 				EDC66ED52ADE5DDC0085B184 /* RecordMainView */,
 				ED622C362AE00FAB004DCF1F /* FastRecordView */,
 				ED622C372AE00FB1004DCF1F /* WeightRecordView */,
+				ED80B9F32AE10ADE00F85A66 /* WriteFastView */,
 			);
 			path = RecordFlow;
 			sourceTree = "<group>";
@@ -960,6 +993,7 @@
 				EDC66ECA2ADCFB470085B184 /* FastInterruptedDayRepository.swift in Sources */,
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */,
+				ED80B9F72AE10B0400F85A66 /* WriteFastRecordViewController.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
 				ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */,
 				ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */,
@@ -1033,10 +1067,12 @@
 				ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */,
 				EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */,
 				EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */,
+				ED80B9F92AE10B2D00F85A66 /* WriteFastRecordViewModel.swift in Sources */,
 				EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */,
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
 				ED6C671E2AC8395400230621 /* Coordinator.swift in Sources */,
 				ED4D40F42AD971C300C49C8A /* CalendarNotification.swift in Sources */,
+				ED80B9FB2AE10CA000F85A66 /* FastRecordViewModel.swift in Sources */,
 				EDC66ECC2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift in Sources */,
 				ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */,
 				ED0E74AB2ADFC8A600E94419 /* FSCalendarCustomCell.swift in Sources */,

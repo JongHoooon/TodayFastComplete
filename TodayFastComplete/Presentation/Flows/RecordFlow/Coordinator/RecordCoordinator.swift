@@ -9,6 +9,7 @@ import UIKit
 
 protocol RecordCoordinatorDependencies: AnyObject { 
     func makeRecordMainViewController(coordinator: Coordinator, pageViewController: UIPageViewController) -> UIViewController
+    func makeWriteFastRecord(coordinator: Coordinator) -> UIViewController
 }
 
 final class RecordCoordinator: BaseCoordinator,
@@ -31,6 +32,8 @@ final class RecordCoordinator: BaseCoordinator,
         switch step {
         case .recordFlowIsRequired:
             showRecordMain()
+        case .writeFastRecord:
+            presentWriteFastRecord()
         default:
             assertionFailure("not configured step")
         }
@@ -50,5 +53,10 @@ private extension RecordCoordinator {
             pageViewController: pageViewController
         )
         rootViewController.viewControllers = [vc]
+    }
+    
+    func presentWriteFastRecord() {
+        let vc = dependencies.makeWriteFastRecord(coordinator: self)
+        rootViewController.present(vc, animated: true)
     }
 }

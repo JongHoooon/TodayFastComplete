@@ -17,7 +17,10 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
         return RecordMainViewController(
             viewModel: makeRecordMainViewModel(coordinator: coordinator),
             pageViewController: pageViewController,
-            pageViewChildViewControllers: [makeFastRecordViewController(), makeWeightRecordViewController()]
+            pageViewChildViewControllers: [
+                makeFastRecordViewController(coordinator: coordinator),
+                makeWeightRecordViewController()
+            ]
         )
     }
     
@@ -26,12 +29,25 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     }
     
     // MARK: - Fast Record
-    private func makeFastRecordViewController() -> UIViewController {
-        return FastRecordViewController()
+    private func makeFastRecordViewController(coordinator: Coordinator) -> UIViewController {
+        return FastRecordViewController(viewModel: makeFastRecordViewModel(coordinator: coordinator))
+    }
+    
+    private func makeFastRecordViewModel(coordinator: Coordinator) -> FastRecordViewModel {
+        return FastRecordViewModel(coordinator: coordinator)
     }
     
     // MARK: - Weight Record
     private func makeWeightRecordViewController() -> UIViewController {
         return WeightRecordViewController()
+    }
+    
+    // MARK: - Write Fast Record
+    func makeWriteFastRecord(coordinator: Coordinator) -> UIViewController {
+        return WriteFastRecordViewController(viewModel: makeWriteFastRecordViewModel(coordinator: coordinator))
+    }
+    
+    private func makeWriteFastRecordViewModel(coordinator: Coordinator) -> WriteFastRecordViewModel {
+        return WriteFastRecordViewModel(coordinator: coordinator)
     }
 }
