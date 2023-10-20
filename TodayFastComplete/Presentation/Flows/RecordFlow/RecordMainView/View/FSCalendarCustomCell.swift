@@ -41,7 +41,7 @@ final class FSCalendarCustomCell: FSCalendarCell {
     }()
     private let weightLabel: UILabel = {
         let label = UILabel()
-        label.text = "99.0kg"
+        label.text = "78.0kg"
         label.font = UIFont.custom(size: 8.0, weight: .regular)
         label.textColor = UIColor.tintMain
         label.sizeToFit()
@@ -102,6 +102,11 @@ final class FSCalendarCustomCell: FSCalendarCell {
     }
     
     func configureCell(date: Date) {
-        self.date = date
+        if date > Date() {
+            fastEventLayer.isHidden = true
+            weightLabel.isHidden = true
+        }
+        let weight = 80.0 - 0.1 * Double(date.day)
+        weightLabel.text = "\(String(format: "%.1f", weight))kg"
     }
 }

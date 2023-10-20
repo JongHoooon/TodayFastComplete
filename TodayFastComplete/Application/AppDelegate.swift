@@ -14,23 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        
-        // 알림 권한 설정
-        UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current()
-            .requestAuthorization(
-                options: [.alert, .sound, .badge],
-                completionHandler: { success, error in
-                    if let error {
-                        Log.error(error)
-                    } else if success == true {
-                        Log.info("request authorization authorized")
-                    } else {
-                        Log.info("request authorization rejected")
-                    }
-                }
-            )
-        
+        configureLocalNotification()
         return true
     }
 
@@ -73,12 +57,31 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse
     ) async {
         
-        print(response.notification.request.identifier)
-        print(response.notification.request.content.userInfo)
-        print(response.notification.date.toString(format: .dateTimeFormat))
+        Log.debug(response.notification.request.identifier)
+        Log.debug(response.notification.request.content.userInfo)
+        Log.debug(response.notification.date.toString(format: .dateTimeFormat))
         
         if response.notification.request.identifier == "" {
-            print("deep link!")
+            
         }
+    }
+}
+
+private extension AppDelegate {
+    func configureLocalNotification() {
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current()
+            .requestAuthorization(
+                options: [.alert, .sound, .badge],
+                completionHandler: { success, error in
+                    if let error {
+                        Log.error(error)
+                    } else if success == true {
+                        Log.info("request authorization authorized")
+                    } else {
+                        Log.info("request authorization rejected")
+                    }
+                }
+            )
     }
 }

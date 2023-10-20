@@ -60,11 +60,11 @@ struct Log {
         }
         switch level {
         case .debug, .custom:
-            logger.debug("✨ \(logMessage, privacy: .public)")
+            os_log(.debug, "✨ \(logMessage, privacy: .public)")
         case .info:
-            logger.info("ℹ️ \(logMessage, privacy: .public)")
+            os_log(.info, "ℹ️ \(logMessage, privacy: .public)")
         case .error:
-            logger.error("🚨 \(logMessage, privacy: .public)")
+            os_log(.error, "🚨 \(logMessage, privacy: .public)")
         }
         #endif
     }

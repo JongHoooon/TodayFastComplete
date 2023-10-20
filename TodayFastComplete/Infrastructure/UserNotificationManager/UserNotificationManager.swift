@@ -199,7 +199,7 @@ final class DefaultUserNotificationManager: UserNotificationManager {
                 type: .fastStart,
                 title: String(
                     localized: "FAST_START_NOTI_TITLE",
-                    defaultValue: "단식이 시작됐습니다.🍚🍜🍔❌"
+                    defaultValue: "단식이 시작됐습니다. 🍚🍜🍔❌"
                 ),
                 body: String(
                     localized: "FAST_START_NOTI_BODY",

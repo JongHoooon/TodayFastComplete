@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
         let window = UIWindow(windowScene: windowScene)
         window.backgroundColor = .systemBackground
         window.tintColor = Constants.Color.tintMain
@@ -30,6 +31,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             dependencies: AppDIContainer()
         )
         appCoordinator?.navigate(to: .appFlowIsRequired)
+        
+        Log.info(connectionOptions.notificationResponse)
+        Log.info(connectionOptions.notificationResponse?.notification)
+        Log.info(connectionOptions.notificationResponse?.notification.request.identifier)
+        Log.info(connectionOptions.notificationResponse?.notification.date)
+        Log.info(connectionOptions.notificationResponse?.notification.request.content)
+        if let notificationResponse = connectionOptions.notificationResponse {
+            Log.info(notificationResponse.notification.request.identifier)
+        }
+        Log.info("test-test-test-test")
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }
@@ -57,7 +69,7 @@ private extension SceneDelegate {
             fatalError("init realm repository failed")
         }
         
-        guard let userNotificationManager, let timerRoutineSettingRepository 
+        guard let userNotificationManager, let timerRoutineSettingRepository
         else {
             assertionFailure("user notification manager or timer routine setting repository is not exist")
             return
@@ -72,11 +84,11 @@ private extension SceneDelegate {
         .asObservable()
         .filter { $0.0 != nil && $0.1 + $0.2 < 8 }
         .map { routinsetting, _, _, pendingNotiCount in
-             return userNotificationManager.fastNotifications(
+            return userNotificationManager.fastNotifications(
                 maxCount: Constants.DefaultValue.localNotificationMaxCount - pendingNotiCount,
                 fastDays: routinsetting!.days,
                 routineSetting: routinsetting!
-        )}
+            )}
         .flatMap {
             return userNotificationManager.schedule(calendarNotifications: $0)
         }

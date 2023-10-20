@@ -85,6 +85,14 @@ extension Constants {
             localized: "DO_FINISH",
             defaultValue: "종료하기"
         )
+        static let RECORD_EDIT = String(
+            localized: "RECORD_EDIT",
+            defaultValue: "기록 수정"
+        )
+        static let RECORD_DELETE = String(
+            localized: "RECORD_DELETE",
+            defaultValue: "기록 삭제"
+        )
         
         static let YESTERDAY = String(
             localized: "YESTERDAY",

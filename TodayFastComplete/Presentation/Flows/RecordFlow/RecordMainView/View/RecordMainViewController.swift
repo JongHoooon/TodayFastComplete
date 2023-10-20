@@ -48,11 +48,19 @@ final class RecordMainViewController: BaseViewController {
         return calendar
     }()
     
+    private let calendarDateInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "2023년 10월 3주차"
+        label.font = .bodyMedium
+        label.textColor = .white
+        return label
+    }()
+    
     private let calendarButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
-        stackView.spacing = 12.0
+        stackView.spacing = 16.0
         return stackView
     }()
     private let toggleButton: UIButton = {
@@ -107,7 +115,7 @@ final class RecordMainViewController: BaseViewController {
         let label = UILabel()
         label.font = .subtitleBold
         label.textColor = .label
-        label.text = "2023년 10월 18일 수요일"
+        label.text = "2023년 10월 19일 목요일"
         return label
     }()
     private let infoLabel: UILabel = {
@@ -203,6 +211,7 @@ final class RecordMainViewController: BaseViewController {
         [
             calendarView,
             calendarButtonStackView,
+            calendarDateInfoLabel,
             baseView
         ].forEach { view.addSubview($0) }
         
@@ -217,7 +226,7 @@ final class RecordMainViewController: BaseViewController {
         }
         
         baseView.snp.makeConstraints {
-            $0.top.equalTo(calendarView.snp.bottom)
+            $0.top.equalTo(calendarView.snp.bottom).offset(16.0)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -227,10 +236,15 @@ final class RecordMainViewController: BaseViewController {
             $0.height.equalTo(28.0)
         }
         
+        calendarDateInfoLabel.snp.makeConstraints {
+            $0.centerY.equalTo(calendarButtonStackView)
+            $0.leading.equalToSuperview().inset(16.0)
+        }
+        
         grabberView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(4.0)
-            $0.width.equalTo(56.0)
+            $0.width.equalTo(48.0)
             $0.top.equalToSuperview().inset(8.0)
         }
         
