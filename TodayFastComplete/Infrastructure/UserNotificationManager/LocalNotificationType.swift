@@ -23,4 +23,17 @@ enum LocalNotificationType: String {
     func fastNotificationID(date: Date) -> String {
         return "\(self.rawValue)-\(date.year)\(date.month)\(date.day)\(date.hour)\(date.minute)"
     }
+    init?(with localNotificationID: String?) {
+        guard let localNotificationID else { return nil }
+        let id = String(localNotificationID.split(separator: "-").first ?? "")
+        self.init(rawValue: id)
+    }
+    var tabBarIndex: Int {
+        switch self {
+        case .fastStart:
+            return 0
+        case .fastEnd:
+            return 1
+        }
+    }
 }

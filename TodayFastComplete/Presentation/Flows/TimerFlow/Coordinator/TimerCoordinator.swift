@@ -20,6 +20,8 @@ final class TimerCoordinator: BaseCoordinator,
                               CancelOkAlertPresentable {
     
     private let rootViewController: UINavigationController
+    private weak var settingTimerCoordinator: Coordinator?
+    
     private let dependencies: TimerCoordinatorDependencies
     private let disposeBag = DisposeBag()
     
@@ -49,6 +51,10 @@ final class TimerCoordinator: BaseCoordinator,
             )
         case let .timerInterruptFastButtonTapped(interruptFastAlertRelay):
             presentInterruptFastAlert(interruptFastAlertRelay: interruptFastAlertRelay)
+        case .fastStartNotification:
+            fastStartNotification()
+        case .fastEndNotification:
+            fastEndNotification()
         default:
             assertionFailure("not configured step")
         }
@@ -79,6 +85,7 @@ private extension TimerCoordinator {
             settingTimerNavigationController,
             animated: true
         )
+        self.settingTimerCoordinator = settingTimerCoordinator
         addChild(child: settingTimerCoordinator)
     }
     
@@ -90,5 +97,15 @@ private extension TimerCoordinator {
         )
         .bind { interruptFastAlertRelay.accept($0) }
         .disposed(by: disposeBag)
+    }
+    
+    func fastStartNotification() {
+        guard let settingTimerCoordinator else { return }
+        settingTimerCoordinator.finish()
+    }
+    
+    func fastEndNotification() {
+        guard let settingTimerCoordinator else { return }
+        settingTimerCoordinator.finish()
     }
 }

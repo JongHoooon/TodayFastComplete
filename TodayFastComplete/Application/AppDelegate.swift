@@ -41,29 +41,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
-    
+        
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-            
-            // 특정 화면, 특정 조건에서만 포그라운드 알림 받기,
-            // 특정 화면에서는 알림 안받기
-            completionHandler([.sound, .badge, .banner, .list])
-        }
+        willPresent notification: UNNotification
+    ) async -> UNNotificationPresentationOptions {
+        return [.sound, .badge, .banner, .list]
+    }
     
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse
     ) async {
-        
-        Log.debug(response.notification.request.identifier)
-        Log.debug(response.notification.request.content.userInfo)
-        Log.debug(response.notification.date.toString(format: .dateTimeFormat))
-        
-        if response.notification.request.identifier == "" {
-            
-        }
+        postNotification(with: response.notification.request.identifier)
     }
 }
 
@@ -83,5 +73,15 @@ private extension AppDelegate {
                     }
                 }
             )
+    }
+    
+    func postNotification(with id: String) {
+        guard let localNotificationType = LocalNotificationType(with: id) else { return }
+        NotificationCenter.default.post(
+            name: .localNotificationType,
+            object: nil,
+            userInfo: [NotificationUserInfoKey.localNotificationType.rawValue: localNotificationType]
+        )
+        Log.debug("app delegate noti")
     }
 }

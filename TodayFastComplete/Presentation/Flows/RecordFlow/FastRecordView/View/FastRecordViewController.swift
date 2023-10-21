@@ -150,7 +150,7 @@ final class FastRecordViewController: BaseViewController {
         ].forEach { view.addSubview($0) }
         
         recordBaseView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20.0)
+            $0.top.equalToSuperview().inset(24.0)
             $0.horizontalEdges.equalToSuperview().inset(16.0)
             $0.height.equalTo(180.0)
         }

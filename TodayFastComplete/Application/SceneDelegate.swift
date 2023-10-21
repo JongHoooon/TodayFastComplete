@@ -30,18 +30,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window: window,
             dependencies: AppDIContainer()
         )
-        appCoordinator?.navigate(to: .appFlowIsRequired)
-        
-        Log.info(connectionOptions.notificationResponse)
-        Log.info(connectionOptions.notificationResponse?.notification)
-        Log.info(connectionOptions.notificationResponse?.notification.request.identifier)
-        Log.info(connectionOptions.notificationResponse?.notification.date)
-        Log.info(connectionOptions.notificationResponse?.notification.request.content)
         if let notificationResponse = connectionOptions.notificationResponse {
-            Log.info(notificationResponse.notification.request.identifier)
+            let notificationID = notificationResponse.notification.request.identifier
+            let localNotificationType = LocalNotificationType(with: notificationID)
+            Log.debug(localNotificationType)
+            appCoordinator?.navigate(to: .appFlowIsRequired(notificationType: localNotificationType))
+        } else {
+            appCoordinator?.navigate(to: .appFlowIsRequired())
         }
-        Log.info("test-test-test-test")
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }

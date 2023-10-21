@@ -34,6 +34,8 @@ final class RecordCoordinator: BaseCoordinator,
             showRecordMain()
         case .writeFastRecord:
             presentWriteFastRecord()
+        case .fastEndNotification:
+            fastEndNotification()
         default:
             assertionFailure("not configured step")
         }
@@ -58,5 +60,9 @@ private extension RecordCoordinator {
     func presentWriteFastRecord() {
         let vc = dependencies.makeWriteFastRecord(coordinator: self)
         rootViewController.present(vc, animated: true)
+    }
+    
+    func fastEndNotification() {
+        presentWriteFastRecord()
     }
 }

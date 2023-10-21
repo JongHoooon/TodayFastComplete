@@ -9,4 +9,9 @@ import Foundation
 
 extension NSNotification.Name {
     static let sceneWillEnterForeground = NSNotification.Name("sceneWillEnterForeground")
+    static let localNotificationType = NSNotification.Name("localNotificationType")
+}
+
+enum NotificationUserInfoKey: String {
+    case localNotificationType
 }

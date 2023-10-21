@@ -200,6 +200,26 @@ final class TimerViewController: BaseViewController {
 private extension TimerViewController {
     func bindViewModel() {
         
+        #if DEBUG
+        timerProgressView.endPointButton.rx.tap
+            .subscribe(onNext: { _ in
+                let content = UNMutableNotificationContent()
+                content.title = "test"
+                content.subtitle = "test"
+                let trigger = UNTimeIntervalNotificationTrigger(
+                    timeInterval: 10,
+                    repeats: false
+                )
+                let request = UNNotificationRequest(
+                    identifier: "fastEnd-ff",
+                    content: content,
+                    trigger: trigger
+                )
+                UNUserNotificationCenter.current().add(request)
+            })
+            .disposed(by: disposeBag)
+        #endif
+        
         let progressViewEndpoinButtonTapped = timerProgressView.endPointButton.rx.tap
             .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
         

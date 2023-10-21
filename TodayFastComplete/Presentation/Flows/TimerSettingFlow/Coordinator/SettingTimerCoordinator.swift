@@ -87,6 +87,14 @@ final class SettingTimerCoordinator: BaseCoordinator, CancelOkAlertPresentable {
             assertionFailure("not configured step")
         }
     }
+    
+    override func finish() {
+        if let vc = rootViewController.presentedViewController {
+            vc.dismiss(animated: true)
+        }
+        rootViewController.dismiss(animated: true)
+        super.finish()
+    }
 }
 
 private extension SettingTimerCoordinator {

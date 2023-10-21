@@ -11,13 +11,13 @@ import RxRelay
 
 enum Step {
     // App
-    case appFlowIsRequired
+    case appFlowIsRequired(notificationType: LocalNotificationType? = nil)
     
     // Tab Bar
-    case tabBarFlowIsRequired
+    case tabBarFlowIsRequired(tabBarIndex: Int)
     
     // Timer
-    case timerFlowIsRequired
+    case timerFlowIsRequired    
     case timerSettingButtonTapped(
         currentRoutineSetting: BehaviorRelay<TimerRoutineSetting?>,
         interruptedFast: BehaviorRelay<InterruptedFast?>
@@ -46,4 +46,8 @@ enum Step {
     // Record
     case recordFlowIsRequired
     case writeFastRecord
+    
+    // notification
+    case fastStartNotification
+    case fastEndNotification
 }

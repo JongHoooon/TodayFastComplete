@@ -81,6 +81,7 @@
 		ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED830EB42ACE97DE000B715A /* Reuseable.swift */; };
 		ED86F5572ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F5562ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift */; };
 		ED86F55C2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */; };
+		ED89A7702AE23D8000C663D9 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED89A76F2AE23D8000C663D9 /* UserDefaultsManager.swift */; };
 		EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */; };
 		EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */; };
 		EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */; };
@@ -190,6 +191,7 @@
 		ED830EB42ACE97DE000B715A /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
 		ED86F5562ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFSCalendarDelegateProxy.swift; sourceTree = "<group>"; };
 		ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentContorl.swift; sourceTree = "<group>"; };
+		ED89A76F2AE23D8000C663D9 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../Desktop/Study/iOS/TabBarController.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 		ED6C67352AC9027600230621 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				ED89A76E2AE23D5200C663D9 /* UserDefaultsManager */,
 				ED4D40F22AD9716A00C49C8A /* UserNotificationManager */,
 				ED6C67362AC9028100230621 /* Log */,
 			);
@@ -710,6 +713,14 @@
 				EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */,
 			);
 			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		ED89A76E2AE23D5200C663D9 /* UserDefaultsManager */ = {
+			isa = PBXGroup;
+			children = (
+				ED89A76F2AE23D8000C663D9 /* UserDefaultsManager.swift */,
+			);
+			path = UserDefaultsManager;
 			sourceTree = "<group>";
 		};
 		EDA776E92ACAB4680019DCB1 /* TabBarFlow */ = {
@@ -1021,6 +1032,7 @@
 				EDC66EC82ADCFA120085B184 /* FastInterruptedDayTable+Mapping.swift in Sources */,
 				ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */,
 				ED50E97D2AD1716D00182922 /* RealmUniqueKey.swift in Sources */,
+				ED89A7702AE23D8000C663D9 /* UserDefaultsManager.swift in Sources */,
 				ED50E9662ACFCB9B00182922 /* FastRoutine.swift in Sources */,
 				EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */,
 				ED80B9F12AE0E6A500F85A66 /* RecordEnum.swift in Sources */,
