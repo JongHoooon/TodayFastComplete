@@ -13,7 +13,7 @@ import RxSwift
 final class FastRecordViewModel: ViewModel {
     
     struct Input { 
-        let writeFastRecordButtonTapped: Observable<Void>
+        let plusViewTapped: Observable<Void>
     }
     struct Output { 
         
@@ -30,7 +30,7 @@ final class FastRecordViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let output = Output()
         
-        input.writeFastRecordButtonTapped
+        input.plusViewTapped
             .asDriver(onErrorJustReturn: Void())
             .drive(with: self, onNext: { owner, _ in
                 owner.coordinator?.navigate(to: .writeFastRecord)

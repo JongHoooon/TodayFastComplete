@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import SnapKit
 
 // MARK: - UIViewController
 extension Reactive where Base: UIViewController {
@@ -32,6 +33,16 @@ extension Reactive where Base: UIViewController {
             .filter { [weak base] _ in base?.navigationController?.isBeingDismissed == true }
             .map { _ in Void() }
          return ControlEvent(events: source)
+    }
+}
+
+extension Reactive where Base: UIView {
+    var updateHeight: Binder<CGFloat> {
+        return Binder(self.base) { view, height in
+            view.snp.updateConstraints {
+                $0.height.equalTo(height)
+            }
+        }
     }
 }
 

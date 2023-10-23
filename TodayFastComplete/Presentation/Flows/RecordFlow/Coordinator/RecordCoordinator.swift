@@ -36,6 +36,8 @@ final class RecordCoordinator: BaseCoordinator,
             presentWriteFastRecord()
         case .fastEndNotification:
             fastEndNotification()
+        case .writeFastRecordIsComplete:
+            dismissPresentedView()
         default:
             assertionFailure("not configured step")
         }
@@ -59,7 +61,13 @@ private extension RecordCoordinator {
     
     func presentWriteFastRecord() {
         let vc = dependencies.makeWriteFastRecord(coordinator: self)
-        rootViewController.present(vc, animated: true)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        rootViewController.present(nav, animated: true)
+    }
+    
+    func dismissPresentedView() {
+        rootViewController.presentedViewController?.dismiss(animated: true)
     }
     
     func fastEndNotification() {

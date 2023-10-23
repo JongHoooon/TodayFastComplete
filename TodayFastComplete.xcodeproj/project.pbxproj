@@ -84,6 +84,7 @@
 		ED89A7702AE23D8000C663D9 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED89A76F2AE23D8000C663D9 /* UserDefaultsManager.swift */; };
 		EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */; };
 		EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */; };
+		EDA37B352AE63AA500EC6D6E /* FastTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA37B342AE63AA500EC6D6E /* FastTitleView.swift */; };
 		EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */; };
 		EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EF2ACAB5CA0019DCB1 /* AppCoordinator.swift */; };
 		EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */; };
@@ -194,6 +195,7 @@
 		ED89A76F2AE23D8000C663D9 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		EDA250D02AD77780004EE6F9 /* TimeInterval+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Extension.swift"; sourceTree = "<group>"; };
 		EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		EDA37B342AE63AA500EC6D6E /* FastTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastTitleView.swift; sourceTree = "<group>"; };
 		EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../Desktop/Study/iOS/TabBarController.swift; sourceTree = "<group>"; };
 		EDA776ED2ACAB58B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EDA776EF2ACAB5CA0019DCB1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				ED80B9F62AE10B0400F85A66 /* WriteFastRecordViewController.swift */,
+				EDA37B342AE63AA500EC6D6E /* FastTitleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1005,6 +1008,7 @@
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */,
 				ED80B9F72AE10B0400F85A66 /* WriteFastRecordViewController.swift in Sources */,
+				EDA37B352AE63AA500EC6D6E /* FastTitleView.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
 				ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */,
 				ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */,

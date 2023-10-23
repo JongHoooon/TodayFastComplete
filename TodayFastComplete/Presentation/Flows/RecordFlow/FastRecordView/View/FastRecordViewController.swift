@@ -13,11 +13,26 @@ final class FastRecordViewController: BaseViewController {
     private let viewModel: FastRecordViewModel
     
     // MARK: - UI
-    private let button: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .blue
-        return button
+    private let plusBaseView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.layer.cornerRadius = 20.0
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.masksToBounds = false
+        view.layer.shadowRadius = 4.0
+        view.layer.shadowOffset = .zero
+        view.layer.shadowOpacity = 0.2
+        return view
     }()
+    
+    private let plusImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Constants.Icon.plus
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .label
+        return imageView
+    }()
+    private let plusViewTapGesture = UITapGestureRecognizer()
     
     private let recordBaseView: UIView = {
         let view = UIView()
@@ -118,20 +133,17 @@ final class FastRecordViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        view.addSubview(button)
-//        button.snp.makeConstraints {
-//            $0.center.equalToSuperview()
-//            $0.size.equalTo(40.0)
-//        }
-//        bindViewModel()
     }
     
     override func configure() {
-        
+        super.configure()
+        registerGesture()
+        bindViewModel()
     }
     
     override func configureLayout() {
+        
+        plusBaseView.addSubview(plusImageView)
         
         [
             fastTimeLabel,
@@ -146,7 +158,8 @@ final class FastRecordViewController: BaseViewController {
         ].forEach { recordBaseView.addSubview($0) }
         
         [
-            recordBaseView
+            recordBaseView,
+            plusBaseView
         ].forEach { view.addSubview($0) }
         
         recordBaseView.snp.makeConstraints {
@@ -211,15 +224,31 @@ final class FastRecordViewController: BaseViewController {
         }
         deleteButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
         deleteButton.setContentHuggingPriority(.defaultLow, for: .vertical)
+        
+        plusBaseView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(24.0)
+            $0.horizontalEdges.equalToSuperview().inset(16.0)
+            $0.height.equalTo(180.0)
+        }
+        plusImageView.snp.makeConstraints {
+            $0.size.equalTo(plusBaseView.snp.height).multipliedBy(0.3)
+            $0.center.equalToSuperview()
+        }
+        
+        recordBaseView.isHidden = true
     }
 }
 
 private extension FastRecordViewController {
     func bindViewModel() {
         let input = FastRecordViewModel.Input(
-            writeFastRecordButtonTapped: button.rx.tap.asObservable()
+            plusViewTapped: plusViewTapGesture.rx.event.map { _ in }
         )
         
         let output = viewModel.transform(input: input)
+    }
+    
+    func registerGesture() {
+        plusBaseView.addGestureRecognizer(plusViewTapGesture)
     }
 }

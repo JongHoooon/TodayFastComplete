@@ -52,6 +52,7 @@ final class RecordMainViewModel: ViewModel {
         input.calendarDidSelect
             .subscribe(with: self, onNext: { owner, date in
                 Log.debug(date.toString(format: owner.calendarformatter))
+                Log.debug(Date().toString(format: .yearMonthDayFormat))
             })
             .disposed(by: disposeBag)
             

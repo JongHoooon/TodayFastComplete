@@ -24,7 +24,23 @@ extension Constants {
             localized: "WEIGHT_TITLE",
             defaultValue: "몸무게"
         )
-        
+        static let FAST_RECORD_TITLE = String(
+            localized: "FAST_RECORD_TITLE",
+            defaultValue: "단식 기록"
+        )
+        static let TOTAL_FAST_TIME_TITLE = String(
+            localized: "TOTAL_FAST_TIME_TITLE",
+            defaultValue: "총 단식 시간"
+        )
+        static let TOTAL_FAST_TIME = String(
+            localized: "TOTAL_FAST_TIME",
+            defaultValue: "%1$@ 시간 %2$@ 분"
+        )
+        static let FAST_TIME = String(
+            localized: "FAST_TIME",
+            defaultValue: "단식 시간"
+        )
+
         static let TIMER_MODE_SELECT_VIEW_TITLE = String(
             localized: "TIMER_MODE_SELECT_VIEW_TITLE",
             defaultValue: "타이머 모드 선택")
@@ -135,7 +151,23 @@ extension Constants {
             localized: "SUNDAY",
             defaultValue: "일"
         )
+        static let HOUR = String(
+            localized: "HOUR",
+            defaultValue: "시간"
+        )
+        static let MINUTE = String(
+            localized: "MINUTE",
+            defaultValue: "분"
+        )
         
+        static let START = String(
+            localized: "START",
+            defaultValue: "시작"
+        )
+        static let END = String(
+            localized: "END",
+            defaultValue: "종료"
+        )
         static let COMPLETE = String(
             localized: "COMPLETE",
             defaultValue: "완료"
