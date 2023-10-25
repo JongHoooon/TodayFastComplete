@@ -17,7 +17,6 @@ final class WriteFastRecordViewController: BaseViewController {
     private let disposeBag: DisposeBag
 
     // MARK: - UI
-    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
@@ -91,6 +90,14 @@ final class WriteFastRecordViewController: BaseViewController {
         return view
     }()
     
+    private let fastTimeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.font = .subtitleBold
+        label.text = Constants.Localization.FAST_TIME
+        return label
+    }()
+    
     private let fastStartTitleView = FastTitleView(style: .start)
     
     private let fastStartDatePickerView: UIDatePicker = {
@@ -125,6 +132,7 @@ final class WriteFastRecordViewController: BaseViewController {
     private let weightBaseView: UIView = {
         let view = UIView()
         view.backgroundColor = Constants.Color.backgroundMain
+        view.layer.cornerRadius = 20.0
         return view
     }()
 
@@ -158,6 +166,7 @@ final class WriteFastRecordViewController: BaseViewController {
     override func configureLayout() {
         
         [
+            fastTimeTitleLabel,
             fastStartTitleView,
             fastStartDatePickerView,
             fastSeparatorView,
@@ -168,28 +177,25 @@ final class WriteFastRecordViewController: BaseViewController {
         [
             totalTimeTitleLabel,
             totalTimeLabel,
-            fastTimeBaseView
-        ].forEach { scrollContentStackView.addArrangedSubview($0) }
+            fastTimeBaseView,
+            weightBaseView
+        ].forEach { scrollContentView.addSubview($0) }
         
-        scrollView.addSubview(scrollContentStackView)
+        scrollView.addSubview(scrollContentView)
         view.addSubview(scrollView)
         
         scrollView.snp.makeConstraints {
             $0.leading.trailing.top.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
-//        scrollContentView.snp.makeConstraints {
-//            $0.edges.equalTo(scrollView.contentLayoutGuide)
-//            $0.bottom.equalTo(fastTimeBaseView).offset(60.0)
-//            $0.width.equalTo(scrollView.snp.width)
-//            $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
-//            $0.width.equalTo(scrollView.snp.width)
-//            $0.bottom.equalTo(fastTimeBaseView).offset(60.0)
-//        }
+        scrollContentView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.snp.width)
+        }
         
         totalTimeTitleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16.0)
+            $0.top.equalToSuperview().inset(16.0)
         }
         
         totalTimeLabel.snp.makeConstraints {
@@ -197,8 +203,13 @@ final class WriteFastRecordViewController: BaseViewController {
             $0.top.equalTo(totalTimeTitleLabel.snp.bottom).offset(12.0)
         }
         
+        fastTimeTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(totalTimeLabel.snp.bottom).offset(36.0)
+            $0.leading.equalToSuperview().inset(16.0)
+        }
+        
         fastTimeBaseView.snp.makeConstraints {
-            $0.top.equalTo(totalTimeLabel.snp.bottom).offset(48.0)
+            $0.top.equalTo(fastTimeTitleLabel.snp.bottom).offset(0)
             $0.leading.trailing.equalToSuperview().inset(16.0)
         }
         
@@ -231,6 +242,13 @@ final class WriteFastRecordViewController: BaseViewController {
             $0.horizontalEdges.equalTo(fastEndTitleView)
             $0.height.equalTo(0.0)
             $0.bottom.equalToSuperview()
+        }
+        
+        weightBaseView.snp.makeConstraints {
+            $0.top.equalTo(fastTimeBaseView.snp.bottom).offset(24.0)
+            $0.horizontalEdges.equalToSuperview().inset(16.0)
+            $0.height.equalTo(240.0)
+            $0.bottom.equalToSuperview().inset(24.0)
         }
     }
 }
@@ -270,8 +288,6 @@ private extension WriteFastRecordViewController {
     func addGesture() {
         fastStartTitleView.addGestureRecognizer(fastStartTitleViewTapGesture)
         fastEndTitleView.addGestureRecognizer(fastEndTitleViewTapGesture)
-//        view.addGestureRecognizer(fastStartTitleViewTapGesture)
-//        view.addGestureRecognizer(fastEndTitleViewTapGesture)
     }
     
     func showDatePicker(pickerView: UIView, isShow: Bool) {
@@ -279,7 +295,7 @@ private extension WriteFastRecordViewController {
         case true:
             pickerView.isHidden = false
             pickerView.snp.updateConstraints {
-                $0.height.equalTo(400.0)
+                $0.height.equalTo(200.0)
             }
             
         case false:
