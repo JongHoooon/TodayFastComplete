@@ -106,10 +106,3 @@ private extension TimerUseCaseImp {
         .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
     }
 }
-
-/*
- 알람 등록, 전부 삭제해야됨
- week days 기반으로 알림 등록
- 
- 시작알림 끝 알림
- */
