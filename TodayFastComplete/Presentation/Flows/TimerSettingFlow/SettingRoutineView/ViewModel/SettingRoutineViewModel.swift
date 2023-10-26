@@ -207,8 +207,9 @@ final class SettingRoutineViewModel: ViewModel {
                 onNext: { owner, _ in
                     owner.currentRoutineSetting.accept(nil)
                     owner.coordinator?.navigate(to: .settingTimerFlowIsComplete)
-            }, onError: { _, error in
-                Log.error(error)
+                },
+                onError: { _, error in
+                    Log.error(error)
             })
             .disposed(by: disposeBag)
         
