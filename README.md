@@ -16,7 +16,7 @@
 ## Architecture
 > MVVM-C, Clean Architecture
 
-<p align="center"><img width="1148" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/497a9013-84d0-47d7-8011-a278b3e97b6e"></p>
+<p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/a75ad613-a49d-44b5-a149-64d1e50a5525"></p>
 
 <p align="center"><img width="1200" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/bd7f5c18-9225-4037-98c9-bd5e9fda37f1"></p>
 
