@@ -19,7 +19,7 @@
 
 <br>
 
-<p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/a75ad613-a49d-44b5-a149-64d1e50a5525"></p>
+<p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/b4436197-74b1-44be-af96-24db3a2b7a48"></p>
 
 <p align="center"><img width="1200" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/bd7f5c18-9225-4037-98c9-bd5e9fda37f1"></p>
 
