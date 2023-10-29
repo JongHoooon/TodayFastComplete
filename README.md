@@ -1,8 +1,8 @@
 # 오단완 - 간헐적 단식 시간 측정 타이머 앱⏱️
 
-> Minimum Deployments: iOS 16.0 <br>
-> Development Period: 2023.09.25 ~ (진행중) <br>
-> Role: iOS 전체 개발, 기획, 디자인 담당 <br>
+- Minimum Deployments: iOS 16.0 <br>
+- Development Period: 2023.09.25 ~ (진행중) <br>
+- Role: iOS 개발, 기획, 디자인 담당 <br>
 
 <br>
 
@@ -14,7 +14,10 @@
 <br>
 
 ## Architecture
-> MVVM-C, Clean Architecture
+- MVVM-C
+- Clean Architecture
+
+<br>
 
 <p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/a75ad613-a49d-44b5-a149-64d1e50a5525"></p>
 
