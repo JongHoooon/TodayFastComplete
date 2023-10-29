@@ -205,11 +205,11 @@ final class WriteFastRecordViewController: BaseViewController {
         
         fastTimeTitleLabel.snp.makeConstraints {
             $0.top.equalTo(totalTimeLabel.snp.bottom).offset(36.0)
-            $0.leading.equalToSuperview().inset(16.0)
+            $0.leading.equalTo(fastTimeBaseView)
         }
         
         fastTimeBaseView.snp.makeConstraints {
-            $0.top.equalTo(fastTimeTitleLabel.snp.bottom).offset(0)
+            $0.top.equalTo(fastTimeTitleLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(16.0)
         }
         

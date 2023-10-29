@@ -41,7 +41,8 @@ final class FastTitleView: UIView {
     
     private let pencilImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Constants.Icon.pencilLine
+        imageView.image = UIImage(resource: .pencil)
+            .withTintColor(.label, renderingMode: .alwaysOriginal)
         imageView.tintColor = .label
         return imageView
     }()
@@ -72,13 +73,13 @@ private extension FastTitleView {
         }
         
         pencilImageView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(16.0)
+            $0.trailing.equalToSuperview().inset(8.0)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(20.0)
         }
         
         timeLabel.snp.makeConstraints {
-            $0.trailing.equalTo(pencilImageView.snp.leading).offset(-4.0)
+            $0.trailing.equalTo(pencilImageView.snp.leading).offset(-8.0)
             $0.centerY.equalToSuperview()
         }
     }
