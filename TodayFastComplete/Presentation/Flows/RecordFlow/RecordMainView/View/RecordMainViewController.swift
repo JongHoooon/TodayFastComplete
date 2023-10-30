@@ -147,6 +147,18 @@ final class RecordMainViewController: BaseViewController {
         return gesture
     }()
     
+    private let swipeLeftGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer()
+        gesture.direction = .left
+        return gesture
+    }()
+    
+    private let swipeRightGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer()
+        gesture.direction = .right
+        return gesture
+    }()
+    
     // MARK: - Lifecycle
     init(
         viewModel: RecordMainViewModel,
@@ -269,8 +281,23 @@ final class RecordMainViewController: BaseViewController {
 
 private extension RecordMainViewController {
     func bindViewModel() {
+        let selectedSegmentIndex = Observable.merge(
+            swipeRightGesture.rx.event.map { _ in 0 },
+            swipeLeftGesture.rx.event.map { _ in 1 },
+            segmentedControl.rx.selectedSegmentIndex.asObservable()
+        )
+        swipeRightGesture.rx.event
+            .map { _ in 0 }
+            .bind(to: segmentedControl.rx.selectedSegmentIndex)
+            .disposed(by: disposeBag)
+        
+        swipeLeftGesture.rx.event
+            .map { _ in 1 }
+            .bind(to: segmentedControl.rx.selectedSegmentIndex)
+            .disposed(by: disposeBag)
+        
         let input = RecordMainViewModel.Input(
-            selectedSegmentIndex: segmentedControl.rx.selectedSegmentIndex.asObservable(),
+            selectedSegmentIndex: selectedSegmentIndex,
             swipeUpGesture: swipeUpGesture.rx.event.asObservable().map { _ in },
             swipeDownGesture: swipeDownGesture.rx.event.asObservable().map { _ in },
             calendarDidSelect: calendarView.rx.didSelect
@@ -396,5 +423,9 @@ private extension RecordMainViewController {
             swipeUpGesture,
             swipeDownGesture
         ].forEach { view.addGestureRecognizer($0) }
+        [
+            swipeRightGesture,
+            swipeLeftGesture
+        ].forEach { baseView.addGestureRecognizer($0) }
     }
 }
