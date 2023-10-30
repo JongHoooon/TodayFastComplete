@@ -29,7 +29,8 @@ final class WriteFastRecordViewModel: ViewModel {
     
     private let disposeBag: DisposeBag
     
-    init(coordinator: Coordinator) {
+    init(coordinator: Coordinator, startDate: Date) {
+        
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
     }

@@ -87,9 +87,10 @@ private extension TabBarCoordinator {
                     owner.tabBarController.selectedIndex = 0
                     owner.timerCoordinator?.navigate(to: .fastStartNotification)
                 case .fastEnd:
-                    owner.timerCoordinator?.navigate(to: .fastEndNotification)
+                    guard let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: Date()) else { return }
+                    owner.timerCoordinator?.navigate(to: .fastEndNotification(startDate: yesterDay))
                     owner.tabBarController.selectedIndex = 1
-                    owner.recordCoordinator?.navigate(to: .fastEndNotification)
+                    owner.recordCoordinator?.navigate(to: .fastEndNotification(startDate: yesterDay))
                 }
             }
             .disposed(by: disposeBag)

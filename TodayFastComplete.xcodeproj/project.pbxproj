@@ -117,6 +117,7 @@
 		EDC66EDB2ADE5E270085B184 /* RecordMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */; };
 		EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDC2ADE5F340085B184 /* RecordCoordinator.swift */; };
 		EDC66EDF2ADE66F20085B184 /* RecordDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */; };
+		EDC682F42AF007A300702E4D /* WeightRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC682F32AF007A300702E4D /* WeightRecordViewModel.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
@@ -231,6 +232,7 @@
 		EDC66EDA2ADE5E270085B184 /* RecordMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMainViewController.swift; sourceTree = "<group>"; };
 		EDC66EDC2ADE5F340085B184 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
 		EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDIContainer.swift; sourceTree = "<group>"; };
+		EDC682F32AF007A300702E4D /* WeightRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordViewModel.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 		ED622C3F2AE01073004DCF1F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				EDC682F32AF007A300702E4D /* WeightRecordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				ED622C392AE00FD8004DCF1F /* FastRecordViewController.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
 				ED86F5572ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift in Sources */,
+				EDC682F42AF007A300702E4D /* WeightRecordViewModel.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
 				EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */,
 				ED4DB3BE2AD4D457003535C9 /* LocalRepositoryError.swift in Sources */,

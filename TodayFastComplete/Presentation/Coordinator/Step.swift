@@ -45,10 +45,10 @@ enum Step {
     
     // Record
     case recordFlowIsRequired
-    case writeFastRecord
+    case writeFastRecord(startDate: Date)
     case writeFastRecordIsComplete
     
     // notification
     case fastStartNotification
-    case fastEndNotification
+    case fastEndNotification(startDate: Date)
 }

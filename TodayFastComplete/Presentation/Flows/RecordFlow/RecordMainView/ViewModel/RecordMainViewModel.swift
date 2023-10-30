@@ -27,9 +27,15 @@ final class RecordMainViewModel: ViewModel {
     private let calendarformatter = DateFormatter.yearMonthDayFormat
     private let disposeBag: DisposeBag
     
-    init(coordinator: Coordinator) {
+    private let selectedDateRelay: BehaviorRelay<Date>
+    
+    init(
+        coordinator: Coordinator,
+        selectedDateRelay: BehaviorRelay<Date>
+    ) {
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
+        self.selectedDateRelay = selectedDateRelay
     }
     
     func transform(input: Input) -> Output {
@@ -50,9 +56,10 @@ final class RecordMainViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         input.calendarDidSelect
-            .subscribe(with: self, onNext: { owner, date in
+            .bind(with: self, onNext: { owner, date in
                 Log.debug(date.toString(format: owner.calendarformatter))
                 Log.debug(Date().toString(format: .yearMonthDayFormat))
+                owner.selectedDateRelay.accept(date)
             })
             .disposed(by: disposeBag)
             

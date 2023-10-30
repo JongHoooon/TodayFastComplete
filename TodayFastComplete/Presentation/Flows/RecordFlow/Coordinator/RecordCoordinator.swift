@@ -7,9 +7,11 @@
 
 import UIKit
 
+import RxRelay
+
 protocol RecordCoordinatorDependencies: AnyObject { 
     func makeRecordMainViewController(coordinator: Coordinator, pageViewController: UIPageViewController) -> UIViewController
-    func makeWriteFastRecord(coordinator: Coordinator) -> UIViewController
+    func makeWriteFastRecord(coordinator: Coordinator, startDate: Date) -> UIViewController
 }
 
 final class RecordCoordinator: BaseCoordinator,
@@ -32,10 +34,10 @@ final class RecordCoordinator: BaseCoordinator,
         switch step {
         case .recordFlowIsRequired:
             showRecordMain()
-        case .writeFastRecord:
-            presentWriteFastRecord()
-        case .fastEndNotification:
-            fastEndNotification()
+        case let .writeFastRecord(startDate):
+            presentWriteFastRecord(startDate: startDate)
+        case let .fastEndNotification(startDate):
+            fastEndNotification(startDate: startDate)
         case .writeFastRecordIsComplete:
             dismissPresentedView()
         default:
@@ -59,8 +61,8 @@ private extension RecordCoordinator {
         rootViewController.viewControllers = [vc]
     }
     
-    func presentWriteFastRecord() {
-        let vc = dependencies.makeWriteFastRecord(coordinator: self)
+    func presentWriteFastRecord(startDate: Date) {
+        let vc = dependencies.makeWriteFastRecord(coordinator: self, startDate: startDate)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         rootViewController.present(nav, animated: true)
@@ -70,7 +72,7 @@ private extension RecordCoordinator {
         rootViewController.presentedViewController?.dismiss(animated: true)
     }
     
-    func fastEndNotification() {
-        presentWriteFastRecord()
+    func fastEndNotification(startDate: Date) {
+        presentWriteFastRecord(startDate: startDate)
     }
 }
