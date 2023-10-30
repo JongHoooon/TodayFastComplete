@@ -48,7 +48,7 @@ final class WriteFastRecordViewController: BaseViewController {
     
     private let totalTimeTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .bodyRegural
+        label.font = .subtitleBold
         label.textColor = .label
         label.textAlignment = .center
         label.text = Constants.Localization.TOTAL_FAST_TIME_TITLE
@@ -57,7 +57,7 @@ final class WriteFastRecordViewController: BaseViewController {
     
     private let totalTimeLabel: UILabel = {
         let label = UILabel()
-        label.font = .custom(size: 32.0, weight: .black)
+        label.font = .custom(size: 36.0, weight: .black)
         label.textColor = .label
         label.textAlignment = .center
         let text = String(
@@ -141,22 +141,44 @@ final class WriteFastRecordViewController: BaseViewController {
         return view
     }()
     
-    private let weightTextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .red
+    private let weightBaseViewTap = UITapGestureRecognizer()
+    
+    private let weightTextField: PasteDisableTextField = {
+        let textField = PasteDisableTextField()
+        textField.backgroundColor = .clear
         textField.textColor = .label
         textField.tintColor = .tintAccent
-        textField.font = .subtitleBold
+        textField.font = .titleBold
         textField.textAlignment = .center
+        textField.keyboardType = .decimalPad
+        textField.text = "0.0"
         return textField
     }()
     
     private let kgLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.font = .bodyMedium
+        label.font = .custom(size: 20.0, weight: .bold)
         label.text = "kg"
         return label
+    }()
+    
+    private let plusButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .filled()
+        button.configuration?.image = Constants.Icon.plus?.withTintColor(.label)
+        button.configuration?.baseBackgroundColor = .tintAccent
+        button.configuration?.cornerStyle = .capsule
+        return button
+    }()
+    
+    private let minusButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .filled()
+        button.configuration?.image = Constants.Icon.minus?.withTintColor(.label)
+        button.configuration?.baseBackgroundColor = .tintAccent
+        button.configuration?.cornerStyle = .capsule
+        return button
     }()
     
     // MARK: - Lifecycle
@@ -199,7 +221,9 @@ final class WriteFastRecordViewController: BaseViewController {
         
         [
             weightTextField,
-            kgLabel
+            kgLabel,
+            minusButton,
+            plusButton
         ].forEach { weightBaseView.addSubview($0) }
         
         [
@@ -282,29 +306,50 @@ final class WriteFastRecordViewController: BaseViewController {
         weightBaseView.snp.makeConstraints {
             $0.top.equalTo(weightTitleLabel.snp.bottom).offset(8.0)
             $0.horizontalEdges.equalToSuperview().inset(16.0)
-            $0.height.equalTo(240.0)
+            $0.height.equalTo(120.0)
             $0.bottom.equalToSuperview().inset(24.0)
         }
         
         weightTextField.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.height.equalTo(60.0)
-            $0.width.greaterThanOrEqualTo(30.0)
+            $0.width.greaterThanOrEqualTo(0.0)
         }
         
         kgLabel.snp.makeConstraints {
             $0.leading.equalTo(weightTextField.snp.trailing)
+            $0.centerY.equalTo(weightTextField).offset(3.0)
+        }
+        
+        minusButton.snp.makeConstraints {
             $0.centerY.equalTo(weightTextField)
+            $0.leading.equalToSuperview().inset(24.0)
+            $0.size.equalTo(48.0)
+        }
+        
+        plusButton.snp.makeConstraints {
+            $0.centerY.equalTo(weightTextField)
+            $0.trailing.equalToSuperview().inset(24.0)
+            $0.size.equalTo(48.0)
         }
     }
 }
 
 private extension WriteFastRecordViewController {
     func bindViewModel() {
+        
+        let weightTextFieldTextShared = weightTextField.rx.text.orEmpty.share()
+        
         let input = WriteFastRecordViewModel.Input(
             fastStartTitleViewTapped: fastStartTitleViewTapGesture.rx.event.map { _ in },
             fastEndTitleViewTapped: fastEndTitleViewTapGesture.rx.event.map { _ in },
-            dismissButtonTapped: dismissBarButton.rx.tap.asObservable()
+            dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
+            minusWeightButtonTapped: minusButton.rx.tap
+                .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+                .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
+            plusWeightButtonTapped: plusButton.rx.tap
+                .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+                .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
         )
         let output = viewModel.transform(input: input)
         
@@ -346,12 +391,52 @@ private extension WriteFastRecordViewController {
                 owner.scrollView.scroll(to: .bottom)
             })
             .disposed(by: disposeBag)
+        
+        weightBaseViewTap.rx.event
+            .subscribe(with: self, onNext: { owner, _ in
+                switch owner.weightTextField.isFirstResponder {
+                case true:      owner.view.endEditing(true)
+                case false:     owner.weightTextField.becomeFirstResponder()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        weightTextFieldTextShared
+            .filter {
+                var pointCount = 0
+                for c in $0 where c == "." { pointCount += 1 }
+                return $0.count > 5
+                    || pointCount > 1
+                    || ($0.count == 5 && $0.last == ".")
+            }
+            .map {
+                var text = $0
+                _ = text.popLast()
+                return text
+            }
+            .bind(to: weightTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        weightTextFieldTextShared
+            .filter { ($0.count == 1 && $0 == ".") }
+            .map { "0"+$0 }
+            .bind(to: weightTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        weightTextField.rx.controlEvent(.editingDidEnd)
+            .withLatestFrom(weightTextFieldTextShared)
+            .filter { $0 == "" }
+            .map { _ in "0.0" }
+            .bind(to: weightTextField.rx.text)
+            .disposed(by: disposeBag)
+            
     }
     
     func addGesture() {
         scrollContentView.addGestureRecognizer(scrollContentViewTapGesture)
         fastStartTitleView.addGestureRecognizer(fastStartTitleViewTapGesture)
         fastEndTitleView.addGestureRecognizer(fastEndTitleViewTapGesture)
+        weightBaseView.addGestureRecognizer(weightBaseViewTap)
     }
     
     func showDatePicker(pickerView: UIView, isShow: Bool) {

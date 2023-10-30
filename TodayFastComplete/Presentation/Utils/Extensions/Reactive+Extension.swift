@@ -36,6 +36,7 @@ extension Reactive where Base: UIViewController {
     }
 }
 
+// MARK: - UIView
 extension Reactive where Base: UIView {
     var updateHeight: Binder<CGFloat> {
         return Binder(self.base) { view, height in
@@ -46,6 +47,7 @@ extension Reactive where Base: UIView {
     }
 }
 
+// MARK: - ETC.
 extension ObservableType {
     func withPrevious(startWith first: Element) -> Observable<(Element, Element)> {
         return scan((first, first)) { ($0.1, $1) }.skip(1)

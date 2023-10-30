@@ -16,6 +16,8 @@ final class WriteFastRecordViewModel: ViewModel {
         let fastStartTitleViewTapped: Observable<Void>
         let fastEndTitleViewTapped: Observable<Void>
         let dismissButtonTapped: Observable<Void>
+        let minusWeightButtonTapped: Observable<Void>
+        let plusWeightButtonTapped: Observable<Void>
     }
     
     struct Output { 
@@ -49,6 +51,18 @@ final class WriteFastRecordViewModel: ViewModel {
         input.fastEndTitleViewTapped
             .withLatestFrom(output.endDatePickerIsShow)
             .bind(onNext: { output.endDatePickerIsShow.accept(!$0) })
+            .disposed(by: disposeBag)
+        
+        input.minusWeightButtonTapped
+            .bind(onNext: {
+                
+            })
+            .disposed(by: disposeBag)
+        
+        input.plusWeightButtonTapped
+            .bind(onNext: {
+                
+            })
             .disposed(by: disposeBag)
         
         return output

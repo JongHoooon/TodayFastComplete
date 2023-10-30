@@ -96,6 +96,7 @@
 		EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */; };
 		EDAC26FE2AEFA7770095A564 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC26FD2AEFA7770095A564 /* UIScrollView+Extension.swift */; };
 		EDAC27012AEFB4B10095A564 /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = EDAC27002AEFB4B10095A564 /* RxKeyboard */; };
+		EDAC27032AEFD1B00095A564 /* PasteDisableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC27022AEFD1B00095A564 /* PasteDisableTextField.swift */; };
 		EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF3662ACEA32A00F72CE8 /* FastMode.swift */; };
 		EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */; };
 		EDACF3712ACED31000F72CE8 /* SettingTimerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF3702ACED31000F72CE8 /* SettingTimerDIContainer.swift */; };
@@ -209,6 +210,7 @@
 		EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDIContainer.swift; sourceTree = "<group>"; };
 		EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
 		EDAC26FD2AEFA7770095A564 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		EDAC27022AEFD1B00095A564 /* PasteDisableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteDisableTextField.swift; sourceTree = "<group>"; };
 		EDACF3662ACEA32A00F72CE8 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerCoordinator.swift; sourceTree = "<group>"; };
 		EDACF3702ACED31000F72CE8 /* SettingTimerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerDIContainer.swift; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 				EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */,
 				EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */,
 				ED86F55B2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift */,
+				EDAC27022AEFD1B00095A564 /* PasteDisableTextField.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				ED6C67342AC84F2C00230621 /* TimerCoordinator.swift in Sources */,
 				EDACF3712ACED31000F72CE8 /* SettingTimerDIContainer.swift in Sources */,
 				ED86F55C2ADEF9E600CA83AE /* UnderlineSegmentContorl.swift in Sources */,
+				EDAC27032AEFD1B00095A564 /* PasteDisableTextField.swift in Sources */,
 				ED50E95C2ACF908200182922 /* FastRoutineCollectionViewCell.swift in Sources */,
 				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
 				ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */,

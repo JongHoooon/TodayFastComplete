@@ -37,6 +37,7 @@ enum Constants {
         static let chevronUp = UIImage(systemName: "chevron.up")
         static let arrowtriagleDownFill = UIImage(systemName: "arrowtriangle.down.fill")
         static let plus = UIImage(systemName: "plus")
+        static let minus = UIImage(systemName: "minus")
     }
     
     // MARK: - Image
