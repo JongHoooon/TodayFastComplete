@@ -22,7 +22,7 @@ enum FastTitleViewStyle {
 }
 
 final class FastTitleView: UIView {
-
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .systemGray
@@ -39,10 +39,16 @@ final class FastTitleView: UIView {
         return label
     }()
     
-    private let pencilImageView: UIImageView = {
+    private let chevronDown = Constants.Icon.chevronDown?
+        .withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+    
+    private let chevronUp = Constants.Icon.chevronUp?
+        .withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+    
+    private let chevronImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(resource: .pencil)
-            .withTintColor(.label, renderingMode: .alwaysOriginal)
+        imageView.image = Constants.Icon.chevronDown?
+            .withTintColor(.systemGray, renderingMode: .alwaysOriginal)
         imageView.tintColor = .label
         return imageView
     }()
@@ -57,6 +63,18 @@ final class FastTitleView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    private var isDownd = true
+    func rotateChevronImage() {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotateAnimation.fromValue = isDownd ? 0.0 : CGFloat.pi
+        rotateAnimation.toValue = isDownd ? CGFloat.pi : CGFloat.pi * 2.0
+        rotateAnimation.duration = 0.2
+        rotateAnimation.fillMode = .forwards
+        rotateAnimation.isRemovedOnCompletion = false
+        chevronImageView.layer.add(rotateAnimation, forKey: nil)
+        isDownd.toggle()
+    }
 }
 
 private extension FastTitleView {
@@ -64,7 +82,7 @@ private extension FastTitleView {
         [
             titleLabel,
             timeLabel,
-            pencilImageView
+            chevronImageView
         ].forEach { addSubview($0) }
         
         titleLabel.snp.makeConstraints {
@@ -72,14 +90,14 @@ private extension FastTitleView {
             $0.centerY.equalToSuperview()
         }
         
-        pencilImageView.snp.makeConstraints {
+        chevronImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(8.0)
             $0.centerY.equalToSuperview()
             $0.size.equalTo(20.0)
         }
         
         timeLabel.snp.makeConstraints {
-            $0.trailing.equalTo(pencilImageView.snp.leading).offset(-8.0)
+            $0.trailing.equalTo(chevronImageView.snp.leading).offset(-8.0)
             $0.centerY.equalToSuperview()
         }
     }

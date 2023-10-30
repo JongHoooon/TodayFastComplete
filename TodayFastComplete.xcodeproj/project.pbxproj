@@ -94,6 +94,8 @@
 		EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FC2ACAFE540019DCB1 /* TabBarEnum.swift */; };
 		EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */; };
 		EDA7770E2ACBF29C0019DCB1 /* TimerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */; };
+		EDAC26FE2AEFA7770095A564 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAC26FD2AEFA7770095A564 /* UIScrollView+Extension.swift */; };
+		EDAC27012AEFB4B10095A564 /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = EDAC27002AEFB4B10095A564 /* RxKeyboard */; };
 		EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF3662ACEA32A00F72CE8 /* FastMode.swift */; };
 		EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */; };
 		EDACF3712ACED31000F72CE8 /* SettingTimerDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDACF3702ACED31000F72CE8 /* SettingTimerDIContainer.swift */; };
@@ -206,6 +208,7 @@
 		EDA776FC2ACAFE540019DCB1 /* TabBarEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarEnum.swift; sourceTree = "<group>"; };
 		EDA776FE2ACB00F50019DCB1 /* TimerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDIContainer.swift; sourceTree = "<group>"; };
 		EDA7770D2ACBF29C0019DCB1 /* TimerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProgressView.swift; sourceTree = "<group>"; };
+		EDAC26FD2AEFA7770095A564 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		EDACF3662ACEA32A00F72CE8 /* FastMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastMode.swift; sourceTree = "<group>"; };
 		EDACF36C2ACECE5300F72CE8 /* SettingTimerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerCoordinator.swift; sourceTree = "<group>"; };
 		EDACF3702ACED31000F72CE8 /* SettingTimerDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTimerDIContainer.swift; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED6C673B2AC9033D00230621 /* OSLog.framework in Frameworks */,
+				EDAC27012AEFB4B10095A564 /* RxKeyboard in Frameworks */,
 				ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */,
 				ED1407E12AC2FDDE0050E631 /* RxSwift in Frameworks */,
 				ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */,
@@ -310,6 +314,7 @@
 				ED5090472ACD3F7600CE1456 /* UIFont+Extension.swift */,
 				ED50E96B2AD104E600182922 /* UILabel+Extension.swift */,
 				ED50E9692AD0F62A00182922 /* UITextField+Extension.swift */,
+				EDAC26FD2AEFA7770095A564 /* UIScrollView+Extension.swift */,
 				EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */,
 				ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */,
 			);
@@ -910,6 +915,7 @@
 				ED1407E62AC2FE5D0050E631 /* FSCalendar */,
 				ED1407E92AC2FF4D0050E631 /* Realm */,
 				ED1407EB2AC2FF4D0050E631 /* RealmSwift */,
+				EDAC27002AEFB4B10095A564 /* RxKeyboard */,
 			);
 			productName = TodayFastComplete;
 			productReference = ED8192112AC2ECEA00C7C830 /* TodayFastComplete.app */;
@@ -946,6 +952,7 @@
 				ED1407E22AC2FE3D0050E631 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				ED1407E52AC2FE5D0050E631 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				ED1407E82AC2FF4D0050E631 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				EDAC26FF2AEFB4B10095A564 /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = ED8192122AC2ECEA00C7C830 /* Products */;
 			projectDirPath = "";
@@ -1032,6 +1039,7 @@
 				EDC66EDB2ADE5E270085B184 /* RecordMainViewController.swift in Sources */,
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
+				EDAC26FE2AEFA7770095A564 /* UIScrollView+Extension.swift in Sources */,
 				ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */,
 				EDC66EC82ADCFA120085B184 /* FastInterruptedDayTable+Mapping.swift in Sources */,
 				ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */,
@@ -1360,6 +1368,14 @@
 				minimumVersion = 0.52.4;
 			};
 		};
+		EDAC26FF2AEFB4B10095A564 /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
+			requirement = {
+				kind = exactVersion;
+				version = 2.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1397,6 +1413,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED1407E82AC2FF4D0050E631 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		EDAC27002AEFB4B10095A564 /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EDAC26FF2AEFB4B10095A564 /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

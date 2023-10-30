@@ -8,6 +8,7 @@
 import UIKit
 
 import RxCocoa
+import RxKeyboard
 import RxSwift
 
 final class WriteFastRecordViewController: BaseViewController {
@@ -19,6 +20,7 @@ final class WriteFastRecordViewController: BaseViewController {
     // MARK: - UI
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
     
@@ -28,13 +30,8 @@ final class WriteFastRecordViewController: BaseViewController {
         return view
     }()
     
-    private let scrollContentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 0.0
-        stackView.axis = .vertical
-        return stackView
-    }()
-    
+    private let scrollContentViewTapGesture = UITapGestureRecognizer()
+
     private let dismissBarButton = UIBarButtonItem(
         image: Constants.Icon.xmark,
         style: .plain,
@@ -129,13 +126,39 @@ final class WriteFastRecordViewController: BaseViewController {
     private let fastStartTitleViewTapGesture = UITapGestureRecognizer()
     private let fastEndTitleViewTapGesture = UITapGestureRecognizer()
     
+    private let weightTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.font = .subtitleBold
+        label.text = Constants.Localization.WEIGHT_TITLE
+        return label
+    }()
+    
     private let weightBaseView: UIView = {
         let view = UIView()
         view.backgroundColor = Constants.Color.backgroundMain
         view.layer.cornerRadius = 20.0
         return view
     }()
-
+    
+    private let weightTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .red
+        textField.textColor = .label
+        textField.tintColor = .tintAccent
+        textField.font = .subtitleBold
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    private let kgLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.font = .bodyMedium
+        label.text = "kg"
+        return label
+    }()
+    
     // MARK: - Lifecycle
     init(viewModel: WriteFastRecordViewModel) {
         self.viewModel = viewModel
@@ -175,9 +198,15 @@ final class WriteFastRecordViewController: BaseViewController {
         ].forEach { fastTimeBaseView.addSubview($0) }
         
         [
+            weightTextField,
+            kgLabel
+        ].forEach { weightBaseView.addSubview($0) }
+        
+        [
             totalTimeTitleLabel,
             totalTimeLabel,
             fastTimeBaseView,
+            weightTitleLabel,
             weightBaseView
         ].forEach { scrollContentView.addSubview($0) }
         
@@ -185,7 +214,8 @@ final class WriteFastRecordViewController: BaseViewController {
         view.addSubview(scrollView)
         
         scrollView.snp.makeConstraints {
-            $0.leading.trailing.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
         
         scrollContentView.snp.makeConstraints {
@@ -244,11 +274,27 @@ final class WriteFastRecordViewController: BaseViewController {
             $0.bottom.equalToSuperview()
         }
         
-        weightBaseView.snp.makeConstraints {
+        weightTitleLabel.snp.makeConstraints {
             $0.top.equalTo(fastTimeBaseView.snp.bottom).offset(24.0)
+            $0.leading.equalTo(weightBaseView)
+        }
+        
+        weightBaseView.snp.makeConstraints {
+            $0.top.equalTo(weightTitleLabel.snp.bottom).offset(8.0)
             $0.horizontalEdges.equalToSuperview().inset(16.0)
             $0.height.equalTo(240.0)
             $0.bottom.equalToSuperview().inset(24.0)
+        }
+        
+        weightTextField.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.height.equalTo(60.0)
+            $0.width.greaterThanOrEqualTo(30.0)
+        }
+        
+        kgLabel.snp.makeConstraints {
+            $0.leading.equalTo(weightTextField.snp.trailing)
+            $0.centerY.equalTo(weightTextField)
         }
     }
 }
@@ -270,6 +316,7 @@ private extension WriteFastRecordViewController {
                     pickerView: owner.fastStartDatePickerView,
                     isShow: isShow
                 )
+                owner.fastStartTitleView.rotateChevronImage()
             })
             .disposed(by: disposeBag)
         
@@ -281,11 +328,28 @@ private extension WriteFastRecordViewController {
                     pickerView: owner.fastEndDatePickerView,
                     isShow: isShow
                 )
+                owner.fastEndTitleView.rotateChevronImage()
+            })
+            .disposed(by: disposeBag)
+        
+        scrollContentViewTapGesture.rx.event
+            .asDriver()
+            .skip(1)
+            .drive(with: self, onNext: { owner, _ in
+                owner.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+    
+        RxKeyboard.instance.visibleHeight
+            .filter { $0 != 0 }
+            .drive(with: self, onNext: { owner, _ in
+                owner.scrollView.scroll(to: .bottom)
             })
             .disposed(by: disposeBag)
     }
     
     func addGesture() {
+        scrollContentView.addGestureRecognizer(scrollContentViewTapGesture)
         fastStartTitleView.addGestureRecognizer(fastStartTitleViewTapGesture)
         fastEndTitleView.addGestureRecognizer(fastEndTitleViewTapGesture)
     }

@@ -33,6 +33,8 @@ enum Constants {
         static let xmark = UIImage(systemName: "xmark")
         static let chevronLeft = UIImage(systemName: "chevron.left")
         static let chevronRight = UIImage(systemName: "chevron.right")
+        static let chevronDown = UIImage(systemName: "chevron.down")
+        static let chevronUp = UIImage(systemName: "chevron.up")
         static let arrowtriagleDownFill = UIImage(systemName: "arrowtriangle.down.fill")
         static let plus = UIImage(systemName: "plus")
     }
