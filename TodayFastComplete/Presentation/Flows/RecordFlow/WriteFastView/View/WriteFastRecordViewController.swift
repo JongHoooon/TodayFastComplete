@@ -324,13 +324,13 @@ final class WriteFastRecordViewController: BaseViewController {
         minusButton.snp.makeConstraints {
             $0.centerY.equalTo(weightTextField)
             $0.leading.equalToSuperview().inset(24.0)
-            $0.size.equalTo(48.0)
+            $0.size.equalTo(52.0)
         }
         
         plusButton.snp.makeConstraints {
             $0.centerY.equalTo(weightTextField)
             $0.trailing.equalToSuperview().inset(24.0)
-            $0.size.equalTo(48.0)
+            $0.size.equalTo(52.0)
         }
     }
 }
@@ -345,10 +345,10 @@ private extension WriteFastRecordViewController {
             fastEndTitleViewTapped: fastEndTitleViewTapGesture.rx.event.map { _ in },
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
             minusWeightButtonTapped: minusButton.rx.tap
-                .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+                .throttle(.milliseconds(100), latest: false, scheduler: MainScheduler.instance)
                 .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
             plusWeightButtonTapped: plusButton.rx.tap
-                .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+                .throttle(.milliseconds(100), latest: false, scheduler: MainScheduler.instance)
                 .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
         )
         let output = viewModel.transform(input: input)

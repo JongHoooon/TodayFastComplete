@@ -44,7 +44,8 @@ final class TimerUseCaseImp: TimerUseCase {
             .flatMap { [unowned self] _ in
                 var tasks = [
                     self.scheduleNotifications(routineSetting: routineSetting).map { _ in },
-                    self.routineSettingRepository.update(routineSetting: routineSetting).map { _ in }
+                    self.routineSettingRepository.update(routineSetting: routineSetting).map { _ in },
+                    UserDefaultsManager.save(routineSetting: routineSetting).map { _ in }
                 ]
                 if isDeleteInterruptedDay {
                     tasks.append(self.fastInterruptedDayRepository.deleteInterruptedDay().map { _ in })

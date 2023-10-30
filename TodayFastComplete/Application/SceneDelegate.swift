@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var appCoordinator: Coordinator?
     private var userNotificationManager: UserNotificationManager?
-    private var timerRoutineSettingRepository: TimerRoutineSettingRepository?
     private var disposeBag = DisposeBag()
 
     func scene(
@@ -58,21 +57,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 private extension SceneDelegate {
     func updateFastNotification() {
         userNotificationManager = DefaultUserNotificationManager()
-        do {
-            timerRoutineSettingRepository = try DefaultTimerRoutineSettingRepository()
-        } catch {
-            Log.error(error)
-            fatalError("init realm repository failed")
-        }
         
-        guard let userNotificationManager, let timerRoutineSettingRepository
+        guard let userNotificationManager
         else {
             assertionFailure("user notification manager or timer routine setting repository is not exist")
             return
         }
         
         Single.zip(
-            timerRoutineSettingRepository.fetchRoutine(),
+            Observable.just(UserDefaultsManager.routineSetting).asSingle(),
             userNotificationManager.pendingNotificationCount(type: .fastStart),
             userNotificationManager.pendingNotificationCount(type: .fastEnd),
             userNotificationManager.pendingNotificationCount()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TimerRoutineSetting {
+struct TimerRoutineSetting: Codable {
     var days: [Int]
     var startTime: DateComponents
     var fastTime: Int
