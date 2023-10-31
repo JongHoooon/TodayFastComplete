@@ -470,16 +470,16 @@ private extension RecordMainViewController {
         segmentedControl.setTitleTextAttributes(
             [
                 .foregroundColor: UIColor.systemGray,
-                .font: UIFont.custom(size: 14.0, weight: .light)
+                .font: UIFont.custom(size: 16.0, weight: .medium)
             ],
             for: .normal
         )
         segmentedControl.setTitleTextAttributes(
             [
                 .foregroundColor: UIColor.label,
-                .font: UIFont.custom(size: 14.0, weight: .medium)
+                .font: UIFont.custom(size: 16.0, weight: .bold)
             ],
-        for: .selected
+            for: .selected
         )
     }
     func configurePageViewController() {

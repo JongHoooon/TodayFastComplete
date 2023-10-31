@@ -38,11 +38,7 @@ final class WriteFastRecordViewModel: ViewModel {
     private let coordinator: Coordinator
     private let disposeBag: DisposeBag
     let startDate: Date
-    private var weight: Double {
-        didSet {
-            print(weight)
-        }
-    }
+    private var weight: Double
     
     init(
         coordinator: Coordinator,
