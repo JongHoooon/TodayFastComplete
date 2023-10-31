@@ -66,6 +66,7 @@ extension DateFormatter {
     }
     
     /// 2018-10-18
+    /// Fast Record & Weight Record Fomat
     static var yearMonthDayFormat: DateFormatter {
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM-dd"

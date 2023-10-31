@@ -119,6 +119,15 @@
 		EDC66EDF2ADE66F20085B184 /* RecordDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */; };
 		EDC682F42AF007A300702E4D /* WeightRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC682F32AF007A300702E4D /* WeightRecordViewModel.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
+		EDEB160E2AF11E2A00B03962 /* FastRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB160D2AF11E2A00B03962 /* FastRecord.swift */; };
+		EDEB16122AF1220F00B03962 /* FastRecordTable+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16112AF1220F00B03962 /* FastRecordTable+Mapping.swift */; };
+		EDEB16142AF1270D00B03962 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16132AF1270D00B03962 /* String+Extension.swift */; };
+		EDEB16162AF14AB900B03962 /* WeightRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16152AF14AB900B03962 /* WeightRecord.swift */; };
+		EDEB16182AF14C3100B03962 /* WeightRecordTable+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16172AF14C3100B03962 /* WeightRecordTable+Mapping.swift */; };
+		EDEB161A2AF14F2E00B03962 /* FastRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16192AF14F2E00B03962 /* FastRecordRepository.swift */; };
+		EDEB161C2AF14F3E00B03962 /* WeightRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161B2AF14F3E00B03962 /* WeightRecordRepository.swift */; };
+		EDEB161E2AF1511700B03962 /* DefaultFastRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161D2AF1511700B03962 /* DefaultFastRecordRepository.swift */; };
+		EDEB16202AF157C900B03962 /* DefaultWeightRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161F2AF157C900B03962 /* DefaultWeightRecordRepository.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
 		EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */; };
@@ -234,6 +243,15 @@
 		EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDIContainer.swift; sourceTree = "<group>"; };
 		EDC682F32AF007A300702E4D /* WeightRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordViewModel.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
+		EDEB160D2AF11E2A00B03962 /* FastRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRecord.swift; sourceTree = "<group>"; };
+		EDEB16112AF1220F00B03962 /* FastRecordTable+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FastRecordTable+Mapping.swift"; sourceTree = "<group>"; };
+		EDEB16132AF1270D00B03962 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		EDEB16152AF14AB900B03962 /* WeightRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightRecord.swift; sourceTree = "<group>"; };
+		EDEB16172AF14C3100B03962 /* WeightRecordTable+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeightRecordTable+Mapping.swift"; sourceTree = "<group>"; };
+		EDEB16192AF14F2E00B03962 /* FastRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRecordRepository.swift; sourceTree = "<group>"; };
+		EDEB161B2AF14F3E00B03962 /* WeightRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordRepository.swift; sourceTree = "<group>"; };
+		EDEB161D2AF1511700B03962 /* DefaultFastRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFastRecordRepository.swift; sourceTree = "<group>"; };
+		EDEB161F2AF157C900B03962 /* DefaultWeightRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWeightRecordRepository.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
@@ -321,6 +339,7 @@
 				EDAC26FD2AEFA7770095A564 /* UIScrollView+Extension.swift */,
 				EDA250D22AD77DF6004EE6F9 /* Int+Extension.swift */,
 				ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */,
+				EDEB16132AF1270D00B03962 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -372,6 +391,8 @@
 				ED50E9852AD1893600182922 /* Utils */,
 				ED50E97A2AD16DB300182922 /* TimerRoutineSettingTable+Mapping.swift */,
 				EDC66EC72ADCFA120085B184 /* FastInterruptedDayTable+Mapping.swift */,
+				EDEB16112AF1220F00B03962 /* FastRecordTable+Mapping.swift */,
+				EDEB16172AF14C3100B03962 /* WeightRecordTable+Mapping.swift */,
 			);
 			path = RealmStorage;
 			sourceTree = "<group>";
@@ -381,6 +402,8 @@
 			children = (
 				ED50E9812AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift */,
 				EDC66ECB2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift */,
+				EDEB161D2AF1511700B03962 /* DefaultFastRecordRepository.swift */,
+				EDEB161F2AF157C900B03962 /* DefaultWeightRecordRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -695,6 +718,8 @@
 				ED50E9772AD16C8700182922 /* TimerRoutineSetting.swift */,
 				ED50E9612ACFCA3D00182922 /* WeekDay.swift */,
 				EDC66ECF2ADD9B5C0085B184 /* InterruptedFast.swift */,
+				EDEB160D2AF11E2A00B03962 /* FastRecord.swift */,
+				EDEB16152AF14AB900B03962 /* WeightRecord.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -712,6 +737,8 @@
 			children = (
 				ED50E97E2AD17E4F00182922 /* TimerRoutineSettingRepository.swift */,
 				EDC66EC92ADCFB470085B184 /* FastInterruptedDayRepository.swift */,
+				EDEB16192AF14F2E00B03962 /* FastRecordRepository.swift */,
+				EDEB161B2AF14F3E00B03962 /* WeightRecordRepository.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1010,6 +1037,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDEB161A2AF14F2E00B03962 /* FastRecordRepository.swift in Sources */,
 				EDC66EDD2ADE5F340085B184 /* RecordCoordinator.swift in Sources */,
 				ED50E96A2AD0F62A00182922 /* UITextField+Extension.swift in Sources */,
 				EDC66ECE2ADD10480085B184 /* FastInterruptable.swift in Sources */,
@@ -1023,10 +1051,12 @@
 				ED80B9F72AE10B0400F85A66 /* WriteFastRecordViewController.swift in Sources */,
 				EDA37B352AE63AA500EC6D6E /* FastTitleView.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
+				EDEB16182AF14C3100B03962 /* WeightRecordTable+Mapping.swift in Sources */,
 				ED830EB32ACE8BF2000B715A /* SelectFastModeCollectionViewCell.swift in Sources */,
 				ED4DB3AD2AD3DA3C003535C9 /* TimePickerViewType.swift in Sources */,
 				ED50E9602ACF913E00182922 /* TitleCollectionViewHeader.swift in Sources */,
 				ED50E9892AD1990400182922 /* List+Extension.swift in Sources */,
+				EDEB160E2AF11E2A00B03962 /* FastRecord.swift in Sources */,
 				ED50E97F2AD17E4F00182922 /* TimerRoutineSettingRepository.swift in Sources */,
 				EDBAAA302AD2B1D900CB84C8 /* SettingRoutineSection.swift in Sources */,
 				EDC66ED02ADD9B5C0085B184 /* InterruptedFast.swift in Sources */,
@@ -1036,10 +1066,12 @@
 				EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */,
 				EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */,
 				ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */,
+				EDEB16122AF1220F00B03962 /* FastRecordTable+Mapping.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
 				ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */,
 				ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */,
 				ED4DB3BA2AD4318A003535C9 /* TimerUseCase.swift in Sources */,
+				EDEB16142AF1270D00B03962 /* String+Extension.swift in Sources */,
 				ED50E9782AD16C8700182922 /* TimerRoutineSetting.swift in Sources */,
 				ED6C673E2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift in Sources */,
 				EDC66EDB2ADE5E270085B184 /* RecordMainViewController.swift in Sources */,
@@ -1067,10 +1099,12 @@
 				ED6C67262AC83EB200230621 /* TimerViewModel.swift in Sources */,
 				ED4DB3C62AD53337003535C9 /* RoutineSettingFetchable.swift in Sources */,
 				EDA776FF2ACB00F50019DCB1 /* TimerDIContainer.swift in Sources */,
+				EDEB161E2AF1511700B03962 /* DefaultFastRecordRepository.swift in Sources */,
 				ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */,
 				ED622C392AE00FD8004DCF1F /* FastRecordViewController.swift in Sources */,
 				EDC2CC272ACD9A8E0096D2F0 /* Step.swift in Sources */,
 				ED86F5572ADEAC9A00CA83AE /* RxFSCalendarDelegateProxy.swift in Sources */,
+				EDEB16202AF157C900B03962 /* DefaultWeightRecordRepository.swift in Sources */,
 				EDC682F42AF007A300702E4D /* WeightRecordViewModel.swift in Sources */,
 				ED5090482ACD3F7600CE1456 /* UIFont+Extension.swift in Sources */,
 				EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */,
@@ -1099,6 +1133,7 @@
 				ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */,
 				EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */,
 				EDA776FD2ACAFE540019DCB1 /* TabBarEnum.swift in Sources */,
+				EDEB16162AF14AB900B03962 /* WeightRecord.swift in Sources */,
 				ED80B9F92AE10B2D00F85A66 /* WriteFastRecordViewModel.swift in Sources */,
 				EDACF3672ACEA32A00F72CE8 /* FastMode.swift in Sources */,
 				ED8192172AC2ECEA00C7C830 /* SceneDelegate.swift in Sources */,
@@ -1106,6 +1141,7 @@
 				ED4D40F42AD971C300C49C8A /* CalendarNotification.swift in Sources */,
 				ED80B9FB2AE10CA000F85A66 /* FastRecordViewModel.swift in Sources */,
 				EDC66ECC2ADCFBE00085B184 /* DefaultFastInterruptedDayRepository.swift in Sources */,
+				EDEB161C2AF14F3E00B03962 /* WeightRecordRepository.swift in Sources */,
 				ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */,
 				ED0E74AB2ADFC8A600E94419 /* FSCalendarCustomCell.swift in Sources */,
 				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
