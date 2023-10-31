@@ -72,6 +72,22 @@ extension Date {
         return minute
     }
     
+    var previousWeek: Date {
+        return Calendar.current.date(byAdding: .weekOfMonth, value: -1, to: self) ?? Date()
+    }
+    
+    var nextWeek: Date {
+        return Calendar.current.date(byAdding: .weekOfMonth, value: +1, to: self) ?? Date()
+    }
+    
+    var previousMonth: Date {
+        return Calendar.current.date(byAdding: .month, value: -1, to: self) ?? Date()
+    }
+    
+    var nextMonth: Date {
+        return Calendar.current.date(byAdding: .month, value: +1, to: self) ?? Date()
+    }
+    
     var second: Int {
         guard let second = Calendar.current.dateComponents([.second], from: self).second
         else {

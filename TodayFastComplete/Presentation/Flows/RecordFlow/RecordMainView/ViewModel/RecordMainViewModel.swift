@@ -16,6 +16,9 @@ final class RecordMainViewModel: ViewModel {
         let swipeUpGesture: Observable<Void>
         let swipeDownGesture: Observable<Void>
         let calendarDidSelect: Observable<Date>
+        let toggleButtonTapped: Observable<Void>
+        let beforeButtonTapped: Observable<Void>
+        let afterButtonTapped: Observable<Void>
     }
     
     struct Output {
@@ -52,6 +55,12 @@ final class RecordMainViewModel: ViewModel {
         
         input.swipeDownGesture
             .map { 0 } // FSCalendarScope enum month raw value
+            .bind { output.calendarScope.accept($0) }
+            .disposed(by: disposeBag)
+        
+        input.toggleButtonTapped
+            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.asyncInstance)
+            .map { _ in output.calendarScope.value == 1 ? 0 : 1 }
             .bind { output.calendarScope.accept($0) }
             .disposed(by: disposeBag)
         

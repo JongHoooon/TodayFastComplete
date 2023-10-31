@@ -47,6 +47,13 @@ extension DateFormatter {
         return format
     }
     
+    /// 2023년 10월
+    static var yearMonthFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = Constants.Localization.YEAR_MONTH_FORMAT
+        return format
+    }
+    
     static func toString(
         date: Date,
         format: DateFormatter

@@ -64,16 +64,16 @@ final class FastTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private var isDownd = true
+    private var isDown = true
     func rotateChevronImage() {
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotateAnimation.fromValue = isDownd ? 0.0 : CGFloat.pi
-        rotateAnimation.toValue = isDownd ? CGFloat.pi : CGFloat.pi * 2.0
+        rotateAnimation.fromValue = isDown ? 0.0 : CGFloat.pi
+        rotateAnimation.toValue = isDown ? CGFloat.pi : CGFloat.pi * 2.0
         rotateAnimation.duration = 0.2
         rotateAnimation.fillMode = .forwards
         rotateAnimation.isRemovedOnCompletion = false
         chevronImageView.layer.add(rotateAnimation, forKey: nil)
-        isDownd.toggle()
+        isDown.toggle()
     }
 }
 

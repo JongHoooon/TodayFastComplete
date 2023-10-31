@@ -151,6 +151,16 @@ extension Constants {
             localized: "SUNDAY",
             defaultValue: "일"
         )
+        
+        static let WEEK = String(
+            localized: "WEEK",
+            defaultValue: "주"
+        )
+        static let MONTH = String(
+            localized: "MONTH",
+            defaultValue: "월"
+        )
+        
         static let HOUR = String(
             localized: "HOUR",
             defaultValue: "시간"
@@ -187,6 +197,11 @@ extension Constants {
         static let CANCEL = String(
             localized: "CANCEL",
             defaultValue: "취소"
+        )
+        
+        static let YEAR_MONTH_FORMAT = String(
+            localized: "MONTH_WEEK_FORMAT",
+            defaultValue: "YYYY년 MM월"
         )
     }
 }

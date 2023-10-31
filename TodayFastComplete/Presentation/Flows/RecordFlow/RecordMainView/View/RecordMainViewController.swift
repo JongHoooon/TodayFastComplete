@@ -16,6 +16,7 @@ final class RecordMainViewController: BaseViewController {
     // MARK: - Property
     private let viewModel: RecordMainViewModel
     private let disposeBag: DisposeBag
+    private var isDown = true
     
     // MARK: - UI
     private let recordPageViewController: UIPageViewController
@@ -286,21 +287,16 @@ private extension RecordMainViewController {
             swipeLeftGesture.rx.event.map { _ in 1 },
             segmentedControl.rx.selectedSegmentIndex.asObservable()
         )
-        swipeRightGesture.rx.event
-            .map { _ in 0 }
-            .bind(to: segmentedControl.rx.selectedSegmentIndex)
-            .disposed(by: disposeBag)
-        
-        swipeLeftGesture.rx.event
-            .map { _ in 1 }
-            .bind(to: segmentedControl.rx.selectedSegmentIndex)
-            .disposed(by: disposeBag)
+        let viewDidLoadShared = self.rx.viewDidLoad
         
         let input = RecordMainViewModel.Input(
             selectedSegmentIndex: selectedSegmentIndex,
             swipeUpGesture: swipeUpGesture.rx.event.asObservable().map { _ in },
             swipeDownGesture: swipeDownGesture.rx.event.asObservable().map { _ in },
-            calendarDidSelect: calendarView.rx.didSelect
+            calendarDidSelect: calendarView.rx.didSelect, 
+            toggleButtonTapped: toggleButton.rx.tap.asObservable(),
+            beforeButtonTapped: beforeButon.rx.tap.asObservable().map { _ in },
+            afterButtonTapped: afterButon.rx.tap.asObservable().map { _ in }
         )
         
         let output = viewModel.transform(input: input)
@@ -320,15 +316,32 @@ private extension RecordMainViewController {
             )})
             .disposed(by: disposeBag)
         
-        output.calendarScope
+        let calendarScopeShared = output.calendarScope
             .map { UInt($0) }
             .compactMap { FSCalendarScope(rawValue: $0) }
             .asDriver(onErrorJustReturn: .week)
+        
+        calendarScopeShared
             .drive(with: self, onNext: { owner, scope in
                 owner.calendarView.setScope(scope, animated: true)
             })
             .disposed(by: disposeBag)
-
+        
+        calendarScopeShared
+            .map {
+                return switch $0 {
+                case .month:        Constants.Localization.MONTH
+                case .week:         Constants.Localization.WEEK
+                default:            Constants.Localization.WEEK
+                }
+            }
+            .skip(1)
+            .drive(with: self, onNext: { owner, scopeName in
+                owner.toggleButton.configuration?.title = scopeName
+                owner.rotateChevronImage()
+            })
+            .disposed(by: disposeBag)
+        
         calendarView.rx.boundingRectWillChange
             .asDriver(onErrorJustReturn: .zero)
             .drive(with: self, onNext: { owner, bounds in
@@ -347,6 +360,69 @@ private extension RecordMainViewController {
                 guard let cell = cell as? FSCalendarCustomCell else { return }
                 cell.configureCell(date: date)
             })
+            .disposed(by: disposeBag)
+        
+        let beforeButtonTapDriver = beforeButon.rx.tap.asDriver()
+        let afterButtonTapDriver = afterButon.rx.tap.asDriver()
+        
+        beforeButtonTapDriver
+            .drive(with: self, onNext: { owner, _ in
+                switch owner.calendarView.scope {
+                case .week:
+                    owner.calendarView.setCurrentPage(
+                        owner.calendarView.currentPage.previousWeek,
+                        animated: true
+                    )
+                case .month:
+                    owner.calendarView.setCurrentPage(
+                        owner.calendarView.currentPage.previousMonth,
+                        animated: true
+                    )
+                @unknown default:
+                    return
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        afterButtonTapDriver
+            .drive(with: self, onNext: { owner, _ in
+                switch owner.calendarView.scope {
+                case .week:
+                    owner.calendarView.setCurrentPage(
+                        owner.calendarView.currentPage.nextWeek,
+                        animated: true
+                    )
+                case .month:
+                    owner.calendarView.setCurrentPage(
+                        owner.calendarView.currentPage.nextMonth,
+                        animated: true
+                    )
+                @unknown default:
+                    return
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        Driver.merge(
+            viewDidLoadShared.asDriver(),
+            beforeButtonTapDriver,
+            afterButtonTapDriver
+        )
+        .compactMap { [weak self] _ in
+            self?.calendarView.currentPage.toString(format: .yearMonthFormat)
+        }
+        .distinctUntilChanged()
+        .drive(calendarDateInfoLabel.rx.text)
+        .disposed(by: disposeBag)
+        
+        swipeRightGesture.rx.event
+            .map { _ in 0 }
+            .bind(to: segmentedControl.rx.selectedSegmentIndex)
+            .disposed(by: disposeBag)
+        
+        swipeLeftGesture.rx.event
+            .map { _ in 1 }
+            .bind(to: segmentedControl.rx.selectedSegmentIndex)
             .disposed(by: disposeBag)
     }
 }
@@ -427,5 +503,16 @@ private extension RecordMainViewController {
             swipeRightGesture,
             swipeLeftGesture
         ].forEach { baseView.addGestureRecognizer($0) }
+    }
+    
+    func rotateChevronImage() {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotateAnimation.fromValue = isDown ? 0.0 : CGFloat.pi
+        rotateAnimation.toValue = isDown ? CGFloat.pi : CGFloat.pi * 2.0
+        rotateAnimation.duration = 0.2
+        rotateAnimation.fillMode = .forwards
+        rotateAnimation.isRemovedOnCompletion = false
+        toggleButton.imageView?.layer.add(rotateAnimation, forKey: nil)
+        isDown.toggle()
     }
 }
