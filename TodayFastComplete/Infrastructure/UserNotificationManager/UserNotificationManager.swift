@@ -140,13 +140,13 @@ final class DefaultUserNotificationManager: UserNotificationManager {
             dates: datesForNotification,
             startTimeHour: routineSetting.startTime.hour ?? 0,
             startTimeMinute: routineSetting.startTime.minute ?? 0,
-            fastTime: routineSetting.fastTime
+            fastTime: routineSetting.fastTimeHour
         )
         let fastEndNotifications = fastEndNotifications(
             dates: datesForNotification,
             startTimeHour: routineSetting.startTime.hour ?? 0,
             startTimeMinute: routineSetting.startTime.minute ?? 0,
-            fastTime: routineSetting.fastTime
+            fastTime: routineSetting.fastTimeHour
         )
         var notifications = (fastStartNotifications + fastEndNotifications)
             .sorted {

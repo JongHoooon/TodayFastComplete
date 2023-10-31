@@ -339,8 +339,10 @@ private extension WriteFastRecordViewController {
     func bindViewModel() {
         
         let weightTextFieldTextShared = weightTextField.rx.text.orEmpty.share()
+        let viewDidLoadShared = self.rx.viewDidLoad.share()
         
         let input = WriteFastRecordViewModel.Input(
+            viewDidLoad: self.rx.viewDidLoad.asObservable(), 
             fastStartTitleViewTapped: fastStartTitleViewTapGesture.rx.event.map { _ in },
             fastEndTitleViewTapped: fastEndTitleViewTapGesture.rx.event.map { _ in },
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
@@ -349,7 +351,10 @@ private extension WriteFastRecordViewController {
                 .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
             plusWeightButtonTapped: plusButton.rx.tap
                 .throttle(.milliseconds(100), latest: false, scheduler: MainScheduler.instance)
-                .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() })
+                .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
+            startTimeDate: fastStartDatePickerView.rx.value.asObservable(),
+            endTimeDate: fastEndDatePickerView.rx.value.asObservable(),
+            weightTextFieldText: weightTextFieldTextShared
         )
         let output = viewModel.transform(input: input)
         
@@ -377,6 +382,84 @@ private extension WriteFastRecordViewController {
             })
             .disposed(by: disposeBag)
         
+        output.startTimeDate
+            .map { $0.toString(format: .currentFastTimeFormat2) }
+            .bind(with: self, onNext: { owner, text in
+                owner.fastStartTitleView.configureTitleLabel(text: text)
+            })
+            .disposed(by: disposeBag)
+        
+        output.endTimeDate
+            .map { $0.toString(format: .currentFastTimeFormat2) }
+            .bind(with: self, onNext: { owner, text in
+                owner.fastEndTitleView.configureTitleLabel(text: text)
+            })
+            .disposed(by: disposeBag)
+        
+        output.startDatePickerDate
+            .bind(to: fastStartDatePickerView.rx.date)
+            .disposed(by: disposeBag)
+        
+        output.endDatePickerDate
+            .bind(to: fastEndDatePickerView.rx.date)
+            .disposed(by: disposeBag)
+        
+        output.totalFastTimeSecond
+            .map {
+                let text = String(
+                    format: Constants.Localization.TOTAL_FAST_TIME,
+                    arguments: ["\($0 / 3600)", "\($0 % 3600 / 60)"]
+                )
+                let attributedString = NSMutableAttributedString(string: text)
+                attributedString.addAttribute(
+                    .font,
+                    value: UIFont.bodyBold,
+                    range: (text as NSString).range(of: Constants.Localization.HOUR)
+                )
+                attributedString.addAttribute(
+                    .font,
+                    value: UIFont.bodyBold,
+                    range: (text as NSString).range(of: Constants.Localization.MINUTE)
+                )
+                return attributedString
+            }
+            .bind(to: totalTimeLabel.rx.attributedText)
+            .disposed(by: disposeBag)
+        
+        output.weight
+            .map { String(format: "%.1f", $0) }
+            .bind(to: weightTextField.rx.text)
+            .disposed(by: disposeBag)
+    
+        viewDidLoadShared
+            .bind(with: self, onNext: { owner, _ in
+                owner.fastStartDatePickerView.minimumDate = Calendar.current.date(
+                    bySettingHour: 0,
+                    minute: 0,
+                    second: 0,
+                    of: owner.viewModel.startDate
+                )
+                owner.fastStartDatePickerView.maximumDate = Calendar.current.date(
+                    bySettingHour: 23,
+                    minute: 59,
+                    second: 59,
+                    of: owner.viewModel.startDate
+                )
+                owner.fastEndDatePickerView.minimumDate = Calendar.current.date(
+                    bySettingHour: 0,
+                    minute: 0,
+                    second: 0,
+                    of: owner.viewModel.startDate
+                )
+                owner.fastEndDatePickerView.maximumDate = Calendar.current.date(
+                    bySettingHour: 23,
+                    minute: 59,
+                    second: 59,
+                    of: owner.viewModel.startDate.addingTimeInterval(24*60*60)
+                )
+            })
+            .disposed(by: disposeBag)
+            
         scrollContentViewTapGesture.rx.event
             .asDriver()
             .skip(1)

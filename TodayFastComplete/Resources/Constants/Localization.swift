@@ -201,7 +201,17 @@ extension Constants {
         
         static let YEAR_MONTH_FORMAT = String(
             localized: "MONTH_WEEK_FORMAT",
-            defaultValue: "YYYY년 MM월"
+            defaultValue: "YYYY년 M월"
+        )
+        
+        static let MONTH_DAY_TIME_FORMAT = String(
+            localized: "MONTH_DAY_TIME_FORMAT",
+            defaultValue: "M월 d일 a h시 m분"
+        )
+        
+        static let YEAR_MONTH_DAY_FORMAT = String(
+            localized: "YEAR_MONTH_DAY_FORMAT",
+            defaultValue: "YYYY년 M월 d일 EEEE"
         )
     }
 }

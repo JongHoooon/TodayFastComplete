@@ -10,9 +10,9 @@ import Foundation
 struct TimerRoutineSetting: Codable {
     var days: [Int]
     var startTime: DateComponents
-    var fastTime: Int
+    var fastTimeHour: Int
     var mealTime: Int {
-        return 24 - fastTime
+        return 24 - fastTimeHour
     }
     
     init(
@@ -22,7 +22,7 @@ struct TimerRoutineSetting: Codable {
     ) {
         self.days = days
         self.startTime = startTime
-        self.fastTime = fastTime
+        self.fastTimeHour = fastTime
     }
     
     var todayFastStartTimeDate: Date {
@@ -36,7 +36,7 @@ struct TimerRoutineSetting: Codable {
     }
     
     var todayFastEndTimeDate: Date {
-        let todayFastEndTimeDate = todayFastStartTimeDate.addingTimeInterval(TimeInterval(fastTime * 3600))
+        let todayFastEndTimeDate = todayFastStartTimeDate.addingTimeInterval(TimeInterval(fastTimeHour * 3600))
         return todayFastEndTimeDate
     }
     
@@ -53,7 +53,7 @@ struct TimerRoutineSetting: Codable {
     
     var yesterdayFastEndTimeDate: Date {
         let yesterdayFastEndTimeDate = yesterdayFastStartTimeDate
-            .addingTimeInterval(TimeInterval(fastTime * 3600))
+            .addingTimeInterval(TimeInterval(fastTimeHour * 3600))
         return yesterdayFastEndTimeDate
     }
     
@@ -69,7 +69,7 @@ struct TimerRoutineSetting: Codable {
     }
     
     var currentMealStartDate: Date {
-        return currentMealEndDate.addingTimeInterval(-(24.0 - Double(fastTime)) * 3600.0)
+        return currentMealEndDate.addingTimeInterval(-(24.0 - Double(fastTimeHour)) * 3600.0)
     }
     
     var currentMealEndDate: Date {
@@ -166,15 +166,15 @@ struct TimerRoutineSetting: Codable {
             .joined(separator: ", ")
         let fastStartTime = startTime.timeString
         let mealStartTime = DateComponents(
-            hour: (startTime.hour ?? 0) + fastTime,
+            hour: (startTime.hour ?? 0) + fastTimeHour,
             minute: startTime.minute
         ).timeString
         return String(
             format: Constants.Localization.TIMER_VIEW_FAST_INFO, 
             arguments: [
                 days,
-                fastStartTime, mealStartTime, fastTime,
-                mealStartTime, fastStartTime, (24-fastTime)
+                fastStartTime, mealStartTime, fastTimeHour,
+                mealStartTime, fastStartTime, (24-fastTimeHour)
             ]
         )
     }

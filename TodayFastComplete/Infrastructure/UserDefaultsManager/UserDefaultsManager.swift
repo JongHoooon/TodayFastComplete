@@ -33,10 +33,14 @@ enum UserDefaultsManager {
     enum UserDefaultsKey: String, CaseIterable {
         case notificationHandled
         case routineSetting
+        case recentSavedWeight
     }
     
     @UserDefault(key: .notificationHandled, defaultValue: false)
     static var notificationHandled: Bool
+    
+    @UserDefault(key: .recentSavedWeight, defaultValue: 0)
+    static var recentSavedWeight: Double
     
     static func save(routineSetting: TimerRoutineSetting) -> Single<TimerRoutineSetting> {
         return Single<TimerRoutineSetting>

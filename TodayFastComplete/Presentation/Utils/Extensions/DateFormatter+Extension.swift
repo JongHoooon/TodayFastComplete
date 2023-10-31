@@ -17,6 +17,20 @@ extension DateFormatter {
         return format
     }
     
+    /// 10월 23일 오후 8:52
+    static var monthDayTimeFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = Constants.Localization.MONTH_DAY_TIME_FORMAT
+        return format
+    }
+    
+    /// 2023년 10월 19일 목요일
+    static var yearMonthDayWeekDayFormat: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = Constants.Localization.YEAR_MONTH_DAY_FORMAT
+        return format
+    }
+    
     /// 11 : 22 : 33
     static var timerHourMinuteSecondFormat: DateFormatter {
         let format = DateFormatter()
@@ -24,11 +38,22 @@ extension DateFormatter {
         return format
     }
     
+    /// M월 d일 H시 m분
     static var currentFastTimeFormat: DateFormatter {
         let format = DateFormatter()
         format.dateFormat = String(
             localized: "CURRENT_FAST_TIME_FORMAT",
-            defaultValue: "M월 d일 H시 m분"
+            defaultValue: "M월 d일 H:mm"
+        )
+        return format
+    }
+    
+    /// M월 d일 a h시 m분
+    static var currentFastTimeFormat2: DateFormatter {
+        let format = DateFormatter()
+        format.dateFormat = String(
+            localized: "CURRENT_FAST_TIME_FORMAT",
+            defaultValue: "M월 d일 a h시 m분"
         )
         return format
     }

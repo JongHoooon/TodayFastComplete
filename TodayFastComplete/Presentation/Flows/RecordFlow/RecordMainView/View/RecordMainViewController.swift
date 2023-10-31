@@ -342,6 +342,11 @@ private extension RecordMainViewController {
             })
             .disposed(by: disposeBag)
         
+        output.dateInfoLabelText
+            .asDriver()
+            .drive(dateInfoLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         calendarView.rx.boundingRectWillChange
             .asDriver(onErrorJustReturn: .zero)
             .drive(with: self, onNext: { owner, bounds in
@@ -358,14 +363,22 @@ private extension RecordMainViewController {
             .observe(on: MainScheduler.asyncInstance)
             .bind(onNext: { cell, date in
                 guard let cell = cell as? FSCalendarCustomCell else { return }
-                cell.configureCell(date: date)
+//                cell.configureCell(date: date)
             })
             .disposed(by: disposeBag)
         
-        let beforeButtonTapDriver = beforeButon.rx.tap.asDriver()
-        let afterButtonTapDriver = afterButon.rx.tap.asDriver()
+        Driver.merge(
+            viewDidLoadShared.asDriver(),
+            calendarView.rx.calendarCurrentPageDidChange.map { _ in }.asDriver(onErrorJustReturn: Void())
+        )
+        .compactMap { [weak self] _ in
+            self?.calendarView.currentPage.toString(format: .yearMonthFormat)
+        }
+        .distinctUntilChanged()
+        .drive(calendarDateInfoLabel.rx.text)
+        .disposed(by: disposeBag)
         
-        beforeButtonTapDriver
+        beforeButon.rx.tap.asDriver()
             .drive(with: self, onNext: { owner, _ in
                 switch owner.calendarView.scope {
                 case .week:
@@ -384,7 +397,7 @@ private extension RecordMainViewController {
             })
             .disposed(by: disposeBag)
         
-        afterButtonTapDriver
+        afterButon.rx.tap.asDriver()
             .drive(with: self, onNext: { owner, _ in
                 switch owner.calendarView.scope {
                 case .week:
@@ -402,18 +415,6 @@ private extension RecordMainViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
-        Driver.merge(
-            viewDidLoadShared.asDriver(),
-            beforeButtonTapDriver,
-            afterButtonTapDriver
-        )
-        .compactMap { [weak self] _ in
-            self?.calendarView.currentPage.toString(format: .yearMonthFormat)
-        }
-        .distinctUntilChanged()
-        .drive(calendarDateInfoLabel.rx.text)
-        .disposed(by: disposeBag)
         
         swipeRightGesture.rx.event
             .map { _ in 0 }

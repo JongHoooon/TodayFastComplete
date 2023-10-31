@@ -14,8 +14,7 @@ final class WeightRecordViewController: BaseViewController {
     // MARK: - Properties
     private let viewModel: WeightRecordViewModel
     private let disposeBag: DisposeBag
-    
-     
+         
     // MARK: - Lifecycle
     init(viewModel: WeightRecordViewModel) {
         self.viewModel = viewModel

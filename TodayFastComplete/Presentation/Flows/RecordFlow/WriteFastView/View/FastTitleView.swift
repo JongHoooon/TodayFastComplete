@@ -75,6 +75,10 @@ final class FastTitleView: UIView {
         chevronImageView.layer.add(rotateAnimation, forKey: nil)
         isDown.toggle()
     }
+    
+    func configureTitleLabel(text: String) {
+        timeLabel.text = text
+    }
 }
 
 private extension FastTitleView {

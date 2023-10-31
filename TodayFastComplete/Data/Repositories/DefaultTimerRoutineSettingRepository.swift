@@ -30,7 +30,7 @@ final class DefaultTimerRoutineSettingRepository: BaseRealmRepository, TimerRout
                     days: routineSetting.days.toList(),
                     startTimeHour: hour,
                     startTimeMinute: minute,
-                    fastTime: routineSetting.fastTime
+                    fastTime: routineSetting.fastTimeHour
                 )
                 do {
                     try realm.write {

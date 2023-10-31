@@ -24,6 +24,7 @@ final class RecordMainViewModel: ViewModel {
     struct Output {
         let currentPage = BehaviorRelay(value: 0)
         let calendarScope = BehaviorRelay(value: 1)
+        let dateInfoLabelText = BehaviorRelay(value: Date().toString(format: .yearMonthDayWeekDayFormat))
     }
     
     private let coordinator: Coordinator
@@ -64,12 +65,19 @@ final class RecordMainViewModel: ViewModel {
             .bind { output.calendarScope.accept($0) }
             .disposed(by: disposeBag)
         
-        input.calendarDidSelect
+        let calendarDidSelectShared = input.calendarDidSelect.share()
+        
+        calendarDidSelectShared
             .bind(with: self, onNext: { owner, date in
                 Log.debug(date.toString(format: owner.calendarformatter))
                 Log.debug(Date().toString(format: .yearMonthDayFormat))
                 owner.selectedDateRelay.accept(date)
             })
+            .disposed(by: disposeBag)
+        
+        calendarDidSelectShared
+            .map { $0.toString(format: .yearMonthDayWeekDayFormat) }
+            .bind(onNext: { output.dateInfoLabelText.accept($0) })
             .disposed(by: disposeBag)
             
         return output

@@ -259,7 +259,7 @@ final class SettingRoutineViewModel: ViewModel {
                     output.deleteButtonIsEnable.accept(true)
                     output.selectedWeekDays.accept(routineSetting.days)
                     output.selectedStartTime.accept(routineSetting.startTime)
-                    output.selectedFastTime.accept(routineSetting.fastTime)
+                    output.selectedFastTime.accept(routineSetting.fastTimeHour)
                 })
                 .disposed(by: disposeBag)
         }

@@ -59,4 +59,11 @@ extension Reactive where Base: FSCalendar {
                 return parameters[1] as! Date
             }
     }
+    
+    var calendarCurrentPageDidChange: Observable<FSCalendar> {
+        return delegate.methodInvoked(#selector(FSCalendarDelegate.calendarCurrentPageDidChange(_:)))
+            .map { parameters in
+                return parameters[0] as! FSCalendar
+            }
+    }
 }
