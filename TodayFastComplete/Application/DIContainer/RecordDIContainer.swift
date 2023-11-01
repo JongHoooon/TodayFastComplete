@@ -12,6 +12,38 @@ import RxRelay
 final class RecordDIContainer: RecordCoordinatorDependencies {
     
     private let selectedDateRelay = BehaviorRelay(value: Date())
+    private let fastRecordViewState = BehaviorRelay<RecordViewState>(value: .noData)
+    private let weightRecordViewState = BehaviorRelay<RecordViewState>(value: .noData)
+    
+    // MARK: - Use Case
+    func makeRecordUseCase() -> RecordUseCase {
+        return RecordUseCaseImp(
+            fastRecordRepository: makeFastRecordRepository(),
+            weightRecordRepository: makeWeightRecordRepository()
+        )
+    }
+    
+    // MARK: - Repository
+    func makeFastRecordRepository() -> FastRecordRepository {
+        do {
+            let repository = try DefaultFastRecordRepository()
+            return repository
+        } catch {
+            Log.error(error)
+            fatalError("init realm repository failed")
+
+        }
+    }
+    
+    func makeWeightRecordRepository() -> WeightRecordRepository {
+        do {
+            let repository = try DefaultWeightRecordRepository()
+            return repository
+        } catch {
+            Log.error(error)
+            fatalError("init realm repository failed")
+        }
+    }
     
     // MARK: - Record View
     func makeRecordMainViewController(
@@ -29,16 +61,28 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     }
     
     private func makeRecordMainViewModel(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> RecordMainViewModel {
-        return RecordMainViewModel(coordinator: coordinator, selectedDateRelay: selectedDateRelay)
+        return RecordMainViewModel(
+            coordinator: coordinator,
+            selectedDateRelay: selectedDateRelay,
+            fastRecordViewState: fastRecordViewState,
+            weightRecordViewState: weightRecordViewState
+        )
     }
     
     // MARK: - Fast Record
     private func makeFastRecordViewController(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> UIViewController {
-        return FastRecordViewController(viewModel: makeFastRecordViewModel(coordinator: coordinator, selectedDateRelay: selectedDateRelay))
+        return FastRecordViewController(viewModel: makeFastRecordViewModel(
+            coordinator: coordinator,
+            selectedDateRelay: selectedDateRelay
+        ))
     }
     
     private func makeFastRecordViewModel(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> FastRecordViewModel {
-        return FastRecordViewModel(coordinator: coordinator, selectedDateRelay: selectedDateRelay)
+        return FastRecordViewModel(
+            coordinator: coordinator,
+            selectedDateRelay: selectedDateRelay,
+            fastRecordViewState: fastRecordViewState
+        )
     }
     
     // MARK: - Weight Record
@@ -47,7 +91,10 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     }
     
     private func makeWeightRecordViewModel(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> WeightRecordViewModel {
-        return WeightRecordViewModel(coordinator: coordinator, selectedDateRelay: selectedDateRelay)
+        return WeightRecordViewModel(
+            coordinator: coordinator,
+            selectedDateRelay: selectedDateRelay,
+            weightRecordViewState: weightRecordViewState)
     }
     
     // MARK: - Write Fast Record
@@ -56,6 +103,10 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     }
     
     private func makeWriteFastRecordViewModel(coordinator: Coordinator, startDate: Date) -> WriteFastRecordViewModel {
-        return WriteFastRecordViewModel(coordinator: coordinator, startDate: startDate)
+        return WriteFastRecordViewModel(
+            coordinator: coordinator,
+            useCase: makeRecordUseCase(),
+            startDate: startDate
+        )
     }
 }

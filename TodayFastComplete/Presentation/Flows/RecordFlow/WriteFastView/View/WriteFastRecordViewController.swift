@@ -193,6 +193,10 @@ final class WriteFastRecordViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        Log.deinit()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -354,7 +358,8 @@ private extension WriteFastRecordViewController {
                 .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
             startTimeDate: fastStartDatePickerView.rx.value.asObservable(),
             endTimeDate: fastEndDatePickerView.rx.value.asObservable(),
-            weightTextFieldText: weightTextFieldTextShared
+            weightTextFieldText: weightTextFieldTextShared, 
+            saveButtonTapped: saveBarButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(input: input)
         

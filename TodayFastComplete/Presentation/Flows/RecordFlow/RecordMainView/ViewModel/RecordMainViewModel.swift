@@ -32,14 +32,20 @@ final class RecordMainViewModel: ViewModel {
     private let disposeBag: DisposeBag
     
     private let selectedDateRelay: BehaviorRelay<Date>
+    private let fastRecordViewState: BehaviorRelay<RecordViewState>
+    private let weightRecordViewState: BehaviorRelay<RecordViewState>
     
     init(
         coordinator: Coordinator,
-        selectedDateRelay: BehaviorRelay<Date>
+        selectedDateRelay: BehaviorRelay<Date>,
+        fastRecordViewState: BehaviorRelay<RecordViewState>,
+        weightRecordViewState: BehaviorRelay<RecordViewState>
     ) {
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
         self.selectedDateRelay = selectedDateRelay
+        self.fastRecordViewState = fastRecordViewState
+        self.weightRecordViewState = weightRecordViewState
     }
     
     func transform(input: Input) -> Output {

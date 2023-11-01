@@ -128,6 +128,9 @@
 		EDEB161C2AF14F3E00B03962 /* WeightRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161B2AF14F3E00B03962 /* WeightRecordRepository.swift */; };
 		EDEB161E2AF1511700B03962 /* DefaultFastRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161D2AF1511700B03962 /* DefaultFastRecordRepository.swift */; };
 		EDEB16202AF157C900B03962 /* DefaultWeightRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161F2AF157C900B03962 /* DefaultWeightRecordRepository.swift */; };
+		EDEB16232AF1593100B03962 /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16222AF1593100B03962 /* RecordUseCase.swift */; };
+		EDEB16252AF15B7B00B03962 /* RecordSavable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16242AF15B7B00B03962 /* RecordSavable.swift */; };
+		EDEB16292AF1E77600B03962 /* RecordViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16282AF1E77600B03962 /* RecordViewState.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
 		EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */; };
@@ -252,6 +255,9 @@
 		EDEB161B2AF14F3E00B03962 /* WeightRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordRepository.swift; sourceTree = "<group>"; };
 		EDEB161D2AF1511700B03962 /* DefaultFastRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFastRecordRepository.swift; sourceTree = "<group>"; };
 		EDEB161F2AF157C900B03962 /* DefaultWeightRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWeightRecordRepository.swift; sourceTree = "<group>"; };
+		EDEB16222AF1593100B03962 /* RecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCase.swift; sourceTree = "<group>"; };
+		EDEB16242AF15B7B00B03962 /* RecordSavable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSavable.swift; sourceTree = "<group>"; };
+		EDEB16282AF1E77600B03962 /* RecordViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewState.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
@@ -727,6 +733,7 @@
 		ED8192332AC2F45F00C7C830 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				EDEB16212AF1592100B03962 /* RecordUseCase */,
 				ED4DB3C92AD533C9003535C9 /* TimerUseCase */,
 			);
 			path = UseCases;
@@ -892,6 +899,7 @@
 			children = (
 				EDC66ED82ADE5E1A0085B184 /* RecordMainViewModel.swift */,
 				ED80B9F02AE0E6A500F85A66 /* RecordEnum.swift */,
+				EDEB16282AF1E77600B03962 /* RecordViewState.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -903,6 +911,15 @@
 				ED0E74AA2ADFC8A600E94419 /* FSCalendarCustomCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EDEB16212AF1592100B03962 /* RecordUseCase */ = {
+			isa = PBXGroup;
+			children = (
+				EDEB16222AF1593100B03962 /* RecordUseCase.swift */,
+				EDEB16242AF15B7B00B03962 /* RecordSavable.swift */,
+			);
+			path = RecordUseCase;
 			sourceTree = "<group>";
 		};
 		EDF700E42AC80D4E00DBA5E8 /* Utils */ = {
@@ -1049,6 +1066,7 @@
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */,
 				ED80B9F72AE10B0400F85A66 /* WriteFastRecordViewController.swift in Sources */,
+				EDEB16232AF1593100B03962 /* RecordUseCase.swift in Sources */,
 				EDA37B352AE63AA500EC6D6E /* FastTitleView.swift in Sources */,
 				ED6C672F2AC841AB00230621 /* Constants.swift in Sources */,
 				EDEB16182AF14C3100B03962 /* WeightRecordTable+Mapping.swift in Sources */,
@@ -1078,6 +1096,7 @@
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
 				EDAC26FE2AEFA7770095A564 /* UIScrollView+Extension.swift in Sources */,
+				EDEB16252AF15B7B00B03962 /* RecordSavable.swift in Sources */,
 				ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */,
 				EDC66EC82ADCFA120085B184 /* FastInterruptedDayTable+Mapping.swift in Sources */,
 				ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */,
@@ -1110,6 +1129,7 @@
 				EDACF36D2ACECE5300F72CE8 /* SettingTimerCoordinator.swift in Sources */,
 				ED4DB3BE2AD4D457003535C9 /* LocalRepositoryError.swift in Sources */,
 				EDC66ED22ADE441F0085B184 /* Localization.swift in Sources */,
+				EDEB16292AF1E77600B03962 /* RecordViewState.swift in Sources */,
 				ED50E96C2AD104E600182922 /* UILabel+Extension.swift in Sources */,
 				EDA250D32AD77DF6004EE6F9 /* Int+Extension.swift in Sources */,
 				EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */,

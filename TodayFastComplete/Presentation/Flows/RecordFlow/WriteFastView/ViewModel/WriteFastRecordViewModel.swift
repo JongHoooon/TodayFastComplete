@@ -22,6 +22,7 @@ final class WriteFastRecordViewModel: ViewModel {
         let startTimeDate: Observable<Date>
         let endTimeDate: Observable<Date>
         let weightTextFieldText: Observable<String>
+        let saveButtonTapped: Observable<Void>
     }
     
     struct Output { 
@@ -36,18 +37,24 @@ final class WriteFastRecordViewModel: ViewModel {
     }
     
     private let coordinator: Coordinator
+    private let useCase: RecordUseCase
     private let disposeBag: DisposeBag
     let startDate: Date
-    private var weight: Double
+    private var weightRelay = BehaviorRelay<Double>(value: UserDefaultsManager.recentSavedWeight)
     
     init(
         coordinator: Coordinator,
+        useCase: RecordUseCase,
         startDate: Date
     ) {
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
         self.startDate = startDate
-        self.weight = UserDefaultsManager.recentSavedWeight
+        self.useCase = useCase
+    }
+    
+    deinit {
+        Log.deinit()
     }
     
     func transform(input: Input) -> Output {
@@ -118,29 +125,76 @@ final class WriteFastRecordViewModel: ViewModel {
         .disposed(by: disposeBag)
         
         input.minusWeightButtonTapped
-            .compactMap { [weak self] in (self?.weight ?? 0.0) - 0.1 }
+            .withLatestFrom(weightRelay)
+            .map { $0 - 0.1 }
             .map { $0 < 0 ? 0 : $0 }
             .bind(with: self, onNext: { owner, weight in
                 output.weight.accept(weight)
-                owner.weight = weight
+                owner.weightRelay.accept(weight)
             })
             .disposed(by: disposeBag)
         
         input.plusWeightButtonTapped
-            .compactMap { [weak self] in (self?.weight ?? 0.0) + 0.1 }
+            .withLatestFrom(weightRelay)
+            .map { $0 + 0.1 }
             .bind(with: self, onNext: { owner, weight in
                 output.weight.accept(weight)
-                owner.weight = weight
+                owner.weightRelay.accept(weight)
             })
             .disposed(by: disposeBag)
         
         input.weightTextFieldText
-            .compactMap { Double($0) }
-            .bind(with: self, onNext: { owner, weightText in
-                owner.weight = weightText
+            .skip(1)
+            .map { Double($0) ?? 0.0 }
+            .bind(with: self, onNext: { owner, weight in
+                owner.weightRelay.accept(weight)
             })
             .disposed(by: disposeBag)
         
+        input.saveButtonTapped
+            .map { _ in try validateData() }
+            .map { [unowned self] _ -> (FastRecord, WeightRecord?) in
+                let fastRecord = FastRecord(
+                    date: startDate,
+                    startDate: output.startTimeDate.value,
+                    endDate: output.endTimeDate.value
+                )
+                let weight = weightRelay.value
+                switch weight == 0 {
+                case true:
+                    return (fastRecord, nil)
+                case false:
+                    let weightRecord = WeightRecord(
+                        date: startDate,
+                        weight: weight
+                    )
+                    return (fastRecord, weightRecord)
+                }
+            }
+            .flatMap { [unowned self] in self.useCase.saveRecords(fastRecord: $0.0, weightRecord: $0.1) }
+            .observe(on: MainScheduler.asyncInstance)
+            .subscribe(
+                with: self,
+                onNext: { owner, _ in
+                    owner.coordinator.navigate(to: .writeFastRecordIsComplete)
+                },
+                onError: { owner, error in
+                    Log.error(error)
+                })
+            .disposed(by: disposeBag)
+            
         return output
+        
+        func validateData() throws {
+            guard output.totalFastTimeSecond.value != 0
+            else {
+                throw ValidateError.badFastTime
+            }
+        }
+    }
+    
+    private enum ValidateError: Error {
+        case badFastTime
+        case badWeight
     }
 }

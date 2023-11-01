@@ -23,14 +23,17 @@ final class FastRecordViewModel: ViewModel {
     private let disposeBag: DisposeBag
     
     private let selectedDateRelay: BehaviorRelay<Date>
+    private let fastRecordViewState: BehaviorRelay<RecordViewState>
     
     init(
         coordinator: Coordinator,
-        selectedDateRelay: BehaviorRelay<Date>
+        selectedDateRelay: BehaviorRelay<Date>,
+        fastRecordViewState: BehaviorRelay<RecordViewState>
     ) {
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
         self.selectedDateRelay = selectedDateRelay
+        self.fastRecordViewState = fastRecordViewState
         
         selectedDateRelay
             .debug()

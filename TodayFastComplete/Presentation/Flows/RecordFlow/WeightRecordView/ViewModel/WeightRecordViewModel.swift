@@ -19,13 +19,16 @@ final class WeightRecordViewModel: ViewModel {
     private weak var coordinator: Coordinator?
     private let disposeBag: DisposeBag
     private let selectedDateRelay: BehaviorRelay<Date>
+    private let weightRecordViewState: BehaviorRelay<RecordViewState>
     
     init(
         coordinator: Coordinator,
-        selectedDateRelay: BehaviorRelay<Date>
+        selectedDateRelay: BehaviorRelay<Date>,
+        weightRecordViewState: BehaviorRelay<RecordViewState>
     ) {
         self.disposeBag = DisposeBag()
         self.selectedDateRelay = selectedDateRelay
+        self.weightRecordViewState = weightRecordViewState
         
         selectedDateRelay
             .debug()
