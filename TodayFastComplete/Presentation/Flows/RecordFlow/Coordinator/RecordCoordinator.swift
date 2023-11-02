@@ -7,7 +7,7 @@
 
 import UIKit
 
-import RxRelay
+import RxSwift
 
 protocol RecordCoordinatorDependencies: AnyObject { 
     func makeRecordMainViewController(coordinator: Coordinator, pageViewController: UIPageViewController) -> UIViewController
@@ -15,11 +15,14 @@ protocol RecordCoordinatorDependencies: AnyObject {
 }
 
 final class RecordCoordinator: BaseCoordinator,
-                               CoordinatorFinishDelegate {
+                               CoordinatorFinishDelegate,
+                               SimpleMessageAlertPresentable {
 
     private let rootViewController: UINavigationController
+    private var writeFastRecordNavigationController: UINavigationController?
     private var mainPageViewController: UIPageViewController?
     private let dependencies: RecordCoordinatorDependencies
+    private let disposeBag: DisposeBag
     
     init(
         rootViewController: UINavigationController,
@@ -28,11 +31,12 @@ final class RecordCoordinator: BaseCoordinator,
     ) {
         self.rootViewController = rootViewController
         self.dependencies = dependencies
+        self.disposeBag = DisposeBag()
     }
     
     override func navigate(to step: Step) {
         switch step {
-        case .recordFlowIsRequired:
+        case .writeRecordFlowIsRequired:
             showRecordMain()
         case let .writeFastRecord(startDate):
             presentWriteFastRecord(startDate: startDate)
@@ -40,6 +44,15 @@ final class RecordCoordinator: BaseCoordinator,
             fastEndNotification(startDate: startDate)
         case .writeFastRecordIsComplete:
             dismissPresentedView()
+        case let .writeRecordValidateAlert(title, message):
+            guard let nav = writeFastRecordNavigationController else { return }
+            presentSimpleAlert(
+                navigationController: nav,
+                title: title,
+                message: message
+            )
+            .bind { _ in }
+            .disposed(by: disposeBag)
         default:
             assertionFailure("not configured step")
         }
@@ -64,6 +77,7 @@ private extension RecordCoordinator {
     func presentWriteFastRecord(startDate: Date) {
         let vc = dependencies.makeWriteFastRecord(coordinator: self, startDate: startDate)
         let nav = UINavigationController(rootViewController: vc)
+        writeFastRecordNavigationController = nav
         nav.modalPresentationStyle = .fullScreen
         rootViewController.present(nav, animated: true)
     }

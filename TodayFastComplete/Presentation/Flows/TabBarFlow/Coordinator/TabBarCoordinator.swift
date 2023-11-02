@@ -66,7 +66,7 @@ private extension TabBarCoordinator {
             navigationController: recordNavigationController,
             finishDelegate: self
         )
-        recordCoordinator.navigate(to: .recordFlowIsRequired)
+        recordCoordinator.navigate(to: .writeRecordFlowIsRequired)
         self.recordCoordinator = recordCoordinator
         addChild(child: recordCoordinator)
         

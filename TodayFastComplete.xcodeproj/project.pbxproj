@@ -131,6 +131,7 @@
 		EDEB16232AF1593100B03962 /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16222AF1593100B03962 /* RecordUseCase.swift */; };
 		EDEB16252AF15B7B00B03962 /* RecordSavable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16242AF15B7B00B03962 /* RecordSavable.swift */; };
 		EDEB16292AF1E77600B03962 /* RecordViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16282AF1E77600B03962 /* RecordViewState.swift */; };
+		EDEB162D2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB162C2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
 		EDF700E92AC80D7D00DBA5E8 /* UIView+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */; };
 		EDF700EB2AC80E7E00DBA5E8 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */; };
@@ -258,6 +259,7 @@
 		EDEB16222AF1593100B03962 /* RecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCase.swift; sourceTree = "<group>"; };
 		EDEB16242AF15B7B00B03962 /* RecordSavable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSavable.swift; sourceTree = "<group>"; };
 		EDEB16282AF1E77600B03962 /* RecordViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewState.swift; sourceTree = "<group>"; };
+		EDEB162C2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMessageAlertPresentable.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 			children = (
 				ED6C671D2AC8395400230621 /* Coordinator.swift */,
 				ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */,
+				EDEB162C2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift */,
 				EDC2CC262ACD9A8E0096D2F0 /* Step.swift */,
 				ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */,
 				EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */,
@@ -1062,6 +1065,7 @@
 				ED4DB3B62AD3FC3F003535C9 /* FastTimePickerViewModel.swift in Sources */,
 				ED50E9622ACFCA3D00182922 /* WeekDay.swift in Sources */,
 				EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */,
+				EDEB162D2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift in Sources */,
 				EDC66ECA2ADCFB470085B184 /* FastInterruptedDayRepository.swift in Sources */,
 				ED6C672B2AC8401800230621 /* ViewModel.swift in Sources */,
 				ED4DB3AF2AD3EF31003535C9 /* DateFormatter+Extension.swift in Sources */,

@@ -44,9 +44,10 @@ enum Step {
     case settingDeleteRoutineSettingButtonTapped(deleteAlertActionRelay: PublishRelay<AlertActionType>)
     
     // Record
-    case recordFlowIsRequired
+    case writeRecordFlowIsRequired
     case writeFastRecord(startDate: Date)
     case writeFastRecordIsComplete
+    case writeRecordValidateAlert(title: String? = nil, message: String?)
     
     // notification
     case fastStartNotification

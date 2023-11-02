@@ -152,7 +152,8 @@ final class WriteFastRecordViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         input.saveButtonTapped
-            .map { _ in try validateData() }
+            .map { _ in validateRecord() }
+            .filter { $0 }
             .map { [unowned self] _ -> (FastRecord, WeightRecord?) in
                 let fastRecord = FastRecord(
                     date: startDate,
@@ -172,28 +173,36 @@ final class WriteFastRecordViewModel: ViewModel {
                 }
             }
             .flatMap { [unowned self] in self.useCase.saveRecords(fastRecord: $0.0, weightRecord: $0.1) }
-            .observe(on: MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.instance)
             .subscribe(
                 with: self,
                 onNext: { owner, _ in
                     owner.coordinator.navigate(to: .writeFastRecordIsComplete)
                 },
-                onError: { owner, error in
+                onError: { _, error in
                     Log.error(error)
+                },
+                onDisposed: { _ in
+                    Log.debug("input.saveButtonTapped disposed")
                 })
             .disposed(by: disposeBag)
-            
+
         return output
         
-        func validateData() throws {
+        func validateRecord() -> Bool {
             guard output.totalFastTimeSecond.value != 0
             else {
-                throw ValidateError.badFastTime
+                coordinator.navigate(to: .writeRecordValidateAlert(
+                    title: nil,
+                    message: Constants.Localization.FAST_TIME_VALIDATE_ALERT_MESSAGE
+                ))
+                return false
             }
+            return true
         }
     }
     
-    private enum ValidateError: Error {
+    private enum RecordValidateError: Error {
         case badFastTime
         case badWeight
     }

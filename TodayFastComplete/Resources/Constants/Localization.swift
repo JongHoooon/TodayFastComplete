@@ -97,6 +97,11 @@ extension Constants {
             localized: "FINISH_FAST_ALERT_MESSAGE",
             defaultValue: "정말로 단식을 종료할까요?"
         )
+        static let FAST_TIME_VALIDATE_ALERT_MESSAGE = String(
+            localized: "FAST_TIME_VALIDATE_ALERT_MESSAGE",
+            defaultValue: "종료 시간을 시작 시간 이후로 설정해 주세요!"
+        )
+        
         static let DO_FINISH = String(
             localized: "DO_FINISH",
             defaultValue: "종료하기"
