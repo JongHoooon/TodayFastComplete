@@ -84,6 +84,7 @@ private extension RecordCoordinator {
     
     func dismissPresentedView() {
         rootViewController.presentedViewController?.dismiss(animated: true)
+        writeFastRecordNavigationController = nil
     }
     
     func fastEndNotification(startDate: Date) {

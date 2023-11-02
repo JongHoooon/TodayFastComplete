@@ -118,9 +118,7 @@ final class WriteFastRecordViewModel: ViewModel {
             output.endTimeDate
         )
         .map { Int($0.distance(to: $1)) }
-        .debug()
         .map { $0 < 0 ? 0 : $0 }
-        .debug()
         .bind(onNext: { output.totalFastTimeSecond.accept($0) })
         .disposed(by: disposeBag)
         
@@ -196,9 +194,6 @@ final class WriteFastRecordViewModel: ViewModel {
                             title: nil,
                             message: errorMessage
                         ))
-                    },
-                    onDisposed: { _ in
-                        Log.debug("input.saveButtonTapped disposed")
                     })
                 .disposed(by: disposeBag)
         }
