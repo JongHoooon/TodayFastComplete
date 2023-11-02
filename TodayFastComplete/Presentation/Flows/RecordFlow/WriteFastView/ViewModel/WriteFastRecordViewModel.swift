@@ -152,42 +152,56 @@ final class WriteFastRecordViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         input.saveButtonTapped
-            .map { _ in validateRecord() }
-            .filter { $0 }
-            .map { [unowned self] _ -> (FastRecord, WeightRecord?) in
-                let fastRecord = FastRecord(
-                    date: startDate,
-                    startDate: output.startTimeDate.value,
-                    endDate: output.endTimeDate.value
-                )
-                let weight = weightRelay.value
-                switch weight == 0 {
-                case true:
-                    return (fastRecord, nil)
-                case false:
-                    let weightRecord = WeightRecord(
-                        date: startDate,
-                        weight: weight
-                    )
-                    return (fastRecord, weightRecord)
-                }
-            }
-            .flatMap { [unowned self] in self.useCase.saveRecords(fastRecord: $0.0, weightRecord: $0.1) }
-            .observe(on: MainScheduler.instance)
-            .subscribe(
-                with: self,
-                onNext: { owner, _ in
-                    owner.coordinator.navigate(to: .writeFastRecordIsComplete)
-                },
-                onError: { _, error in
-                    Log.error(error)
-                },
-                onDisposed: { _ in
-                    Log.debug("input.saveButtonTapped disposed")
-                })
+            .bind { saveButtonTapped() }
             .disposed(by: disposeBag)
-
+            
         return output
+        
+        func saveButtonTapped() {
+            Observable.just(Void())
+                .map { try validateRecord2() }
+                .map { [unowned self] _ -> (FastRecord, WeightRecord?) in
+                    let fastRecord = FastRecord(
+                        date: startDate,
+                        startDate: output.startTimeDate.value,
+                        endDate: output.endTimeDate.value
+                    )
+                    let weight = weightRelay.value
+                    switch weight == 0 {
+                    case true:
+                        return (fastRecord, nil)
+                    case false:
+                        let weightRecord = WeightRecord(
+                            date: startDate,
+                            weight: weight
+                        )
+                        return (fastRecord, weightRecord)
+                    }
+                }
+                .flatMap { [unowned self] in self.useCase.saveRecords(fastRecord: $0.0, weightRecord: $0.1) }
+                .observe(on: MainScheduler.instance)
+                .subscribe(
+                    with: self,
+                    onNext: { owner, _ in
+                        owner.coordinator.navigate(to: .writeFastRecordIsComplete)
+                    },
+                    onError: { owner, error in
+                        let errorMessage = if let error = error as? RecordValidateError,
+                            error == .badFastTime {
+                                Constants.Localization.FAST_TIME_VALIDATE_ALERT_MESSAGE
+                            } else {
+                                error.localizedDescription
+                            }
+                        owner.coordinator.navigate(to: .writeRecordValidateAlert(
+                            title: nil,
+                            message: errorMessage
+                        ))
+                    },
+                    onDisposed: { _ in
+                        Log.debug("input.saveButtonTapped disposed")
+                    })
+                .disposed(by: disposeBag)
+        }
         
         func validateRecord() -> Bool {
             guard output.totalFastTimeSecond.value != 0
@@ -199,6 +213,12 @@ final class WriteFastRecordViewModel: ViewModel {
                 return false
             }
             return true
+        }
+        
+        func validateRecord2() throws {
+            if output.totalFastTimeSecond.value == 0 {
+                throw RecordValidateError.badFastTime
+            }
         }
     }
     
