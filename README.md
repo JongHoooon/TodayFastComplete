@@ -7,7 +7,7 @@
 <br>
 
 ## Screenshot
-<p align="center"><img src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/59a209a9-afd3-46dc-b285-fe3bb00df314"></p>
+<p align="center"><img src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/4017ef7a-5aba-44bd-8466-14a6bf44efbd"></p>
 
 
 
