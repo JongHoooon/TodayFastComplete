@@ -40,7 +40,6 @@ final class TimerUseCaseImp: TimerUseCase {
     
     func saveRoutineSetting(with routineSetting: TimerRoutineSetting, isDeleteInterruptedDay: Bool) -> Single<TimerRoutineSetting> {
         removePreviousFastNotifications()
-            .flatMap { [unowned self] _ in self.removePreviousFastNotifications() }
             .flatMap { [unowned self] _ in
                 var tasks = [
                     self.scheduleNotifications(routineSetting: routineSetting).map { _ in },
@@ -52,7 +51,7 @@ final class TimerUseCaseImp: TimerUseCase {
                 }
                 return Single
                     .zip(tasks)
-                    .map { _ in routineSetting}
+                    .map { _ in routineSetting }
             }
     }
     
