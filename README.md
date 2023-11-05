@@ -19,9 +19,9 @@
 
 <br>
 
-<p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/b4436197-74b1-44be-af96-24db3a2b7a48"></p>
+<p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/a1d01940-32ec-48e9-8c59-8c257ed06819"></p>
 
-<p align="center"><img width="1200" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/bd7f5c18-9225-4037-98c9-bd5e9fda37f1"></p>
+<p align="center"><img width="1200" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/6bdf76bd-a3a9-49e0-bf1f-2c8ab40bf9c4"></p>
 
 
 <br>
