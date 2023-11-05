@@ -21,7 +21,7 @@
 
 <p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/a1d01940-32ec-48e9-8c59-8c257ed06819"></p>
 
-<p align="center"><img width="1200" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/6bdf76bd-a3a9-49e0-bf1f-2c8ab40bf9c4"></p>
+<p align="center"><img width="1200" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/30f61ada-41fc-4256-a1b1-af487b93f005"></p>
 
 
 <br>
