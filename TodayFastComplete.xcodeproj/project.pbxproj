@@ -18,6 +18,7 @@
 		ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E62AC2FE5D0050E631 /* FSCalendar */; };
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
+		ED34A3032AF4867B001AD819 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34A3022AF4867B001AD819 /* BaseCoordinator.swift */; };
 		ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */; };
 		ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */; };
 		ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */; };
@@ -87,7 +88,6 @@
 		EDA37B352AE63AA500EC6D6E /* FastTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA37B342AE63AA500EC6D6E /* FastTitleView.swift */; };
 		EDA776EB2ACAB48B0019DCB1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */; };
 		EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776EF2ACAB5CA0019DCB1 /* AppCoordinator.swift */; };
-		EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */; };
 		EDA776F72ACAC3CE0019DCB1 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776F62ACAC3CE0019DCB1 /* TabBarCoordinator.swift */; };
 		EDA776F92ACAC7470019DCB1 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776F82ACAC7470019DCB1 /* AppDIContainer.swift */; };
 		EDA776FB2ACAF9C50019DCB1 /* TabBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA776FA2ACAF9C50019DCB1 /* TabBarDIContainer.swift */; };
@@ -142,6 +142,7 @@
 		ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOkAlertPresentable.swift; sourceTree = "<group>"; };
 		ED0E74AA2ADFC8A600E94419 /* FSCalendarCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarCustomCell.swift; sourceTree = "<group>"; };
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		ED34A3022AF4867B001AD819 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
 		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
 		ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extension.swift"; sourceTree = "<group>"; };
@@ -216,7 +217,6 @@
 		EDA776EA2ACAB48B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = ../../../../../../Desktop/Study/iOS/TabBarController.swift; sourceTree = "<group>"; };
 		EDA776ED2ACAB58B0019DCB1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EDA776EF2ACAB5CA0019DCB1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseCoordinator.swift; path = ../../../../../.Trash/BaseCoordinator.swift; sourceTree = "<group>"; };
 		EDA776F62ACAC3CE0019DCB1 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		EDA776F82ACAC7470019DCB1 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		EDA776FA2ACAF9C50019DCB1 /* TabBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarDIContainer.swift; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 				EDEB162C2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift */,
 				EDC2CC262ACD9A8E0096D2F0 /* Step.swift */,
 				ED6C673D2ACA9C7F00230621 /* CoordinatorFinishDelegate.swift */,
-				EDA776F12ACAB8230019DCB1 /* BaseCoordinator.swift */,
+				ED34A3022AF4867B001AD819 /* BaseCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1148,6 +1148,7 @@
 				ED6C67232AC83EA100230621 /* TimerViewController.swift in Sources */,
 				ED50E9542ACEF2D200182922 /* SettingRoutineViewController.swift in Sources */,
 				ED6C67292AC83EF300230621 /* BaseViewController.swift in Sources */,
+				ED34A3032AF4867B001AD819 /* BaseCoordinator.swift in Sources */,
 				EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */,
 				ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */,
 				EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */,
@@ -1168,7 +1169,6 @@
 				EDEB161C2AF14F3E00B03962 /* WeightRecordRepository.swift in Sources */,
 				ED65BEBB2AD385B900534F7C /* StartTimerPickerViewController.swift in Sources */,
 				ED0E74AB2ADFC8A600E94419 /* FSCalendarCustomCell.swift in Sources */,
-				EDA776F22ACAB8230019DCB1 /* BaseCoordinator.swift in Sources */,
 				ED50E95A2ACF903A00182922 /* TimeSettingCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
