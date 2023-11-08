@@ -30,6 +30,15 @@ final class WeightRecordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func configure() {
+        super.configure()
+        bindViewModel()
+    }
+    
+    override func configureLayout() {
+        
+    }
 }
 
 private extension WeightRecordViewController {

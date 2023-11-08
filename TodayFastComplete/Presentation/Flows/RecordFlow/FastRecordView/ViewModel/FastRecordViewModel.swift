@@ -40,13 +40,22 @@ final class FastRecordViewModel: ViewModel {
         let output = Output()
         
         selectedDateRelay
-            .debug()
             .subscribe(onNext: { _ in
                 
             })
             .disposed(by: disposeBag)
         
-        
+        fastRecordViewState
+            .subscribe(onNext: { state in
+                switch state {
+                case .cantRecord:
+                    print("cant record")
+                    
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
         
         input.plusViewTapped
             .asDriver(onErrorJustReturn: Void())

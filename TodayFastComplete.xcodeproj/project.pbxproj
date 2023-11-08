@@ -18,6 +18,7 @@
 		ED1407E72AC2FE5D0050E631 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E62AC2FE5D0050E631 /* FSCalendar */; };
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
+		ED1968A62AFB7ADA000C3F5E /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1968A52AFB7ADA000C3F5E /* PlusButtonView.swift */; };
 		ED34A3032AF4867B001AD819 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34A3022AF4867B001AD819 /* BaseCoordinator.swift */; };
 		ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */; };
 		ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */; };
@@ -141,6 +142,7 @@
 		ED01F8572ADC049300A300DC /* CancelOkAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelOkAlertPresentable.swift; sourceTree = "<group>"; };
 		ED0E74AA2ADFC8A600E94419 /* FSCalendarCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarCustomCell.swift; sourceTree = "<group>"; };
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		ED1968A52AFB7ADA000C3F5E /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
 		ED34A3022AF4867B001AD819 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
 		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
@@ -283,6 +285,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED1968A42AFB77B4000C3F5E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ED1968A52AFB7ADA000C3F5E /* PlusButtonView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		ED4D40F22AD9716A00C49C8A /* UserNotificationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +879,7 @@
 		EDC66ED32ADE5DB20085B184 /* RecordFlow */ = {
 			isa = PBXGroup;
 			children = (
+				ED1968A42AFB77B4000C3F5E /* Common */,
 				EDC66ED42ADE5DD50085B184 /* Coordinator */,
 				EDC66ED52ADE5DDC0085B184 /* RecordMainView */,
 				ED622C362AE00FAB004DCF1F /* FastRecordView */,
@@ -1085,6 +1096,7 @@
 				EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */,
 				EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */,
 				ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */,
+				ED1968A62AFB7ADA000C3F5E /* PlusButtonView.swift in Sources */,
 				EDEB16122AF1220F00B03962 /* FastRecordTable+Mapping.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
 				ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */,

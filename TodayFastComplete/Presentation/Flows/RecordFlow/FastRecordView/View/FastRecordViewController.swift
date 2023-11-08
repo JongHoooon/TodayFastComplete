@@ -13,25 +13,7 @@ final class FastRecordViewController: BaseViewController {
     private let viewModel: FastRecordViewModel
     
     // MARK: - UI
-    private let plusBaseView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = 20.0
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.masksToBounds = false
-        view.layer.shadowRadius = 4.0
-        view.layer.shadowOffset = .zero
-        view.layer.shadowOpacity = 0.2
-        return view
-    }()
-    
-    private let plusImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = Constants.Icon.plus
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .label
-        return imageView
-    }()
+    private let plusButtonView = PlusButtonView()
     private let plusViewTapGesture = UITapGestureRecognizer()
     
     private let recordBaseView: UIView = {
@@ -142,9 +124,6 @@ final class FastRecordViewController: BaseViewController {
     }
     
     override func configureLayout() {
-        
-        plusBaseView.addSubview(plusImageView)
-        
         [
             fastTimeLabel,
             fastStartLabel,
@@ -159,7 +138,7 @@ final class FastRecordViewController: BaseViewController {
         
         [
             recordBaseView,
-            plusBaseView
+            plusButtonView
         ].forEach { view.addSubview($0) }
         
         recordBaseView.snp.makeConstraints {
@@ -225,16 +204,12 @@ final class FastRecordViewController: BaseViewController {
         deleteButton.setContentHuggingPriority(.defaultHigh, for: .vertical)
         deleteButton.setContentHuggingPriority(.defaultLow, for: .vertical)
         
-        plusBaseView.snp.makeConstraints {
+        plusButtonView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(24.0)
             $0.horizontalEdges.equalToSuperview().inset(16.0)
             $0.height.equalTo(180.0)
         }
-        plusImageView.snp.makeConstraints {
-            $0.size.equalTo(plusBaseView.snp.height).multipliedBy(0.3)
-            $0.center.equalToSuperview()
-        }
-        
+
         recordBaseView.isHidden = true
     }
 }
@@ -249,6 +224,6 @@ private extension FastRecordViewController {
     }
     
     func registerGesture() {
-        plusBaseView.addGestureRecognizer(plusViewTapGesture)
+        plusButtonView.addGestureRecognizer(plusViewTapGesture)
     }
 }

@@ -35,7 +35,6 @@ final class WeightRecordViewModel: ViewModel {
         let output = Output()
         
         selectedDateRelay
-            .debug()
             .subscribe(onNext: { _ in
                 
             })
