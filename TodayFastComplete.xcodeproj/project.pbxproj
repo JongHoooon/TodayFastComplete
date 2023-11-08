@@ -19,6 +19,7 @@
 		ED1407EA2AC2FF4D0050E631 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407E92AC2FF4D0050E631 /* Realm */; };
 		ED1407EC2AC2FF4D0050E631 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED1407EB2AC2FF4D0050E631 /* RealmSwift */; };
 		ED1968A62AFB7ADA000C3F5E /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1968A52AFB7ADA000C3F5E /* PlusButtonView.swift */; };
+		ED1968A82AFBE3D6000C3F5E /* CantRecordLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1968A72AFBE3D6000C3F5E /* CantRecordLabel.swift */; };
 		ED34A3032AF4867B001AD819 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34A3022AF4867B001AD819 /* BaseCoordinator.swift */; };
 		ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */; };
 		ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */; };
@@ -143,6 +144,7 @@
 		ED0E74AA2ADFC8A600E94419 /* FSCalendarCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarCustomCell.swift; sourceTree = "<group>"; };
 		ED1407D92AC2FC240050E631 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		ED1968A52AFB7ADA000C3F5E /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
+		ED1968A72AFBE3D6000C3F5E /* CantRecordLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantRecordLabel.swift; sourceTree = "<group>"; };
 		ED34A3022AF4867B001AD819 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
 		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				ED1968A52AFB7ADA000C3F5E /* PlusButtonView.swift */,
+				ED1968A72AFBE3D6000C3F5E /* CantRecordLabel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1161,6 +1164,7 @@
 				ED8192152AC2ECEA00C7C830 /* AppDelegate.swift in Sources */,
 				EDC2CC232ACD89F90096D2F0 /* Reactive+Extension.swift in Sources */,
 				EDA776F02ACAB5CA0019DCB1 /* AppCoordinator.swift in Sources */,
+				ED1968A82AFBE3D6000C3F5E /* CantRecordLabel.swift in Sources */,
 				ED50E97B2AD16DB300182922 /* TimerRoutineSettingTable+Mapping.swift in Sources */,
 				EDC66ED92ADE5E1A0085B184 /* RecordMainViewModel.swift in Sources */,
 				ED65BEBD2AD3BF0600534F7C /* StartTimePickerViewModel.swift in Sources */,

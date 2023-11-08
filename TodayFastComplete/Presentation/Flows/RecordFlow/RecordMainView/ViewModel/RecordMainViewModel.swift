@@ -84,7 +84,8 @@ final class RecordMainViewModel: ViewModel {
                     owner.fastRecordViewState.accept(.cantRecord)
                     owner.weightRecordViewState.accept(.cantRecord)
                 } else {
-                    
+                    owner.fastRecordViewState.accept(.dataExist)
+                    owner.weightRecordViewState.accept(.dataExist)
                 }
             })
             .disposed(by: disposeBag)

@@ -101,6 +101,10 @@ extension Constants {
             localized: "FAST_TIME_VALIDATE_ALERT_MESSAGE",
             defaultValue: "종료 시간을 시작 시간 이후로 설정해 주세요!"
         )
+        static let CANT_RECORD = String(
+            localized: "CANT_RECORD",
+            defaultValue: "오늘 날짜 이후에는 기록할 수 없어요."
+        )
         
         static let DO_FINISH = String(
             localized: "DO_FINISH",

@@ -7,14 +7,19 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class FastRecordViewController: BaseViewController {
     
     // MARK: - Properties
     private let viewModel: FastRecordViewModel
+    private let disposeBag = DisposeBag()
     
     // MARK: - UI
     private let plusButtonView = PlusButtonView()
     private let plusViewTapGesture = UITapGestureRecognizer()
+    private let cantRecordLabel = CantRecordLabel()
     
     private let recordBaseView: UIView = {
         let view = UIView()
@@ -138,7 +143,8 @@ final class FastRecordViewController: BaseViewController {
         
         [
             recordBaseView,
-            plusButtonView
+            plusButtonView,
+            cantRecordLabel
         ].forEach { view.addSubview($0) }
         
         recordBaseView.snp.makeConstraints {
@@ -209,8 +215,11 @@ final class FastRecordViewController: BaseViewController {
             $0.horizontalEdges.equalToSuperview().inset(16.0)
             $0.height.equalTo(180.0)
         }
-
-        recordBaseView.isHidden = true
+        
+        cantRecordLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(48.0)
+            $0.centerX.equalToSuperview()
+        }
     }
 }
 
@@ -221,6 +230,21 @@ private extension FastRecordViewController {
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.plusViewIsHidden
+            .asDriver()
+            .drive(plusButtonView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        output.recordViewIsHidden
+            .asDriver()
+            .drive(recordBaseView.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        output.cantRecordLabelIsHidden
+            .asDriver()
+            .drive(cantRecordLabel.rx.isHidden)
+            .disposed(by: disposeBag)
     }
     
     func registerGesture() {

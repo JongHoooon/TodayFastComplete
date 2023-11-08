@@ -15,8 +15,10 @@ final class FastRecordViewModel: ViewModel {
     struct Input { 
         let plusViewTapped: Observable<Void>
     }
-    struct Output { 
-        
+    struct Output {
+        let plusViewIsHidden = BehaviorRelay(value: true)
+        let recordViewIsHidden = BehaviorRelay(value: true)
+        let cantRecordLabelIsHidden = BehaviorRelay(value: true)
     }
     
     private weak var coordinator: Coordinator?
@@ -46,15 +48,21 @@ final class FastRecordViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         fastRecordViewState
-            .subscribe(onNext: { state in
-                switch state {
+            .map { state in
+                return switch state {
                 case .cantRecord:
-                    print("cant record")
-                    
-                default:
-                    break
+                    (true, true, false)
+                case .dataExist:
+                    (true, false, true)
+                case .noData:
+                    (false, true, true)
                 }
-            })
+            }
+            .bind {
+                output.plusViewIsHidden.accept($0.0)
+                output.recordViewIsHidden.accept($0.1)
+                output.cantRecordLabelIsHidden.accept($0.2)
+            }
             .disposed(by: disposeBag)
         
         input.plusViewTapped
