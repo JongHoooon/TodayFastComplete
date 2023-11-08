@@ -288,6 +288,7 @@ private extension RecordMainViewController {
             segmentedControl.rx.selectedSegmentIndex.asObservable()
         )
         let viewDidLoadShared = self.rx.viewDidLoad
+        let calendarCurrentPageDidChangeShared = calendarView.rx.calendarCurrentPageDidChange.share()
         
         let input = RecordMainViewModel.Input(
             selectedSegmentIndex: selectedSegmentIndex,

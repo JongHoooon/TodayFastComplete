@@ -55,13 +55,17 @@ final class RecordMainViewModel: ViewModel {
             .bind { output.currentPage.accept($0) }
             .disposed(by: disposeBag)
         
+        /*
+         FSCalendarScope enum month raw value:  0
+         FSCalendarScope enum week raw value:   1
+         */
         input.swipeUpGesture
-            .map { 1 } // FSCalendarScope enum week raw value
+            .map { 1 }
             .bind { output.calendarScope.accept($0) }
             .disposed(by: disposeBag)
         
         input.swipeDownGesture
-            .map { 0 } // FSCalendarScope enum month raw value
+            .map { 0 }
             .bind { output.calendarScope.accept($0) }
             .disposed(by: disposeBag)
         

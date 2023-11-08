@@ -201,6 +201,7 @@ private extension TimerViewController {
     func bindViewModel() {
         
         #if DEBUG
+        #warning("notification test")
         timerProgressView.endPointButton.rx.tap
             .subscribe(onNext: { _ in
                 let content = UNMutableNotificationContent()
