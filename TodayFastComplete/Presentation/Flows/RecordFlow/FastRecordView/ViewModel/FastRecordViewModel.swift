@@ -34,6 +34,10 @@ final class FastRecordViewModel: ViewModel {
         self.disposeBag = DisposeBag()
         self.selectedDateRelay = selectedDateRelay
         self.fastRecordViewState = fastRecordViewState
+    }
+    
+    func transform(input: Input) -> Output {
+        let output = Output()
         
         selectedDateRelay
             .debug()
@@ -41,10 +45,8 @@ final class FastRecordViewModel: ViewModel {
                 
             })
             .disposed(by: disposeBag)
-    }
-    
-    func transform(input: Input) -> Output {
-        let output = Output()
+        
+        
         
         input.plusViewTapped
             .asDriver(onErrorJustReturn: Void())

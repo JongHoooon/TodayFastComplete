@@ -13,6 +13,16 @@ extension Date {
         return DateFormatter.toString(date: self, format: format)
     }
     
+    var toCalendarDate: Date {
+        let date = Calendar.current.date(
+            bySettingHour: 0,
+            minute: 0,
+            second: 0,
+            of: Date()
+        ) ?? Date()
+        return date
+    }
+    
     /// 시, 분, 초 date components
     var timeDateComponents: DateComponents {
         return Calendar.current.dateComponents([.hour, .minute, .second], from: self)

@@ -79,9 +79,13 @@ final class RecordMainViewModel: ViewModel {
         
         calendarDidSelectShared
             .bind(with: self, onNext: { owner, date in
-                Log.debug(date.toString(format: owner.calendarformatter))
-                Log.debug(Date().toString(format: .yearMonthDayFormat))
                 owner.selectedDateRelay.accept(date)
+                if Date().toCalendarDate < date {
+                    owner.fastRecordViewState.accept(.cantRecord)
+                    owner.weightRecordViewState.accept(.cantRecord)
+                } else {
+                    
+                }
             })
             .disposed(by: disposeBag)
         

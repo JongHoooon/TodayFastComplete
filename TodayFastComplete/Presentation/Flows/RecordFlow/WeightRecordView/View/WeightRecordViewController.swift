@@ -31,3 +31,10 @@ final class WeightRecordViewController: BaseViewController {
         super.viewDidLoad()
     }
 }
+
+private extension WeightRecordViewController {
+    func bindViewModel() {
+        let input = WeightRecordViewModel.Input()
+        let output = viewModel.transform(input: input)
+    }
+}

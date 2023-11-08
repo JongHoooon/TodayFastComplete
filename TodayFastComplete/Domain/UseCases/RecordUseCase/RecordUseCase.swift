@@ -9,7 +9,9 @@ import Foundation
 
 import RxSwift
 
-typealias RecordUseCase = RecordsSavable
+protocol RecordUseCase {
+    func saveRecords(fastRecord: FastRecord, weightRecord: WeightRecord?) -> Single<(FastRecord, WeightRecord?)>
+}
 
 final class RecordUseCaseImp: RecordUseCase {
     private let fastRecordRepository: FastRecordRepository

@@ -29,6 +29,10 @@ final class WeightRecordViewModel: ViewModel {
         self.disposeBag = DisposeBag()
         self.selectedDateRelay = selectedDateRelay
         self.weightRecordViewState = weightRecordViewState
+    }
+    
+    func transform(input: Input) -> Output {
+        let output = Output()
         
         selectedDateRelay
             .debug()
@@ -36,10 +40,19 @@ final class WeightRecordViewModel: ViewModel {
                 
             })
             .disposed(by: disposeBag)
-    }
-    
-    func transform(input: Input) -> Output {
-        let output = Output()
+        
+        weightRecordViewState
+            .subscribe(onNext: { state in
+                switch state {
+                case .cantRecord:
+                    print("cant record")
+                    
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+        
         return output
     }
     

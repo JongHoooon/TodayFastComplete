@@ -129,7 +129,6 @@
 		EDEB161E2AF1511700B03962 /* DefaultFastRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161D2AF1511700B03962 /* DefaultFastRecordRepository.swift */; };
 		EDEB16202AF157C900B03962 /* DefaultWeightRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB161F2AF157C900B03962 /* DefaultWeightRecordRepository.swift */; };
 		EDEB16232AF1593100B03962 /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16222AF1593100B03962 /* RecordUseCase.swift */; };
-		EDEB16252AF15B7B00B03962 /* RecordSavable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16242AF15B7B00B03962 /* RecordSavable.swift */; };
 		EDEB16292AF1E77600B03962 /* RecordViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16282AF1E77600B03962 /* RecordViewState.swift */; };
 		EDEB162D2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB162C2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift */; };
 		EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */; };
@@ -202,7 +201,6 @@
 		ED8192162AC2ECEA00C7C830 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED8192202AC2ECEB00C7C830 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ED8192222AC2ECEB00C7C830 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED8192282AC2EE2700C7C830 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		ED81922A2AC2EEAC00C7C830 /* Memo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Memo.md; sourceTree = "<group>"; };
 		ED830EB02ACE8BF2000B715A /* SelectFastModeCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFastModeCollectionView.swift; sourceTree = "<group>"; };
@@ -257,10 +255,10 @@
 		EDEB161D2AF1511700B03962 /* DefaultFastRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFastRecordRepository.swift; sourceTree = "<group>"; };
 		EDEB161F2AF157C900B03962 /* DefaultWeightRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWeightRecordRepository.swift; sourceTree = "<group>"; };
 		EDEB16222AF1593100B03962 /* RecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCase.swift; sourceTree = "<group>"; };
-		EDEB16242AF15B7B00B03962 /* RecordSavable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSavable.swift; sourceTree = "<group>"; };
 		EDEB16282AF1E77600B03962 /* RecordViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewState.swift; sourceTree = "<group>"; };
 		EDEB162C2AF1EE2100B03962 /* SimpleMessageAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMessageAlertPresentable.swift; sourceTree = "<group>"; };
 		EDEBF9472AD263940002C24B /* BaseRealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealmRepository.swift; sourceTree = "<group>"; };
+		EDF64B2B2AFB5BA8006D1047 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EDF700E82AC80D7D00DBA5E8 /* UIView+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Preview.swift"; sourceTree = "<group>"; };
 		EDF700EA2AC80E7E00DBA5E8 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -672,7 +670,7 @@
 				ED6C672C2AC840C100230621 /* Constants */,
 				ED81921D2AC2ECEB00C7C830 /* Assets.xcassets */,
 				ED81921F2AC2ECEB00C7C830 /* LaunchScreen.storyboard */,
-				ED8192222AC2ECEB00C7C830 /* Info.plist */,
+				EDF64B2B2AFB5BA8006D1047 /* Info.plist */,
 				ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */,
 				ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */,
 			);
@@ -920,7 +918,6 @@
 			isa = PBXGroup;
 			children = (
 				EDEB16222AF1593100B03962 /* RecordUseCase.swift */,
-				EDEB16242AF15B7B00B03962 /* RecordSavable.swift */,
 			);
 			path = RecordUseCase;
 			sourceTree = "<group>";
@@ -1100,7 +1097,6 @@
 				ED50E9522ACEF2C200182922 /* SettingRoutineViewModel.swift in Sources */,
 				ED830EB52ACE97DE000B715A /* Reuseable.swift in Sources */,
 				EDAC26FE2AEFA7770095A564 /* UIScrollView+Extension.swift in Sources */,
-				EDEB16252AF15B7B00B03962 /* RecordSavable.swift in Sources */,
 				ED4DB3C22AD5100F003535C9 /* Date+Extension.swift in Sources */,
 				EDC66EC82ADCFA120085B184 /* FastInterruptedDayTable+Mapping.swift in Sources */,
 				ED01F8562ADBF04900A300DC /* DeleteRoutineSettingCell.swift in Sources */,
