@@ -12,8 +12,8 @@ import RxRelay
 final class RecordDIContainer: RecordCoordinatorDependencies {
     
     private let selectedDateRelay = BehaviorRelay(value: Date())
-    private let fastRecordViewState = BehaviorRelay<RecordViewState>(value: .noData)
-    private let weightRecordViewState = BehaviorRelay<RecordViewState>(value: .noData)
+    private let fastRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
+    private let weightRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
     
     // MARK: - Use Case
     func makeRecordUseCase() -> RecordUseCase {

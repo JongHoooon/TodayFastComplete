@@ -38,6 +38,9 @@ final class RecordMainViewModel: ViewModel {
     private let fastRecordViewState: BehaviorRelay<RecordViewState>
     private let weightRecordViewState: BehaviorRelay<RecordViewState>
     
+    var fastRecordDict: [Date: FastRecord] = [:]
+    var weightRecordDict: [Date: WeightRecord] = [:]
+    
     init(
         coordinator: Coordinator,
         recordUseCase: RecordUseCase,
@@ -56,7 +59,19 @@ final class RecordMainViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let output = Output()
         
-//        input.viewDidLoad
+        input.viewDidLoad.share()
+            .flatMap { [unowned self] _ in Single.zip(recordUseCase.fetchFastRecords(), recordUseCase.fetchWeightRecords()) }
+            .map { fastRecords, weightRecords in
+                let fastRecordDict = fastRecords.reduce(into: [:], { dict, record in dict[record.date] = record })
+                let weightRecordDict = weightRecords.reduce(into: [:], { dict, record in dict[record.date] = record })
+                return (fastRecordDict, weightRecordDict)
+            }
+            .debug()
+            .bind { [weak self] fastRecordDict, weightRecordDict in
+                self?.fastRecordDict = fastRecordDict
+                self?.weightRecordDict = weightRecordDict
+            }
+            .disposed(by: disposeBag)
         
         input.selectedSegmentIndex
             .bind { output.currentPage.accept($0) }
@@ -90,9 +105,19 @@ final class RecordMainViewModel: ViewModel {
                 if Date().toCalendarDate < date {
                     owner.fastRecordViewState.accept(.cantRecord)
                     owner.weightRecordViewState.accept(.cantRecord)
+                    return
+                }
+                
+                if let fastRecord = owner.fastRecordDict[date] {
+                    
                 } else {
-                    owner.fastRecordViewState.accept(.dataExist)
-                    owner.weightRecordViewState.accept(.dataExist)
+                    owner.fastRecordViewState.accept(.noRecord)
+                }
+                
+                if let weightRecord = owner.weightRecordDict[date] {
+                    
+                } else {
+                    owner.weightRecordViewState.accept(.noRecord)
                 }
             })
             .disposed(by: disposeBag)

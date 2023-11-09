@@ -52,9 +52,9 @@ final class FastRecordViewModel: ViewModel {
                 return switch state {
                 case .cantRecord:
                     (true, true, false)
-                case .dataExist:
+                case .recordExist:
                     (true, false, true)
-                case .noData:
+                case .noRecord:
                     (false, true, true)
                 }
             }

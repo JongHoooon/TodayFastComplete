@@ -6,7 +6,7 @@
 //
 
 enum RecordViewState {
-    case noData
-    case dataExist
+    case noRecord
+    case recordExist
     case cantRecord
 }
