@@ -19,6 +19,7 @@ final class RecordMainViewModel: ViewModel {
         let toggleButtonTapped: Observable<Void>
         let beforeButtonTapped: Observable<Void>
         let afterButtonTapped: Observable<Void>
+        let calendarCurrentPageDidChange: Observable<Date>
     }
     
     struct Output {
@@ -93,6 +94,15 @@ final class RecordMainViewModel: ViewModel {
         calendarDidSelectShared
             .map { $0.toString(format: .yearMonthDayWeekDayFormat) }
             .bind(onNext: { output.dateInfoLabelText.accept($0) })
+            .disposed(by: disposeBag)
+        
+        input.calendarCurrentPageDidChange
+            .map(\.month)
+            .distinctUntilChanged()
+            .bind {
+                print($0)
+//                print($0.month)
+            }
             .disposed(by: disposeBag)
             
         return output

@@ -16,6 +16,18 @@ final class DefaultWeightRecordRepository: BaseRealmRepository, WeightRecordRepo
         Log.deinit()
     }
     
+    func fetchRecords() -> Single<[WeightRecord]> {
+        return Single<[WeightRecord]>
+            .create { [weak self] single in
+                guard let self else { return Disposables.create() }
+                let objects = Array(realm.objects(WeightRecordTable.self))
+                let records = objects.map { $0.toDomain() }
+                single(.success(records))
+                return Disposables.create()
+            }
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
+    }
+    
     func update(weightRecord: WeightRecord) -> Single<WeightRecord> {
         return Single<WeightRecord>
             .create { [weak self] single in

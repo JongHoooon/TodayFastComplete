@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 protocol WeightRecordRepository {
+    func fetchRecords() -> Single<[WeightRecord]>
     func update(weightRecord: WeightRecord) -> Single<WeightRecord>
     func deleteWeightRecord(id: Date) -> Single<Date>
 }

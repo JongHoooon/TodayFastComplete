@@ -297,7 +297,8 @@ private extension RecordMainViewController {
             calendarDidSelect: calendarView.rx.didSelect, 
             toggleButtonTapped: toggleButton.rx.tap.asObservable(),
             beforeButtonTapped: beforeButon.rx.tap.asObservable().map { _ in },
-            afterButtonTapped: afterButon.rx.tap.asObservable().map { _ in }
+            afterButtonTapped: afterButon.rx.tap.asObservable().map { _ in },
+            calendarCurrentPageDidChange: calendarCurrentPageDidChangeShared.map { $0.currentPage }
         )
         
         let output = viewModel.transform(input: input)

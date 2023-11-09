@@ -16,7 +16,19 @@ final class DefaultFastRecordRepository: BaseRealmRepository, FastRecordReposito
         Log.deinit()
     }
     
-    func update(fastRecord: FastRecord) -> RxSwift.Single<FastRecord> {
+    func fetchRecords() -> Single<[FastRecord]> {
+        return Single<[FastRecord]>
+            .create { [weak self] single in
+                guard let self else { return Disposables.create() }
+                let objects = Array(realm.objects(FastRecordTable.self))
+                let records = objects.map { $0.toDomain() }
+                single(.success(records))
+                return Disposables.create()
+            }
+            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
+    }
+    
+    func update(fastRecord: FastRecord) -> Single<FastRecord> {
         return Single<FastRecord>
             .create { [weak self] single in
                 guard let self else { return Disposables.create() }
@@ -39,7 +51,7 @@ final class DefaultFastRecordRepository: BaseRealmRepository, FastRecordReposito
             .subscribe(on: ConcurrentDispatchQueueScheduler(queue: realmTaskQueue))
     }
     
-    func deleteFastRecord(id: Date) -> RxSwift.Single<Date> {
+    func deleteFastRecord(id: Date) -> Single<Date> {
         return Single<Date>
             .create { [weak self] single in
                 guard let self else { return Disposables.create() }

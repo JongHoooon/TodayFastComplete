@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 protocol FastRecordRepository {
+    func fetchRecords() -> Single<[FastRecord]>
     func update(fastRecord: FastRecord) -> Single<FastRecord>
     func deleteFastRecord(id: Date) -> Single<Date>
 }

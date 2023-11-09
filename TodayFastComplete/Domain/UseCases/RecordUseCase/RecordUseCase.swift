@@ -11,6 +11,8 @@ import RxSwift
 
 protocol RecordUseCase {
     func saveRecords(fastRecord: FastRecord, weightRecord: WeightRecord?) -> Single<(FastRecord, WeightRecord?)>
+    func fetchFastRecords() -> Single<[FastRecord]>
+    func fetchWeightRecords() -> Single<[WeightRecord]>
 }
 
 final class RecordUseCaseImp: RecordUseCase {
@@ -42,5 +44,13 @@ final class RecordUseCaseImp: RecordUseCase {
         }
         return Single.zip(tasks)
             .map { _ in (fastRecord, weightRecord) }
+    }
+    
+    func fetchFastRecords() -> Single<[FastRecord]> {
+        return fastRecordRepository.fetchRecords()
+    }
+    
+    func fetchWeightRecords() -> Single<[WeightRecord]> {
+        return weightRecordRepository.fetchRecords()
     }
 }
