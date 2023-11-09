@@ -60,9 +60,13 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
         )
     }
     
-    private func makeRecordMainViewModel(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> RecordMainViewModel {
+    private func makeRecordMainViewModel(
+        coordinator: Coordinator,
+        selectedDateRelay: BehaviorRelay<Date>
+    ) -> RecordMainViewModel {
         return RecordMainViewModel(
             coordinator: coordinator,
+            recordUseCase: makeRecordUseCase(),
             selectedDateRelay: selectedDateRelay,
             fastRecordViewState: fastRecordViewState,
             weightRecordViewState: weightRecordViewState

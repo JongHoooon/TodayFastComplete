@@ -291,6 +291,7 @@ private extension RecordMainViewController {
         let calendarCurrentPageDidChangeShared = calendarView.rx.calendarCurrentPageDidChange.share()
         
         let input = RecordMainViewModel.Input(
+            viewDidLoad: self.rx.viewDidLoad.asObservable(), 
             selectedSegmentIndex: selectedSegmentIndex,
             swipeUpGesture: swipeUpGesture.rx.event.asObservable().map { _ in },
             swipeDownGesture: swipeDownGesture.rx.event.asObservable().map { _ in },

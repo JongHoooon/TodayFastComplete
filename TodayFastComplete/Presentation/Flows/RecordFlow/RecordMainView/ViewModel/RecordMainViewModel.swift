@@ -12,6 +12,7 @@ import RxSwift
 
 final class RecordMainViewModel: ViewModel {
     struct Input {
+        let viewDidLoad: Observable<Void>
         let selectedSegmentIndex: Observable<Int>
         let swipeUpGesture: Observable<Void>
         let swipeDownGesture: Observable<Void>
@@ -28,7 +29,8 @@ final class RecordMainViewModel: ViewModel {
         let dateInfoLabelText = BehaviorRelay(value: Date().toString(format: .yearMonthDayWeekDayFormat))
     }
     
-    private let coordinator: Coordinator
+    private weak var coordinator: Coordinator?
+    private let recordUseCase: RecordUseCase
     private let calendarformatter = DateFormatter.yearMonthDayFormat
     private let disposeBag: DisposeBag
     
@@ -38,19 +40,23 @@ final class RecordMainViewModel: ViewModel {
     
     init(
         coordinator: Coordinator,
+        recordUseCase: RecordUseCase,
         selectedDateRelay: BehaviorRelay<Date>,
         fastRecordViewState: BehaviorRelay<RecordViewState>,
         weightRecordViewState: BehaviorRelay<RecordViewState>
     ) {
         self.coordinator = coordinator
-        self.disposeBag = DisposeBag()
+        self.recordUseCase = recordUseCase
         self.selectedDateRelay = selectedDateRelay
         self.fastRecordViewState = fastRecordViewState
         self.weightRecordViewState = weightRecordViewState
+        self.disposeBag = DisposeBag()
     }
     
     func transform(input: Input) -> Output {
         let output = Output()
+        
+//        input.viewDidLoad
         
         input.selectedSegmentIndex
             .bind { output.currentPage.accept($0) }
