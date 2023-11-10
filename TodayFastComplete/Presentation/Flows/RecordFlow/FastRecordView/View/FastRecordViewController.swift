@@ -246,6 +246,11 @@ private extension FastRecordViewController {
             .drive(cantRecordLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
+        output.fastTimeText
+            .asDriver()
+            .drive(fastTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         output.fastStartTime
             .asDriver()
             .map { $0.toString(format: .currentFastTimeFormat2) }

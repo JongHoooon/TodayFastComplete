@@ -21,7 +21,7 @@ final class FastRecordViewModel: ViewModel {
         let cantRecordLabelIsHidden = BehaviorRelay(value: true)
         let fastStartTime = BehaviorRelay(value: Date())
         let fastEndTime = BehaviorRelay(value: Date())
-        let fastTimeSecond = BehaviorRelay(value: 0)
+        let fastTimeText = BehaviorRelay(value: "")
     }
     
     private weak var coordinator: Coordinator?
@@ -53,8 +53,8 @@ final class FastRecordViewModel: ViewModel {
         let fastRecordViewStateShared = fastRecordViewState.share()
         
         fastRecordViewStateShared
-            .bind {
-                guard case let RecordViewState.recordExist(record) = $0,
+            .bind(with: self, onNext: { owner, state in
+                guard case let RecordViewState.recordExist(record) = state,
                       let record = record as? FastRecord
                 else {
 //                    assertionFailure("fail casting record")
@@ -62,7 +62,10 @@ final class FastRecordViewModel: ViewModel {
                 }
                 output.fastStartTime.accept(record.startDate)
                 output.fastEndTime.accept(record.endDate)
-            }
+                let timeInterval = record.startDate.distance(to: record.endDate)
+                let timeText = owner.secondToFastTimeText(second: timeInterval)
+                output.fastTimeText.accept(timeText)
+            })
             .disposed(by: disposeBag)
  
         fastRecordViewStateShared
@@ -88,5 +91,18 @@ final class FastRecordViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         return output
+    }
+}
+
+private extension FastRecordViewModel {
+    func secondToFastTimeText(second: TimeInterval) -> String {
+        let second = Int(second)
+        let hour = second / 3600
+        let minute = (second % 3600) / 60
+        var text = ""
+        if hour == 0 && minute == 0 { return "0 \(Constants.Localization.HOUR)" }
+        if hour != 0 { text += "\(hour) \(Constants.Localization.HOUR) " }
+        if minute != 0 { text += "\(minute) \(Constants.Localization.MINUTE)" }
+        return text
     }
 }
