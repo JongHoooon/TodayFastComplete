@@ -43,12 +43,17 @@ final class WriteFastRecordViewModel: ViewModel {
     private let useCase: RecordUseCase
     private let disposeBag: DisposeBag
     let startDate: Date
-    private var weightRelay = BehaviorRelay<Double>(value: UserDefaultsManager.recentSavedWeight)
+    private let weightRelay = BehaviorRelay<Double>(value: UserDefaultsManager.recentSavedWeight)
+    
+    private let fastRecordUpdateRelay: PublishRelay<FastRecord>
+    private let weightRecordUpdateRelay: PublishRelay<WeightRecord>
     
     init(
         coordinator: Coordinator,
         useCase: RecordUseCase,
         startDate: Date,
+        fastRecordUpdateRelay: PublishRelay<FastRecord>,
+        weightRecordUpdateRelay: PublishRelay<WeightRecord>,
         fastRecord: FastRecord?,
         weightRecord: WeightRecord?
     ) {
@@ -56,6 +61,8 @@ final class WriteFastRecordViewModel: ViewModel {
         self.disposeBag = DisposeBag()
         self.startDate = startDate
         self.useCase = useCase
+        self.fastRecordUpdateRelay = fastRecordUpdateRelay
+        self.weightRecordUpdateRelay = weightRecordUpdateRelay
         self.fastRecord = fastRecord
         self.weightRecord = weightRecord
     }
@@ -177,6 +184,16 @@ final class WriteFastRecordViewModel: ViewModel {
                     with: self,
                     onNext: { owner, _ in
                         owner.coordinator.navigate(to: .writeFastRecordIsComplete)
+                        owner.fastRecordUpdateRelay.accept(FastRecord(
+                            date: owner.startDate,
+                            startDate: output.startTimeDate.value,
+                            endDate: output.endTimeDate.value
+                        ))
+                        if owner.weightRelay.value != 0 {
+                            owner.weightRecordUpdateRelay.accept(WeightRecord(
+                                date: owner.startDate,
+                                weight: owner.weightRelay.value
+                            ))}
                     },
                     onError: { owner, error in
                         let errorMessage = if let error = error as? RecordValidateError,

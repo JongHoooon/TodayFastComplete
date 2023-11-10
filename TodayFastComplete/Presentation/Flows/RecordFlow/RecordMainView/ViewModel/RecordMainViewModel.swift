@@ -40,8 +40,12 @@ final class RecordMainViewModel: ViewModel {
     private let editButtonTapped: PublishRelay<Void>
     private let deleteButtonTapped: PublishRelay<Void>
     
+    private let fastRecordUpdateRelay: PublishRelay<FastRecord>
+    private let weightRecordUpdateRelay: PublishRelay<WeightRecord>
+    
     var fastRecordDict: [Date: FastRecord] = [:]
     var weightRecordDict: [Date: WeightRecord] = [:]
+    
     
     init(
         coordinator: Coordinator,
@@ -50,7 +54,9 @@ final class RecordMainViewModel: ViewModel {
         fastRecordViewState: BehaviorRelay<RecordViewState>,
         weightRecordViewState: BehaviorRelay<RecordViewState>,
         editButtonTapped: PublishRelay<Void>,
-        deleteButtonTapped: PublishRelay<Void>
+        deleteButtonTapped: PublishRelay<Void>,
+        fastRecordUpdateRelay: PublishRelay<FastRecord>,
+        weightRecordUpdateRelay: PublishRelay<WeightRecord>
     ) {
         self.coordinator = coordinator
         self.recordUseCase = recordUseCase
@@ -59,6 +65,8 @@ final class RecordMainViewModel: ViewModel {
         self.weightRecordViewState = weightRecordViewState
         self.editButtonTapped = editButtonTapped
         self.deleteButtonTapped = deleteButtonTapped
+        self.fastRecordUpdateRelay = fastRecordUpdateRelay
+        self.weightRecordUpdateRelay = weightRecordUpdateRelay
         self.disposeBag = DisposeBag()
     }
     
@@ -156,6 +164,20 @@ final class RecordMainViewModel: ViewModel {
             }
             .observe(on: MainScheduler.instance)
             .bind { [weak self] in self?.coordinator?.navigate(to: $0) }
+            .disposed(by: disposeBag)
+        
+        fastRecordUpdateRelay
+            .bind(with: self, onNext: { owner, record in
+                owner.fastRecordDict[record.date] = record
+                owner.fastRecordViewState.accept(.recordExist(record: record))
+            })
+            .disposed(by: disposeBag)
+        
+        weightRecordUpdateRelay
+            .bind(with: self, onNext: { owner, record in
+                owner.weightRecordDict[record.date] = record
+                owner.weightRecordViewState.accept(.recordExist(record: record))
+            })
             .disposed(by: disposeBag)
             
         return output

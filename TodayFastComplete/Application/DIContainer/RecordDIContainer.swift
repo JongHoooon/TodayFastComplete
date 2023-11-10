@@ -16,6 +16,8 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     private let weightRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
     private let editButtonTapped = PublishRelay<Void>()
     private let deleteButtonTapped = PublishRelay<Void>()
+    private let fastRecordUpdateRelay = PublishRelay<FastRecord>()
+    private let weightRecordUpdateRelay = PublishRelay<WeightRecord>()
     
     // MARK: - Use Case
     func makeRecordUseCase() -> RecordUseCase {
@@ -73,7 +75,9 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
             fastRecordViewState: fastRecordViewState,
             weightRecordViewState: weightRecordViewState,
             editButtonTapped: editButtonTapped,
-            deleteButtonTapped: deleteButtonTapped
+            deleteButtonTapped: deleteButtonTapped,
+            fastRecordUpdateRelay: fastRecordUpdateRelay,
+            weightRecordUpdateRelay: weightRecordUpdateRelay
         )
     }
     
@@ -147,6 +151,8 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
             coordinator: coordinator,
             useCase: makeRecordUseCase(),
             startDate: startDate,
+            fastRecordUpdateRelay: fastRecordUpdateRelay,
+            weightRecordUpdateRelay: weightRecordUpdateRelay,
             fastRecord: fastRecord,
             weightRecord: weightRecord
         )
