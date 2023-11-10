@@ -226,7 +226,9 @@ final class FastRecordViewController: BaseViewController {
 private extension FastRecordViewController {
     func bindViewModel() {
         let input = FastRecordViewModel.Input(
-            plusViewTapped: plusViewTapGesture.rx.event.map { _ in }
+            plusViewTapped: plusViewTapGesture.rx.event.map { _ in },
+            editButtonTapped: editButton.rx.tap.asObservable(),
+            deleteButtonTapped: deleteButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input: input)

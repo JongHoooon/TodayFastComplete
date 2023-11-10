@@ -36,6 +36,9 @@ final class WriteFastRecordViewModel: ViewModel {
         let weight = BehaviorRelay(value: UserDefaultsManager.recentSavedWeight)
     }
     
+    private let fastRecord: FastRecord?
+    private let weightRecord: WeightRecord?
+    
     private let coordinator: Coordinator
     private let useCase: RecordUseCase
     private let disposeBag: DisposeBag
@@ -45,12 +48,16 @@ final class WriteFastRecordViewModel: ViewModel {
     init(
         coordinator: Coordinator,
         useCase: RecordUseCase,
-        startDate: Date
+        startDate: Date,
+        fastRecord: FastRecord?,
+        weightRecord: WeightRecord?
     ) {
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
         self.startDate = startDate
         self.useCase = useCase
+        self.fastRecord = fastRecord
+        self.weightRecord = weightRecord
     }
     
     deinit {
@@ -59,29 +66,17 @@ final class WriteFastRecordViewModel: ViewModel {
     
     func transform(input: Input) -> Output {
         let output = Output()
+
+        let viewDidLoadShared = input.viewDidLoad.share()
         
-        input.viewDidLoad
-            .map { _ in UserDefaultsManager.routineSetting }
-            .bind(with: self, onNext: { owner, setting in
-                if let setting {
-                    guard let startDate = Calendar.current.date(
-                        bySettingHour: setting.startTime.hour ?? 0,
-                        minute: setting.startTime.minute ?? 0,
-                        second: 0,
-                        of: owner.startDate
-                    ) else { return }
-                    let endDate = startDate.addingTimeInterval(TimeInterval(setting.fastTimeHour*60*60))
-                    output.startDatePickerDate.accept(startDate)
-                    output.endDatePickerDate.accept(endDate)
-                    output.startTimeDate.accept(startDate)
-                    output.endTimeDate.accept(endDate)
-                } else {
-                    output.startDatePickerDate.accept(owner.startDate)
-                    output.endDatePickerDate.accept(owner.startDate)
-                    output.startTimeDate.accept(owner.startDate)
-                    output.endTimeDate.accept(owner.startDate)
-                }
-            })
+        viewDidLoadShared
+            .compactMap { [weak self] in self?.startDateTime }
+            .bind(to: output.startDatePickerDate, output.startTimeDate)
+            .disposed(by: disposeBag)
+        
+        viewDidLoadShared
+            .compactMap { [weak self] in self?.endDateTime }
+            .bind(to: output.endDatePickerDate, output.endTimeDate)
             .disposed(by: disposeBag)
         
         input.dismissButtonTapped
@@ -203,13 +198,42 @@ final class WriteFastRecordViewModel: ViewModel {
                 throw RecordValidateError.badFastTime
             }
         }
+    }
+}
+
+private extension WriteFastRecordViewModel {
+    var startDateTime: Date {
+        if let fastRecord = fastRecord {
+            return fastRecord.startDate
+        }
         
+        if let setting = UserDefaultsManager.routineSetting {
+            guard let hour = setting.startTime.hour,
+                  let minute = setting.startTime.minute
+            else {
+                assertionFailure("no hour or minute")
+                return Date()
             }
+            return Calendar.current.date(
+                bySettingHour: hour,
+                minute: minute,
+                second: 0,
+                of: startDate
+            ) ?? Date()
+        } else {
+            return startDate
         }
     }
     
-    private enum RecordValidateError: Error {
-        case badFastTime
-        case badWeight
+    var endDateTime: Date {
+        if let fastRecord = fastRecord {
+            return fastRecord.endDate
+        }
+        
+        if let setting = UserDefaultsManager.routineSetting {
+            return startDateTime.addingTimeInterval(TimeInterval(setting.fastTimeHour * 3600))
+        } else {
+            return startDate
+        }
     }
 }

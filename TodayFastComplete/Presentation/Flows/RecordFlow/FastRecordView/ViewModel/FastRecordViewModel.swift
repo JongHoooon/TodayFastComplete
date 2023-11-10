@@ -14,6 +14,8 @@ final class FastRecordViewModel: ViewModel {
     
     struct Input { 
         let plusViewTapped: Observable<Void>
+        let editButtonTapped: Observable<Void>
+        let deleteButtonTapped: Observable<Void>
     }
     struct Output {
         let plusViewIsHidden = BehaviorRelay(value: true)
@@ -29,16 +31,22 @@ final class FastRecordViewModel: ViewModel {
     
     private let selectedDateRelay: BehaviorRelay<Date>
     private let fastRecordViewState: BehaviorRelay<RecordViewState>
+    private let editButtonTapped: PublishRelay<Void>
+    private let deleteButtonTapped: PublishRelay<Void>
     
     init(
         coordinator: Coordinator,
         selectedDateRelay: BehaviorRelay<Date>,
-        fastRecordViewState: BehaviorRelay<RecordViewState>
+        fastRecordViewState: BehaviorRelay<RecordViewState>,
+        editButtonTapped: PublishRelay<Void>,
+        deleteButtonTapped: PublishRelay<Void>
     ) {
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
         self.selectedDateRelay = selectedDateRelay
         self.fastRecordViewState = fastRecordViewState
+        self.editButtonTapped = editButtonTapped
+        self.deleteButtonTapped = deleteButtonTapped
     }
     
     func transform(input: Input) -> Output {
@@ -84,10 +92,13 @@ final class FastRecordViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         input.plusViewTapped
-            .asDriver(onErrorJustReturn: Void())
-            .drive(with: self, onNext: { owner, _ in
-                owner.coordinator?.navigate(to: .writeFastRecord(startDate: owner.selectedDateRelay.value))
-            })
+            .observe(on: MainScheduler.instance)
+            .map { [unowned self] in Step.writeFastRecord(startDate: selectedDateRelay.value) }
+            .bind { [unowned self] in coordinator?.navigate(to: $0) }
+            .disposed(by: disposeBag)
+        
+        input.editButtonTapped
+            .bind(to: editButtonTapped)
             .disposed(by: disposeBag)
         
         return output

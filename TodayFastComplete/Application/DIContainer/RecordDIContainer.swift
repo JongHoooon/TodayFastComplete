@@ -14,6 +14,8 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     private let selectedDateRelay = BehaviorRelay(value: Date())
     private let fastRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
     private let weightRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
+    private let editButtonTapped = PublishRelay<Void>()
+    private let deleteButtonTapped = PublishRelay<Void>()
     
     // MARK: - Use Case
     func makeRecordUseCase() -> RecordUseCase {
@@ -69,32 +71,51 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
             recordUseCase: makeRecordUseCase(),
             selectedDateRelay: selectedDateRelay,
             fastRecordViewState: fastRecordViewState,
-            weightRecordViewState: weightRecordViewState
+            weightRecordViewState: weightRecordViewState,
+            editButtonTapped: editButtonTapped,
+            deleteButtonTapped: deleteButtonTapped
         )
     }
     
     // MARK: - Fast Record
-    private func makeFastRecordViewController(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> UIViewController {
+    private func makeFastRecordViewController(
+        coordinator: Coordinator,
+        selectedDateRelay: BehaviorRelay<Date>
+    ) -> UIViewController {
         return FastRecordViewController(viewModel: makeFastRecordViewModel(
             coordinator: coordinator,
             selectedDateRelay: selectedDateRelay
         ))
     }
     
-    private func makeFastRecordViewModel(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> FastRecordViewModel {
+    private func makeFastRecordViewModel(
+        coordinator: Coordinator,
+        selectedDateRelay: BehaviorRelay<Date>
+    ) -> FastRecordViewModel {
         return FastRecordViewModel(
             coordinator: coordinator,
             selectedDateRelay: selectedDateRelay,
-            fastRecordViewState: fastRecordViewState
+            fastRecordViewState: fastRecordViewState, 
+            editButtonTapped: editButtonTapped,
+            deleteButtonTapped: deleteButtonTapped
         )
     }
     
     // MARK: - Weight Record
-    private func makeWeightRecordViewController(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> UIViewController {
-        return WeightRecordViewController(viewModel: makeWeightRecordViewModel(coordinator: coordinator, selectedDateRelay: selectedDateRelay))
+    private func makeWeightRecordViewController(
+        coordinator: Coordinator,
+        selectedDateRelay: BehaviorRelay<Date>
+    ) -> UIViewController {
+        return WeightRecordViewController(viewModel: makeWeightRecordViewModel(
+            coordinator: coordinator,
+            selectedDateRelay: selectedDateRelay
+        ))
     }
     
-    private func makeWeightRecordViewModel(coordinator: Coordinator, selectedDateRelay: BehaviorRelay<Date>) -> WeightRecordViewModel {
+    private func makeWeightRecordViewModel(
+        coordinator: Coordinator,
+        selectedDateRelay: BehaviorRelay<Date>
+    ) -> WeightRecordViewModel {
         return WeightRecordViewModel(
             coordinator: coordinator,
             selectedDateRelay: selectedDateRelay,
@@ -102,15 +123,32 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     }
     
     // MARK: - Write Fast Record
-    func makeWriteFastRecord(coordinator: Coordinator, startDate: Date) -> UIViewController {
-        return WriteFastRecordViewController(viewModel: makeWriteFastRecordViewModel(coordinator: coordinator, startDate: startDate))
+    func makeWriteFastRecord(
+        coordinator: Coordinator,
+        startDate: Date,
+        fastRecord: FastRecord?,
+        weightRecord: WeightRecord?
+    ) -> UIViewController {
+        return WriteFastRecordViewController(viewModel: makeWriteFastRecordViewModel(
+            coordinator: coordinator,
+            startDate: startDate,
+            fastRecord: fastRecord,
+            weightRecord: weightRecord
+        ))
     }
     
-    private func makeWriteFastRecordViewModel(coordinator: Coordinator, startDate: Date) -> WriteFastRecordViewModel {
+    private func makeWriteFastRecordViewModel(
+        coordinator: Coordinator,
+        startDate: Date,
+        fastRecord: FastRecord?,
+        weightRecord: WeightRecord?
+    ) -> WriteFastRecordViewModel {
         return WriteFastRecordViewModel(
             coordinator: coordinator,
             useCase: makeRecordUseCase(),
-            startDate: startDate
+            startDate: startDate,
+            fastRecord: fastRecord,
+            weightRecord: weightRecord
         )
     }
 }

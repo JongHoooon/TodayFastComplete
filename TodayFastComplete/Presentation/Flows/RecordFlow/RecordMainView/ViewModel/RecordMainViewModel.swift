@@ -37,6 +37,8 @@ final class RecordMainViewModel: ViewModel {
     private let selectedDateRelay: BehaviorRelay<Date>
     private let fastRecordViewState: BehaviorRelay<RecordViewState>
     private let weightRecordViewState: BehaviorRelay<RecordViewState>
+    private let editButtonTapped: PublishRelay<Void>
+    private let deleteButtonTapped: PublishRelay<Void>
     
     var fastRecordDict: [Date: FastRecord] = [:]
     var weightRecordDict: [Date: WeightRecord] = [:]
@@ -46,13 +48,17 @@ final class RecordMainViewModel: ViewModel {
         recordUseCase: RecordUseCase,
         selectedDateRelay: BehaviorRelay<Date>,
         fastRecordViewState: BehaviorRelay<RecordViewState>,
-        weightRecordViewState: BehaviorRelay<RecordViewState>
+        weightRecordViewState: BehaviorRelay<RecordViewState>,
+        editButtonTapped: PublishRelay<Void>,
+        deleteButtonTapped: PublishRelay<Void>
     ) {
         self.coordinator = coordinator
         self.recordUseCase = recordUseCase
         self.selectedDateRelay = selectedDateRelay
         self.fastRecordViewState = fastRecordViewState
         self.weightRecordViewState = weightRecordViewState
+        self.editButtonTapped = editButtonTapped
+        self.deleteButtonTapped = deleteButtonTapped
         self.disposeBag = DisposeBag()
     }
     
@@ -100,8 +106,16 @@ final class RecordMainViewModel: ViewModel {
         let calendarDidSelectShared = input.calendarDidSelect.share()
         
         calendarDidSelectShared
+            .map { $0.toString(format: .yearMonthDayWeekDayFormat) }
+            .bind(to: output.dateInfoLabelText)
+            .disposed(by: disposeBag)
+        
+        calendarDidSelectShared
+            .bind(to: selectedDateRelay)
+            .disposed(by: disposeBag)
+        
+        calendarDidSelectShared
             .bind(with: self, onNext: { owner, date in
-                owner.selectedDateRelay.accept(date)
                 if Date().toCalendarDate < date {
                     owner.fastRecordViewState.accept(.cantRecord)
                     owner.weightRecordViewState.accept(.cantRecord)
@@ -122,11 +136,6 @@ final class RecordMainViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
-        calendarDidSelectShared
-            .map { $0.toString(format: .yearMonthDayWeekDayFormat) }
-            .bind(onNext: { output.dateInfoLabelText.accept($0) })
-            .disposed(by: disposeBag)
-        
         input.calendarCurrentPageDidChange
             .map(\.month)
             .distinctUntilChanged()
@@ -134,6 +143,19 @@ final class RecordMainViewModel: ViewModel {
                 print($0)
 //                print($0.month)
             }
+            .disposed(by: disposeBag)
+        
+        editButtonTapped
+            .map { [unowned self] in
+                let startDate = selectedDateRelay.value
+                return Step.writeFastRecord(
+                    startDate: startDate,
+                    fastRecor: fastRecordDict[startDate],
+                    weightRecord: weightRecordDict[startDate]
+                )
+            }
+            .observe(on: MainScheduler.instance)
+            .bind { [weak self] in self?.coordinator?.navigate(to: $0) }
             .disposed(by: disposeBag)
             
         return output

@@ -45,7 +45,7 @@ enum Step {
     
     // Record
     case writeRecordFlowIsRequired
-    case writeFastRecord(startDate: Date)
+    case writeFastRecord(startDate: Date, fastRecor: FastRecord? = nil, weightRecord: WeightRecord? = nil)
     case writeFastRecordIsComplete
     case writeRecordValidateAlert(title: String? = nil, message: String?)
     

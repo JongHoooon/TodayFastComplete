@@ -10,8 +10,17 @@ import UIKit
 import RxSwift
 
 protocol RecordCoordinatorDependencies: AnyObject { 
-    func makeRecordMainViewController(coordinator: Coordinator, pageViewController: UIPageViewController) -> UIViewController
-    func makeWriteFastRecord(coordinator: Coordinator, startDate: Date) -> UIViewController
+    func makeRecordMainViewController(
+        coordinator: Coordinator,
+        pageViewController: UIPageViewController
+    ) -> UIViewController
+    
+    func makeWriteFastRecord(
+        coordinator: Coordinator,
+        startDate: Date,
+        fastRecord: FastRecord?,
+        weightRecord: WeightRecord?
+    ) -> UIViewController
 }
 
 final class RecordCoordinator: BaseCoordinator,
@@ -38,8 +47,12 @@ final class RecordCoordinator: BaseCoordinator,
         switch step {
         case .writeRecordFlowIsRequired:
             showRecordMain()
-        case let .writeFastRecord(startDate):
-            presentWriteFastRecord(startDate: startDate)
+        case let .writeFastRecord(startDate, fastRecord, weightRecord):
+            presentWriteFastRecord(
+                startDate: startDate,
+                fastRecord: fastRecord,
+                weightRecord: weightRecord
+            )
         case let .fastEndNotification(startDate):
             fastEndNotification(startDate: startDate)
         case .writeFastRecordIsComplete:
@@ -74,8 +87,17 @@ private extension RecordCoordinator {
         rootViewController.viewControllers = [vc]
     }
     
-    func presentWriteFastRecord(startDate: Date) {
-        let vc = dependencies.makeWriteFastRecord(coordinator: self, startDate: startDate)
+    func presentWriteFastRecord(
+        startDate: Date,
+        fastRecord: FastRecord? = nil,
+        weightRecord: WeightRecord? = nil
+    ) {
+        let vc = dependencies.makeWriteFastRecord(
+            coordinator: self,
+            startDate: startDate,
+            fastRecord: fastRecord,
+            weightRecord: weightRecord
+        )
         let nav = UINavigationController(rootViewController: vc)
         writeFastRecordNavigationController = nav
         nav.modalPresentationStyle = .fullScreen
