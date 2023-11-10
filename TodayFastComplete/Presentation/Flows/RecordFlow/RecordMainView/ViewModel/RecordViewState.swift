@@ -7,6 +7,6 @@
 
 enum RecordViewState {
     case noRecord
-    case recordExist
+    case recordExist(record: Record)
     case cantRecord
 }

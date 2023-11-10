@@ -240,10 +240,22 @@ private extension FastRecordViewController {
             .asDriver()
             .drive(recordBaseView.rx.isHidden)
             .disposed(by: disposeBag)
-
+        
         output.cantRecordLabelIsHidden
             .asDriver()
             .drive(cantRecordLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        output.fastStartTime
+            .asDriver()
+            .map { $0.toString(format: .currentFastTimeFormat2) }
+            .drive(fastStartTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.fastEndTime
+            .asDriver()
+            .map { $0.toString(format: .currentFastTimeFormat2) }
+            .drive(fastEndTimeLabel.rx.text)
             .disposed(by: disposeBag)
     }
     

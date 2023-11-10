@@ -109,13 +109,13 @@ final class RecordMainViewModel: ViewModel {
                 }
                 
                 if let fastRecord = owner.fastRecordDict[date] {
-                    
+                    owner.fastRecordViewState.accept(.recordExist(record: fastRecord))
                 } else {
                     owner.fastRecordViewState.accept(.noRecord)
                 }
                 
                 if let weightRecord = owner.weightRecordDict[date] {
-                    
+                    owner.weightRecordViewState.accept(.recordExist(record: weightRecord))
                 } else {
                     owner.weightRecordViewState.accept(.noRecord)
                 }

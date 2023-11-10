@@ -19,6 +19,9 @@ final class FastRecordViewModel: ViewModel {
         let plusViewIsHidden = BehaviorRelay(value: true)
         let recordViewIsHidden = BehaviorRelay(value: true)
         let cantRecordLabelIsHidden = BehaviorRelay(value: true)
+        let fastStartTime = BehaviorRelay(value: Date())
+        let fastEndTime = BehaviorRelay(value: Date())
+        let fastTimeSecond = BehaviorRelay(value: 0)
     }
     
     private weak var coordinator: Coordinator?
@@ -47,15 +50,27 @@ final class FastRecordViewModel: ViewModel {
             })
             .disposed(by: disposeBag)
         
-        fastRecordViewState
+        let fastRecordViewStateShared = fastRecordViewState.share()
+        
+        fastRecordViewStateShared
+            .bind {
+                guard case let RecordViewState.recordExist(record) = $0,
+                      let record = record as? FastRecord
+                else {
+//                    assertionFailure("fail casting record")
+                    return
+                }
+                output.fastStartTime.accept(record.startDate)
+                output.fastEndTime.accept(record.endDate)
+            }
+            .disposed(by: disposeBag)
+ 
+        fastRecordViewStateShared
             .map { state in
                 return switch state {
-                case .cantRecord:
-                    (true, true, false)
-                case .recordExist:
-                    (true, false, true)
-                case .noRecord:
-                    (false, true, true)
+                case .cantRecord:       (true, true, false)
+                case .recordExist:      (true, false, true)
+                case .noRecord:         (false, true, true)
                 }
             }
             .bind {

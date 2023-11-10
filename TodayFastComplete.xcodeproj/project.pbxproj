@@ -121,6 +121,7 @@
 		EDC66EDF2ADE66F20085B184 /* RecordDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */; };
 		EDC682F42AF007A300702E4D /* WeightRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC682F32AF007A300702E4D /* WeightRecordViewModel.swift */; };
 		EDC9A40D2ACD6249009A5AB1 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */; };
+		EDE926642AFD3E6A00BA4E53 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE926632AFD3E6A00BA4E53 /* Record.swift */; };
 		EDEB160E2AF11E2A00B03962 /* FastRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB160D2AF11E2A00B03962 /* FastRecord.swift */; };
 		EDEB16122AF1220F00B03962 /* FastRecordTable+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16112AF1220F00B03962 /* FastRecordTable+Mapping.swift */; };
 		EDEB16142AF1270D00B03962 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEB16132AF1270D00B03962 /* String+Extension.swift */; };
@@ -249,6 +250,7 @@
 		EDC66EDE2ADE66F20085B184 /* RecordDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDIContainer.swift; sourceTree = "<group>"; };
 		EDC682F32AF007A300702E4D /* WeightRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordViewModel.swift; sourceTree = "<group>"; };
 		EDC9A40C2ACD6249009A5AB1 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
+		EDE926632AFD3E6A00BA4E53 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		EDEB160D2AF11E2A00B03962 /* FastRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastRecord.swift; sourceTree = "<group>"; };
 		EDEB16112AF1220F00B03962 /* FastRecordTable+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FastRecordTable+Mapping.swift"; sourceTree = "<group>"; };
 		EDEB16132AF1270D00B03962 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -738,8 +740,7 @@
 				ED50E9772AD16C8700182922 /* TimerRoutineSetting.swift */,
 				ED50E9612ACFCA3D00182922 /* WeekDay.swift */,
 				EDC66ECF2ADD9B5C0085B184 /* InterruptedFast.swift */,
-				EDEB160D2AF11E2A00B03962 /* FastRecord.swift */,
-				EDEB16152AF14AB900B03962 /* WeightRecord.swift */,
+				EDE926622AFD3E5B00BA4E53 /* Record */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -928,6 +929,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EDE926622AFD3E5B00BA4E53 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				EDEB160D2AF11E2A00B03962 /* FastRecord.swift */,
+				EDEB16152AF14AB900B03962 /* WeightRecord.swift */,
+				EDE926632AFD3E6A00BA4E53 /* Record.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
 		EDEB16212AF1592100B03962 /* RecordUseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1097,6 +1108,7 @@
 				ED6C67382AC9029400230621 /* Log.swift in Sources */,
 				ED4D40F12AD95DF500C49C8A /* UserNotificationManager.swift in Sources */,
 				EDEBF9482AD263940002C24B /* BaseRealmRepository.swift in Sources */,
+				EDE926642AFD3E6A00BA4E53 /* Record.swift in Sources */,
 				EDA250D12AD77780004EE6F9 /* TimeInterval+Extension.swift in Sources */,
 				ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */,
 				ED1968A62AFB7ADA000C3F5E /* PlusButtonView.swift in Sources */,
