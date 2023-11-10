@@ -157,7 +157,7 @@ final class WriteFastRecordViewModel: ViewModel {
         
         func saveButtonTapped() {
             Observable.just(Void())
-                .map { try validateRecord2() }
+                .map { try validateRecord() }
                 .map { [unowned self] _ -> (FastRecord, WeightRecord?) in
                     let fastRecord = FastRecord(
                         date: startDate,
@@ -198,21 +198,12 @@ final class WriteFastRecordViewModel: ViewModel {
                 .disposed(by: disposeBag)
         }
         
-        func validateRecord() -> Bool {
-            guard output.totalFastTimeSecond.value != 0
-            else {
-                coordinator.navigate(to: .writeRecordValidateAlert(
-                    title: nil,
-                    message: Constants.Localization.FAST_TIME_VALIDATE_ALERT_MESSAGE
-                ))
-                return false
-            }
-            return true
-        }
-        
-        func validateRecord2() throws {
+        func validateRecord() throws {
             if output.totalFastTimeSecond.value == 0 {
                 throw RecordValidateError.badFastTime
+            }
+        }
+        
             }
         }
     }
