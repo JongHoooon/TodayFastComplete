@@ -24,6 +24,7 @@
 		ED38F9142ADA548D005126F3 /* LocalNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */; };
 		ED38F9162ADA8CD8005126F3 /* RoutineSettingSaveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */; };
 		ED38F9182ADAC156005126F3 /* NSNotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */; };
+		ED3F95C22AFE081E0087453F /* RecordValidateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3F95C12AFE081E0087453F /* RecordValidateError.swift */; };
 		ED4D40E92AD8DB7B00C49C8A /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */; };
 		ED4D40EB2AD8DB8A00C49C8A /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */; };
 		ED4D40F12AD95DF500C49C8A /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4D40F02AD95DF500C49C8A /* UserNotificationManager.swift */; };
@@ -150,6 +151,7 @@
 		ED38F9132ADA548D005126F3 /* LocalNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationType.swift; sourceTree = "<group>"; };
 		ED38F9152ADA8CD8005126F3 /* RoutineSettingSaveable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineSettingSaveable.swift; sourceTree = "<group>"; };
 		ED38F9172ADAC156005126F3 /* NSNotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotificationName+Extension.swift"; sourceTree = "<group>"; };
+		ED3F95C12AFE081E0087453F /* RecordValidateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordValidateError.swift; sourceTree = "<group>"; };
 		ED4D40E72AD8DB3000C49C8A /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
 		ED4D40E82AD8DB7B00C49C8A /* InfoPlist.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		ED4D40EA2AD8DB8A00C49C8A /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 			isa = PBXGroup;
 			children = (
 				ED80B9F82AE10B2D00F85A66 /* WriteFastRecordViewModel.swift */,
+				ED3F95C12AFE081E0087453F /* RecordValidateError.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1114,6 +1117,7 @@
 				ED1968A62AFB7ADA000C3F5E /* PlusButtonView.swift in Sources */,
 				EDEB16122AF1220F00B03962 /* FastRecordTable+Mapping.swift in Sources */,
 				ED830EB22ACE8BF2000B715A /* SelectFastModeCollectionView.swift in Sources */,
+				ED3F95C22AFE081E0087453F /* RecordValidateError.swift in Sources */,
 				ED50E9822AD17F4300182922 /* DefaultTimerRoutineSettingRepository.swift in Sources */,
 				ED50E9582ACF0CC200182922 /* DayCollectionViewCell.swift in Sources */,
 				ED4DB3BA2AD4318A003535C9 /* TimerUseCase.swift in Sources */,
