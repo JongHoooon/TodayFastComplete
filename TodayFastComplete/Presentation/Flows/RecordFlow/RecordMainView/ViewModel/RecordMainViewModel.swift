@@ -72,7 +72,9 @@ final class RecordMainViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let output = Output()
         
-        input.viewDidLoad.share()
+        let viewDidLoadShared = input.viewDidLoad.share()
+        
+        viewDidLoadShared
             .flatMap { [unowned self] _ in Single.zip(recordUseCase.fetchFastRecords(), recordUseCase.fetchWeightRecords()) }
             .map { fastRecords, weightRecords in
                 let fastRecordDict = fastRecords.reduce(into: [:], { dict, record in dict[record.date] = record })
@@ -121,7 +123,7 @@ final class RecordMainViewModel: ViewModel {
             .bind(to: selectedDateRelay)
             .disposed(by: disposeBag)
         
-        calendarDidSelectShared
+        Observable.merge(calendarDidSelectShared, viewDidLoadShared.map { _ in Date().toCalendarDate })
             .bind(with: self, onNext: { owner, date in
                 if Date().toCalendarDate < date {
                     owner.fastRecordViewState.accept(.cantRecord)
