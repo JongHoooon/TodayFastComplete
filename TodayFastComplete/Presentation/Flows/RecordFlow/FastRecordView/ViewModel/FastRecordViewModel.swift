@@ -32,14 +32,14 @@ final class FastRecordViewModel: ViewModel {
     private let selectedDateRelay: BehaviorRelay<Date>
     private let fastRecordViewState: BehaviorRelay<RecordViewState>
     private let editButtonTapped: PublishRelay<Void>
-    private let deleteButtonTapped: PublishRelay<Void>
+    private let deleteButtonTapped: PublishRelay<RecordEnum>
     
     init(
         coordinator: Coordinator,
         selectedDateRelay: BehaviorRelay<Date>,
         fastRecordViewState: BehaviorRelay<RecordViewState>,
         editButtonTapped: PublishRelay<Void>,
-        deleteButtonTapped: PublishRelay<Void>
+        deleteButtonTapped: PublishRelay<RecordEnum>
     ) {
         self.coordinator = coordinator
         self.disposeBag = DisposeBag()
@@ -99,6 +99,11 @@ final class FastRecordViewModel: ViewModel {
         
         input.editButtonTapped
             .bind(to: editButtonTapped)
+            .disposed(by: disposeBag)
+        
+        input.deleteButtonTapped
+            .map { RecordEnum.fast }
+            .bind(to: deleteButtonTapped)
             .disposed(by: disposeBag)
         
         return output

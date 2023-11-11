@@ -15,7 +15,7 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
     private let fastRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
     private let weightRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
     private let editButtonTapped = PublishRelay<Void>()
-    private let deleteButtonTapped = PublishRelay<Void>()
+    private let deleteButtonTapped = PublishRelay<RecordEnum>()
     private let fastRecordUpdateRelay = PublishRelay<FastRecord>()
     private let weightRecordUpdateRelay = PublishRelay<WeightRecord>()
     

@@ -13,6 +13,10 @@ protocol RecordUseCase {
     func saveRecords(fastRecord: FastRecord, weightRecord: WeightRecord?) -> Single<(FastRecord, WeightRecord?)>
     func fetchFastRecords() -> Single<[FastRecord]>
     func fetchWeightRecords() -> Single<[WeightRecord]>
+    func updateFastRecord(record: FastRecord) -> Single<FastRecord>
+    func updateWeightRecord(record: WeightRecord) -> Single<WeightRecord>
+    func deleteFastRecord(date: Date) -> Single<Date>
+    func deleteWeightRecrod(date: Date) -> Single<Date>
 }
 
 final class RecordUseCaseImp: RecordUseCase {
@@ -52,5 +56,21 @@ final class RecordUseCaseImp: RecordUseCase {
     
     func fetchWeightRecords() -> Single<[WeightRecord]> {
         return weightRecordRepository.fetchRecords()
+    }
+    
+    func updateFastRecord(record: FastRecord) -> Single<FastRecord> {
+        return fastRecordRepository.update(fastRecord: record)
+    }
+    
+    func updateWeightRecord(record: WeightRecord) -> Single<WeightRecord> {
+        return weightRecordRepository.update(weightRecord: record)
+    }
+    
+    func deleteFastRecord(date: Date) -> Single<Date> {
+        return fastRecordRepository.deleteFastRecord(id: date)
+    }
+    
+    func deleteWeightRecrod(date: Date) -> Single<Date> {
+        return weightRecordRepository.deleteWeightRecord(id: date)
     }
 }

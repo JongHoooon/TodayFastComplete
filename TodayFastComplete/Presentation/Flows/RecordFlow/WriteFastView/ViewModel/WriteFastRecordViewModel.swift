@@ -183,7 +183,6 @@ final class WriteFastRecordViewModel: ViewModel {
                 .subscribe(
                     with: self,
                     onNext: { owner, _ in
-                        owner.coordinator.navigate(to: .writeFastRecordIsComplete)
                         owner.fastRecordUpdateRelay.accept(FastRecord(
                             date: owner.startDate,
                             startDate: output.startTimeDate.value,
@@ -194,6 +193,7 @@ final class WriteFastRecordViewModel: ViewModel {
                                 date: owner.startDate,
                                 weight: owner.weightRelay.value
                             ))}
+                        owner.coordinator.navigate(to: .writeFastRecordIsComplete)
                     },
                     onError: { owner, error in
                         let errorMessage = if let error = error as? RecordValidateError,

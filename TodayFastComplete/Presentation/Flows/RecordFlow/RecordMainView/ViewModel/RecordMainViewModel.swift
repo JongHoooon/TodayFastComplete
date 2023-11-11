@@ -38,14 +38,13 @@ final class RecordMainViewModel: ViewModel {
     private let fastRecordViewState: BehaviorRelay<RecordViewState>
     private let weightRecordViewState: BehaviorRelay<RecordViewState>
     private let editButtonTapped: PublishRelay<Void>
-    private let deleteButtonTapped: PublishRelay<Void>
+    private let deleteButtonTapped: PublishRelay<RecordEnum>
     
     private let fastRecordUpdateRelay: PublishRelay<FastRecord>
     private let weightRecordUpdateRelay: PublishRelay<WeightRecord>
     
     var fastRecordDict: [Date: FastRecord] = [:]
     var weightRecordDict: [Date: WeightRecord] = [:]
-    
     
     init(
         coordinator: Coordinator,
@@ -54,7 +53,7 @@ final class RecordMainViewModel: ViewModel {
         fastRecordViewState: BehaviorRelay<RecordViewState>,
         weightRecordViewState: BehaviorRelay<RecordViewState>,
         editButtonTapped: PublishRelay<Void>,
-        deleteButtonTapped: PublishRelay<Void>,
+        deleteButtonTapped: PublishRelay<RecordEnum>,
         fastRecordUpdateRelay: PublishRelay<FastRecord>,
         weightRecordUpdateRelay: PublishRelay<WeightRecord>
     ) {
@@ -166,18 +165,64 @@ final class RecordMainViewModel: ViewModel {
             .bind { [weak self] in self?.coordinator?.navigate(to: $0) }
             .disposed(by: disposeBag)
         
+        deleteButtonTapped
+            .flatMap { [unowned self] record in
+                return switch record {
+                case .fast:
+                    self.recordUseCase.deleteFastRecord(date: selectedDateRelay.value)
+                        .map { _ in record }
+                case .weight:
+                    self.recordUseCase.deleteWeightRecrod(date: selectedDateRelay.value)
+                        .map { _ in record }
+                }
+            }
+            .subscribe(
+                with: self,
+                onNext: { owner, record in
+                    switch record {
+                    case .fast:
+                        owner.fastRecordDict.removeValue(forKey: owner.selectedDateRelay.value)
+                        owner.fastRecordViewState.accept(.noRecord)
+                    case .weight:
+                        owner.weightRecordDict.removeValue(forKey: owner.selectedDateRelay.value)
+                        owner.weightRecordViewState.accept(.noRecord)
+                    }
+                },
+                onError: { _, error in
+                    Log.error(error)
+                })
+            .disposed(by: disposeBag)
+        
         fastRecordUpdateRelay
-            .bind(with: self, onNext: { owner, record in
-                owner.fastRecordDict[record.date] = record
-                owner.fastRecordViewState.accept(.recordExist(record: record))
-            })
+            .flatMap { [unowned self] record in
+                self.recordUseCase.updateFastRecord(record: record)
+                    .map { _ in record }
+            }
+            .subscribe(
+                with: self,
+                onNext: { owner, record in
+                    owner.fastRecordDict[record.date] = record
+                    owner.fastRecordViewState.accept(.recordExist(record: record))
+                },
+                onError: { _, error in
+                    Log.error(error)
+                })
             .disposed(by: disposeBag)
         
         weightRecordUpdateRelay
-            .bind(with: self, onNext: { owner, record in
-                owner.weightRecordDict[record.date] = record
-                owner.weightRecordViewState.accept(.recordExist(record: record))
-            })
+            .flatMap { [unowned self] record in
+                self.recordUseCase.updateWeightRecord(record: record)
+                    .map { _ in record }
+            }
+            .subscribe(
+                with: self,
+                onNext: { owner, record in
+                    owner.weightRecordDict[record.date] = record
+                    owner.weightRecordViewState.accept(.recordExist(record: record))
+                },
+                onError: { _, error in
+                    Log.error(error)
+                })
             .disposed(by: disposeBag)
             
         return output
