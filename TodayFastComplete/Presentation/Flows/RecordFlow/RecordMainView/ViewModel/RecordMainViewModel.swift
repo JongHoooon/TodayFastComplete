@@ -38,10 +38,12 @@ final class RecordMainViewModel: ViewModel {
     private let fastRecordViewState: BehaviorRelay<RecordViewState>
     private let weightRecordViewState: BehaviorRelay<RecordViewState>
     private let editButtonTapped: PublishRelay<Void>
-    private let deleteButtonTapped: PublishRelay<RecordEnum>
+    private let deleteButtonTapped: BehaviorRelay<RecordEnum>
     
     private let fastRecordUpdateRelay: PublishRelay<FastRecord>
     private let weightRecordUpdateRelay: PublishRelay<WeightRecord>
+    
+    private let deleteRecordRelay: PublishRelay<AlertActionType>
     
     var fastRecordDict: [Date: FastRecord] = [:]
     var weightRecordDict: [Date: WeightRecord] = [:]
@@ -53,7 +55,7 @@ final class RecordMainViewModel: ViewModel {
         fastRecordViewState: BehaviorRelay<RecordViewState>,
         weightRecordViewState: BehaviorRelay<RecordViewState>,
         editButtonTapped: PublishRelay<Void>,
-        deleteButtonTapped: PublishRelay<RecordEnum>,
+        deleteButtonTapped: BehaviorRelay<RecordEnum>,
         fastRecordUpdateRelay: PublishRelay<FastRecord>,
         weightRecordUpdateRelay: PublishRelay<WeightRecord>
     ) {
@@ -66,6 +68,7 @@ final class RecordMainViewModel: ViewModel {
         self.deleteButtonTapped = deleteButtonTapped
         self.fastRecordUpdateRelay = fastRecordUpdateRelay
         self.weightRecordUpdateRelay = weightRecordUpdateRelay
+        self.deleteRecordRelay = PublishRelay()
         self.disposeBag = DisposeBag()
     }
     
@@ -168,6 +171,18 @@ final class RecordMainViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         deleteButtonTapped
+            .skip(1)
+            .bind(with: self, onNext: { owner, record in
+                owner.coordinator?.navigate(to: .recordDeleteAlert(
+                    record: record,
+                    deleteAlertRelay: owner.deleteRecordRelay
+                )
+            )})
+            .disposed(by: disposeBag)
+        
+        deleteRecordRelay
+            .filter { $0 == .ok }
+            .withLatestFrom(deleteButtonTapped)
             .flatMap { [unowned self] record in
                 return switch record {
                 case .fast:

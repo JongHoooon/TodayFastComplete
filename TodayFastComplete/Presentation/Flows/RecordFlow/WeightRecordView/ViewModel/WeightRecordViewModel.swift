@@ -12,7 +12,11 @@ import RxSwift
 
 final class WeightRecordViewModel: ViewModel {
     
-    struct Input { }
+    struct Input { 
+        let plusViewTapped: Observable<Void>
+        let editButtonTapped: Observable<Void>
+        let deleteButtonTapped: Observable<Void>
+    }
     
     struct Output { 
         let plusViewIsHidden = BehaviorRelay(value: true)

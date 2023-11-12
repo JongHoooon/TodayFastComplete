@@ -15,7 +15,7 @@ protocol TimerCoordinatorDependencies {
     func makeSettingTimerCoordinator(rootViewController: UINavigationController, finishDelegate: CoordinatorFinishDelegate) -> Coordinator
 }
 
-final class TimerCoordinator: BaseCoordinator, 
+final class TimerCoordinator: BaseCoordinator,
                                 CoordinatorFinishDelegate,
                               CancelOkAlertPresentable {
     

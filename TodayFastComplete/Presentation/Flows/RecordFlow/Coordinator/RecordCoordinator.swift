@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxRelay
 import RxSwift
 
 protocol RecordCoordinatorDependencies: AnyObject { 
@@ -25,7 +26,8 @@ protocol RecordCoordinatorDependencies: AnyObject {
 
 final class RecordCoordinator: BaseCoordinator,
                                CoordinatorFinishDelegate,
-                               SimpleMessageAlertPresentable {
+                               SimpleMessageAlertPresentable,
+                               CancelOkAlertPresentable {
 
     private let rootViewController: UINavigationController
     private var writeFastRecordNavigationController: UINavigationController?
@@ -66,6 +68,11 @@ final class RecordCoordinator: BaseCoordinator,
             )
             .bind { _ in }
             .disposed(by: disposeBag)
+        case let .recordDeleteAlert(record, deleteAlertRelay):
+            presentDeleteRecordAlert(
+                record: record,
+                alertRelay: deleteAlertRelay
+            )
         default:
             assertionFailure("not configured step")
         }
@@ -111,5 +118,26 @@ private extension RecordCoordinator {
     
     func fastEndNotification(startDate: Date) {
         presentWriteFastRecord(startDate: startDate)
+    }
+    
+    func presentDeleteRecordAlert(
+        record: RecordEnum, 
+        alertRelay: PublishRelay<AlertActionType>
+    ) {
+        let recordName = switch record {
+        case .fast:
+            Constants.Localization.FAST_TITLE
+        case .weight:
+            Constants.Localization.WEIGHT_TITLE
+        }
+        presentCancelOkAlert(
+            navigationController: rootViewController,
+            message: String(
+                format: Constants.Localization.RECORD_DELETE_ALERT,
+                arguments: [recordName]
+            )
+        )
+        .bind(to: alertRelay)
+        .disposed(by: disposeBag)
     }
 }

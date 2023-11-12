@@ -119,6 +119,11 @@ extension Constants {
             defaultValue: "기록 삭제"
         )
         
+        static let RECORD_DELETE_ALERT = String(
+            localized: "RECORD_DELETE_ALERT",
+            defaultValue: "%1$@ 기록을 삭제할까요?"
+        )
+        
         static let YESTERDAY = String(
             localized: "YESTERDAY",
             defaultValue: "어제"

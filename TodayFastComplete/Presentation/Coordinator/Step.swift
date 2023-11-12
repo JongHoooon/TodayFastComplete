@@ -48,6 +48,10 @@ enum Step {
     case writeFastRecord(startDate: Date, fastRecor: FastRecord? = nil, weightRecord: WeightRecord? = nil)
     case writeFastRecordIsComplete
     case writeRecordValidateAlert(title: String? = nil, message: String?)
+    case recordDeleteAlert(
+        record: RecordEnum,
+        deleteAlertRelay: PublishRelay<AlertActionType>
+    )
     
     // notification
     case fastStartNotification
