@@ -11,8 +11,6 @@ import FSCalendar
 
 final class FSCalendarCustomCell: FSCalendarCell {
     
-    var date: Date?
-    
     override var isSelected: Bool {
         didSet {
             switch isSelected {
