@@ -70,6 +70,9 @@ final class FSCalendarCustomCell: FSCalendarCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         selectionLayer.isHidden = true
+        fastEventLayer.isHidden = true
+        weightLabel.isHidden = true
+        weightLabel.text = ""
     }
     
     override func layoutSubviews() {
@@ -99,12 +102,25 @@ final class FSCalendarCustomCell: FSCalendarCell {
         ).cgPath
     }
     
-    func configureCell(date: Date) {
-        if date > Date() {
-            fastEventLayer.isHidden = true
-            weightLabel.isHidden = true
-        }
-        let weight = 80.0 - 0.1 * Double(date.day)
+    func configureFastRecord() {
+        fastEventLayer.isHidden = false
+    }
+    
+    func configureWeightRecord(with weight: Double) {
+        weightLabel.isHidden = false
         weightLabel.text = "\(String(format: "%.1f", weight))kg"
+    }
+    
+    func hideItems() {
+        hideWeightLabel()
+        hideFastEventLayer()
+    }
+    
+    func hideFastEventLayer() {
+        fastEventLayer.isHidden = true
+    }
+    
+    func hideWeightLabel() {
+        weightLabel.isHidden = true
     }
 }

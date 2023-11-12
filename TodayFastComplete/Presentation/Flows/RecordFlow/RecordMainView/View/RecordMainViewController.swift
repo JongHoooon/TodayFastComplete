@@ -364,9 +364,27 @@ private extension RecordMainViewController {
         
         calendarView.rx.willDisplay
             .observe(on: MainScheduler.asyncInstance)
-            .bind(onNext: { cell, date in
+            .bind(with: self, onNext: { owner, tuple in
+                let cell = tuple.0
+                let date = tuple.1
                 guard let cell = cell as? FSCalendarCustomCell else { return }
-//                cell.configureCell(date: date)
+                guard Date().toCalendarDate >= date else {
+                    cell.hideItems()
+                    return
+                }
+                
+                if let _ = owner.viewModel.fastRecordDict[date] {
+                    Log.debug("fast date: \(date)")
+                    cell.configureFastRecord()
+                } else {
+                    cell.hideFastEventLayer()
+                }
+                if let weightRecord = owner.viewModel.weightRecordDict[date] {
+                    Log.debug("weight date: \(date)")
+                    cell.configureWeightRecord(with: weightRecord.weight)
+                } else {
+                    cell.hideWeightLabel()
+                }
             })
             .disposed(by: disposeBag)
         
