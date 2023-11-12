@@ -21,17 +21,7 @@ final class FastRecordViewController: BaseViewController {
     private let plusViewTapGesture = UITapGestureRecognizer()
     private let cantRecordLabel = CantRecordLabel()
     
-    private let recordBaseView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGray6
-        view.layer.cornerRadius = 20.0
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.masksToBounds = false
-        view.layer.shadowRadius = 4.0
-        view.layer.shadowOffset = .zero
-        view.layer.shadowOpacity = 0.2
-        return view
-    }()
+    private let recordBaseView = RecordBaseView()
     
     private let fastTimeLabel: UILabel = {
         let label = UILabel()

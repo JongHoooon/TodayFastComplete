@@ -58,10 +58,7 @@ final class FastRecordViewModel: ViewModel {
             .bind(with: self, onNext: { owner, state in
                 guard case let RecordViewState.recordExist(record) = state,
                       let record = record as? FastRecord
-                else {
-//                    assertionFailure("fail casting record")
-                    return
-                }
+                else { return }
                 output.fastStartTime.accept(record.startDate)
                 output.fastEndTime.accept(record.endDate)
                 let timeInterval = record.startDate.distance(to: record.endDate)

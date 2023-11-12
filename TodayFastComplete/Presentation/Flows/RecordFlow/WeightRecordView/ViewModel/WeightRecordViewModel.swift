@@ -22,6 +22,7 @@ final class WeightRecordViewModel: ViewModel {
         let plusViewIsHidden = BehaviorRelay(value: true)
         let recordViewIsHidden = BehaviorRelay(value: true)
         let cantRecordLabelIsHidden = BehaviorRelay(value: true)
+        let weight = BehaviorRelay(value: 0.0)
     }
     
     private weak var coordinator: Coordinator?
