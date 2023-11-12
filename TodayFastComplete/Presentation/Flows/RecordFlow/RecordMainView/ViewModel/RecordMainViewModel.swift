@@ -45,9 +45,9 @@ final class RecordMainViewModel: ViewModel {
     
     private let deleteRecordRelay: PublishRelay<AlertActionType>
     
-    var fastRecordDict: [Date: FastRecord] = [:]
-    var weightRecordDict: [Date: WeightRecord] = [:]
-    
+    var fastRecordDictRelay = BehaviorRelay<[Date: FastRecord]>(value: [:])
+    var weightRecordDictRelay = BehaviorRelay<[Date: WeightRecord]>(value: [:])
+        
     init(
         coordinator: Coordinator,
         recordUseCase: RecordUseCase,
@@ -84,10 +84,9 @@ final class RecordMainViewModel: ViewModel {
                 let weightRecordDict = weightRecords.reduce(into: [:], { dict, record in dict[record.date] = record })
                 return (fastRecordDict, weightRecordDict)
             }
-            .debug()
             .bind { [weak self] fastRecordDict, weightRecordDict in
-                self?.fastRecordDict = fastRecordDict
-                self?.weightRecordDict = weightRecordDict
+                self?.fastRecordDictRelay.accept(fastRecordDict)
+                self?.weightRecordDictRelay.accept(weightRecordDict)
                 self?.countRecordViewState(date: Date().toCalendarDate)
             }
             .disposed(by: disposeBag)
@@ -147,8 +146,8 @@ final class RecordMainViewModel: ViewModel {
                 let startDate = selectedDateRelay.value
                 return Step.writeFastRecord(
                     startDate: startDate,
-                    fastRecor: fastRecordDict[startDate],
-                    weightRecord: weightRecordDict[startDate]
+                    fastRecor: fastRecordDictRelay.value[startDate],
+                    weightRecord: weightRecordDictRelay.value[startDate]
                 )
             }
             .observe(on: MainScheduler.instance)
@@ -183,10 +182,14 @@ final class RecordMainViewModel: ViewModel {
                 onNext: { owner, record in
                     switch record {
                     case .fast:
-                        owner.fastRecordDict.removeValue(forKey: owner.selectedDateRelay.value)
+                        var currentDict = owner.fastRecordDictRelay.value
+                        currentDict.removeValue(forKey: owner.selectedDateRelay.value)
+                        owner.fastRecordDictRelay.accept(currentDict)
                         owner.fastRecordViewState.accept(.noRecord)
                     case .weight:
-                        owner.weightRecordDict.removeValue(forKey: owner.selectedDateRelay.value)
+                        var currentDict = owner.weightRecordDictRelay.value
+                        currentDict.removeValue(forKey: owner.selectedDateRelay.value)
+                        owner.weightRecordDictRelay.accept(currentDict)
                         owner.weightRecordViewState.accept(.noRecord)
                     }
                 },
@@ -203,7 +206,9 @@ final class RecordMainViewModel: ViewModel {
             .subscribe(
                 with: self,
                 onNext: { owner, record in
-                    owner.fastRecordDict[record.date] = record
+                    var currentDict = owner.fastRecordDictRelay.value
+                    currentDict[record.date] = record
+                    owner.fastRecordDictRelay.accept(currentDict)
                     owner.fastRecordViewState.accept(.recordExist(record: record))
                 },
                 onError: { _, error in
@@ -219,7 +224,9 @@ final class RecordMainViewModel: ViewModel {
             .subscribe(
                 with: self,
                 onNext: { owner, record in
-                    owner.weightRecordDict[record.date] = record
+                    var currentDict = owner.weightRecordDictRelay.value
+                    currentDict[record.date] = record
+                    owner.weightRecordDictRelay.accept(currentDict)
                     owner.weightRecordViewState.accept(.recordExist(record: record))
                 },
                 onError: { _, error in
@@ -239,13 +246,13 @@ private extension RecordMainViewModel {
             return
         }
         
-        if let fastRecord = fastRecordDict[date] {
+        if let fastRecord = fastRecordDictRelay.value[date] {
             fastRecordViewState.accept(.recordExist(record: fastRecord))
         } else {
             fastRecordViewState.accept(.noRecord)
         }
         
-        if let weightRecord = weightRecordDict[date] {
+        if let weightRecord = weightRecordDictRelay.value[date] {
             weightRecordViewState.accept(.recordExist(record: weightRecord))
         } else {
             weightRecordViewState.accept(.noRecord)

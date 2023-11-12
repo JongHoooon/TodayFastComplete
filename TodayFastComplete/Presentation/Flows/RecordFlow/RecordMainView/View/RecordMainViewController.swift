@@ -373,20 +373,28 @@ private extension RecordMainViewController {
                     return
                 }
                 
-                if let _ = owner.viewModel.fastRecordDict[date] {
-                    Log.debug("fast date: \(date)")
+                if let _ = owner.viewModel.fastRecordDictRelay.value[date] {
                     cell.configureFastRecord()
                 } else {
                     cell.hideFastEventLayer()
                 }
-                if let weightRecord = owner.viewModel.weightRecordDict[date] {
-                    Log.debug("weight date: \(date)")
+                if let weightRecord = owner.viewModel.weightRecordDictRelay.value[date] {
                     cell.configureWeightRecord(with: weightRecord.weight)
                 } else {
                     cell.hideWeightLabel()
                 }
             })
             .disposed(by: disposeBag)
+        
+        Observable.merge(
+            viewModel.fastRecordDictRelay.asObservable().map { _ in },
+            viewModel.weightRecordDictRelay.asObservable().map { _ in }
+        )
+        .observe(on: MainScheduler.asyncInstance)
+        .bind(with: self, onNext: { owner, _ in
+            owner.calendarView.reloadData()
+        })
+        .disposed(by: disposeBag)
         
         Driver.merge(
             viewDidLoadShared.asDriver(),
