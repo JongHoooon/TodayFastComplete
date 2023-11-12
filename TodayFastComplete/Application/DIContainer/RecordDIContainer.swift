@@ -11,7 +11,7 @@ import RxRelay
 
 final class RecordDIContainer: RecordCoordinatorDependencies {
     
-    private let selectedDateRelay = BehaviorRelay(value: Date())
+    private let selectedDateRelay = BehaviorRelay(value: Date().toCalendarDate)
     private let fastRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
     private let weightRecordViewState = BehaviorRelay<RecordViewState>(value: .noRecord)
     private let editButtonTapped = PublishRelay<Void>()
