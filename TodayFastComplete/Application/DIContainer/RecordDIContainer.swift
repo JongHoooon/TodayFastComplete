@@ -123,7 +123,10 @@ final class RecordDIContainer: RecordCoordinatorDependencies {
         return WeightRecordViewModel(
             coordinator: coordinator,
             selectedDateRelay: selectedDateRelay,
-            weightRecordViewState: weightRecordViewState)
+            weightRecordViewState: weightRecordViewState,
+            editButtonTapped: editButtonTapped,
+            deleteButtonTapped: deleteButtonTapped
+        )
     }
     
     // MARK: - Write Fast Record

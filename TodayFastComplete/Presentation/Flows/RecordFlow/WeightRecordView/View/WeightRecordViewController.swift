@@ -77,8 +77,8 @@ final class WeightRecordViewController: BaseViewController {
     
     override func configure() {
         super.configure()
-        bindViewModel()
         registerGesture()
+        bindViewModel()
     }
     
     override func configureLayout() {

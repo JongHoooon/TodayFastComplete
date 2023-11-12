@@ -29,19 +29,45 @@ final class WeightRecordViewModel: ViewModel {
     private let disposeBag: DisposeBag
     private let selectedDateRelay: BehaviorRelay<Date>
     private let weightRecordViewState: BehaviorRelay<RecordViewState>
+    private let editButtonTapped: PublishRelay<Void>
+    private let deleteButtonTapped: BehaviorRelay<RecordEnum>
     
     init(
         coordinator: Coordinator,
         selectedDateRelay: BehaviorRelay<Date>,
-        weightRecordViewState: BehaviorRelay<RecordViewState>
+        weightRecordViewState: BehaviorRelay<RecordViewState>,
+        editButtonTapped: PublishRelay<Void>,
+        deleteButtonTapped: BehaviorRelay<RecordEnum>
     ) {
-        self.disposeBag = DisposeBag()
+        self.coordinator = coordinator
         self.selectedDateRelay = selectedDateRelay
         self.weightRecordViewState = weightRecordViewState
+        self.editButtonTapped = editButtonTapped
+        self.deleteButtonTapped = deleteButtonTapped
+        self.disposeBag = DisposeBag()
     }
     
     func transform(input: Input) -> Output {
         let output = Output()
+        
+        input.plusViewTapped
+            .throttle(
+                .milliseconds(500),
+                latest: false,
+                scheduler: MainScheduler.asyncInstance
+            )
+            .map { [unowned self] in Step.writeFastRecord(startDate: selectedDateRelay.value) }
+            .bind { [unowned self] in coordinator?.navigate(to: $0) }
+            .disposed(by: disposeBag)
+        
+        input.editButtonTapped
+            .bind(to: editButtonTapped)
+            .disposed(by: disposeBag)
+        
+        input.deleteButtonTapped
+            .map { RecordEnum.weight }
+            .bind(to: deleteButtonTapped)
+            .disposed(by: disposeBag)
         
         let weightRecordViewStateShared = weightRecordViewState.share(replay: 1)
         

@@ -83,6 +83,11 @@ final class FastRecordViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         input.plusViewTapped
+            .throttle(
+                .milliseconds(500),
+                latest: false,
+                scheduler: MainScheduler.asyncInstance
+            )
             .observe(on: MainScheduler.instance)
             .map { [unowned self] in Step.writeFastRecord(startDate: selectedDateRelay.value) }
             .bind { [unowned self] in coordinator?.navigate(to: $0) }
