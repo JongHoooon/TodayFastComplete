@@ -52,12 +52,6 @@ final class FastRecordViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let output = Output()
         
-        selectedDateRelay
-            .subscribe(onNext: { _ in
-                
-            })
-            .disposed(by: disposeBag)
-        
         let fastRecordViewStateShared = fastRecordViewState.share()
         
         fastRecordViewStateShared
