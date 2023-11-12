@@ -88,6 +88,7 @@ final class RecordMainViewModel: ViewModel {
             .bind { [weak self] fastRecordDict, weightRecordDict in
                 self?.fastRecordDict = fastRecordDict
                 self?.weightRecordDict = weightRecordDict
+                self?.countRecordViewState(date: Date().toCalendarDate)
             }
             .disposed(by: disposeBag)
         
@@ -126,25 +127,9 @@ final class RecordMainViewModel: ViewModel {
             .bind(to: selectedDateRelay)
             .disposed(by: disposeBag)
         
-        Observable.merge(calendarDidSelectShared, viewDidLoadShared.map { _ in Date().toCalendarDate })
+        calendarDidSelectShared
             .bind(with: self, onNext: { owner, date in
-                if Date().toCalendarDate < date {
-                    owner.fastRecordViewState.accept(.cantRecord)
-                    owner.weightRecordViewState.accept(.cantRecord)
-                    return
-                }
-                
-                if let fastRecord = owner.fastRecordDict[date] {
-                    owner.fastRecordViewState.accept(.recordExist(record: fastRecord))
-                } else {
-                    owner.fastRecordViewState.accept(.noRecord)
-                }
-                
-                if let weightRecord = owner.weightRecordDict[date] {
-                    owner.weightRecordViewState.accept(.recordExist(record: weightRecord))
-                } else {
-                    owner.weightRecordViewState.accept(.noRecord)
-                }
+                owner.countRecordViewState(date: date)
             })
             .disposed(by: disposeBag)
         
@@ -243,5 +228,27 @@ final class RecordMainViewModel: ViewModel {
             .disposed(by: disposeBag)
             
         return output
+    }
+}
+
+private extension RecordMainViewModel {
+    func countRecordViewState(date: Date) {
+        if Date().toCalendarDate < date {
+            fastRecordViewState.accept(.cantRecord)
+            weightRecordViewState.accept(.cantRecord)
+            return
+        }
+        
+        if let fastRecord = fastRecordDict[date] {
+            fastRecordViewState.accept(.recordExist(record: fastRecord))
+        } else {
+            fastRecordViewState.accept(.noRecord)
+        }
+        
+        if let weightRecord = weightRecordDict[date] {
+            weightRecordViewState.accept(.recordExist(record: weightRecord))
+        } else {
+            weightRecordViewState.accept(.noRecord)
+        }
     }
 }
