@@ -43,15 +43,23 @@ final class WeightRecordViewModel: ViewModel {
     func transform(input: Input) -> Output {
         let output = Output()
         
-        weightRecordViewState
+        let weightRecordViewStateShared = weightRecordViewState.share(replay: 1)
+        
+        weightRecordViewStateShared
+            .bind(onNext: { state in
+                guard case let RecordViewState.recordExist(record) = state,
+                      let record = record as? WeightRecord
+                else { return }
+                output.weight.accept(record.weight)
+            })
+            .disposed(by: disposeBag)
+        
+        weightRecordViewStateShared
             .map { state in
                 return switch state {
-                case .cantRecord:
-                    (true, true, false)
-                case .recordExist:
-                    (true, false, true)
-                case .noRecord:
-                    (false, true, true)
+                case .cantRecord:       (true, true, false)
+                case .recordExist:      (true, false, true)
+                case .noRecord:         (false, true, true)
                 }
             }
             .bind {
@@ -63,5 +71,4 @@ final class WeightRecordViewModel: ViewModel {
         
         return output
     }
-    
 }
