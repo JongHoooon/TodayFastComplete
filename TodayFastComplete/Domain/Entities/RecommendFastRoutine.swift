@@ -15,9 +15,9 @@ enum RecommendFastRoutine: CaseIterable {
         case .fastTime16:
             FastRoutine(fastingTime: 16, mealCount: 2, image: Constants.Imgage.fasting)
         case .fastTime12:
-            FastRoutine(fastingTime: 12, mealCount: 3, image: Constants.Imgage.fasting)
+            FastRoutine(fastingTime: 12, mealCount: 3)
         case .fastTime23:
-            FastRoutine(fastingTime: 23, mealCount: 1, image: Constants.Imgage.fasting)
+            FastRoutine(fastingTime: 23, mealCount: 1)
         }
     }
 }
