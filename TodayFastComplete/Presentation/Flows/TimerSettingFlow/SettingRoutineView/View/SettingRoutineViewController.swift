@@ -106,8 +106,7 @@ private extension SettingRoutineViewController {
             dismissButtonTapped: dismissBarButton.rx.tap.asObservable(),
             itemSelected: itemSelected,
             timePickerViewTapped: timePickerViewTapped.asObservable(),
-            deleteRoutineSettingButtonTapped: deleteRoutineSettingButtonTapped
-                .do(onNext: { _ in UIImpactFeedbackGenerator(style: .soft).impactOccurred() }),
+            deleteRoutineSettingButtonTapped: deleteRoutineSettingButtonTapped.asObservable(),
             saveButtonTapped: saveBarButton.rx.tap.asObservable()
         )
         var output = viewModel.transform(input: input)

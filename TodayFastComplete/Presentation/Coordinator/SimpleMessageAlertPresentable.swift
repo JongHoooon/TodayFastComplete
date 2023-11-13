@@ -35,6 +35,7 @@ extension SimpleMessageAlertPresentable {
                 handler: { _ in observer.onCompleted() }
             )
             alertController.addAction(confirmAction)
+            UIImpactFeedbackGenerator(style: .rigid ).impactOccurred()
             navigationController.present(alertController, animated: true)
             return Disposables.create {
                 alertController.dismiss(animated: true)

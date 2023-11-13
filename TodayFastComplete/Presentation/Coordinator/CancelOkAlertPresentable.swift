@@ -53,8 +53,8 @@ extension CancelOkAlertPresentable {
                 okAction
             ].forEach { alertController.addAction($0) }
             
+            UIImpactFeedbackGenerator(style: .rigid ).impactOccurred()
             navigationController.present(alertController, animated: true, completion: nil)
-            
             return Disposables.create {
                 alertController.dismiss(animated: true, completion: nil)
             }
