@@ -386,8 +386,9 @@ private extension RecordMainViewController {
             })
             .disposed(by: disposeBag)
         
+        let fastRecordDictDriver = viewModel.fastRecordDictRelay.asDriver()
         Observable.merge(
-            viewModel.fastRecordDictRelay.asObservable().map { _ in },
+            fastRecordDictDriver.asObservable().map { _ in },
             viewModel.weightRecordDictRelay.asObservable().map { _ in }
         )
         .observe(on: MainScheduler.asyncInstance)
@@ -395,6 +396,20 @@ private extension RecordMainViewController {
             owner.calendarView.reloadData()
         })
         .disposed(by: disposeBag)
+        
+        fastRecordDictDriver
+            .map { dict in
+                return dict.filter { $0.key.year == Date().year
+                    && $0.key.month == Date().month
+                    && $0.key.weekOfMonth == Date().weekOfMonth }
+            }
+            .map { $0.values }
+            .map { $0.map { Int($0.startDate.distance(to: $0.endDate)) } }
+            .map { $0.reduce(0, +) }
+            .map { $0 / 3600 }
+            .map { String(format: Constants.Localization.THIS_WEEK_FAST_TIME, arguments: [$0]) }
+            .drive(infoLabel.rx.text)
+            .disposed(by: disposeBag)
         
         Driver.merge(
             viewDidLoadShared.asDriver(),

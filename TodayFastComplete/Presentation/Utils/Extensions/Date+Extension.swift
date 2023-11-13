@@ -63,6 +63,17 @@ extension Date {
         }
         return weekDayComponent
     }
+    
+    var weekOfMonth: Int {
+        var customCalendar = Calendar(identifier: .gregorian)
+        customCalendar.firstWeekday = 2
+        guard let weekOfMonth = customCalendar.dateComponents([.weekOfMonth], from: self).weekOfMonth
+        else {
+            assertionFailure("no week of month")
+            return -1
+        }
+        return weekOfMonth
+    }
 
     var hour: Int {
         guard let hour = Calendar.current.dateComponents([.hour], from: self).hour 

@@ -105,6 +105,10 @@ extension Constants {
             localized: "CANT_RECORD",
             defaultValue: "오늘 날짜 이후에는 기록할 수 없어요."
         )
+        static let THIS_WEEK_FAST_TIME = String(
+            localized: "THIS_WEEK_FAST_TIME",
+            defaultValue: "이번주 누적 단식 시간 - %lld시간🔥"
+        )
         
         static let DO_FINISH = String(
             localized: "DO_FINISH",
