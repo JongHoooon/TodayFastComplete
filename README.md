@@ -1,14 +1,13 @@
-# 오단완 - 간헐적 단식 시간 측정 타이머 앱⏱️
+# 오단완 - 간헐적 단식 타이머 및 단식, 몸무게 기록 앱⏱️
 
-- Minimum Deployments: iOS 16.0 <br>
-- Development Period: 2023.09.25 ~ (진행중) <br>
-- Role: iOS 개발, 기획, 디자인 담당 <br>
+- Minimum Deployments: iOS 16.0 
+- Development Period: 23.09.25 ~ 23.11.01 (운영중)
+- Role: iOS 개발, 기획, 디자인 담당
 
 <br>
 
 ## Screenshot
-<p align="center"><img src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/4017ef7a-5aba-44bd-8466-14a6bf44efbd"></p>
-
+<p align="center"><img src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/de649148-0444-43ff-b8f0-1545a025d184"></p>
 
 
 <br>
@@ -19,7 +18,8 @@
 
 <br>
 
-<p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/a1d01940-32ec-48e9-8c59-8c257ed06819"></p>
+<p align="center"><img width="1271" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/1f4b7366-8565-4985-beff-527fd2dd4a80"></p>
+
 
 <p align="center"><img width="1200" alt="image" src="https://github.com/JongHoooon/TodayFastComplete/assets/98168685/30f61ada-41fc-4256-a1b1-af487b93f005"></p>
 
@@ -33,26 +33,28 @@
 <br>
   
 ## Core Feature
-- 단식 시간을 설정해 **단식 시간과 식사 시간을 모니터링**할 수 있습니다.
+- 단식 요일과 시간을 선택해 간헐적 **단식 루틴을 설정**할 수 있습니다.
+- **타이머**를 통해 **단식 시간과 식사 시간을 모니터링**할 수 있습니다.
 - 단식 시작/종료 시간을 **local notification을 통해 확인**할 수 있습니다.
 - 단식 완료 후 **단식과 몸무게를 기록**할 수 있습니다.
-
+- 단식과 몸무게 기록을 **캘린더를 통해 날짜별로 확인**할 수 있습니다.
 <br>
 
 ## Description
 
+- **관심사의 분리(Separation of Concerns)** 를 통해 layer 분리, layer들 간의 **의존성 규칙(Dependency Rule)** 준수
 - **타이머 화면**
   - **UIBezierPath** 기반 custom progress view 구현
   - **RxSwift timer operator** 기반 타이머 stream 생성
 - **타이머 설정 화면**
   - **Compositional Layout**
-  -  **Diffable Datasource** 기반 collection view 구현
+  - **Diffable Datasource** 기반 collection view 구현
 - **기록 화면**
   - **UIBazierPath** 기반 **custom FSCalendar cell** 구현
   - custom **UISegmentedControl, UIPageViewController** 기반 화면 구성
   - **Delegate Proxy** 사용해 FSCalendar의 **delegate 메소드 rx로 확장**
 
-- **Coordinator** 기반 화면 흐름 제어, local notification handling, 의존성 주입
+- **Coordinator** 기반 화면 흐름 제어, local notification 화면 이동 handling, 의존성 주입
 - OSLog 사용해 로그 모니터링
 
 <br>
