@@ -158,7 +158,7 @@ final class WriteFastRecordViewModel: ViewModel {
         return output
         
         func saveButtonTapped() {
-            Observable.just(Void())
+            Single.just(Void())
                 .map { try validateRecord() }
                 .map { [unowned self] _ -> (FastRecord, WeightRecord?) in
                     let fastRecord = FastRecord(
@@ -182,7 +182,7 @@ final class WriteFastRecordViewModel: ViewModel {
                 .observe(on: MainScheduler.instance)
                 .subscribe(
                     with: self,
-                    onNext: { owner, _ in
+                    onSuccess: { owner, _ in
                         owner.fastRecordUpdateRelay.accept(FastRecord(
                             date: owner.startDate,
                             startDate: output.startTimeDate.value,
@@ -195,7 +195,7 @@ final class WriteFastRecordViewModel: ViewModel {
                             ))}
                         owner.coordinator.navigate(to: .writeFastRecordIsComplete)
                     },
-                    onError: { owner, error in
+                    onFailure: { owner, error in
                         let errorMessage = if let error = error as? RecordValidateError,
                             error == .badFastTime {
                                 Constants.Localization.FAST_TIME_VALIDATE_ALERT_MESSAGE
